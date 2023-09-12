@@ -3,7 +3,7 @@ package com.example.digital_shop.service.order;
 import com.example.digital_shop.domain.dto.OrderDto;
 import com.example.digital_shop.entity.order.OrderEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
-import com.example.digital_shop.repository.OrderRepository;
+import com.example.digital_shop.repository.order.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageRequest;

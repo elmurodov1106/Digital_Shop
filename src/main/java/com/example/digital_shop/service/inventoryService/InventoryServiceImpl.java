@@ -3,7 +3,7 @@ package com.example.digital_shop.service.inventoryService;
 import com.example.digital_shop.domain.dto.InventoryCreateDto;
 import com.example.digital_shop.entity.inventory.InventoryEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
-import com.example.digital_shop.repository.InventoryRepository;
+import com.example.digital_shop.repository.inventory.InventoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageRequest;

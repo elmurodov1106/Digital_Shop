@@ -1,4 +1,4 @@
-package com.example.digital_shop.repository;
+package com.example.digital_shop.repository.inventory;
 
 import com.example.digital_shop.entity.inventory.InventoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
