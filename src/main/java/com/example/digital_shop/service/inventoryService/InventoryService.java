@@ -15,5 +15,5 @@ public interface InventoryService {
     void deleteByProductId(UUID productId);
     InventoryEntity update(InventoryCreateDto update,UUID id,UUID productId);
 
-    ProductEntity getByProductId(UUID productId);
+    InventoryEntity getByProductId(UUID productId);
 }

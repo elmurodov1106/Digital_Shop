@@ -11,5 +11,5 @@ import java.util.UUID;
 public interface InventoryRepository extends JpaRepository<InventoryEntity, UUID> {
     void deleteInventoryEntityByProductIdContaining(UUID productId);
     InventoryEntity getByProductId(UUID productId);
-
+    void deleteByProductIdEquals(UUID productId);
 }
