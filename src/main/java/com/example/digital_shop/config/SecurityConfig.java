@@ -27,7 +27,7 @@ public class SecurityConfig {
     private final AuthenticationService authenticationService;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
-    private final String[] permitAll = {"/swagger-ui/**", "/v3/api-docs/**", "/auth/**", "/role/**","/user/**"};
+    private final String[] permitAll = {"/swagger-ui/**", "/v3/api-docs/**", "/auth/**", "/role/**","/user/**","/inventory/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

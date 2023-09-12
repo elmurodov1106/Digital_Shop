@@ -23,3 +23,6 @@ public class TvEntity extends BaseEntity {
     private Double cost;
     private UUID userId;
 }
+
+
+
