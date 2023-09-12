@@ -20,3 +20,6 @@ public class TvEntity extends BaseEntity {
     private String name;
     private Double cost;
 }
+
+
+
