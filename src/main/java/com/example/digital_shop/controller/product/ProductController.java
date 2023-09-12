@@ -29,14 +29,13 @@ public class ProductController {
     public ResponseEntity<ProductEntity> add(
             @RequestBody ProductCreatDto productCreatDto,
             @RequestParam UUID userId,
-            @RequestParam Integer amount,
-            HttpServletRequest request
+            @RequestParam Integer amount
     ){
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_Seller"))){
             throw new UnauthorizedAccessException("You don`t have permission to access this recourse");
         }
-            return ResponseEntity.ok(productService.add(productCreatDto,userId,amount,request.getHeader("authorization")));
+            return ResponseEntity.ok(productService.add(productCreatDto,userId,amount));
     }
 
     @GetMapping("/get-all")
@@ -58,16 +57,16 @@ public class ProductController {
 
     @PutMapping("/{userId}/update")
     public ResponseEntity<ProductEntity> update(
-            @RequestBody ProductCreatDto productCreatDto,
             @PathVariable UUID userId,
+            @RequestBody ProductCreatDto productCreatDto,
             @RequestParam UUID productId,
-            HttpServletRequest request
+            @RequestParam Integer amount
             ){
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_Seller"))){
             throw new UnauthorizedAccessException("You don`t have permission to access this recourse");
         }
-        return ResponseEntity.ok(productService.update(productCreatDto,productId,userId,request.getHeader("authorization")));
+        return ResponseEntity.ok(productService.update(productCreatDto,productId,amount,userId));
     }
 
     @DeleteMapping("/{userId}/delete")
