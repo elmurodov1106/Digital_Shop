@@ -38,7 +38,7 @@ public class AuthController {
         return ResponseEntity.ok(userService.getNewVerifyCode(email));
     }
 
-    @PostMapping("/sign-in")
+    @GetMapping("/sign-in")
     public ResponseEntity<JwtResponse> signIn(@Valid
                                                   @RequestBody LoginDto loginDto,
                                               BindingResult bindingResult) {

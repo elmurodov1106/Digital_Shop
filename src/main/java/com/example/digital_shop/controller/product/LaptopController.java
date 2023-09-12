@@ -4,12 +4,16 @@ package com.example.digital_shop.controller.product;
 import com.example.digital_shop.domain.dto.LaptopDto;
 import com.example.digital_shop.entity.product.LaptopEntity;
 import com.example.digital_shop.exception.RequestValidationException;
+import com.example.digital_shop.exception.UnauthorizedAccessException;
 import com.example.digital_shop.service.laptop.LaptopService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -24,17 +28,15 @@ public class LaptopController {
 
     private final LaptopService laptopService;
     @PostMapping("/{userId}/add")
-    @PreAuthorize(value = "hasRole('Seller')")
     public ResponseEntity<LaptopEntity> add(
-          @Valid @RequestBody LaptopDto laptopDto,
+           @RequestBody LaptopDto laptopDto,
             @PathVariable UUID userId,
             @RequestParam Integer amount,
-          HttpServletRequest request,
-          BindingResult bindingResult
+          HttpServletRequest request
     ){
-        if(bindingResult.hasErrors()){
-            List<ObjectError> allErrors = bindingResult.getAllErrors();
-            throw new RequestValidationException(allErrors);
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_Seller"))){
+            throw new UnauthorizedAccessException("You don`t have permission to access this recourse");
         }
         return ResponseEntity.ok(laptopService.add(laptopDto,userId,amount,request.getHeader("authorization")));
     }

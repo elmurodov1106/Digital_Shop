@@ -2,6 +2,7 @@ package com.example.digital_shop.service.inventoryService;
 
 import com.example.digital_shop.domain.dto.InventoryCreateDto;
 import com.example.digital_shop.entity.inventory.InventoryEntity;
+import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -54,5 +55,10 @@ public class InventoryServiceImpl implements InventoryService{
             return inventoryRepository.save(inventoryEntity);
         }
         throw new DataNotFoundException("Product not found");
+    }
+
+    @Override
+    public ProductEntity getByProductId(UUID productId) {
+        return inventoryRepository.getByProductId(productId);
     }
 }

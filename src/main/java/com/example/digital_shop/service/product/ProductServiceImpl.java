@@ -1,10 +1,14 @@
 package com.example.digital_shop.service.product;
 
 
+import com.example.digital_shop.domain.dto.InventoryCreateDto;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
+import com.example.digital_shop.entity.inventory.InventoryEntity;
 import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
+import com.example.digital_shop.repository.inventory.InventoryRepository;
 import com.example.digital_shop.repository.product.ProductRepository;
+import com.example.digital_shop.service.inventoryService.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -24,14 +29,20 @@ import java.util.UUID;
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
+    private final InventoryRepository inventoryRepository;
+    private final InventoryService inventoryService;
 
 
+    @Transactional
     public ProductEntity add(ProductCreatDto product, UUID userId, Integer amount, String token) {
         ProductEntity productEntity = modelMapper.map(product, ProductEntity.class);
         productEntity.setUserId(userId);
-        ProductEntity save = productRepository.save(productEntity);
-//        addInventory(save,amount,token);
-        return save;
+        ProductEntity savedProduct = productRepository.save(productEntity);
+        InventoryCreateDto inventoryCreateDto = new InventoryCreateDto();
+        inventoryCreateDto.setProductId(savedProduct.getId());
+        inventoryCreateDto.setProductCount(amount);
+        inventoryRepository.add(inventoryCreateDto);
+        return savedProduct;
     }
 
 
@@ -56,18 +67,24 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new DataNotFoundException("Product not found"));
         if (productNotFound.getUserId().equals(userId)) {
             productRepository.deleteById(productId);
-//            deleteInventory(productId,token);
+            inventoryRepository.deleteByProductId(productId);
             return true;
         }
         throw new DataNotFoundException("Product not found");
     }
 
 
-    public ProductEntity update(ProductCreatDto update, UUID productId, UUID userId) {
+    public ProductEntity update(ProductCreatDto update, UUID productId,Integer amount, UUID userId,String token) {
         ProductEntity productEntity = productRepository.findById(productId)
                 .orElseThrow(() -> new DataNotFoundException("Product not found"));
+        ProductEntity product = inventoryRepository.getByProductId(productId);
         if (productEntity.getUserId().equals(userId)) {
             modelMapper.map(update, productEntity);
+            InventoryCreateDto inventoryCreateDto = new InventoryCreateDto();
+            inventoryCreateDto.setProductId(userId);
+            inventoryCreateDto.setProductCount(amount);
+           InventoryEntity inventoryEntity= inventoryRepository.getByProductId(productId);
+            inventoryService.update(inventoryCreateDto,)
             return productRepository.save(productEntity);
         }
         throw new DataNotFoundException("Product not found");

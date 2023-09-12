@@ -1,13 +1,18 @@
 package com.example.digital_shop.entity.product;
 
 import com.example.digital_shop.entity.BaseEntity;
-import jakarta.persistence.Entity;
+import com.example.digital_shop.entity.inventory.InventoryEntity;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 
 @Entity(name = "product")
+//@DiscriminatorColumn(name = "product")
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
