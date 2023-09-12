@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity(name = "phone")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,5 +27,6 @@ public class PhoneEntity extends BaseEntity {
     private String model;
     private String name;
     private Double cost;
+    private UUID userId;
 
 }
