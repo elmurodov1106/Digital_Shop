@@ -1,29 +1,26 @@
-package com.example.entity.product;
+package com.example.digital_shop.entity.product;
 
-import com.example.entity.BaseEntity;
+import com.example.digital_shop.entity.BaseEntity;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "phone")
+@Entity(name = "laptop")
+//@DiscriminatorColumn(name = "laptop")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class PhoneEntity extends BaseEntity {
+public class LaptopEntity extends BaseEntity {
     private String colour;
-    private String size;
-    private double weight;
+    private Double weight;
     private Integer memory;
     private Integer Ram;
-    private double battery;
-    private Integer FrontCamera;
-    private Integer BackCamera;
-    private String description;
+    private Integer ScreenSize;
+    private Integer Ghz;
     private String model;
     private String name;
     private Double cost;
-
 }

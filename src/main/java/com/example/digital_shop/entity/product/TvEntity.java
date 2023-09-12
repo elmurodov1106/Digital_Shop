@@ -1,6 +1,6 @@
-package com.example.entity.product;
+package com.example.digital_shop.entity.product;
 
-import com.example.entity.BaseEntity;
+import com.example.digital_shop.entity.BaseEntity;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

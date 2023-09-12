@@ -1,8 +1,8 @@
-package com.example.entity.verification;
+package com.example.digital_shop.entity.verification;
 
 
-import com.example.entity.BaseEntity;
-import com.example.entity.user.UserEntity;
+import com.example.digital_shop.entity.BaseEntity;
+import com.example.digital_shop.entity.user.UserEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.*;

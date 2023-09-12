@@ -1,8 +1,8 @@
-package com.example.entity.seller;
+package com.example.digital_shop.entity.seller;
 
 
-import com.example.entity.BaseEntity;
-import com.example.entity.user.UserEntity;
+import com.example.digital_shop.entity.user.UserEntity;
+import com.example.digital_shop.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
