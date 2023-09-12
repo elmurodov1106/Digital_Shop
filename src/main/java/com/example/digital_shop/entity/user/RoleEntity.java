@@ -16,6 +16,4 @@ import lombok.Setter;
 public class RoleEntity extends BaseEntity {
     @Column(unique = true)
     private String name;
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    private List<PermissionEntity> permissions;
 }

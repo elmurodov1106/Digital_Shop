@@ -1,15 +1,13 @@
-#
-#server:
-#  port: 8080
-#
+
+server:
+  port: 8080
+
 spring:
   datasource:
     username: postgres
     password: 1106
     url: jdbc:postgresql://localhost:5432/digital_shop_db
     driver-class-name: org.postgresql.Driver
-
-
 
   jpa:
     hibernate:
@@ -18,26 +16,22 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
 
-#eureka:
-#  client:
-#    service-url:
-#      default-url: ${EUREKA_URI:http://localhost:8761/eureka/}
-#  instance:
-#    prefer-ip-address: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: elmurodov1106@gmail.com
+    password: rehixeessiscctor
+    properties:
+      mjaail:
+        smtp:
+          auth: true
+      mail:
+        smtp:
+          starttls:
+            enable: true
 
-#services:
-#  notification-url: http://NOTIFICATION-SERVICE/notification
-#  product-url: http://PRODUCT-SERVICE/product
-#  payment-url: http://PYMENT-SERVICE/payment
-#eureka:
-#  client:
-#    service-url:
-#      defaultUrl: ${EUREKA_URI:http://localhost:8761/eureka/}
-#    instance:
-#      preferIpAddress: true
-#
-#jwt:
-#  secret:
-#    key: 753778214125442A472D4B6150645367566B59703373367639792F423F45284839792F423F4528487566B597033778214125442A472D4B6150
-#  access:
-#    expiry: 30000000000
+jwt:
+  secret:
+    key: 753778214125442A472D4B6150645367566B59703373367639792F423F45284839792F423F4528487566B597033778214125442A472D4B6150
+  access:
+    expiry: 30000000000
