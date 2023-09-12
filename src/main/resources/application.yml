@@ -1,29 +1,29 @@
+#
+#server:
+#  port: 8080
+#
+#spring:
+#  datasource:
+#    username: postgres
+#    password: 1106
+#    url: jdbc:postgresql://localhost:5432/digital_shop_db
+#    driver-class-name: org.postgresql.Driver
+#
+#
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQL94Dialect
 
-server:
-  port: 8080
-
-spring:
-  datasource:
-    username: postgres
-    password: 1106
-    url: jdbc:postgresql://localhost:5432/digital_shop_db
-    driver-class-name: org.postgresql.Driver
-
-
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL94Dialect
-
-eureka:
-  client:
-    service-url:
-      default-url: ${EUREKA_URI:http://localhost:8761/eureka/}
-  instance:
-    prefer-ip-address: true
+#eureka:
+#  client:
+#    service-url:
+#      default-url: ${EUREKA_URI:http://localhost:8761/eureka/}
+#  instance:
+#    prefer-ip-address: true
 
 #services:
 #  notification-url: http://NOTIFICATION-SERVICE/notification
