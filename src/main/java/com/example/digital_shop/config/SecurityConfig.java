@@ -28,7 +28,6 @@ public class SecurityConfig {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final String[] permitAll = {"/swagger-ui/**", "/v3/api-docs/**", "/auth/**", "/product/get-all","/product/get-by-id"};
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -44,10 +43,6 @@ public class SecurityConfig {
                         UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
-
-
-
-
     @Bean
     public AuthenticationManager authManager(HttpSecurity httpSecurity) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder

@@ -1,6 +1,5 @@
 package com.example.digital_shop.service.product;
 
-
 import com.example.digital_shop.domain.dto.InventoryCreateDto;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.inventory.InventoryEntity;
@@ -8,19 +7,14 @@ import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
 import com.example.digital_shop.repository.product.ProductRepository;
-import com.example.digital_shop.service.inventoryService.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
