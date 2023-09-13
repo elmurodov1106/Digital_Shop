@@ -31,26 +31,25 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
         return ResponseEntity.status(401).body(e.getMessage());
     }
 
-//  @ExceptionHandler(value = {UniqueObjectException.class})
-//  public ResponseEntity<String> uniqueObjectException(
-//          UniqueObjectException e){
-//    return ResponseEntity.status(400).body(e.getMessage());
-//  }
-//
-//  @ExceptionHandler(value = {ObjectsNotFoundException.class})
-//  public ResponseEntity<String> objectNotFoundExceptionHandler(
-//          ObjectsNotFoundException e){
-//    return ResponseEntity.status(401).body(e.getMessage());
-//  }
-//
-//  @ExceptionHandler(value = {UserBadRequestException.class})
-//  public ResponseEntity<String> userBadRequestException(
-//          UserBadRequestException e){
-//    return ResponseEntity.status(400).body(e.getMessage());
-//  }
-//  @ExceptionHandler(value = {ConflictException.class})
-//  public ResponseEntity<String> conflictException(ConflictException e){
-//    return ResponseEntity.status(409).body(e.getMessage());
-//  }
+  @ExceptionHandler(value = {UniqueObjectException.class})
+  public ResponseEntity<String> uniqueObjectException(
+          UniqueObjectException e){
+    return ResponseEntity.status(400).body(e.getMessage());
+  }
+  @ExceptionHandler(value = {ObjectsNotFoundException.class})
+  public ResponseEntity<String> objectNotFoundExceptionHandler(
+          ObjectsNotFoundException e){
+    return ResponseEntity.status(401).body(e.getMessage());
+  }
+
+  @ExceptionHandler(value = {UserBadRequestException.class})
+  public ResponseEntity<String> userBadRequestException(
+          UserBadRequestException e){
+    return ResponseEntity.status(400).body(e.getMessage());
+  }
+  @ExceptionHandler(value = {ConflictException.class})
+  public ResponseEntity<String> conflictException(ConflictException e){
+    return ResponseEntity.status(409).body(e.getMessage());
+  }
 }
 
