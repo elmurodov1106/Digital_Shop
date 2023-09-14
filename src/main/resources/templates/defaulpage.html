@@ -1,0 +1,631 @@
+
+
+
+<!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Digital Shop</title>
+</head>
+<style>
+  /*
+#93C223
+#545356
+#545356
+*/
+
+
+  /*
+  ===========================================
+      User Nav
+  ===========================================
+  */
+  .nav-user {
+    background-color: #93C223;
+    padding-right: 20%;
+    color: white;
+  }
+
+  .nav-user a {
+    font-size: 80%;
+    color: inherit;
+    padding: 3px 10px;
+  }
+
+  .nav-user .nav-item:hover {
+    background-color: white;
+    color: #93C223;
+  }
+
+  /*
+  ===========================================
+      Title / Search bar
+  ===========================================
+  */
+
+  .title {
+
+  }
+
+  .title-title {
+    margin-top: 16px;
+  }
+
+  .title-search {
+    margin-top: 10px;
+  }
+
+  .title-icon {
+    padding: 4px 0 0 0;
+    text-align: end;
+    color: #93C223;
+  }
+
+  .title-text h4 {
+    margin-bottom: 0;
+    font-weight: 400;
+  }
+
+  .title-text p {
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 70%
+  }
+
+  /*========================================*/
+
+  .checkout {
+    font-size: 90%;
+    color: black;
+  }
+
+
+  /*
+  ===========================================
+      Nav Categories
+  ===========================================
+  */
+  .nav-categories {
+    background-color: #545356;
+    color: white;
+  }
+
+  .nav-categories .nav-item {
+    border-top: 4px solid #545356;
+  }
+
+  .nav-categories .nav-item:hover {
+    border-top: 4px solid #93C223;
+  }
+
+  .nav-categories a {
+    color: inherit;
+    font-weight: bold;
+    font-size: 90%;
+  }
+
+
+  /*
+  ===========================================
+      Main banner
+  ===========================================
+  */
+  .banner img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .banner .col-sm-12 {
+    padding: 0;
+  }
+
+  .banner-info {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .3);
+    /*background-color: black;*/
+    color: white;
+    bottom: 0px;
+    text-align: center;
+    padding: 5px 20px;
+  }
+
+  .banner-info hr{
+    border-color: white;
+    margin: 3px 0;
+  }
+
+  .banner-info h4{
+    font-size: 140%;
+    margin-bottom: 1px;
+  }
+
+  .banner-info h5{
+    font-size: 100%;
+    margin-bottom: 0px;
+  }
+
+
+  /*
+  ===========================================
+      Featured
+  ===========================================
+  */
+  .featured {
+    margin-top: 20px;
+  }
+
+  .categories-info {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .7);
+    color: white;
+    bottom: 0px;
+    padding: 5px 6%;
+  }
+
+  .featured-categories img {
+    width: 100%;
+    height: 100%;
+  }
+
+
+  /*
+  ===========================================
+  */
+  .nav-featured {
+    margin: 20px 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+
+  .nav-featured .col-sm-6 {
+    padding: 0;
+  }
+
+  .nav-featured h4{
+    padding-top: 5px;
+  }
+
+  .nav-featured a {
+    color: inherit;
+  }
+
+  .nav-featured .nav-item {
+    color: black;
+  }
+
+  .nav-featured .nav-item:hover {
+    color: #93C223;
+  }
+
+
+  /*
+  ===========================================
+  */
+  .featured-products {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .featured-products img {
+    width: 100%;
+  }
+
+  .featured-products p {
+    margin: 0;
+  }
+
+  .product-name {
+    font-size: 90%;
+  }
+
+  .product-price {
+    color: #93C223;
+  }
+
+  .featured-products a {
+    color: inherit;
+  }
+
+  .featured-products .nav-item {
+    color: black;
+  }
+
+  .featured-products .nav-item:hover {
+    color: #93C223;
+  }
+
+
+  /*
+  ===========================================
+      Pages
+  ===========================================
+  */
+  .pages {
+    margin: 10px 0 20px 0;
+    color: black;
+  }
+
+  .pages .nav-item:hover {
+    color: #93C223;
+  }
+
+  .pages a {
+    color: inherit;
+  }
+
+  /*
+  ===========================================
+      Footer
+  ===========================================
+  */
+  .footer {
+    background-color: #93C223;
+    text-align: center;
+    height: 40px;
+  }
+
+  .footer p {
+    margin: 8px 0 0 0;
+  }
+</style>
+<body>
+
+<main class="container">
+
+  <nav class="nav-user row justify-content-end"> <!-- User -->
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-user"></i>
+          My Account
+        </a>
+      </li>
+      <li class="nav-item">
+
+        <a class="nav-link" href="#">
+          <i class="fas fa-user"></i>
+          Login
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout
+        </a>
+      </li>
+    </ul>
+  </nav> <!-- /User -->
+
+
+  <header class="title row"> <!-- Title -->
+
+    <div class="title-title col-sm-6"> <!-- Icon -->
+      <div class="row">
+        <div class="title-icon col-sm-2">
+          <i class="fas fa-shopping-cart fa-2x"></i>
+        </div>
+
+        <div class="title-text col-sm-10">
+          <h4>Digital <span class="font-weight-bold">Shop</span></h4>
+
+        </div>
+      </div>
+    </div> <!-- /Icon -->
+
+    <div class="title-search col-sm-6"> <!-- Search -->
+      <nav class="navbar justify-content-end">
+        <form class="form-inline">
+          <input class="form-control form-control-sm" type="search" placeholder="Search" aria-label="Search">
+        </form>
+        <span class="navbar-text ml-3">
+                        <a class="checkout" href="#">
+                            <i class="fas fa-shopping-cart"></i>
+
+                        </a>
+                    </span>
+      </nav>
+    </div> <!-- /Search -->
+
+  </header> <!-- /Title -->
+
+
+  <nav class="nav-categories row justify-content-center"> <!-- Categories -->
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">HOME</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">LAPTOPS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">PHONES</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">ELECTRONICS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">TV</a>
+      </li>
+
+    </ul>
+  </nav> <!-- /Categories -->
+
+  <section class="banner row"> <!-- Banner -->
+    <div class="col-sm-12">
+      <div class="row justify-content-center">
+        <div class="banner-info col-sm-3">
+          <h4>AWESOME FURNITURE</h4>
+          <hr/>
+          <h5><span class="font-weight-bold">50%</span> OFF</h5>
+          <h5>TRENDING <span class="font-weight-bold">DESIGNS</span></h5>
+        </div>
+      </div>
+
+      <img src="C:\Users\Mr.Coder\Documents\cfnhnf125kualhm8oe60.jpg" alt="banner">
+    </div>
+  </section> <!-- /Banner -->
+
+  <section class="featured row justify-content-center"> <!-- Featured -->
+    <div class="col-sm-10 featured-box">
+
+      <div class="featured-categories row"> <!-- featured categories -->
+        <div class="col-sm-4">
+          <a href="#">
+            <div class="row justify-content-center">
+              <div class="categories-info col-sm-8">
+                <span class="font-weight-bold">BAGS</span>
+              </div>
+            </div>
+            <img src="https://res.cloudinary.com/dcyzb4eub/image/upload/v1542649668/categories-bags.webp" alt="bags">
+          </a>
+        </div>
+
+        <div class="col-sm-4">
+          <a href="#">
+            <div class="row justify-content-center">
+              <div class="categories-info col-sm-8">
+                <span class="font-weight-bold">SHOES</span>
+              </div>
+            </div>
+            <img src="https://res.cloudinary.com/dcyzb4eub/image/upload/v1542649668/categories-bags.webp" alt="shoes">
+          </a>
+        </div>
+        <div class="col-sm-4" >
+          <a href="#">
+            <div class="row justify-content-center">
+              <div class="categories-info col-sm-8">
+                <span class="font-weight-bold">ELECTRONICS</span>
+              </div>
+            </div>
+            <img src="https://res.cloudinary.com/dcyzb4eub/image/upload/v1542649668/categories-electronics.webp" alt="electronics">
+          </a>
+        </div>
+      </div> <!-- /featured categories -->
+
+      <div class="nav-featured row"> <!-- nav featured -->
+        <div class="col-sm-6">
+          <h4>FEATURED PRODUCTS</h4>
+        </div>
+        <div class="col-sm-6">
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fas fa-chevron-right"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div> <!-- /nav featured -->
+
+      <div class="featured-products row"> <!-- featured products 2 -->
+        <div class="col-sm-3">
+          <img src="https://res.cloudinary.com/dcyzb4eub/image/upload/v1542649668/Mini_Focus_sports_Quartz_watch.webp" alt="product">
+          <p class="product-name">Mini Focus sports Quartz watch</p>
+          <p class="product-price">R900.00</p>
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-heart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-info-circle"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-sm-3">
+          <img src="https://res.cloudinary.com/dcyzb4eub/image/upload/v1542649668/Vintage_52_piece_cutlery_set.webp" alt="product">
+          <p class="product-name">Vintage 52 piece cutlery set</p>
+          <p class="product-price">R450.00</p>
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-heart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-info-circle"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-3">
+          <img src="https://res.cloudinary.com/dcyzb4eub/image/upload/v1542649667/Mario_Bangni_Men_s_Shoes.webp" alt="product">
+          <p class="product-name">Mario Bangni Men's Shoes</p>
+          <p class="product-price">R300.00</p>
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-heart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-info-circle"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-3">
+          <img src="https://res.cloudinary.com/dcyzb4eub/image/upload/v1542649667/Lenovo_Ideapad_G50-70.webp" alt="product">
+          <p class="product-name">Lenovo Ideapad G50-70</p>
+          <p class="product-price">R3600.00</p>
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-heart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-info-circle"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div> <!-- /featured products -->
+
+      <div class="featured-products row"> <!-- featured products -->
+        <div class="col-sm-3">
+          <img src="https://res.cloudinary.com/dcyzb4eub/image/upload/v1542649668/Mini_Focus_sports_Quartz_watch.webp" alt="product">
+          <p class="product-name">Mini Focus sports Quartz watch</p>
+          <p class="product-price">R900.00</p>
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-heart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-info-circle"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-sm-3">
+          <img src="https://res.cloudinary.com/dcyzb4eub/image/upload/v1542649668/Vintage_52_piece_cutlery_set.webp" alt="product">
+          <p class="product-name">Vintage 52 piece cutlery set</p>
+          <p class="product-price">R450.00</p>
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-heart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-info-circle"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-3">
+          <img src="https://res.cloudinary.com/dcyzb4eub/image/upload/v1542649667/Mario_Bangni_Men_s_Shoes.webp" alt="product">
+          <p class="product-name">Mario Bangni Men's Shoes</p>
+          <p class="product-price">R300.00</p>
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-heart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-info-circle"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-3">
+          <img src="https://res.cloudinary.com/dcyzb4eub/image/upload/v1542649667/Lenovo_Ideapad_G50-70.webp" alt="product">
+          <p class="product-name">Lenovo Ideapad G50-70</p>
+          <p class="product-price">R3600.00</p>
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-heart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-info-circle"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div> <!-- /featured products 2 -->
+
+    </div>
+  </section> <!-- /Featured -->
+
+
+  <section class="pages row justify-content-center"> <!-- Pages -->
+    <ul class="nav">
+      <li class="nav-item"><a class="nav-link" href="#">1</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">2</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">3</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Next</a></li>
+    </ul>
+  </section> <!-- /Pages -->
+
+
+  <footer class="footer row"> <!-- Footer -->
+    <div class="col-sm-12">
+      <p>© 2018 OnlineShop, Inc.</p>
+    </div>
+  </footer> <!-- Footer -->
+</main>
+
+</body>
+</html>
