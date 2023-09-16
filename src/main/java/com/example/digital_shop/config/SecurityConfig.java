@@ -27,7 +27,7 @@ public class SecurityConfig {
     private final AuthenticationService authenticationService;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
-    private final String[] permitAll = {"/swagger-ui/**", "/v3/api-docs/**", "/auth/**", "/product/get-all","/product/get-by-id"};
+    private final String[] permitAll = {"/swagger-ui/**", "/v3/api-docs/**", "/auth/**", "/product/get-all","/product/get-by-id", "/index.html"};
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -41,6 +41,10 @@ public class SecurityConfig {
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore((new JwtTokenFilter(authenticationService,jwtService)),
                         UsernamePasswordAuthenticationFilter.class)
+                .formLogin()
+                .loginPage("/auth/index")
+                .defaultSuccessUrl("/menu")
+                .and()
                 .build();
     }
     @Bean
