@@ -1,524 +1,767 @@
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
 
-<!DOCTYPE html>
-<html lang="en">
-   <head>
-      <!-- basic -->
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <!-- mobile metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-      <!-- site metas -->
-      <title>cla</title>
-      <meta name="keywords" content="">
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <!-- bootstrap css -->
-<!--      <link rel="stylesheet" th:href="@{../static/css/bootstrap.min.css}">-->
-<!--      &lt;!&ndash; style css &ndash;&gt;-->
-<!--      <link rel="stylesheet" th:href="@{../static/css/style.css}">-->
-<!--      &lt;!&ndash; Responsive&ndash;&gt;-->
-<!--      <link rel="stylesheet" th:href="@{../static/css/responsive.css}">-->
-<!--      &lt;!&ndash; fevicon &ndash;&gt;-->
-<!--      <link rel="icon" th:href="@{../static/images/fevicon.png}" type="image/gif" />-->
-<!--      &lt;!&ndash; Scrollbar Custom CSS &ndash;&gt;-->
-<!--      <link rel="stylesheet" th:href="@{../static/css/jquery.mCustomScrollbar.min.css}">-->
-<!--      &lt;!&ndash; Tweaks for older IEs&ndash;&gt;-->
-<!--      <link rel="stylesheet" th:href="@{https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css}">-->
-<!--      <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css}" media="screen">-->
-<!--      &lt;!&ndash;[if lt IE 9]>-->
-<!--      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>-->
-<!--      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]&ndash;&gt;-->
-   </head>
-   <!-- body -->
-   <body class="main-layout">
-      <!-- loader  -->
-      <div class="loader_bg">
-         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
-      </div>
-      <!-- end loader -->
-      <!-- header -->
-      <header>
-         <!-- header inner -->
-         <div class="header">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                     <div class="full">
-                        <div class="center-desk">
-                           <div class="logo">
-                              <a th:href="@{index.html}"><img src="images/logo.png" alt="#" /></a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarsExample04">
-                           <ul class="navbar-nav mr-auto">
-                              <li class="nav-item active">
-                                 <a class="nav-link" th:href="@{index.html}">Home</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" th:href="@{about.html}">About</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="computer.html">Computer</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="laptop.html">Laptop</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="product.html">Products</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="contact.html">Contact Us</a>
-                              </li>
-                              <li class="nav-item d_none">
-                                 <a class="nav-link" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                              </li>
-                              <li class="nav-item d_none">
-                                 <a class="nav-link" href="#">Login</a>
-                              </li>
-                           </ul>
-                        </div>
-                     </nav>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </header>
-      <!-- end header inner -->
-      <!-- end header -->
-      <!-- banner -->
-      <section class="banner_main">
-         <div id="banner1" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-               <li data-target="#banner1" data-slide-to="0" class="active"></li>
-               <li data-target="#banner1" data-slide-to="1"></li>
-               <li data-target="#banner1" data-slide-to="2"></li>
-               <li data-target="#banner1" data-slide-to="3"></li>
-               <li data-target="#banner1" data-slide-to="4"></li>
-            </ol>
-            <div class="carousel-inner">
-               <div class="carousel-item active">
-                  <div class="container">
-                     <div class="carousel-caption">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="text-bg">
-                                 <span>Computer And Laptop</span>
-                                 <h1>Accessories</h1>
-                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or </p>
-                                 <a href="#">Buy Now </a> <a href="contact.html">Contact </a>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="text_img">
-                                 <figure><img src="images/pct.png" alt="#"/></figure>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="carousel-item">
-                  <div class="container">
-                     <div class="carousel-caption">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="text-bg">
-                                 <span>Computer And Laptop</span>
-                                 <h1>Accessories</h1>
-                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or </p>
-                                 <a href="#">Buy Now </a> <a href="contact.html">Contact </a>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="text_img">
-                                 <figure><img src="images/pct.png" alt="#"/></figure>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="carousel-item">
-                  <div class="container">
-                     <div class="carousel-caption">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="text-bg">
-                                 <span>Computer And Laptop</span>
-                                 <h1>Accessories</h1>
-                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or </p>
-                                 <a href="#">Buy Now </a> <a href="contact.html">Contact </a>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="text_img">
-                                 <figure><img src="images/pct.png" alt="#"/></figure>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="carousel-item">
-                  <div class="container">
-                     <div class="carousel-caption">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="text-bg">
-                                 <span>Computer And Laptop</span>
-                                 <h1>Accessories</h1>
-                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or </p>
-                                 <a href="#">Buy Now </a> <a href="contact.html">Contact </a>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="text_img">
-                                 <figure><img src="images/pct.png" alt="#"/></figure>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="carousel-item">
-                  <div class="container">
-                     <div class="carousel-caption">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="text-bg">
-                                 <span>Computer And Laptop</span>
-                                 <h1>Accessories</h1>
-                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or </p>
-                                 <a href="#">Buy Now </a> <a href="contact.html">Contact </a>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="text_img">
-                                 <figure><img src="images/pct.png" alt="#"/></figure>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
-            <i class="fa fa-chevron-left" aria-hidden="true"></i>
-            </a>
-            <a class="carousel-control-next" href="#banner1" role="button" data-slide="next">
-            <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            </a>
-         </div>
-      </section>
-      <!-- end banner -->
-      <!-- three_box -->
-      <div class="three_box">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-4">
-                  <div class="box_text">
-                     <i><img src="images/thr.png" alt="#"/></i>
-                     <h3>Computer</h3>
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="box_text">
-                     <i><img src="images/thr1.png" alt="#"/></i>
-                     <h3>Laptop</h3>
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="box_text">
-                     <i><img src="images/thr2.png" alt="#"/></i>
-                     <h3>Tablet</h3>
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- three_box -->
-      <!-- products -->
-      <div  class="products">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>Our Products</h2>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="our_products">
-                     <div class="row">
-                        <div class="col-md-4 margin_bottom1">
-                           <div class="product_box">
-                              <figure><img src="images/product1.png" alt="#"/></figure>
-                              <h3>Computer</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4 margin_bottom1">
-                           <div class="product_box">
-                              <figure><img src="images/product2.png" alt="#"/></figure>
-                              <h3>Laptop</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4 margin_bottom1">
-                           <div class="product_box">
-                              <figure><img src="images/product3.png" alt="#"/></figure>
-                              <h3>Tablet</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4 margin_bottom1">
-                           <div class="product_box">
-                              <figure><img src="images/product4.png" alt="#"/></figure>
-                              <h3>Speakers</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4 margin_bottom1">
-                           <div class="product_box">
-                              <figure><img src="images/product5.png" alt="#"/></figure>
-                              <h3>internet</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4 margin_bottom1">
-                           <div class="product_box">
-                              <figure><img src="images/product6.png" alt="#"/></figure>
-                              <h3>Hardisk</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4">
-                           <div class="product_box">
-                              <figure><img src="images/product7.png" alt="#"/></figure>
-                              <h3>Rams</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4">
-                           <div class="product_box">
-                              <figure><img src="images/product8.png" alt="#"/></figure>
-                              <h3>Bettery</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4">
-                           <div class="product_box">
-                              <figure><img src="images/product9.png" alt="#"/></figure>
-                              <h3>Drive</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-12">
-                           <a class="read_more" href="#">See More</a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- end products -->
-      <!-- laptop  section -->
-      <div class="laptop">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-6">
-                  <div class="titlepage">
-                     <p>Every Computer and laptop</p>
-                     <h2>Up to 40% off !</h2>
-                     <a class="read_more" href="#">Shop Now</a>
-                  </div>
-               </div>
-               <div class="col-md-6">
-                  <div class="laptop_box">
-                     <figure><img src="images/pc.png" alt="#"/></figure>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      </div>
-      <!-- end laptop  section -->
-      <!-- customer -->
-      <div class="customer">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>Customer Review</h2>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-12">
-                  <div id="myCarousel" class="carousel slide customer_Carousel " data-ride="carousel">
-                     <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                     </ol>
-                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                           <div class="container">
-                              <div class="carousel-caption ">
-                                 <div class="row">
-                                    <div class="col-md-9 offset-md-3">
-                                       <div class="test_box">
-                                          <i><img src="images/cos.png" alt="#"/></i>
-                                          <h4>Sandy Miller</h4>
-                                          <p>ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id</p>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="container">
-                              <div class="carousel-caption">
-                                 <div class="row">
-                                    <div class="col-md-9 offset-md-3">
-                                       <div class="test_box">
-                                          <i><img src="images/cos.png" alt="#"/></i>
-                                          <h4>Sandy Miller</h4>
-                                          <p>ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id</p>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="container">
-                              <div class="carousel-caption">
-                                 <div class="row">
-                                    <div class="col-md-9 offset-md-3">
-                                       <div class="test_box">
-                                          <i><img src="images/cos.png" alt="#"/></i>
-                                          <h4>Sandy Miller</h4>
-                                          <p>ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id</p>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                     <span class="sr-only">Previous</span>
-                     </a>
-                     <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                     <span class="sr-only">Next</span>
-                     </a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- end customer -->
+<style>
+   @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400");
 
-      <!--  contact -->
-      <div class="contact">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>Contact Now</h2>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-10 offset-md-1">
-                  <form id="request" class="main_form">
-                     <div class="row">
-                        <div class="col-md-12 ">
-                           <input class="contactus" placeholder="Name" type="type" name="Name"> 
-                        </div>
-                        <div class="col-md-12">
-                           <input class="contactus" placeholder="Email" type="type" name="Email"> 
-                        </div>
-                        <div class="col-md-12">
-                           <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number">                          
-                        </div>
-                        <div class="col-md-12">
-                           <textarea class="textarea" placeholder="Message" type="type" Message="Name">Message </textarea>
-                        </div>
-                        <div class="col-md-12">
-                           <button class="send_btn">Send</button>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
+   *,
+   *::before,
+   *::after {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+   }
+
+   /* ================= VARIABLE ================ */
+   :root {
+      --primary-color: hsl(9, 94%, 61%);
+      --primary-color-alt: hsl(28, 72%, 83%);
+      --second-color: #3e537c;
+      --second-color-alt: hsla(220, 33%, 36%, 65%);
+      --third-color: hsl(220, 36%, 28%);
+      --white-color: #fbfbfb;
+      --white-color-alt: hsl(12, 14%, 93%);
+      --dark-color: hsl(300, 100%, 0%);
+   }
+
+   /* ================= BASE ==================== */
+   li {
+      list-style: none;
+   }
+   a {
+      text-decoration: none;
+   }
+   img {
+      width: 100%;
+      height: auto;
+   }
+   .bx {
+      font-size: 2.5rem;
+   }
+   .container {
+      padding: 0 2rem;
+   }
+
+   /* -- BODY -- */
+   body {
+      font-family: "Raleway", sans-serif;
+      font-size: 1rem;
+      background-color: var(--white-color);
+   }
+
+   /* ================= HEADER ================ */
+   header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: var(--dark-color);
+      padding: 1rem 2rem;
+   }
+   .company-logo {
+      font-size: 2.5rem;
+      background: -webkit-linear-gradient(
+              120deg,
+              var(--primary-color-alt),
+              var(--primary-color)
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+   }
+   .nav-items {
+      display: flex;
+   }
+   .nav-item {
+      margin: 0 2rem;
+   }
+   .nav-link {
+      font-size: 1.1rem;
+      letter-spacing: 0.05rem;
+      position: relative;
+      background: -webkit-linear-gradient(
+              var(--primary-color-alt),
+              var(--primary-color)
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+   }
+   .nav-link::before {
+      content: "";
+      background: linear-gradient(var(--primary-color), var(--primary-color-alt));
+      width: 100%;
+      height: 0.05rem;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 150ms;
+   }
+   .nav-link:hover::before {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+   }
+   .menu-toggle {
+      display: none;
+   }
+   .bx-menu,
+   .bx-x {
+      cursor: pointer;
+      background: -webkit-linear-gradient(
+              120deg,
+              var(--primary-color-alt),
+              var(--primary-color)
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: none !important;
+   }
+
+   /* ================= MAIN ================ */
+
+   /* -------- HOME SECTION -------------- */
+   .section-1 {
+      background-color: var(--dark-color);
+      display: grid;
+   }
+   /* .home-computer-container {} */
+
+   .slogan .company-title {
+      background: -webkit-linear-gradient(
+              120deg,
+              var(--primary-color-alt),
+              var(--primary-color)
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+   }
+   .slogan .company-slogan {
+      background: -webkit-linear-gradient(
+              120deg,
+              var(--primary-color-alt),
+              var(--primary-color)
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      font-weight: 400;
+      line-height: 1.8rem;
+   }
+
+   /* -------- OFFER SECTION ------------- */
+   .section-2 {
+      margin: 2rem 0;
+   }
+   .offer {
+      background-color: var(--dark-color);
+      margin: 1rem 0;
+      display: grid;
+   }
+   .offer img {
+      background-color: var(--dark-color);
+      padding: 2rem 0;
+   }
+   .offer-1 img {
+      background-color: var(--dark-color);
+      padding: 3rem 0;
+   }
+   .offer-description {
+      background-color: var(--white-color-alt);
+      padding: 0 1rem;
+   }
+   .offer-description .offer-title {
+      color: var(--second-color);
+      font-size: 1.8rem;
+      font-weight: 400;
+      padding: 1.5rem 0 0.5rem 0;
+   }
+   .offer-description .offer-hook {
+      color: var(--second-color-alt);
+      font-size: 1.2rem;
+   }
+   .offer-description .cart-btn {
+      cursor: pointer;
+      color: var(--second-color-alt);
+      font-size: 1.1rem;
+      display: grid;
+      place-items: center;
+      margin: 2rem 0 1rem 0;
+      width: 10rem;
+      height: 3rem;
+      background-image: linear-gradient(
+              to top,
+              var(--primary-color-alt),
+              var(--primary-color)
+      );
+   }
+   .offer-description .cart-btn:hover {
+      background-image: linear-gradient(
+              to bottom,
+              var(--primary-color-alt),
+              var(--primary-color)
+      );
+   }
+
+   /* -------- PRODUCT SECTION ----------- */
+   .section-3 {
+      display: grid;
+      place-items: center;
+      justify-content: space-around;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
+   }
+   .product {
+      cursor: pointer;
+      background-color: var(--white-color-alt);
+      position: relative;
+   }
+   .product::before {
+      content: "";
+      background-image: linear-gradient(
+              to bottom,
+              hsla(29, 72%, 83%, 0.438),
+              hsla(9, 94%, 61%, 0.507)
+      );
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+   }
+   .product_add_cart {
+      color: var(--white-color-alt);
+      font-size: 1.2rem;
+      background-color: hsl(9, 94%, 65%);
+      padding: 1rem 0.4rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 300ms, color 300ms, box-shadow 300ms;
+   }
+   .product_add_cart:hover {
+      color: var(--white-color);
+      box-shadow: 0 1rem 0 -0.5rem hsl(17, 79%, 65%, 0.7),
+      0 2rem 0 -1rem hsla(17, 79%, 65%, 0.65);
+   }
+
+   /* -------- SPONSOR SECTION ----------- */
+   .section-4 {
+      margin: 4rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-around;
+   }
+   .sponsor img {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      filter: grayscale(100%);
+      opacity: 0.8;
+      transition: opacity 300ms;
+   }
+   .sponsor img:hover {
+      /* filter: grayscale(0); */
+      opacity: 1;
+   }
+
+   /* ========= SUBSCRIBE SECTION ========== */
+   .section-5 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem 0;
+   }
+   .subscribe-input-label {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.05rem;
+      color: var(--second-color);
+   }
+   input[type="text"] {
+      padding: 0 0.5rem;
+      font-size: 1.1rem;
+      width: 100%;
+      height: 3rem;
+      border: none;
+      background-color: hsl(220, 33%, 90%);
+      color: var(--second-color-alt);
+      transition: background-color 300ms;
+   }
+   input[type="text"]:focus {
+      outline: none;
+      background-color: hsl(220, 33%, 95%);
+   }
+   input[type="text"]::placeholder {
+      color: var(--second-color-alt);
+   }
+   input[type="submit"] {
+      cursor: pointer;
+      background-image: linear-gradient(
+              to top,
+              var(--primary-color-alt),
+              var(--primary-color)
+      );
+      color: var(--white-color-alt);
+      margin: 1rem 0;
+      border: none;
+      width: 100%;
+      height: 3rem;
+      font-size: 1.2rem;
+      transition: color 300ms;
+   }
+   input[type="submit"]:hover {
+      background-image: linear-gradient(
+              to bottom,
+              var(--primary-color-alt),
+              var(--primary-color)
+      );
+      color: var(--white-color);
+   }
+   /* =============== FOOTER =============== */
+   .top-footer {
+      background-color: var(--second-color);
+      display: flex;
+      flex-direction: column;
+   }
+   .footer-title {
+      font-weight: 500;
+      font-size: 1.2rem;
+      padding: 1rem 0;
+      background-image: -webkit-linear-gradient(
+              120deg,
+              var(--primary-color-alt),
+              var(--primary-color)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+   }
+   .footer-items h3 {
+      cursor: pointer;
+      font-weight: 300;
+      font-size: 1.1rem;
+      padding: 0.1rem 0;
+      color: var(--white-color-alt);
+   }
+   .footer-items h3:hover {
+      text-decoration: underline;
+   }
+   .footer-items h3:last-child {
+      padding-bottom: 2rem;
+   }
+
+   .end-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--third-color);
+   }
+   .copyright {
+      color: var(--white-color-alt);
+      padding: 1rem 0;
+      font-size: 0.9rem;
+   }
+   .copyright b {
+      font-weight: inherit;
+      font-size: 0.9rem;
+   }
+   .designer {
+      color: hsla(0, 0%, 98%, 0.541);
+      padding-bottom: 0.5rem;
+      font-size: 0.9rem;
+   }
+   .designer:hover {
+      text-decoration: underline;
+   }
+
+   /* =============== MEDIA QUERIES ======= */
+
+   @media screen and (max-width: 768px) {
+      .container {
+         padding: 0 1rem;
+      }
+      /* ================= HEADER ================ */
+      header {
+         padding: 0.5rem 1rem;
+      }
+      .navbar {
+         background-color: var(--dark-color);
+         position: absolute;
+         top: 3.5rem;
+         right: 0;
+         width: 100%;
+         height: 100vh;
+         display: flex;
+         justify-content: center;
+         transform: scaleY(0);
+         transform-origin: bottom;
+         transition: transform 500ms;
+      }
+      .show-navbar {
+         display: flex;
+         transform: scaleY(1);
+         transform-origin: top;
+         transition: transform 300ms;
+      }
+      .nav-items {
+         display: flex;
+         flex-direction: column;
+      }
+      .nav-item {
+         margin: 0.5rem 0;
+      }
+      .menu-toggle {
+         display: block;
+      }
+      .bx-menu {
+         display: block !important;
+      }
+      .show-bx {
+         display: block !important;
+      }
+      .hide-bx {
+         display: none !important;
+      }
+   }
+   @media (min-width: 769px) {
+      header {
+         padding: 1rem 5rem;
+      }
+      /* ================= MAIN ================ */
+
+      /* -------- HOME SECTION -------------- */
+      .section-1 {
+         justify-content: space-between;
+         grid-template-columns: 1fr 1fr;
+         padding: 10rem 5rem 0 5rem;
+      }
+      .slogan .company-title {
+         max-width: 30rem;
+         font-size: 1.8rem;
+         letter-spacing: 0.5rem;
+      }
+      .slogan .company-slogan {
+         max-width: 20rem;
+         font-size: 1.3rem;
+      }
+      /* -------- OFFER SECTION ------------- */
+      .section-2 {
+         margin: 2rem 5rem;
+      }
+      .offer {
+         margin: 5rem 0;
+         align-items: center;
+         justify-content: space-between;
+         grid-template-rows: auto auto;
+      }
+      .offer-1 {
+         grid-template-areas: "offer-1-img offer-desc-1";
+      }
+      .offer-1 img {
+         background-color: var(--dark-color);
+         padding: 2rem 0;
+      }
+      .offer-2 {
+         grid-template-areas: "offer-desc-2 offer-2-img";
+      }
+      .offer-1-img {
+         grid-area: offer-1-img;
+      }
+      .offer-2-img {
+         grid-area: offer-2-img;
+      }
+      .offer-desc-1 {
+         grid-area: offer-desc-1;
+      }
+      .offer-desc-2 {
+         grid-area: offer-desc-2;
+      }
+      .offer-description .offer-title {
+         font-size: 1.9rem;
+         padding: 1.5rem 0 0.5rem 0;
+      }
+      .offer-description .offer-hook {
+         max-width: 30rem;
+      }
+      .offer-description {
+         background-color: var(--white-color-alt);
+         padding: 2rem 1rem;
+      }
+      .offer-description .offer-title {
+         padding: 0.5rem 0 1rem 0;
+      }
+      .offer-description .cart-btn {
+         margin: 2rem 0 0.5rem 0;
+      }
+      /* -------- PRODUCT SECTION ----------- */
+      .section-3 {
+         gap: 5rem;
+      }
+      .product::before {
+         transform: scaleY(0);
+         transform-origin: bottom;
+         transition: transform 300ms;
+      }
+      .product:hover::before {
+         transform: scaleY(1);
+         transform-origin: top;
+         transition: transform 300ms;
+      }
+      .product_add_cart {
+         transform: scaleY(0);
+         transform-origin: bottom;
+      }
+      .product:hover .product_add_cart {
+         transform: translate(-50%, -50%) scaleY(1);
+         transform-origin: top;
+      }
+      /* -------- SPONSOR SECTION ----------- */
+      .section-4 {
+         margin: 5rem 0;
+      }
+      /* ========= SUBSCRIBE SECTION ========== */
+      .section-5 {
+         padding: 1rem 0;
+      }
+      .section-5 .subscribe-container {
+         display: flex;
+         align-items: center;
+      }
+      input[type="text"] {
+         padding: 0 1rem;
+         width: 15rem;
+      }
+      input[type="submit"] {
+         width: 10rem;
+      }
+      /* =============== FOOTER =============== */
+      .top-footer {
+         flex-direction: row;
+         justify-content: space-around;
+         padding-bottom: 8rem;
+         padding-top: 2rem;
+      }
+      .footer-title {
+         font-size: 1rem;
+         padding: 1rem 0;
+      }
+      .footer-items h3 {
+         font-size: 0.9rem;
+      }
+
+      .end-footer {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         background-color: var(--third-color);
+      }
+      .copyright {
+         color: hsla(0, 0%, 98%, 0.747);
+         padding: 1rem 0;
+         font-size: 0.8rem;
+      }
+      .copyright b {
+         font-size: 0.7rem;
+      }
+      .designer {
+         color: hsla(0, 0%, 98%, 0.322);
+         font-size: 0.8rem;
+      }
+   }
+
+
+
+</style>
+<body>
+<header>
+   <div class="company-logo">Digital Shop</div>
+   <nav class="navbar">
+      <ul class="nav-items">
+         <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+         <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+         <li class="nav-item"><a href="#" class="nav-link">Laptop</a></li>
+         <li class="nav-item"><a href="#" class="nav-link">Phone</a></li>
+         <li class="nav-item"><a href="#" class="nav-link">Tv</a></li>
+         <li class="nav-item"><a href="#" class="nav-link">Products</a></li>
+         <li class="nav-item"><a href="#" class="nav-link">Contact us</a></li>
+         <li class="nav-item"><a href="#" class="nav-link">Basket</a></li>
+         <li class="nav-item"><a href="#" class="nav-link">Login</a></li>
+         <li class="nav-item"><a href="#" class="nav-link">Register</a></li>
+      </ul>
+   </nav>
+   <div class="menu-toggle">
+      <i class="bx bx-menu"></i>
+      <i class="bx bx-x"></i>
+   </div>
+</header>
+<main>
+   <!-- HOME SECTION -->
+   <section class="container section-1">
+      <div class="slogan">
+         <h1 class="company-title">DOWNTOWN TECH LIVER</h1>
+         <h2 class="company-slogan">
+            The biggest computer shop in the area where customers come first.
+         </h2>
+      </div>
+      <div class="home-computer-container">
+         <img  src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/home_img.png?raw=true" alt="a computer in dark with shadow" class="home-img">
+      </div>
+   </section>
+
+<!--    OFFER SECTION-->
+   <section class="container section-2">
+<!--       offer 1-->
+      <div class="offer offer-1">
+         <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/offer_1.png?raw=true" alt="a computer in dark with with white shadow" class="offer-img offer-1-img">
+         <div class="offer-description offer-desc-1">
+            <h2 class="offer-title">Macbook pro</h2>
+            <p class="offer-hook">This a Macbook pro nulla vulputate magna vel odio sagittis bibendium...</p>
+            <div class="cart-btn">ADD TO CART</div>
          </div>
       </div>
-      <!-- end contact -->
-      <!--  footer -->
-      <footer>
-         <div class="footer">
-            <div class="container">
-               <div class="row">
-                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                     <img class="logo1" src="images/logo1.png" alt="#"/>
-                     <ul class="social_icon">
-                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                     </ul>
-                  </div>
-                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                     <h3>About Us</h3>
-                     <ul class="about_us">
-                        <li>dolor sit amet, consectetur<br> magna aliqua. Ut enim ad <br>minim veniam, <br> quisdotempor incididunt r</li>
-                     </ul>
-                  </div>
-                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                     <h3>Contact Us</h3>
-                     <ul class="conta">
-                        <li>dolor sit amet,<br> consectetur <br>magna aliqua.<br> quisdotempor <br>incididunt ut e </li>
-                     </ul>
-                  </div>
-                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                     <form class="bottom_form">
-                        <h3>Newsletter</h3>
-                        <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
-                        <button class="sub_btn">subscribe</button>
-                     </form>
-                  </div>
-               </div>
-            </div>
-            <div class="copyright">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-12">
-                        <p>© 2019 All Rights Reserved. Design by<a href="https://html.design/"> Free Html Templates</a></p>
-                     </div>
-                  </div>
-               </div>
-            </div>
+      <!-- offer 2 -->
+      <div class="offer offer-2">
+         <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/offer_2.png?raw=true" alt="a opened computer" class="offer-img offer-2-img">
+         <div class="offer-description offer-desc-2">
+            <h2 class="offer-title">Lenovo</h2>
+            <p class="offer-hook">This a Lenovo nulla vulputate magna vel odio sagittis bibendium...</p>
+            <div class="cart-btn">ADD TO CART</div>
          </div>
-      </footer>
-      <!-- end footer -->
-      <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
-      <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
-   </body>
-</html>
+      </div>
+   </section>
 
+   <!-- PRODUCT SECTION -->
+   <section class="container section-3">
+      <!-- product - 1 -->
+      <div class="product product-1">
+         <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/comp_1.png?raw=true" alt="computer to sell" class="product-img">
+         <span class="product_add_cart">ADD TO CART</span>
+      </div>
+      <!-- product - 2 -->
+      <div class="product product-2">
+         <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/comp_2.png?raw=true" alt="computer to sell" class="product-img">
+         <span class="product_add_cart">ADD TO CART</span>
+      </div>
+      <!-- product - 3 -->
+      <div class="product product-3">
+         <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/comp_3.png?raw=true" alt="computer to sell" class="product-img">
+         <span class="product_add_cart">ADD TO CART</span>
+      </div>
+      <!-- product - 4 -->
+      <div class="product product-4">
+         <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/comp_4.png?raw=true" alt="computer to sell" class="product-img">
+         <span class="product_add_cart">ADD TO CART</span>
+      </div>
+
+      <div class="product product-5">
+         <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/comp_4.png?raw=true" alt="computer to sell" class="product-img">
+         <span class="product_add_cart">ADD TO CART</span>
+      </div>
+
+      <div class="product product-4">
+         <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/comp_4.png?raw=true" alt="computer to sell" class="product-img">
+         <span class="product_add_cart">ADD TO CART</span>
+      </div>
+
+      <div class="product product-4">
+         <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/comp_4.png?raw=true" alt="computer to sell" class="product-img">
+         <span class="product_add_cart">ADD TO CART</span>
+      </div>
+      <div class="product product-4">
+         <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/comp_4.png?raw=true" alt="computer to sell" class="product-img">
+         <span class="product_add_cart">ADD TO CART</span>
+      </div>
+
+      <div class="product product-4">
+         <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/comp_4.png?raw=true" alt="computer to sell" class="product-img">
+         <span class="product_add_cart">ADD TO CART</span>
+      </div>
+
+      <div class="product product-4">
+         <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/comp_4.png?raw=true" alt="computer to sell" class="product-img">
+         <span class="product_add_cart">ADD TO CART</span>
+      </div>
+   </section>
+
+   <!-- SPONSOR SECTION -->
+   <section class="container section-4">
+      <!-- SPONSOR group 1 -->
+      <div class="sponsor sponsor-1"><img src="https://raw.githubusercontent.com/r-e-d-ant/Computer-store-website/b90ac65459206fef22e9b87313f587185554263b/assets/images/microsoft.svg" alt=""></div>
+      <div class="sponsor sponsor-2"><img src="https://raw.githubusercontent.com/r-e-d-ant/Computer-store-website/b90ac65459206fef22e9b87313f587185554263b/assets/images/apple.svg" alt=""></div>
+
+      <!-- SPONSOR group 2 -->
+      <div class="sponsor sponsor-3"><img src="https://raw.githubusercontent.com/r-e-d-ant/Computer-store-website/b90ac65459206fef22e9b87313f587185554263b/assets/images/dell.svg" alt=""></div>
+      <div class="sponsor sponsor-4"><img src="https://raw.githubusercontent.com/r-e-d-ant/Computer-store-website/b90ac65459206fef22e9b87313f587185554263b/assets/images/ibm.svg" alt=""></div>
+   </section>
+
+   <!-- SUBSCRIBE SECTION-->
+   <section class="container section-5">
+      <h2 class="subscribe-input-label">NEWSLETTER</h2>
+      <div class="subscribe-container">
+         <input type="text" id="email-subscribe" placeholder="Email address...">
+         <input type="submit" value="SUBSCRIBE">
+      </div>
+   </section>
+</main>
+<footer>
+   <div class="container top-footer">
+      <!-- footer item 1 -->
+      <div class="footer-item">
+         <h2 class="footer-title">ADDRESS</h2>
+         <div class="footer-items">
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing st18</h3>
+         </div>
+      </div>
+      <!-- footer item 2 -->
+      <div class="footer-item">
+         <h2 class="footer-title">SERVICES</h2>
+         <div class="footer-items">
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+         </div>
+      </div>
+      <!-- footer item 3 -->
+      <div class="footer-item">
+         <h2 class="footer-title">SUPPLIERS</h2>
+         <div class="footer-items">
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+         </div>
+      </div>
+      <!-- footer item 4 -->
+      <div class="footer-item">
+         <h2 class="footer-title">INVESTMENT</h2>
+         <div class="footer-items">
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+            <h3>Adipisicing elit.</h3>
+         </div>
+      </div>
+   </div>
+   <div class="container end-footer">
+      <div class="copyright">copyright © 2021 - Present • <b>DOWNTOWN TECH LIVER</b></div>
+      <a class="designer" href="#">Thierry M</a>
+   </div>
+</footer>
+<script src="../../resources/static/js/index_small.js" async></script>
+
+</body>
