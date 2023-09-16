@@ -7,16 +7,25 @@ import com.example.digital_shop.service.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
     private final UserService userService;
+
+    @GetMapping("/index")
+    public String yourPage() {
+        return "index";
+    }
+
 
     @PostMapping("/sign-up")
     public UserEntity signUp(@Valid
