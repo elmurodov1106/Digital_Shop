@@ -25,7 +25,12 @@ public class AuthController {
     @PostMapping("/sign-up")
     public String signUp(@ModelAttribute UserCreatDto userCreatDto,
                          Model model) {
-      model.addAttribute(userService.save(userCreatDto));
+        UserEntity save = userService.save(userCreatDto);
+        if(save==null){
+            model.addAttribute("message","Already exists");
+            return "signUp";
+        }
+        model.addAttribute("user",save);
       return "verify";
     }
     @GetMapping("/sign-up")
