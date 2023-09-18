@@ -30,7 +30,7 @@ public class AuthController {
     public String signUp(@ModelAttribute UserCreatDto userCreatDto,
                          Model model) {
       model.addAttribute(userService.save(userCreatDto));
-      return "auth/verify";
+      return "verify";
     }
     @GetMapping("/sign-up")
     public String signUpGet(){
