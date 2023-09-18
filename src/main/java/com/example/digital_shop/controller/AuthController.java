@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Controller
@@ -28,23 +27,37 @@ public class AuthController {
 
 
     @PostMapping("/sign-up")
-    public UserEntity signUp(@Valid
-                             @RequestBody UserCreatDto userCreatDto,
-                             BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw new RequestValidationException(bindingResult.getAllErrors());
-        }
-        return userService.save(userCreatDto);
+    public String signUp(@ModelAttribute UserCreatDto userCreatDto,
+                         Model model) {
+      model.addAttribute(userService.save(userCreatDto));
+      return "auth/verify";
+    }
+    @GetMapping("/sign-up")
+    public String signUpGet(){
+        return "signUp";
     }
 
-    @PutMapping("/verify")
-    public ResponseEntity<Boolean> verify(@RequestParam UUID userId, @RequestParam String sendingCode) {
-        return ResponseEntity.ok(userService.verify(sendingCode,userId));
+    @PostMapping("/verify")
+    public String verify(@RequestParam UUID userId,
+                         @RequestParam String sendingCode,
+                         Model model) {
+        Boolean isActive=userService.verify(sendingCode,userId);
+         if(isActive){
+             model.addAttribute("isActive",true);
+             return "signIn";
+         }
+         model.addAttribute("message","Activation code is incorrect or ragged");
+         return "verify";
     }
 
     @GetMapping("/new-code")
-    public ResponseEntity<UserEntity> getNewVerifyCode(@RequestParam String email) {
-        return ResponseEntity.ok(userService.getNewVerifyCode(email));
+    public String NewVerifyCode() {
+         return "newCode";
+    }
+    @PostMapping("/new-code")
+    public String getNewVerifyCode(@RequestParam String email){
+        userService.getNewVerifyCode(email);
+        return "verify";
     }
 
     @GetMapping("/sign-in")

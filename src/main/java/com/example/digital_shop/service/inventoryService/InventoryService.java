@@ -2,7 +2,6 @@ package com.example.digital_shop.service.inventoryService;
 
 import com.example.digital_shop.domain.dto.InventoryCreateDto;
 import com.example.digital_shop.entity.inventory.InventoryEntity;
-import com.example.digital_shop.entity.product.ProductEntity;
 
 import java.util.List;
 import java.util.UUID;
