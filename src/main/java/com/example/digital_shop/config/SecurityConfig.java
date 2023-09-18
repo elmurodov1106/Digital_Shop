@@ -35,6 +35,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorizer) -> {
                     authorizer
                             .requestMatchers(permitAll).permitAll()
+                            .requestMatchers(
+                                    "/resources/**",
+                                    "/static/**",
+                                    "/css/**",
+                                    "/js/**",
+                                    "/images/**"
+                            ).permitAll()
                             .anyRequest().authenticated();
 
                 })
