@@ -44,7 +44,9 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public UserEntity save(UserCreatDto userCreatDto) {
-        checkUserEmail(userCreatDto.getEmail());
+        if(checkUserEmail(userCreatDto.getEmail())){
+            return null;
+        }
         UserEntity userEntity = modelMapper.map(userCreatDto, UserEntity.class);
         userEntity.setState(UserState.UNVERIFIED);
         RoleEntity userRole = roleRepository.findRoleEntityByNameEqualsIgnoreCase("User");
@@ -82,8 +84,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity getNewVerifyCode(String email) {
-        UserEntity userEntity = userRepository.findByEmail(email)
-                .orElseThrow(() -> new DataNotFoundException("User not found,Please sign up"));
+        UserEntity userEntity = userRepository.findByEmail(email);
           verificationCodeRepository.deleteVerificationCodeByUserEmail(userEntity.getEmail());
         VerificationCode verificationCode = generateVerificationCode.generateVerificationCode(userEntity);
         mailService.sendVerificationCode(email, verificationCode.getSendingCode());
@@ -91,23 +92,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JwtResponse signIn(LoginDto loginDto) {
-        UserEntity user = userRepository.findByEmail(loginDto.getEmail())
-                .orElseThrow(() -> new DataNotFoundException("User not found"));
+    public UserEntity signIn(LoginDto loginDto) {
+        UserEntity user = userRepository.findByEmail(loginDto.getEmail());
         if (passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
             if (user.getState().equals(UserState.ACTIVE)) {
-                return JwtResponse.builder().accessToken(jwtService.generateAccessToken(user)).build();
+                return user;
             } else {
-                throw new AuthenticationFailedException("You are not verified user! Please verify your account and login");
+                return null;
             }
         }
-        throw new DataNotFoundException("User not found");
+        return null;
     }
 
     @Override
     public UserEntity saveSeller(SellerDto sellerDto) {
         RoleEntity role = checkRole("Seller");
         SellerInfo sellerInfo1 = checkPassport(sellerDto.getPassportNumber());
+        if(checkUserEmail(sellerDto.getEmail())){
+            return null;
+        }
         if(role==null){
             role = roleRepository.save(new RoleEntity("Seller"));
         }
@@ -129,7 +132,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             sellerRepository.save(sellerInfo);
         }else {
-            throw new ConflictException("This Seller information is already exists");
+            return null;
         }
         VerificationCode verificationCode=generateVerificationCode.generateVerificationCode(save);
         mailService.sendVerificationCode(save.getEmail(),verificationCode.getSendingCode());
@@ -148,10 +151,8 @@ public class UserServiceImpl implements UserService {
        return userRepository.save(user);
     }
 
-    private void checkUserEmail(String email) {
-        if (userRepository.findByEmail(email).isPresent()) {
-            throw new ConflictException("email already exists");
-        }
+    private Boolean checkUserEmail(String email) {
+        return userRepository.findByEmail(email) != null;
     }
     public SellerInfo checkPassport(String passport){
         return sellerRepository.findSellerInfoByPassportNumberEquals(passport);

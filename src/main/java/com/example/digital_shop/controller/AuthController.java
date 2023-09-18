@@ -2,14 +2,10 @@ package com.example.digital_shop.controller;
 
 import com.example.digital_shop.domain.dto.*;
 import com.example.digital_shop.entity.user.UserEntity;
-import com.example.digital_shop.exception.RequestValidationException;
 import com.example.digital_shop.service.user.UserService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -61,22 +57,31 @@ public class AuthController {
     }
 
     @GetMapping("/sign-in")
-    public ResponseEntity<JwtResponse> signIn(@Valid
-                                                  @RequestBody LoginDto loginDto,
-                                              BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
-            throw new RequestValidationException(bindingResult.getAllErrors());
-        }
-        return ResponseEntity.ok(userService.signIn(loginDto));
+    public String signInGet() {
+        return "signIn";
     }
-
-    @PostMapping("/seller/sign-up")
-    public ResponseEntity<UserEntity> sellerSignUp(
-            @Valid @RequestBody SellerDto sellerDto,
-            BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
-            throw new RequestValidationException(bindingResult.getAllErrors());
+    @PostMapping("/sign-in")
+    public String signIn(@ModelAttribute LoginDto loginDto,Model model){
+        UserEntity user = userService.signIn(loginDto);
+        if(user==null){
+            model.addAttribute("message","Username or password is wrong!!! Please try again");
+            return "signIn";
         }
-        return ResponseEntity.ok(userService.saveSeller(sellerDto));
+        model.addAttribute("user",user);
+        return "index";
+    }
+   @GetMapping("/seller/sign-up")
+   public String sellerSignUpGet(){
+        return "SellerSignUp";
+   }
+    @PostMapping("/seller/sign-up")
+    public String sellerSignUp(@ModelAttribute SellerDto sellerDto,Model model) {
+        UserEntity user = userService.saveSeller(sellerDto);
+        if(user==null){
+            model.addAttribute("message","Already exists");
+            return "SellerSignUp";
+        }
+        model.addAttribute("user",user);
+        return "verify";
     }
 }
