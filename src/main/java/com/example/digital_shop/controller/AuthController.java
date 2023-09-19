@@ -30,7 +30,12 @@ public class AuthController {
     @PostMapping("/sign-up")
     public String signUp(@ModelAttribute UserCreatDto userCreatDto,
                          Model model) {
-      model.addAttribute(userService.save(userCreatDto));
+        UserEntity save = userService.save(userCreatDto);
+        if(save==null){
+            model.addAttribute("message","Email already exists");
+            return "signUp";
+        }
+        model.addAttribute("user",save);
       return "verify";
     }
     @GetMapping("/sign-up")
@@ -83,7 +88,7 @@ public class AuthController {
     public String sellerSignUp(@ModelAttribute SellerDto sellerDto,Model model) {
         UserEntity user = userService.saveSeller(sellerDto);
         if(user==null){
-            model.addAttribute("message","Already exists");
+            model.addAttribute("message","Email already exists");
             return "SellerSignUp";
         }
         model.addAttribute("user",user);
