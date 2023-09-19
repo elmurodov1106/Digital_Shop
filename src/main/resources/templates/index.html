@@ -1,33 +1,17 @@
-
-
+<!doctype html>
+<html lang="eng"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-   <link th:href="@{/css/style.css}" rel="stylesheet">
-   <script type="text/javascript" th:src="@{/js/index_small.js}"></script>
-
+   <title>Home Page</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 
 <body>
-<header>
-   <div class="company-logo">Digital Shop</div>
-   <nav class="navbar">
-      <ul class="nav-items">
-         <li class="nav-item"><a href="/auth/index" methods="get" class="nav-link">Home</a></li>
-         <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-         <li class="nav-item"><a href="#" class="nav-link">Laptop</a></li>
-         <li class="nav-item"><a href="#" class="nav-link">Phone</a></li>
-         <li class="nav-item"><a href="#" class="nav-link">Tv</a></li>
-         <li class="nav-item"><a href="#" class="nav-link">Products</a></li>
-         <li class="nav-item"><a href="/auth/index" methods="get"  class="nav-link">Contact Us</a></li>
-         <li class="nav-item"><a href="" methods="" class="nav-link">Basket</a></li>
-         <li class="nav-item"><a href="/auth/sign-in" methods="get" class="nav-link">Sign in</a></li>
-         <li class="nav-item"><a href="/auth/sign-up" methods="get" class="nav-link">Register</a></li>
-      </ul>
-   </nav>
-   <div class="menu-toggle">
-      <i class="bx bx-menu"></i>
-      <i class="bx bx-x"></i>
-   </div>
-</header>
+<div layout:fragment="body">
+
+
 <main>
    <!-- HOME SECTION -->
    <section class="container section-1">
@@ -42,9 +26,9 @@
       </div>
    </section>
 
-<!--    OFFER SECTION-->
+   <!--    OFFER SECTION-->
    <section class="container section-2">
-<!--       offer 1-->
+      <!--       offer 1-->
       <div class="offer offer-1">
          <img src="https://github.com/r-e-d-ant/Computer-store-website/blob/main/assets/images/offer_1.png?raw=true" alt="a computer in dark with with white shadow" class="offer-img offer-1-img">
          <div class="offer-description offer-desc-1">
@@ -187,6 +171,8 @@
       <a class="designer" href="#">Thierry M</a>
    </div>
 </footer>
-
+</div>
 </body>
 
+
+</html>
