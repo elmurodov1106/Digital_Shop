@@ -1,6 +1,5 @@
 package com.example.digital_shop.service.user;
 
-import com.example.digital_shop.domain.dto.JwtResponse;
 import com.example.digital_shop.domain.dto.LoginDto;
 import com.example.digital_shop.domain.dto.SellerDto;
 import com.example.digital_shop.domain.dto.UserCreatDto;
@@ -10,13 +9,11 @@ import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.entity.user.UserState;
 import com.example.digital_shop.entity.verification.VerificationCode;
 import com.example.digital_shop.exception.AuthenticationFailedException;
-import com.example.digital_shop.exception.ConflictException;
 import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.RoleRepository;
 import com.example.digital_shop.repository.SellerRepository;
 import com.example.digital_shop.repository.UserRepository;
 import com.example.digital_shop.repository.VerificationCodeRepository;
-import com.example.digital_shop.service.JwtService;
 import com.example.digital_shop.service.mailservice.MailService;
 import com.example.digital_shop.service.verificationcode.GenerateVerificationCode;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +35,6 @@ public class UserServiceImpl implements UserService {
     private final VerificationCodeRepository verificationCodeRepository;
     private final MailService mailService;
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
     private final SellerRepository sellerRepository;
     private final GenerateVerificationCode generateVerificationCode;
 

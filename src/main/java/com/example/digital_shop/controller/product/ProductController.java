@@ -5,80 +5,113 @@ import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.exception.UnauthorizedAccessException;
 import com.example.digital_shop.service.product.ProductService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
 
-@RestController
+@Controller
 @RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
 
-    @PostMapping("/add")
-    public ResponseEntity<ProductEntity> add(
-            @RequestBody ProductCreatDto productCreatDto,
+    @GetMapping("/add")
+    public String addGet(
             @RequestParam UUID userId,
-            @RequestParam Integer amount
-    ){
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_Seller"))){
+            Model model) {
+      model.addAttribute("userId",userId);
+      return "ProductAdd";
+    }
+
+    @PostMapping("/add")
+    public String add(
+            @ModelAttribute ProductCreatDto productCreatDto,
+            @RequestParam UUID userId,
+            @RequestParam Integer amount,
+            Model model
+    ) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_Seller"))) {
             throw new UnauthorizedAccessException("You don`t have permission to access this recourse");
         }
-            return ResponseEntity.ok(productService.add(productCreatDto,userId,amount));
+       productService.add(productCreatDto,userId,amount);
+        model.addAttribute("userId",userId);
+        return "SellerMenu";
     }
 
     @GetMapping("/get-all")
-    public ResponseEntity<List<ProductEntity>> getAll(
-            @RequestParam(required = false,defaultValue = "10") int size,
-            @RequestParam(defaultValue = "0",required = false)  int page
-    ){
-        return ResponseEntity.ok(productService.getAllProducts(size, page));
+    public String getAll(
+            @RequestParam int page,
+            @RequestParam int size,
+            Model model) {
+        List<ProductEntity> allProducts = productService.getAllProducts(page, size);
+        if(allProducts.isEmpty()){
+            model.addAttribute("message","Product not found");
+            return "index";
+        }
+        model.addAttribute("products",allProducts);
+        return "allProducts";
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<ProductEntity>> search(
-            @RequestParam(defaultValue = "10",required = false) int size,
-            @RequestParam(defaultValue = "0",required = false) int page,
-            @RequestParam String name
-    ){
-        return ResponseEntity.status(200).body(productService.search(size, page, name));
+    public String search(
+            @RequestParam(defaultValue = "10", required = false) int size,
+            @RequestParam(defaultValue = "0", required = false) int page,
+            @RequestParam String name,
+            Model model
+    ) {
+        List<ProductEntity> search = productService.search(size, page, name);
+        if(search.isEmpty()){
+            model.addAttribute("message","Product not found");
+            return "index";
+        }
+        model.addAttribute("products",search);
+        return "search";
     }
 
-    @PutMapping("/{userId}/update")
-    public ResponseEntity<ProductEntity> update(
-            @PathVariable UUID userId,
+    @PutMapping("/update")
+    public String update(
+            @RequestParam UUID userId,
             @RequestBody ProductCreatDto productCreatDto,
             @RequestParam UUID productId,
-            @RequestParam Integer amount
-            ){
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_Seller"))){
-            throw new UnauthorizedAccessException("You don`t have permission to access this recourse");
+            @RequestParam Integer amount,
+            Model model
+    ) {
+        ProductEntity update = productService.update(productCreatDto, productId, amount, userId);
+        if(update==null){
+            model.addAttribute("message","Product not found");
+            model.addAttribute("userId",userId);
+            return "SellerMenu";
         }
-        return ResponseEntity.ok(productService.update(productCreatDto,productId,amount,userId));
+        model.addAttribute("userId",userId);
+        model.addAttribute("message","Product successfully updated");
+        return "SellerMenu";
     }
 
-    @DeleteMapping("/{userId}/delete")
-    public ResponseEntity<Boolean> delete(
-            @PathVariable UUID userId,
+    @DeleteMapping("/delete")
+    public String delete(
+            @RequestParam UUID userId,
             @RequestParam UUID productId,
-            HttpServletRequest request
-    ){
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_Seller"))){
-            throw new UnauthorizedAccessException("You don`t have permission to access this recourse");
+            Model model
+    ) {
+        Boolean aBoolean = productService.deleteById(productId, userId);
+        if (aBoolean==null){
+            model.addAttribute("message","Product not found");
+            model.addAttribute("userId",userId);
+            return "SellerMenu";
         }
-        return ResponseEntity.ok(productService.deleteById(productId,userId,request.getHeader("authorization")));
+        model.addAttribute("message","Product successfully deleted");
+        model.addAttribute("userId",userId);
+        return "SellerMenu";
     }
 
 

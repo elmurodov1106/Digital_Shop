@@ -12,4 +12,5 @@ import java.util.UUID;
 public interface ProductRepository extends JpaRepository<ProductEntity, UUID> {
     List<ProductEntity> searchProductEntitiesByModelContainingIgnoreCase(String model, Pageable pageable);
     List<ProductEntity> findProductEntitiesByUserIdEquals(UUID userId, Pageable pageable);
+    ProductEntity findProductEntityById(UUID productId);
 }

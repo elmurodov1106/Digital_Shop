@@ -1,6 +1,5 @@
 package com.example.digital_shop.service.user;
 
-import com.example.digital_shop.domain.dto.JwtResponse;
 import com.example.digital_shop.domain.dto.LoginDto;
 import com.example.digital_shop.domain.dto.SellerDto;
 import com.example.digital_shop.domain.dto.UserCreatDto;
