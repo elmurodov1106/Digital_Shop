@@ -1,5 +1,16 @@
+.error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center; /* Center-align the text */
+    font-size: 24px; /* Adjust the font size as needed */
+}
+
+
+
+
+
 :root {
-    --background: #1a1a2e;
+    --background: #16161d;
     --color: #ffffff;
     --primary-color: #0f3460;
 }
@@ -213,4 +224,5 @@ h1 {
         -ms-transform: scale(1);
         -o-transform: scale(1);
     }
+
 }

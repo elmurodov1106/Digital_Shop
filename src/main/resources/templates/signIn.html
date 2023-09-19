@@ -16,8 +16,8 @@
             <h1 class="opacity">LOGIN</h1>
 
             <form action="/auth/sign-in" method="post">
-                <input type="text" placeholder="USERNAME" />
-                <input type="password" placeholder="PASSWORD" />
+                <input type="email" placeholder="EMAIL" name="email" />
+                <input type="password" placeholder="PASSWORD" name="password" />
                 <button class="opacity">SUBMIT</button>
             </form>
             <div class="register-forget opacity">
@@ -28,6 +28,7 @@
         <div class="circle circle-two"></div>
     </div>
     <div class="theme-btn-container"></div>
+    <div th:text="${message}" ></div>
 </section>
 </body>
 </html>

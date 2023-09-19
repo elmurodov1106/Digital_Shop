@@ -16,7 +16,7 @@
     --third-color: hsl(220, 36%, 28%);
     --white-color: #fbfbfb;
     --white-color-alt: hsl(12, 14%, 93%);
-    --dark-color: hsl(300, 100%, 0%);
+    --dark-color: hsl(0, 0%, 0%);
 }
 
 /* ================= BASE ==================== */

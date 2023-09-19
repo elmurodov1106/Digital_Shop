@@ -27,7 +27,7 @@ public class AuthController {
                          Model model) {
         UserEntity save = userService.save(userCreatDto);
         if(save==null){
-            model.addAttribute("message","Already exists");
+            model.addAttribute("message","Email already exists");
             return "signUp";
         }
         model.addAttribute("user",save);
@@ -83,7 +83,7 @@ public class AuthController {
     public String sellerSignUp(@ModelAttribute SellerDto sellerDto,Model model) {
         UserEntity user = userService.saveSeller(sellerDto);
         if(user==null){
-            model.addAttribute("message","Already exists");
+            model.addAttribute("message","Email already exists");
             return "SellerSignUp";
         }
         model.addAttribute("user",user);
