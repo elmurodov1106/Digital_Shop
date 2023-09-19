@@ -21,6 +21,11 @@ public class AuthController {
         return "index";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "About";
+    }
+
 
     @PostMapping("/sign-up")
     public String signUp(@ModelAttribute UserCreatDto userCreatDto,

@@ -1,0 +1,25 @@
+body { max-width: 900px; margin: auto; padding: 20px; background: #eee; color: #111; }
+
+img.bubble.left {
+  float: left; margin: 0 10px 0 0 ;
+  shape-outside: circle(150px at 130px 130px);
+}
+img.bubble.right {
+  float: right; margin: 0 0 0 40px;
+  shape-outside: circle(150px at 170px 130px);
+}
+.complex-content div:nth-child(even):not(:last-child) p {
+  margin-right: 33%;
+}
+.complex-content div:nth-child(odd):not(:last-child) p {
+  margin-left: 33%;
+}
+
+@supports (shape-outside: circle()) {
+  .complex-content div:nth-child(even):not(:last-child) p {
+    margin-right: 20%;
+  }
+  .complex-content div:nth-child(odd):not(:last-child) p {
+    margin-left: 20%;
+  }
+}
