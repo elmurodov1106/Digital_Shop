@@ -7,7 +7,6 @@
     margin: 0;
     box-sizing: border-box;
 }
-
 :root {
     --primary-color: hsl(9, 94%, 61%);
     --primary-color-alt: hsl(28, 72%, 83%);
@@ -69,6 +68,7 @@ header {
     margin: 0 2rem;
 }
 .nav-link {
+    text-decoration: none;
     font-size: 1.1rem;
     letter-spacing: 0.05rem;
     position: relative;
@@ -394,7 +394,7 @@ input[type="submit"]:hover {
         right: 0;
         width: 100%;
         height: 100vh;
-        display: flex;
+        display: none;
         justify-content: center;
         transform: scaleY(0);
         transform-origin: bottom;
@@ -414,7 +414,8 @@ input[type="submit"]:hover {
         margin: 0.5rem 0;
     }
     .menu-toggle {
-        display: block;
+        display: none;
+        cursor: pointer;
     }
     .bx-menu {
         display: block !important;

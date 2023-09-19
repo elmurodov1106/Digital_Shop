@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
     <title>sign up</title>
@@ -8,7 +10,8 @@
 </head>
 
 <body>
-<section class="container">
+<div  layout:fragment="body">
+<section class="container" >
     <div class="login-container">
         <div class="circle circle-one"></div>
         <div class="form-container">
@@ -30,5 +33,6 @@
     <div class="theme-btn-container"></div>
     <div th:text="${message}" ></div>
 </section>
+</div>
 </body>
 </html>

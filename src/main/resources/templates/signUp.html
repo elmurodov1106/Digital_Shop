@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
   <meta charset="UTF-8">
   <title>sign up</title>
@@ -8,9 +10,10 @@
 </head>
 
 <body>
-<div class="error-message" th:text="${message}"></div>
+<div  layout:fragment="body">
+<div class="error-message" th:text="${message}" ></div>
 <section class="container">
-  <div class="login-container">
+  <div class="login-container" >
     <div class="circle circle-one"></div>
     <div class="form-container">
       <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
@@ -30,6 +33,6 @@
   </div>
   <div class="theme-btn-container"></div>
 </section>
-
+</div>
 </body>
 </html>
