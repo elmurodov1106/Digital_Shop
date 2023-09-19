@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="eng"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Digital</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/index_small.js}"></script>
+    <script type="text/javascript" th:src="@{/js/menu.js}"></script>
+</head>
+<body>
+<div>
+<!--    navbar-->
+    <header class="fixed-header" style="position: fixed; z-index: 1; width: 100%">
+        <div class="company-logo">Digital Shop</div>
+        <nav class="navbar">
+            <ul class="nav-items">
+                <li class="nav-item"><a href="/auth/index" onclick="w3_close()"  methods="get" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/auth/about" onclick="w3_close()"  methods="get" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#" onclick="w3_close()"  class="nav-link">Laptop</a></li>
+                <li class="nav-item"><a href="#" onclick="w3_close()"  class="nav-link">Phone</a></li>
+                <li class="nav-item"><a href="#" onclick="w3_close()"  class="nav-link">Tv</a></li>
+                <li class="nav-item"><a href="#" onclick="w3_close()"  class="nav-link">Products</a></li>
+                <li class="nav-item"><a href="/auth/index" onclick="w3_close()"  methods="get" class="nav-link">Contact Us</a></li>
+                <li class="nav-item"><a href="" onclick="w3_close()"  methods="" class="nav-link">Basket</a></li>
+                <li class="nav-item"><a href="/auth/sign-in" onclick="w3_close()"  methods="get" class="nav-link">Sign in</a></li>
+                <li class="nav-item"><a href="/auth/sign-up" onclick="w3_close()"  methods="get" class="nav-link">Register</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle">
+            <i class="bx bx-menu"></i>
+            <i class="bx bx-x"></i>
+        </div>
+
+    </header>
+</div>
+
+<div layout:fragment="body" style="position: absolute; margin-top: 75px; width: 100%">
+
+</div>
+</body>
+</html>
