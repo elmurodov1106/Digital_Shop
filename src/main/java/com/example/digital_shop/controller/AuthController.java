@@ -36,6 +36,11 @@ public class AuthController {
         return "contactUs";
     }
 
+    @GetMapping("/basket")
+    public String basket() {
+        return "basket";
+    }
+
 
 
 
