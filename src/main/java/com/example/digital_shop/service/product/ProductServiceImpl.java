@@ -4,7 +4,6 @@ import com.example.digital_shop.domain.dto.InventoryCreateDto;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.inventory.InventoryEntity;
 import com.example.digital_shop.entity.product.ProductEntity;
-import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
 import com.example.digital_shop.repository.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
         Pageable pageable = PageRequest.of(page, size);
         List<ProductEntity> content = productRepository.findAll(pageable).getContent();
         if (content.isEmpty()) {
-            throw new DataNotFoundException("Products not found");
+            return null;
         }
         return content;
     }
@@ -57,22 +56,26 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public Boolean deleteById(UUID productId, UUID userId, String token) {
-        ProductEntity productNotFound = productRepository.findById(productId)
-                .orElseThrow(() -> new DataNotFoundException("Product not found"));
+    public Boolean deleteById(UUID productId, UUID userId) {
+        ProductEntity productNotFound = productRepository.findProductEntityById(productId);
+        if(productNotFound==null){
+            return null;
+        }
         if (productNotFound.getUserId().equals(userId)) {
             inventoryRepository.deleteByProductIdEquals(productId);
             productRepository.deleteById(productId);
             return true;
         }
-        throw new DataNotFoundException("Product not found");
+        return null;
     }
 
     @Override
     @Transactional
     public ProductEntity update(ProductCreatDto update, UUID productId, Integer amount, UUID userId) {
-        ProductEntity productEntity = productRepository.findById(productId)
-                .orElseThrow(() -> new DataNotFoundException("Product not found"));
+        ProductEntity productEntity = productRepository.findProductEntityById(productId);
+        if(productEntity==null){
+            return null;
+        }
         InventoryEntity inventoryEntity = inventoryRepository.getByProductId(productId);
         if (productEntity.getUserId().equals(userId)) {
             modelMapper.map(update, productEntity);
@@ -80,6 +83,6 @@ public class ProductServiceImpl implements ProductService {
             inventoryRepository.save(inventoryEntity);
             return productRepository.save(productEntity);
         }
-        throw new DataNotFoundException("Product not found");
+        return null;
     }
 }

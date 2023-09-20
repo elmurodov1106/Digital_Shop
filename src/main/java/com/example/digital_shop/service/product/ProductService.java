@@ -11,6 +11,6 @@ public interface ProductService {
     ProductEntity add(ProductCreatDto product, UUID userId, Integer amount);
     List<ProductEntity> getAllProducts(int size, int page);
     List<ProductEntity> search(int page,int size,String name);
-    Boolean deleteById(UUID id,UUID userId,String token);
+    Boolean deleteById(UUID id,UUID userId);
     ProductEntity update(ProductCreatDto update,UUID productId,Integer amount,UUID userId);
 }

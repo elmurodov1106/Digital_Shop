@@ -2,6 +2,7 @@ package com.example.digital_shop.controller;
 
 import com.example.digital_shop.domain.dto.*;
 import com.example.digital_shop.entity.user.UserEntity;
+import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,13 @@ import java.util.UUID;
 @RequestMapping("/auth")
 public class AuthController {
     private final UserService userService;
-
+     private final ProductService productService;
     @GetMapping("/index")
-    public String yourPage() {
+    public String yourPage(
+            @RequestParam int page,
+            @RequestParam int size,
+            Model model) {
+        model.addAttribute("products",productService.getAllProducts(page,size));
         return "index";
     }
 
