@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Basket</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/basket.css}" />
+  <script type="text/javascript" th:src="@{/js/basket.js}"></script>
+</head>
+<body>
+<div id="container" layout:fragment="body"   >
+  <table>
+    <!--<tr style="text-align:center;">
+      <td>Image</td>
+      <td>Name</td>
+      <td>Price</td>
+      <td>Amount</td>
+      <td>Subtotal</td>
+      <td> </td>
+    </tr>-->
+    <tr class="p">
+      <td class="image"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxEREREQEREQEBEQEhEQERAQEBAOEBARFhIXFxYSFhYZHioiGRspHhYWIzMjJystMDEwGCE2OzYuOiovMC0BCwsLDw4PGxERGC8eHh4vLy8vLy8vLy8vLy8tLS0vLy8vLy8vLy8vLy8vLy8vLy0vLy8vLy8vLy8vLy8vLy8vL//AABEIAMIBAwMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAAABgQFAQIHAwj/xABOEAABAwICBAkIBQcJCQAAAAABAAIDBBEFBhIhMXMTM0FRYXF0srMHIiQ0coGRsSNEocHCMkJSkrTD8ENiY2R1gpOj0RQWVGWipNLh8f/EABsBAAEFAQEAAAAAAAAAAAAAAAUAAQIDBAYH/8QAMhEAAgECAwYDCAEFAAAAAAAAAAECAxEEMXESITIzgbEFQVEGEyM0YcHR8CIUQpGh4f/aAAwDAQACEQMRAD8A7ihCEhAhCEhAhCEhAhCEhAhR6qsjibpSyRxt/Ske2NvxJSpinlQwinvpVkcrv0YA6cn3tGj9qQhzQuR1flsY+4ocOqqkg20neY0attmB5PVqVRP5ZcSiOlLhzY4+dzJxq6XEgD4JCO5oXLcL8rzHtY+WkLWSEhkkFRHK1xH5TSJBHouH6J121i4T/guMw1cfCQv0hsc0gtew8zmnZ8jyJXHsyzQhCQwIQhIQIQljM2d6OgOhNK0yWB4IOAcAdhdfZ8+hIQzoXMKDyg1le9zaGGCOJhtJUz8LKwO/QjaCwyO+ACvI8QqxrdUsceYwMDPgDf7VTOvTg7NlsaM5K6Q5oSxHj07baUcMvO5j3wn3NIdf4hSosyR/ykc8XSY+FHu4MuPxCUa9OWUhnRqL+0vUKDTYrBKdFk0bnfoB7dP9Xapt1ct5WZQhCQgQhCQgQhCQgQhCQgQhCQgQhI2ecwTh4w+icI53sEs9SW6QpYHEtbo8hkcQ6w5A0nmKRCpUhTg5zdkt7Yx4zmOjoxepqYYNVw17wHkdDdp+CTa/yy4a06EDairk5GwxEA+91j9iW6PJtGwl8kZqZna3y1TuHc485B1fYr2npmRjRjZHGOaNgYPgFPYZztb2loxdqdNy1dvyyvm8pOLz+q4UIG8klW9wt02Oj96rKl+P1F+HxKOmafzKVpBt1gNP2lRs5Z2FFIIY4hLKWB7i5xDGA3AGrWTqvyciRq3yg18mx8cI/oYwD8X3KX8FmW0a/iuKhGcFCnF+b3v/ABv7DY/JETnadRNV1LjtMsmiCfeL/amTCsr0UIbo00OkNjnsEjgee77lcmwbG6o1VMTUzSF00bSx0ryCHPALS3Zruu4Xsqq9VQSsrBHA4LFOp8aq536JdDzqnWbYagNgGoJUxWW5ITNVnUlPFNpWzAz21c2Yuj7tiRXWpZtTA+B7myugd+Q4sPntA5PNLtfJddNy1iGFU0gqqKaSFwb58DnExyxnW6Mt2aVth5CByXXPsdjBdT9Mwj9zxY/JRqTJ75I2SNkLS4Xto3trPLdZcbGMKr37Pn/kuwzlOGVz6zY8EAg3BFwRyg7Ct1R5Ke44fR6Z0ntgjje4/nOjboOPvLSrxIgCEISEQcZrhBBJKS0aDdRd+SHEhrb9FyFxHMmIYZEyaSMcNVTG3DSWe4yvIHCu57XvbZqsn3y0F7sPbBGdF1TUxRX5gGSSn7IlwqXKz4jC98hfpTxMLdEgWc+x2lU1GtpJyt9PUvpKWy2lf6nacIpm09PFExoYAwOI/Rvr1855Pch1WzSLdWr8pz7m3uC0xGfRB5gC4/ckTGswOggfM23CPdoR31hr3XOmRy2DTbpsga26sklvbC+zGEHJ5I6IZGDWdJvTqaPhdeoDvzXg+0LLg7ql8pJle6R42ueS4/anHIOPPbK2mkcXRyXEWkb8G8C4aOg7Lc9lrngpwhtbV7dPuYo4qMpbNrHRZGuIs+NsjeUWDx8Ni9KZ+jxb5Yrfmskexo/uX0fsUB+I2k4NjbuGom9tfN/HMp7JfPax9ruHmvAsb22FVUozcXOOSLakoxajLNk6LFallvpWSb2ME+4sLfkVMizI8cZBfphka8n+68Nt8SqtzVoQrFiqsfO+pB4enLyGekxyCQhukY3HUGyNMdzzAnzXHqJVokFzeRXeAYgbiJxuDxZOsiwvoX5rXt1W5lro4vbezJWM1XDbK2ou4xoQhbTKCEISECEISEC5RQP4R1RUnW6qqJZgeeIHgoB/hxs+JXUqmTRY936LHO+AJXJ8sC1FRj+q05/ymqcMznPaWq44eEF/dLsvy/8ARZIQhWHFCDnfI89XU8PDJCA9jQ8Sue0tc3VyNNxayrqfyYW1zVPW2GM95x+5dNeVEqCnUEGaXjOMjTjTjKyirZK9tXcoMt5NpaZ4maJJJGk6DpXB2ibbQAALpjlksimFmDp1/NRKqTWud8Ur7MtmJ6d7OUZzoRnUd215nq92kEuYtHtV3DJr61CxSG4K1+CYu/8AF5o1+MYb+O0hExkedTdph+9POAwA08fU7vuSZj8dn03aofvTphFPI6FjmSaAOl5miHNHnHYtPjG+otF9wd4YrRep1XJzbUcQ5jMP856u1SZOaRRxAm5BlBOy54Z9yrtWQ4VoUT4nqCEIUiIm+UpmlFSg/wDFE/8Aaz/6rnGOwgNg7TD8yuk+UhhMVOAS0mo1OG0ejyrnWKwFgiOk55M8TfO1jXfYOdDsTzVoEMNyuv4GLG4/Md0t/CuZ5tpPoqck6g4k6/zravxLp2YgQx3TESOsNXP8QpjUxOhuGutpxOJsA8bLnk5QT/OusOHlsVU723m6cdujJIUIDZxurKgeWzxObtbLG4W6HiyqOCe0lkjXMkjOjIxwIcCOWyZ8mYa6eeORwIihc18jzqbdpuG35SSBq5ro7OcYwcn5AOEZOSSzOjzyQsmc0McJCQdMnVc3ueo3CsnHSETjtY5vwB/+qFPUxPd+TpuHLqHXr5l4nHqZrgwzQtOy3CtNv9EGw+J2KcoWvfK33ClfD7U1O9vW4xzDYVoQt9IFjSNd7G/PqWhVRM0IWrXlhDxtaQ8dbTf7luQtSE17bxWvuHppuL862UbDnXiiPPGw/wDSFJXQLfvAwIQhOIEIQkIjYlxMu6k7pXLcveqUvZafw2rqOJcTLupO6Vy7L59EpeyweG1WUzl/afgpay7IsFlF1oSrEjkLGryoVQVKeVGfrcB1KzyuaKMbyS9SS7U33KqqHqzqTYKmncuKx8nKu16HvHg1LYw0dDaJylSM0mquicrCmeq8NWdCqpG7FUVUg4sTs3U+iaU/1uAd5N+Xm+jxdTu+5UWfYrMozz10A+x6Ysut9Hi6nd9yOY6r72Kl++ZztGj7qco/vkdHyp6rH7U3jPVwqjK3q0ftTeM9W63U+FaLsDJ8T1BCEKZEU/KCPo6btB/Z5Vz/ADA3zYe0RfiXQs+jzKbtB/Z5UhZhb5kPaIvk5C8VzloglheV1/A04nAHxG42MPd2JSlwEXux2iL3F+T38qbcRnDYiDysPdS6zE2vdoMF+k6lgqtX3G7D3syXT0LXNbwjYpCAAC+MPLQOQEqLjUoYRG3UGtvYAAXPR/G1eU2aaOHU6oY43/k2vkAPWBZSBNBUNMzJGyNJj85p5A4BwPKDY7Cq5wkopuLV/W48ZwdTc0zn+ccTLeCp43kcL58pGolgOpnUdZPUFR2V7n+KNlTG4CwcwsaTylryCR+sFTMIt06/kj2BivcxtuBGNk3Vdzovkyxdz45KV5vwWjJESdfBm4c3qB0f1k8LlfkyB/2w83ASX6tNi6osWKio1XY0Ydt095grQr0WhWVl6G/Cz9BDu4+6FLUTDOJh3bO6FLR6OQGYIQhSECEISERcS4mbdSdwrlmAH0Sl7NB4bV1PEuJm3UncK5RgB9FpezweG1XUVds5n2mXw6WsuyLLSWritboJWhRORsYeV5RC7x0LZxW1Gy5J9yeorQZuwMNqvBfUxXHUqOcq6xNUcy4PE8+R7z4YvgQ0RhhU2FygNUuEqiaN1RFXnl14qLt8HyemXLjfR4up3fclbOp8yj7dB8nJsy2PR4up3fciVKTlho3+vdnP4hWrvQ6Flj1ZntT+M9Wyqsters9ubxnq1R+HCtF2AE+J6ghCFMiK+evyabtB8CVImYh5kJ5qiP5OT7ncebTb937PKkbMg+ji38fdcheL5y0/ISwnK6/g98fm82Toj0R+qua5kxF8cAjZdrqlxaSL34IbR7/NHUTzrpuIsBGvYbA9VrLm+bwxsdO/9EvYeh2r/wASsuFs6qur7/saqt1QlZ2Fd32DUOpXGVa90c3B3IZP5jhfVp/mO676upxVQ2wuPtUrCGl1RAG7TPDb/ECOVYKVNxfmmBqc3GakvIbsdwn/AGmPgi7QcDpRSOvZr+Z3QdnRt5FSxZcrdjqdxI5WlhYekG9rLpuL1FJBHws5axpNhYOcXO5mtbrPuW9BXU8kbJYXB8b76JFxrG0Fp2HXsKC0a9alTVkmuoVrUqVWe/dL6ETIeXXU0b5ZbcLNotsDcMYLm1+Uk7epNVlpSzCSKORocGvax4DmljgC29i06weheiU5Sk25ZkYpJWjkYK15luVoOTrVbJobsM4mHds7oUtRMN4mLdR90KWj0ckB3mCEIUhgQhCQiNiXEzbqTulckwI+jUvZ4PDautYlxM26k7pXI8BPo1N2eDw2rVhVds5v2k5dLV9kT7ouhABOxbdk5OxgqwpIbBedNTcpVlHEqa7WzZBvwvDNTU2U+MM1BL0qa8bi8y/MlWULhsdHZxEvqezeEyTw8foeIUiEqOvWIrLLIJyW4q85fk0fboPxJyy2PRoup3fckzN+yi7dB+JO2Wh6ND1O77luo/LrV92c7ivmHouw/Zb9WZ7c3jPVoqzLvEN9ufxnqzXQw4Vouxz8+J6ghCFMiLWdB5tNv3fs8qSsxt8yIf07O65O+chqpt+79nlSbmFvmQ9oj7r0KxnOWn5CWF5XU3xGPV0D5H/2kbFcMa8yQy3Ect3NeNZY69w4e/k93KulTR6Q6R/FlU1WGMfqPmkbL8h6CsSvB3RtjKLi4y8zlv8AudWt1CLhQNTZI3Ncx7eQ6zcHoKYsp5VlhkFRUgNe2/BRXDiCdRe62oargDp6E60+HuaLNLbdD3a1u6hk5r/3h960TxdaUdmy3+hnhhaMZ7V8jn3lPc4vpjr0CyS3Np3bf32U7ySueRVM/MDoC3m03B4d9jWfAJnxDAmVEfBTxuc2+k0tPnNPOCNisMBwqCkjEcTC0El1iSXvedrnE9QHQn9+v6f3dt//AG5CVF++94nuLh/IF5ovz7UKnyLAK15lm61TDob8N4mLdR90KWomG8TDu2d0KWj0ckB3mCEIUhgQhCQiNiXEy7uTulcxwKlBpKU2200HhNXTcS4ibdSdwpEy/F6JS9np/Car6ErNgrxWgqsIp+TfY8RRhSYqYDkUwRL0bGtTncEQwUYvcjyjiUlka2ZGpDI1VN7gnh6WyyrxKC8bh0FJE7da6TPFcEdCQsTg0ZHDpXK+LU7TjPod74JVvBw9CqIXpEh7VhgQtvcdA8irzadVF26D709ZZHo0PU7vuSJmzZRdug+9N2U4AQXnW5sTI231hjS+Rx0ea5Ivz6I5lvopf061fdnPYv5h6I6Vl7iG+3N4z1ZKsy9xDfbm8Z6s10MOFaLsc9PieoIQhSIi7m/ZTb53gSJPzBYshsQfSGbNesNenDN41U2/d4EiQsXg0Z3kag99K8t5NPQqGl/WQ1oPshC8Wk6vRfcJYXl9RiCw5oO0LIKLrMXGnAN5gs8COkdRK3WU2yvQe7NOD/nO+JWzIwNnx2lbLKayEbIWt0JCMFYQhRHHDDOJh3bO6FLUTDeJi3UfdClo/HJAZ5ghCFIYEIQkIi4lxE26k7hSfl1nolL2en8JqccT4mbdSd0pWy230Ok7NB4LVODsymtDaSJIjWzY1IDFs1is2jN7mx5sYvZjFu1i9GtSbJxhY8XxpNzPS2fpc6eixUWZaTSjvbYhfiVHbpP1W8O+F1vd1V9Tn72rUBS5GLxLVyykddGRQ5r2UXbqf7055QH0bvZZ83pNzWNVF26n/EnTJ4+jd7LPm9FKPy61fdgTFr48tF9joeX+Ib7c/jPVkq3L/EN9ubxnqyXQQ4Vouxzs+J6ghCFIiL2bPq2/PgyJIxwfTHrp/lUp5zX9W3zvBkSRjo+mPXT92pQvF83p+QlhOW/30LcIutAtllLzcFAXmtrpCPS6LrS6LphG91i6xdF0w5sha3WUwhxw3iYt1H3QpaiYbxMW6j7oUtH45IDPMEIQpDAhCEhEbE+Jm3UndKW8st9DpOzU/gtTJifEzbqTulLuWfU6Ts1P4LUzdiUY3LINW4ahoXoApKRBwMtavRrUALYBSuR2Q0VCr4dJrh0KdZaSNUKkboupS2Xc5liEOi8jpUFzUy5kpbPuOVL7wuMxNN0qridjh6u3BSFvNn1Lt9P96ccoOGi5t9ehG63Lol0gB+LT8En5vHqXb6f708Zap2GCCTRGmGPZpjUdHhHHRNtovrsUQofLrV92DsW/jvRD5l7iG+3N4z1ZKuwDiG+3N4z1YroYcK0XY56fE9WCEIUiJQZq+rb53gyJKxwgyuAIJaae45RdlSRdO2aR6vvneBIlLHqZjGNLGgF84e87XPdwLxdxOs6gB1ABDMXzegRwvL6kgFF1hF1kNJtdF1rdF1ERvdekMRdpEbGi5PMsU1O6S+iNm0nUFLhglDXR6IGkdbydVuYKSRFyt5kK6zdEsbmktdqIWoKgSNlm61ui6ZjodcM4mHds7oUtRMM4mLdx90KWugjkBXmCEIUhgQhCQiNifEzbqTulLmV3eh0nZYPBamPE+Jm3UndKV8sO9DpOzQeE1V1HkX0FdsvGr1C8IyvdqaLJTieoWwWGrYK5MztWMrDgsrDkmJC5mSnu2/MkyVtl0TE4tJpHQkKvjs4hc74tS3qZ0fhtS8Nn0FLOP1Lt9P8AiT1lj1aHqd33JEzjsou30/4k95ZPo0PU7xHKFD5davuyOK570Q8Zf4hvtzeM9WSrcv8AEN9ufxnqyXRQ4Vouxz8+J6ghCFIiUWZ9tNvneBIlfMnFxb391ImjM+2m3zvAkSvmTi4t7+6kQvGc3oEcLy+oBYutQs3WM0mboutboSEX+FNtEOkkn42+5TCVBwp94m9BcPtv96lEq1PcUNb2UVZKXPcekgdQK8wV64hFovPM67h96jXVLzL45G4K2BXndZBUWyVh5wziYd1H3QpaiYZxMW7j7gUtdFHJAR5ghCE4wIQhIRFxPiJt1J3ClLLDvRKXs8HhNTbifEzbqTuFJuWXeiUvZoPCaqKzyNWFV3IYYipLCoURUuNNBk5okBeoXm1btV6M0jYIKAslSKyHVt1JIxuCzinuoGpK2Nw8qG4+mp02gt4fUtI5jnL6l2+n/EnfLJ9Gi6nd9yTs9x2FH2+n/EnDLR9Gi6nd9yG0ouNBJ+r7s14h3rvRD5l/iG+3N4z1ZKsy7xDfbn8Z6s10EOFaLsAJ8T1BCEKZEoc07abfO8CRLOZOLj3v7qRM2afq2+d4EiWMycXHvf3UiF4zm9PyEcLy+p5oWqzdYjVYzdYusLKQ5PwmpDSWONg7WCdgP8fJWIrIySNNtxz6h8diXkJ1KxBwu7kqun03kjYNQ/1XhdagouoMmlY3usgrzusgqLHQ+4VxEO7j7gUxQ8K4mHdR90KYukjkA3mCEITjAhCEhEbE+Jm3UndKR8sn0Wl7PB4TU8YnxM26k7pSFlZ96Wl7PD4TVRXyRtwechkhKmRlQISp0ShAnURKYV6tXixezVoRlkbhYWQsKZSzylGpUWKxXBV/IqquZcFZ68bo14aVpHKvKMyzKL+0Kf5PTDls+jRdTu+5U/lQZaOiP/Maf5PVrlw+jxdTu+5DK0dmml++YRctqpc6Dlv1dntzeM9Wiq8ters9ubxnq0RenwrRdgLPieoIQhTIlBmr6vvneBIlbMR+jj3v7qRNGaz6tvneBIlXMR+jj3v7qRCsXzen5CWFXw+phF1ohYjUbXWLrCLpCBbXWl0Jrjm91i6xdYumEb3Rda3WoKZjo6JhXEw7qPuhTFDwniId3H3Qpi6SOQCeYIQhOMCEISERcT4mbdSd0rn2UfVabcQ+G1YQqqvCa8JxPQZYFYRIQqYF9UksXq1CFpiYpG6FlCmio85FXVaEKFTIvoZnM/KvxVD/AGjT92RT8u+rxdTu+5ZQhWKy/fqEocTOg5Z9XZ7c/jPVqhCKU+FaLsCJ8T1BCEKZEX82/Vt87wJEqZg4uPe/upEIQnGc1aBLCcvqzRCELGazCChCZiBalCEwkCyhCYQLCEJhzouF8RDuo+4FMQhdJHJAJ5sEIQpDH//Z" /></td>
+      <td class="name">Iphone 15 Pro Max</td>
+      <td class="price">$1800</td>
+      <td class="amount"><input type="number" value="1" min="0" /></td>
+      <td class="pricesubtotal"></td>
+      <td class="remove"><div>&times</div></td>
+    </tr>
+    <tr class="p">
+      <td class="image"><img src="https://images.unsplash.com/photo-1491472253230-a044054ca35f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1784&q=80" /></td>
+      <td class="name">Rainbow MacBook</td>
+      <td class="price">$1450</td>
+      <td class="amount"><input type="number" value="3" min="0" /></td>
+      <td class="pricesubtotal"></td>
+      <td class="remove"><div>&times</div></td>
+    </tr>
+    <tr class="p">
+      <td class="image"><img src="https://www.theweek.in/content/dam/week/news/2022/images/2023/2/NU-webOS-TV.jpg.transform/schema-4x3/image.jpg" /></td>
+      <td class="name">NU's 55-inch WebOS TV A comprehensive</td>
+      <td class="price">$599.99</td>
+      <td class="amount">
+        <input type="number" value="1" min="0" />
+      </td>
+      <td class="pricesubtotal"></td>
+      <td class="remove"><div>&times</div></td>
+    </tr>
+    <tr class="p">
+      <td class="image"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80" /></td>
+      <td class="name">Bluetooth Earphone</td>
+      <td class="price">$49.99</td>
+      <td class="amount"><input type="number" value="5" min="0" /></td>
+      <td class="pricesubtotal"></td>
+      <td class="remove"><div>&times</div></td>
+    </tr>
+    <tr class="p">
+      <td class="image"><img src="https://assets.asaxiy.uz/product/items/desktop/1e8bc4094ea8af6b978617a8de8c975d2021090311085960403DJnF7vUlnM.jpg.webp" /></td>
+      <td class="name">AirPods Max (White)</td>
+      <td class="price">$30.00</td>
+      <td class="amount"><input type="number" value="20" min="0" /></td>
+      <td class="pricesubtotal"></td>
+      <td class="remove"><div>&times</div></td>
+    </tr>
+    <tr class="p">
+      <td class="image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0w43wycNWbUdf3VW-d8HKZIpzCkOHsf_FCQ&usqp=CAU" /></td>
+      <td class="name">Hlwatch T800 Ultra Smart Watch 49 </td>
+      <td class="price">$45.96</td>
+      <td class="amount"><input type="number" value="2" min="0" /></td>
+      <td class="pricesubtotal"></td>
+      <td class="remove"><div>&times</div></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>Subtotal:</td>
+      <td class="totalpricesubtotal"></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="border-top:1px solid white" colspan="6"><br />
+        With 5% sales tax <span class="taxval"></span> and <span class="shipping">10</span>$ shipping:<br />
+        <span class="big">Total: $<span class="realtotal">0</span></span>
+      </td>
+    </tr>
+  </table>
+  <div id="checkout">Checkout<span> &rarr;</span></div>
+  <div id="footer">
+    <ul>
+      <li>Change the amount of stuff and see the subtotal and total change</li>
+      <li>Try to change the amount of items to minus amounts or 0</li>
+      <li>Delete items and see the totals change</li>
+    </ul>
+    <hr />
+    This is my first entry for this week's <a href="https://codepen.io/tag/rodeo-007">CodePen Pattern Rodeo</a>.<br />
+    If you like this pen, please heart it :)
+  </div>
+</div>
+
+</body>
+</html>

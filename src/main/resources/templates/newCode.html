@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Verify</title>
+    <link th:href="@{/css/sign-in.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/sign-in.js}"></script>
 </head>
-<body>
 
+<body>
+<div layout:fragment="body"  th:text="${message}" class="alert alert-danger" >
+<!--    <div th:text="${message}" class="alert alert-danger"></div>-->
+    <section class="container">
+        <div class="login-container">
+            <div class="circle circle-one"></div>
+            <div class="form-container">
+                <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
+                <h1 class="opacity">VERIFY</h1>
+
+                <form action="/auth/new-code" method="post">
+                    <input type="email" placeholder="EMAIL" name="email" />
+                    <button class="opacity" type="submit">SUBMIT</button>
+                </form>
+            </div>
+            <div class="circle circle-two"></div>
+        </div>
+        <div class="theme-btn-container"></div>
+    </section>
+</div>
 </body>
 </html>
