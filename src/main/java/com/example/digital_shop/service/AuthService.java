@@ -1,5 +1,6 @@
 package com.example.digital_shop.service;
 
+import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +14,7 @@ public class AuthService implements UserDetailsService {
     private final UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return  userRepository.findByEmail(username);
-
+        return  userRepository.findUserEntityByEmailEquals(username)
+                .orElseThrow(()->new DataNotFoundException("User not found"));
     }
 }

@@ -13,7 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,9 +28,10 @@ public class ProductServiceImpl implements ProductService {
     private final InventoryRepository inventoryRepository;
     @Override
     @Transactional
-    public ProductEntity add(ProductCreatDto product, UUID userId, Integer amount) {
+    public ProductEntity add(ProductCreatDto product, UUID userId, Integer amount, MultipartFile image) throws IOException {
         ProductEntity productEntity = modelMapper.map(product, ProductEntity.class);
         productEntity.setUserId(userId);
+        productEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
         ProductEntity savedProduct = productRepository.save(productEntity);
         InventoryCreateDto inventoryCreateDto = new InventoryCreateDto();
         inventoryCreateDto.setProductId(savedProduct.getId());
@@ -71,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ProductEntity update(ProductCreatDto update, UUID productId, Integer amount, UUID userId) {
+    public ProductEntity update(ProductCreatDto update, UUID productId, Integer amount, UUID userId,MultipartFile image) throws IOException {
         ProductEntity productEntity = productRepository.findProductEntityById(productId);
         if(productEntity==null){
             return null;
@@ -81,6 +85,7 @@ public class ProductServiceImpl implements ProductService {
             modelMapper.map(update, productEntity);
             inventoryEntity.setProductCount(amount);
             inventoryRepository.save(inventoryEntity);
+            productEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
             return productRepository.save(productEntity);
         }
         return null;

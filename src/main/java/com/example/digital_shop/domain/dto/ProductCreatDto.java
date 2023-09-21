@@ -2,6 +2,7 @@ package com.example.digital_shop.domain.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
 @NoArgsConstructor
