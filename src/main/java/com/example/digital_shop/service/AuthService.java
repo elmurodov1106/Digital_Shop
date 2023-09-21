@@ -1,6 +1,7 @@
 package com.example.digital_shop.service;
 
 import com.example.digital_shop.exception.DataNotFoundException;
+import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
