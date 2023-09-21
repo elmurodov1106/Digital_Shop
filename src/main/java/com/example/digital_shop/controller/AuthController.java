@@ -19,10 +19,10 @@ public class AuthController {
      private final ProductService productService;
     @GetMapping("/index")
     public String yourPage(
-            @RequestParam int page,
-            @RequestParam int size,
-            Model model) {
-        model.addAttribute("products",productService.getAllProducts(page,size));
+//            @RequestParam int page,
+//            @RequestParam int size,
+            ) {
+//        model.addAttribute("products",productService.getAllProducts(page,size));
         return "index";
     }
 
@@ -79,7 +79,7 @@ public class AuthController {
     }
     @PostMapping("/new-code")
     public String getNewVerifyCode(@RequestParam String email){
-        userService.getNewVerifyCode(email);
+         userService.getNewVerifyCode(email);
         return "verify";
     }
 
