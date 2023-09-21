@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Verify</title>
@@ -10,24 +8,22 @@
 </head>
 
 <body>
-<div layout:fragment="body"  th:text="${message}" class="alert alert-danger" >
-<!--    <div th:text="${message}" class="alert alert-danger"></div>-->
-    <section class="container">
-        <div class="login-container">
-            <div class="circle circle-one"></div>
-            <div class="form-container">
-                <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
-                <h1 class="opacity">VERIFY</h1>
+<section class="container">
+    <div class="login-container">
+        <div class="circle circle-one"></div>
+        <div class="form-container">
+            <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
+            <h1 class="opacity">NEW CODE</h1>
 
-                <form action="/auth/new-code" method="post">
-                    <input type="email" placeholder="EMAIL" name="email" />
-                    <button class="opacity" type="submit">SUBMIT</button>
-                </form>
-            </div>
-            <div class="circle circle-two"></div>
+            <form action="/auth/new-code" method="post">
+                <input type="email" placeholder="EMAIL" name="email" />
+                <button class="opacity" type="submit">SUBMIT</button>
+            </form>
         </div>
-        <div class="theme-btn-container"></div>
-    </section>
-</div>
+        <div class="circle circle-two"></div>
+    </div>
+    <div class="theme-btn-container"></div>
+</section>
+<!--<div th:text="${m}" class="alert alert-danger"></div>-->
 </body>
 </html>
