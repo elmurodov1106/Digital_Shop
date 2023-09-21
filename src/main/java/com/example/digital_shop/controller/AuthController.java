@@ -54,6 +54,10 @@ public class AuthController {
     public String signUpGet(){
         return "signUp";
     }
+    @GetMapping("/verify")
+    public String verifyGet(){
+        return "verify";
+    }
 
     @PostMapping("/verify")
     public String verify(@RequestParam UUID userId,
