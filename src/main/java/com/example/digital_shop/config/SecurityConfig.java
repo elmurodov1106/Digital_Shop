@@ -26,16 +26,21 @@ public class SecurityConfig {
             "/auth/**",
             "/product/get-all",
             "/product/get-by-id",
-            "/resources/**"};
+            };
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             return http.csrf().disable()
                     .authorizeHttpRequests()
                     .requestMatchers(permitAll).permitAll()
+                    .requestMatchers(
+                            "/resources/**",
+                            "/static/**",
+                            "/css/**",
+                            "/js/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
-                    .loginPage("/auth/login")
+                    .loginPage("/auth/sign-in")
                     .defaultSuccessUrl("/index")
                     .and()
                     .build();
