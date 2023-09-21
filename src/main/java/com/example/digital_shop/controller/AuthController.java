@@ -19,10 +19,10 @@ public class AuthController {
      private final ProductService productService;
     @GetMapping("/index")
     public String yourPage(
-            @RequestParam int page,
-            @RequestParam int size,
+//            @RequestParam int page,
+//            @RequestParam int size,
             Model model) {
-        model.addAttribute("products",productService.getAllProducts(page,size));
+//        model.addAttribute("products",productService.getAllProducts(page,size));
         return "index";
     }
 
