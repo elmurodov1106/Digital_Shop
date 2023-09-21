@@ -9,9 +9,8 @@
   <script type="text/javascript" th:src="@{/js/sign-in.js}"></script>
 </head>
 
-<body>
-<div  layout:fragment="body">
-<div class="error-message" th:text="${message}" ></div>
+<body  layout:fragment="body">
+<!--<div class="error-message" th:text="${message}" ></div>-->
 <section class="container">
   <div class="login-container" >
     <div class="circle circle-one"></div>
@@ -20,11 +19,12 @@
       <h1 class="opacity">REGISTER</h1>
 
       <form action="/auth/sign-up" method="post">
-        <input type="text" placeholder="NAME" name="name" />
-        <input type="email" placeholder="EMAIL" name="email"  />
-        <input type="password" placeholder="PASSWORD" name="password"/>
-        <button class="opacity" >SUBMIT</button>
+        <input type="text" placeholder="NAME" name="name" style="color: black;" />
+        <input type="email" placeholder="EMAIL" name="email" />
+        <input type="password" placeholder="PASSWORD" name="password" />
+        <button class="opacity">SUBMIT</button>
       </form>
+
       <div class="register-forget opacity">
         <a href="/auth/sign-in" methods="get">SIGN IN</a>
       </div>
@@ -33,6 +33,5 @@
   </div>
   <div class="theme-btn-container"></div>
 </section>
-</div>
 </body>
 </html>
