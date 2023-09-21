@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity getNewVerifyCode(String email) {
-        UserEntity userEntity = userRepository.findByEmail(email);
+        UserEntity userEntity = userRepository.findUserEntityByEmail(email);
           verificationCodeRepository.deleteVerificationCodeByUserEmail(userEntity.getEmail());
         VerificationCode verificationCode = generateVerificationCode.generateVerificationCode(userEntity);
         mailService.sendVerificationCode(email, verificationCode.getSendingCode());
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity signIn(LoginDto loginDto) {
-        UserEntity user = userRepository.findByEmail(loginDto.getEmail());
+        UserEntity user = userRepository.findUserEntityByEmail(loginDto.getEmail());
         if (passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
             if (user.getState().equals(UserState.ACTIVE)) {
                 return user;
@@ -148,7 +148,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private Boolean checkUserEmail(String email) {
-        return userRepository.findByEmail(email) != null;
+        return userRepository.findUserEntityByEmail(email) != null;
     }
     public SellerInfo checkPassport(String passport){
         return sellerRepository.findSellerInfoByPassportNumberEquals(passport);

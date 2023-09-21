@@ -10,20 +10,18 @@ import java.util.UUID;
 
 
 @Entity(name = "product")
-//@DiscriminatorColumn(name = "product")
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
 public class ProductEntity extends BaseEntity {
-    private String productType;
-    private String model;
-    private String name;
-    private Double cost;
-    private UUID userId;
+    protected String productType;
+    protected String model;
+    protected String name;
+    protected Double cost;
+    protected UUID userId;
+    protected String image;
 }
 
 

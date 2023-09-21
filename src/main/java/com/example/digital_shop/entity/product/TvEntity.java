@@ -23,10 +23,6 @@ public class TvEntity extends ProductEntity {
     private Double isSmart;
     private Integer Size;
     private Integer ScreenSpeed;
-//    private String model;
-//    private String name;
-//    private Double cost;
-//    private UUID userId;
 }
 
 

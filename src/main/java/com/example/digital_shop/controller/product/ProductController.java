@@ -3,16 +3,14 @@ package com.example.digital_shop.controller.product;
 
 import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.product.ProductEntity;
-import com.example.digital_shop.exception.UnauthorizedAccessException;
 import com.example.digital_shop.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,8 +24,7 @@ public class ProductController {
 
     @GetMapping("/add")
     public String addGet(
-            @RequestParam UUID userId,
-            Model model) {
+            @RequestParam UUID userId, Model model) {
       model.addAttribute("userId",userId);
       return "ProductAdd";
     }
@@ -37,13 +34,10 @@ public class ProductController {
             @ModelAttribute ProductCreatDto productCreatDto,
             @RequestParam UUID userId,
             @RequestParam Integer amount,
+            @RequestParam MultipartFile image,
             Model model
-    ) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_Seller"))) {
-            throw new UnauthorizedAccessException("You don`t have permission to access this recourse");
-        }
-       productService.add(productCreatDto,userId,amount);
+    ) throws IOException {
+       productService.add(productCreatDto,userId,amount,image);
         model.addAttribute("userId",userId);
         return "SellerMenu";
     }
@@ -84,9 +78,10 @@ public class ProductController {
             @RequestBody ProductCreatDto productCreatDto,
             @RequestParam UUID productId,
             @RequestParam Integer amount,
+            @RequestParam MultipartFile image,
             Model model
-    ) {
-        ProductEntity update = productService.update(productCreatDto, productId, amount, userId);
+    ) throws IOException {
+        ProductEntity update = productService.update(productCreatDto, productId, amount, userId,image);
         if(update==null){
             model.addAttribute("message","Product not found");
             model.addAttribute("userId",userId);
