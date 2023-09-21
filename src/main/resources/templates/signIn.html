@@ -4,7 +4,7 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>sign up</title>
+    <title>Sign In</title>
     <link th:href="@{/css/sign-in.css}" rel="stylesheet">
     <script type="text/javascript" th:src="@{/js/sign-in.js}"></script>
 </head>
@@ -25,7 +25,8 @@
             </form>
             <div class="register-forget opacity">
                 <a href="/auth/sign-up" methods="get">REGISTER</a>
-                <a href="">FORGOT PASSWORD</a>
+                <a href="/new-code" methods="get">VERIFY</a>
+<!--                <a href="/auth/">FORGOT PASSWORD</a>-->
             </div>
         </div>
         <div class="circle circle-two"></div>
