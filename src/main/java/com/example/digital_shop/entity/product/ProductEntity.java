@@ -1,11 +1,9 @@
 package com.example.digital_shop.entity.product;
 
 import com.example.digital_shop.entity.BaseEntity;
-import com.example.digital_shop.entity.inventory.InventoryEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.UUID;
 
 
@@ -21,6 +19,7 @@ public class ProductEntity extends BaseEntity {
     protected String name;
     protected Double cost;
     protected UUID userId;
+    @Column(length = 100000)
     protected String image;
 }
 

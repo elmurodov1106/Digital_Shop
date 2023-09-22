@@ -2,13 +2,13 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>sign up</title>
+  <title>Sign up</title>
   <link th:href="@{/css/sign-in.css}" rel="stylesheet">
   <script type="text/javascript" th:src="@{/js/sign-in.js}"></script>
 </head>
 
 <body >
-<!--<div class="error-message" th:text="${message}" ></div>-->
+<div class="error-message" th:text="${message}" ></div>
 <section class="container">
   <div class="login-container" >
     <div class="circle circle-one"></div>
@@ -25,6 +25,7 @@
 
       <div class="register-forget opacity">
         <a href="/auth/sign-in" methods="get">SIGN IN</a>
+        <a href="/auth/seller/sign-up" methods="get">SELLER</a>
       </div>
     </div>
     <div class="circle circle-two"></div>

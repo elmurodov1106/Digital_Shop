@@ -1,6 +1,7 @@
 package com.example.digital_shop.controller;
 
 import com.example.digital_shop.domain.dto.*;
+import com.example.digital_shop.entity.user.RoleEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
@@ -97,6 +98,9 @@ public class AuthController {
         if(user==null){
             model.addAttribute("message","Username or password is wrong!!! Please try again");
             return "signIn";
+        } if (user.getRole().equals(new RoleEntity("Seller"))){
+        model.addAttribute("user",user);
+            return "SellerMenu";
         }
         model.addAttribute("user",user);
         return "index";
