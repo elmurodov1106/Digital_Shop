@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Sign up</title>
+  <link th:href="@{/css/sign-in.css}" rel="stylesheet">
+  <script type="text/javascript" th:src="@{/js/sign-in.js}"></script>
 </head>
-<body>
 
+<body >
+<div class="error-message" th:text="${message}" ></div>
+<section class="container">
+  <div class="login-container" >
+    <div class="circle circle-one"></div>
+    <div class="form-container">
+      <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
+      <h1 class="opacity">REGISTER</h1>
+
+      <form action="/auth/seller/sign-up" method="post">
+        <input type="text" placeholder="NAME" name="name" style="color: black;" />
+        <input type="email" placeholder="EMAIL" name="email" />
+        <input type="password" placeholder="PASSWORD" name="password" />
+        <input type="text" placeholder="LAST NAME" name="lastName" />
+        <input type="text" placeholder="FATHER NAME" name="fatherName" />
+        <input type="date" placeholder="BIRTH DATE" name="birthDate" />
+        <input type="text" placeholder="PASSPORT NUMBER" name="passportNumber" />
+        <input type="text" placeholder="PHONE NUMBER" name="phoneNumber" />
+        <button class="opacity">SUBMIT</button>
+      </form>
+
+      <div class="register-forget opacity">
+        <a href="/auth/sign-in" methods="get">SIGN IN</a>
+      </div>
+    </div>
+    <div class="circle circle-two"></div>
+  </div>
+  <div class="theme-btn-container"></div>
+</section>
 </body>
 </html>
