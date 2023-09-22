@@ -83,8 +83,9 @@ public class AuthController {
          return "newCode";
     }
     @PostMapping("/new-code")
-    public String getNewVerifyCode(@RequestParam String email){
-         userService.getNewVerifyCode(email);
+    public String getNewVerifyCode(@RequestParam String email,Model model){
+        UserEntity user = userService.getNewVerifyCode(email);
+        model.addAttribute("user",user);
         return "verify";
     }
 
