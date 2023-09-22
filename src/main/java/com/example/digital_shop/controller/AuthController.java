@@ -1,7 +1,7 @@
 package com.example.digital_shop.controller;
 
 import com.example.digital_shop.domain.dto.*;
-import com.example.digital_shop.entity.user.RoleEntity;
+import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -17,13 +18,20 @@ import java.util.UUID;
 @RequestMapping("/auth")
 public class AuthController {
     private final UserService userService;
-     private final ProductService productService;
+    private final ProductService productService;
+
     @GetMapping("/index")
     public String yourPage(
-//            @RequestParam int page,
-//            @RequestParam int size,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size,
+            Model model
             ) {
-//        model.addAttribute("products",productService.getAllProducts(page,size));
+        List<ProductEntity> allProducts = productService.getAllProducts(page, size);
+        if(allProducts==null){
+            model.addAttribute("message","Product not found");
+            return "index";
+        }
+        model.addAttribute("products",allProducts);
         return "index";
     }
 
@@ -43,25 +51,25 @@ public class AuthController {
     }
 
 
-
-
     @PostMapping("/sign-up")
     public String signUp(@ModelAttribute UserCreatDto userCreatDto,
                          Model model) {
         UserEntity save = userService.save(userCreatDto);
-        if(save==null){
-            model.addAttribute("message","Email already exists");
+        if (save == null) {
+            model.addAttribute("message", "Email already exists");
             return "signUp";
         }
-        model.addAttribute("user",save);
-      return "verify";
+        model.addAttribute("user", save);
+        return "verify";
     }
+
     @GetMapping("/sign-up")
-    public String signUpGet(){
+    public String signUpGet() {
         return "signUp";
     }
+
     @GetMapping("/verify")
-    public String verifyGet(){
+    public String verifyGet() {
         return "verify";
     }
 
@@ -69,19 +77,20 @@ public class AuthController {
     public String verify(@RequestParam UUID userId,
                          @RequestParam String sendingCode,
                          Model model) {
-        Boolean isActive=userService.verify(sendingCode,userId);
-         if(isActive){
-             model.addAttribute("isActive",true);
-             return "signIn";
-         }
-         model.addAttribute("message","Activation code is incorrect or ragged");
-         return "verify";
+        Boolean isActive = userService.verify(sendingCode, userId);
+        if (isActive) {
+            model.addAttribute("isActive", true);
+            return "signIn";
+        }
+        model.addAttribute("message", "Activation code is incorrect or ragged");
+        return "verify";
     }
 
     @GetMapping("/new-code")
     public String NewVerifyCode() {
-         return "newCode";
+        return "newCode";
     }
+
     @PostMapping("/new-code")
     public String getNewVerifyCode(@RequestParam String email,Model model){
         UserEntity user = userService.getNewVerifyCode(email);
@@ -93,31 +102,35 @@ public class AuthController {
     public String signInGet() {
         return "signIn";
     }
+
     @PostMapping("/sign-in")
-    public String signIn(@ModelAttribute LoginDto loginDto,Model model){
+    public String signIn(@ModelAttribute LoginDto loginDto, Model model) {
         UserEntity user = userService.signIn(loginDto);
-        if(user==null){
-            model.addAttribute("message","Username or password is wrong!!! Please try again");
+        if (user == null) {
+            model.addAttribute("message", "Username or password is wrong!!! Please try again");
             return "signIn";
-        } if (user.getRole().equals(new RoleEntity("Seller"))){
-        model.addAttribute("user",user);
+        }
+        if (user.getRole().getName().equals("Seller")){
+            model.addAttribute("user", user);
             return "SellerMenu";
         }
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "index";
     }
-   @GetMapping("/seller/sign-up")
-   public String sellerSignUpGet(){
+
+    @GetMapping("/seller/sign-up")
+    public String sellerSignUpGet() {
         return "SellerSignUp";
-   }
+    }
+
     @PostMapping("/seller/sign-up")
-    public String sellerSignUp(@ModelAttribute SellerDto sellerDto,Model model) {
+    public String sellerSignUp(@ModelAttribute SellerDto sellerDto, Model model) {
         UserEntity user = userService.saveSeller(sellerDto);
-        if(user==null){
-            model.addAttribute("message","Email already exists");
+        if (user == null) {
+            model.addAttribute("message", "Email already exists");
             return "SellerSignUp";
         }
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "verify";
     }
 }
