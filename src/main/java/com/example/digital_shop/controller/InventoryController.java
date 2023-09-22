@@ -44,14 +44,14 @@ public class InventoryController {
         }
         return inventoryService.update(inventoryCreateDto,inventoryId,productId);
     }
-    @DeleteMapping("/delete")
+    @GetMapping("/delete")
     public Boolean delete(
             @RequestParam UUID inventoryId
     ){
         inventoryService.deleteByInventoryId(inventoryId);
         return true;
     }
-    @DeleteMapping("/delete")
+    @GetMapping("/deleteBYProductId")
     public Boolean deleteByProductId(
             @RequestParam UUID productId
     ){
