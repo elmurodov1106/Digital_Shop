@@ -6,11 +6,7 @@ import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,13 +20,6 @@ public class InventoryServiceImpl implements InventoryService{
         InventoryEntity inventoryEntity = modelMapper.map(inventory, InventoryEntity.class);
         return inventoryRepository.save(inventoryEntity);
     }
-
-    @Override
-    public List<InventoryEntity> getAll(int size, int page) {
-        Pageable pageable = PageRequest.of(page,size);
-        return inventoryRepository.findAll(pageable).getContent();
-    }
-
 
     @Override
     public void deleteByInventoryId(UUID id) {
@@ -53,7 +42,7 @@ public class InventoryServiceImpl implements InventoryService{
             modelMapper.map(update,inventoryEntity);
             return inventoryRepository.save(inventoryEntity);
         }
-        throw new DataNotFoundException("Product not found");
+        return null;
     }
     @Override
     public InventoryEntity getByProductId(UUID productId) {

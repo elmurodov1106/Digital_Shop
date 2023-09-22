@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface InventoryService {
     InventoryEntity add(InventoryCreateDto inventory);
-    List<InventoryEntity> getAll(int size, int page);
+//    List<InventoryEntity> getAll(int size, int page);
     //    List<InventoryEntity> search(int page,int size,UUID productId);
     void deleteByInventoryId(UUID inventoryId);
     void deleteByProductId(UUID productId);
