@@ -28,10 +28,10 @@ public class PhoneController {
         return "PhoneAdd";
     }
 
-    @PostMapping("{userId}/add")
+    @PostMapping("/add")
     public String add(
             @ModelAttribute PhoneDto phoneDto,
-            @PathVariable UUID userId,
+            @RequestParam UUID userId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
             Model model
@@ -72,10 +72,10 @@ public class PhoneController {
       return "search";
     }
 
-    @PutMapping("/{userId}/update")
+    @PutMapping("/update")
     public String update(
             @RequestBody PhoneDto phoneDto,
-            @PathVariable UUID userId,
+            @RequestParam UUID userId,
             @RequestParam UUID phoneId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
@@ -94,9 +94,9 @@ public class PhoneController {
 
 
 
-    @DeleteMapping("/{userId}/delete")
+    @DeleteMapping("/delete")
     public String delete(
-            @PathVariable UUID userId,
+            @RequestParam UUID userId,
             @RequestParam UUID phoneId,
             Model model
     ) {
