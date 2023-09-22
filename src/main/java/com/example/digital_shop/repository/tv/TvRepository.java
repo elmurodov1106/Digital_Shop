@@ -12,5 +12,6 @@ import java.util.UUID;
 public interface TvRepository extends JpaRepository<TvEntity, UUID> {
     List<TvEntity> searchTvEntitiesByModelContainingIgnoreCase(String model, Pageable pageable);
 
+    TvEntity findTvEntityById(UUID tvId);
 
 }
