@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     username: postgres
-    password: 7777
-    url: jdbc:postgresql://localhost:5432/digital_shop_db
+    password: 1999
+    url: jdbc:postgresql://localhost:5432/shopping
     driver-class-name: org.postgresql.Driver
   thymeleaf:
     prefix: classpath:/templates/

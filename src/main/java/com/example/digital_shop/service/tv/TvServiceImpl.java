@@ -2,10 +2,16 @@ package com.example.digital_shop.service.tv;
 
 
 
+import com.example.digital_shop.domain.dto.InventoryCreateDto;
+import com.example.digital_shop.domain.dto.PhoneDto;
 import com.example.digital_shop.domain.dto.TvDto;
+import com.example.digital_shop.entity.inventory.InventoryEntity;
+import com.example.digital_shop.entity.product.PhoneEntity;
 import com.example.digital_shop.entity.product.TvEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
+import com.example.digital_shop.repository.inventory.InventoryRepository;
 import com.example.digital_shop.repository.tv.TvRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,8 +21,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.URI;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,75 +36,80 @@ public class TvServiceImpl implements TvService {
 
     private final TvRepository tvRepository;
     private final ModelMapper modelMapper;
+    private final InventoryRepository inventoryRepository;
     @Override
-    public TvEntity add(TvDto tvDto, UUID userId, Integer amount, String token) {
-        TvEntity tvEntity = modelMapper.map(tvDto, TvEntity.class);
+    @Transactional
+    public TvEntity add(TvDto tvDto, UUID userId, Integer amount, MultipartFile image) throws IOException {
+        TvEntity tvEntity = modelMapper.map(tvDto,TvEntity.class);
         tvEntity.setUserId(userId);
+        tvEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
         TvEntity save = tvRepository.save(tvEntity);
-//        InventoryDto inventoryDto = InventoryDto.builder().productCount(amount).productId(save.getId()).build();
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-//        HttpEntity<InventoryDto> entity = new HttpEntity<>(inventoryDto, httpHeaders);
-//        ResponseEntity<String> exchange = restTemplate.exchange(URI.create(inventoryServiceUrl + "/add"),
-//                HttpMethod.POST, entity, String.class);
+        InventoryCreateDto inventoryCreateDto = new InventoryCreateDto();
+        inventoryCreateDto.setProductId(save.getId());
+        inventoryCreateDto.setProductCount(amount);
+        InventoryEntity inventoryEntity = modelMapper.map(inventoryCreateDto, InventoryEntity.class);
+        inventoryRepository.save(inventoryEntity);
         return save;
     }
 
+
     @Override
-    public List<TvEntity> getAllTvs(int size, int page) {
+    public List<TvEntity> getAllTv(int size, int page) {
         Pageable pageable = PageRequest.of(page, size);
         List<TvEntity> content = tvRepository.findAll(pageable).getContent();
-        if (content.isEmpty()) {
-            throw new DataNotFoundException("Products not found");
+        if(content.isEmpty()){
+            throw new DataNotFoundException("Tv not found");
         }
         return content;
     }
 
     @Override
-    public List<TvEntity> search(int page, int size, String name) {
-
+    public List<TvEntity> search(int page, int size, String model) {
         Sort sort = Sort.by(Sort.Direction.ASC, "name");
         Pageable pageable = PageRequest.of(page, size, sort);
-        return tvRepository.searchTvEntitiesByModelContainingIgnoreCase(name, pageable);
+        return tvRepository.searchTvEntitiesByModelContainingIgnoreCase(model, pageable);
     }
 
+
+
     @Override
-    public Boolean deleteById(UUID id, UUID userId) {
-        TvEntity tvEntityNotFound = tvRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Tv not found"));
-        if (tvEntityNotFound.getUserId().equals(userId)) {
-            tvRepository.deleteById(id);
+    @Transactional
+    public Boolean deleteById(UUID tvId, UUID userId) {
+        TvEntity tvNotFound = tvRepository.findTvEntityById(tvId);
+        if (tvNotFound == null) {
+            return null;
+        }
+        if (tvNotFound.getUserId().equals(userId)){
+            inventoryRepository.deleteByProductIdEquals(tvId);
+            tvRepository.deleteById(tvId);
             return true;
-
         }
-        throw new DataNotFoundException("Tv not found");
+        return null;
     }
+
+
+
+
 
     @Override
-    public TvEntity update(TvDto update, UUID tvId, UUID userId) {
-        TvEntity tvEntity = tvRepository.findById(tvId)
-                .orElseThrow(() -> new DataNotFoundException("Product not found"));
-        if (tvEntity.getUserId().equals(userId)) {
-            modelMapper.map(update, tvEntity);
-            return tvRepository.save(tvEntity);
+    @Transactional
+    public TvEntity update(TvDto tvDto, UUID tvId,UUID userId,Integer amount,MultipartFile image) throws IOException {
+        TvEntity tvEntity = tvRepository.findTvEntityById(tvId);
+        if (tvEntity==null){
+            return null;
         }
-        throw new DataNotFoundException("Product not found");
+        InventoryEntity inventoryEntity = inventoryRepository.getByProductId(tvId);
+        if (tvEntity
+                .getUserId().equals(userId)){
+            modelMapper.map(tvDto,tvEntity
+            );
+            inventoryEntity.setProductCount(amount);
+            inventoryRepository.save(inventoryEntity);
+            tvEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+            return tvRepository.save(tvEntity
+            );
+        }
+        return null;
     }
-
-
-//    public void addInventory(TvEntity save, Integer amount, String token) {
-//        InventoryDto inventoryDto = new InventoryDto(save.getId(), amount);
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-//        token = token.substring(7);
-//        httpHeaders.setBearerAuth(token);
-//        HttpEntity<InventoryDto> entity = new HttpEntity<>(inventoryDto, httpHeaders);
-//        ResponseEntity<String> exchange = restTemplate.exchange(URI.create(inventoryServiceUrl + "/add"),
-//                HttpMethod.POST, entity, String.class);
-//        String body = exchange.getBody();
-//    }
-
-
 }
-
 

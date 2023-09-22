@@ -6,22 +6,21 @@ import com.example.digital_shop.exception.RequestValidationException;
 import com.example.digital_shop.service.inventoryService.InventoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.UUID;
 
-@RestController
+@Controller
 @RequestMapping("/inventory")
 @RequiredArgsConstructor
 public class InventoryController {
     private final InventoryService inventoryService;
 
     @PostMapping("/add")
-    public ResponseEntity<InventoryEntity> add(
+    public InventoryEntity add(
             @Valid @RequestBody InventoryCreateDto inventoryCreateDto,
             BindingResult bindingResult
     ){
@@ -29,21 +28,12 @@ public class InventoryController {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
             throw new RequestValidationException(allErrors);
         }
-        return ResponseEntity.ok(inventoryService.add(inventoryCreateDto));
+        return inventoryService.add(inventoryCreateDto);
     }
 
-    @GetMapping("/get-all")
-    public ResponseEntity<List<InventoryEntity>> getAll(
-            @RequestParam int size,
-            @RequestParam int page
-
-    ){
-        return ResponseEntity.status(200).body(inventoryService.getAll(size, page));
-    }
-
-    @PutMapping("/{productId}/update")
-    public ResponseEntity<InventoryEntity> update(
-            @Valid @PathVariable UUID productId,
+    @PutMapping("/update")
+    public InventoryEntity update(
+            @Valid @RequestParam UUID productId,
             @RequestParam UUID inventoryId,
             @RequestBody InventoryCreateDto inventoryCreateDto,
             BindingResult bindingResult
@@ -52,20 +42,20 @@ public class InventoryController {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
             throw new RequestValidationException(allErrors);
         }
-        return ResponseEntity.ok(inventoryService.update(inventoryCreateDto,inventoryId,productId));
+        return inventoryService.update(inventoryCreateDto,inventoryId,productId);
     }
-    @DeleteMapping("/{inventoryId}/delete")
-    public ResponseEntity delete(
-            @PathVariable UUID inventoryId
+    @DeleteMapping("/delete")
+    public Boolean delete(
+            @RequestParam UUID inventoryId
     ){
         inventoryService.deleteByInventoryId(inventoryId);
-        return ResponseEntity.status(204).build();
+        return true;
     }
-    @DeleteMapping("/{productId}/delete")
-    public ResponseEntity deleteByProductId(
-            @PathVariable UUID productId
+    @DeleteMapping("/delete")
+    public Boolean deleteByProductId(
+            @RequestParam UUID productId
     ){
         inventoryService.deleteByProductId(productId);
-        return ResponseEntity.status(204).build();
+        return true;
     }
 }

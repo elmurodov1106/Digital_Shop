@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserEntity getNewVerifyCode(String email) {
         UserEntity userEntity = userRepository.findUserEntityByEmail(email);
           verificationCodeRepository.deleteVerificationCodeByUserEmail(userEntity.getEmail());
