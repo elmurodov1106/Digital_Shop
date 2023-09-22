@@ -3,83 +3,115 @@ package com.example.digital_shop.controller.product;
 
 import com.example.digital_shop.domain.dto.LaptopDto;
 import com.example.digital_shop.entity.product.LaptopEntity;
-import com.example.digital_shop.exception.RequestValidationException;
-import com.example.digital_shop.exception.UnauthorizedAccessException;
 import com.example.digital_shop.service.laptop.LaptopService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
+@Controller
 @RequestMapping("/product/laptop")
 @RequiredArgsConstructor
 public class LaptopController {
 
     private final LaptopService laptopService;
-    @PostMapping("/{userId}/add")
-    public ResponseEntity<LaptopEntity> add(
-           @RequestBody LaptopDto laptopDto,
+
+    @GetMapping("/add")
+    public String addGet(
+            @RequestParam UUID userId, Model model) {
+        model.addAttribute("userId",userId);
+        return "LaptopAdd";
+    }
+
+
+
+    @PostMapping("/add")
+    public String add(
+            @RequestBody LaptopDto laptopDto,
             @PathVariable UUID userId,
             @RequestParam Integer amount,
-          HttpServletRequest request
-    ){
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_Seller"))){
-            throw new UnauthorizedAccessException("You don`t have permission to access this recourse");
-        }
-        return ResponseEntity.ok(laptopService.add(laptopDto,userId,amount,request.getHeader("authorization")));
+            @RequestParam MultipartFile image,
+            Model model
+    ) throws IOException {
+        laptopService.add(laptopDto,userId,amount,image);
+        model.addAttribute("userId",userId);
+        return "SellerMenu";
     }
     @GetMapping("/get-all")
-    public ResponseEntity<List<LaptopEntity>> getAll(
+    public String getAll(
             @RequestParam(defaultValue = "10",required = false)  int size,
-            @RequestParam(defaultValue = "0",required = false)  int page
+            @RequestParam(defaultValue = "0",required = false)  int page,
+            Model model
     ){
-        return ResponseEntity.ok(laptopService.getAllLaptops(size, page));
+      List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
+      if (allLaptop.isEmpty()){
+          model.addAttribute("message","Laptop not found");
+          return "index";
+      }
+      model.addAttribute("laptop",allLaptop);;
+      return "allLaptop";
     }
 
     @GetMapping("/search-by-name")
-    public ResponseEntity<List<LaptopEntity>> search(
+    public String search(
             @RequestParam(defaultValue = "10",required = false)  int size,
             @RequestParam(defaultValue = "0",required = false)  int page,
-            @RequestParam String name
+            @RequestParam String name,
+            Model model
     ){
-        return ResponseEntity.status(200).body(laptopService.search(size, page, name));
+      List<LaptopEntity> search = laptopService.search(size,page,name);
+      if (search.isEmpty()){
+          model.addAttribute("message","Laptop not found");
+          return "index";
+      }
+      model.addAttribute("laptop",search);
+      return "search";
     }
 
     @PutMapping("/{userId}/update")
     @PreAuthorize(value = "hasRole('Seller')")
-    public ResponseEntity<LaptopEntity> update(
+    public String update(
             @Valid  @RequestBody LaptopDto laptopDto,
             @PathVariable UUID userId,
             @RequestParam UUID laptopId,
-            BindingResult bindingResult
-    ){
-        if(bindingResult.hasErrors()){
-            List<ObjectError> allErrors = bindingResult.getAllErrors();
-            throw new RequestValidationException(allErrors);
+            @RequestParam Integer amount,
+            @RequestParam MultipartFile image,
+            Model model
+    )throws IOException{
+        LaptopEntity update = laptopService.update(laptopDto,laptopId,userId, amount,image);
+        if (update==null){
+            model.addAttribute("message","laptop not found");
+            model.addAttribute("userId",userId);
+            return "SellerMenu";
         }
-        return ResponseEntity.ok(laptopService.update(laptopDto,laptopId,userId));
+        model.addAttribute("userId",userId);
+        model.addAttribute("message","Laptop successfully");
+        return "SellerMenu";
     }
+
 
     @DeleteMapping("/{userId}/delete")
-    public ResponseEntity<Boolean> delete(
+    public String delete(
             @PathVariable UUID userId,
             @RequestParam UUID laptopId,
-            HttpServletRequest request
+            Model model
     ){
-        return ResponseEntity.ok(laptopService.deleteById(laptopId,userId,request.getHeader("authorization")));
+        Boolean aBoolean = laptopService.deleteById(laptopId,userId);
+        if (aBoolean==null){
+            model.addAttribute("message","Laptop not found");
+            model.addAttribute("userId",userId);
+            return "SellerMenu";
+        }
+        model.addAttribute("message","Laptop successfully deleted");
+        model.addAttribute("userId",userId);
+        return "SellerMenu";
     }
-
 
 }
