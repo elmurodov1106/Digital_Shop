@@ -3,17 +3,13 @@ package com.example.digital_shop.controller.product;
 
 import com.example.digital_shop.domain.dto.TvDto;
 import com.example.digital_shop.entity.product.TvEntity;
-import com.example.digital_shop.exception.UnauthorizedAccessException;
 import com.example.digital_shop.service.tv.TvService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,54 +19,94 @@ import java.util.UUID;
 public class TvController {
     private final TvService tvService;
 
-    @PostMapping("/add")
-    public ResponseEntity<TvEntity> add(
-            @RequestBody TvDto tvDto,
-            @RequestParam UUID userId,
-            @RequestParam Integer amount,
-            HttpServletRequest request
-    ) {
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_Seller"))){
-            throw new UnauthorizedAccessException("You don`t have permission to access this recourse");
-        }
+    @GetMapping("/add")
+    public String addGet(
+            @RequestParam UUID userId, Model model) {
+        model.addAttribute("userId", userId);
+        return "TvAdd";
+    }
 
-        return ResponseEntity.ok(tvService.add(tvDto, userId, amount, request.getHeader("authorization")));
+    @PostMapping("{userId}/add")
+    public String add(
+            @ModelAttribute TvDto tvDto,
+            @PathVariable UUID userId,
+            @RequestParam Integer amount,
+            @RequestParam MultipartFile image,
+            Model model
+    ) throws IOException {
+        tvService.add(tvDto, userId, amount, image);
+        model.addAttribute("userId", userId);
+        return "SellerMenu";
     }
 
     @GetMapping("/get-all")
-    public ResponseEntity<List<TvEntity>> getAll(
-            @RequestParam int size,
-            @RequestParam int page
-    ) {
-        return ResponseEntity.ok(tvService.getAllTvs(size, page));
-    }
-
-    @GetMapping("/search")
-    public ResponseEntity<List<TvEntity>> search(
+    public String getAll(
             @RequestParam int size,
             @RequestParam int page,
-            @RequestParam String name
+            Model model) {
+        List<TvEntity> allTv = tvService.getAllTv(size, page);
+        if (allTv.isEmpty()) {
+            model.addAttribute("message", "Tv not found");
+            return "index";
+        }
+        model.addAttribute("tv", allTv);
+        return "allTv";
+    }
+
+
+    @GetMapping("/search")
+    public String search(
+            @RequestParam(defaultValue = "10", required = false) int size,
+            @RequestParam(defaultValue = "0", required = false) int page,
+            @RequestParam String name,
+            Model model
     ) {
-        return ResponseEntity.status(200).body(tvService.search(size, page, name));
+        List<TvEntity> search = tvService.search(size, page, name);
+        if (search.isEmpty()) {
+            model.addAttribute("message", "tv not found");
+            return "index";
+        }
+        model.addAttribute("tv", search);
+        return "search";
     }
 
     @PutMapping("/{userId}/update")
-    public ResponseEntity<TvEntity> update(
+    public String update(
             @RequestBody TvDto tvDto,
             @PathVariable UUID userId,
-            @RequestParam UUID tvId
-    ) {
-        return ResponseEntity.ok(tvService.update(tvDto, tvId, userId));
+            @RequestParam UUID tvId,
+            @RequestParam Integer amount,
+            @RequestParam MultipartFile image,
+            Model model
+    ) throws IOException {
+        TvEntity update = tvService.update(tvDto, userId, tvId, amount, image);
+        if (update == null) {
+            model.addAttribute("message", "Tv not found");
+            model.addAttribute("userId", userId);
+            return "SellerMenu";
+        }
+        model.addAttribute("userId", userId);
+        model.addAttribute("message", "Tv successfully updated");
+        return "SellerMenu";
     }
+
 
     @DeleteMapping("/{userId}/delete")
-    public ResponseEntity<Boolean> delete(
+    public String delete(
             @PathVariable UUID userId,
-            @RequestParam UUID tvId
+            @RequestParam UUID tvId,
+            Model model
     ) {
-        return ResponseEntity.ok(tvService.deleteById(tvId, userId));
+        Boolean tv = tvService.deleteById(tvId, userId);
+        if (tv == null) {
+            model.addAttribute("message", "Tv not found");
+            model.addAttribute("userId", userId);
+            return "SellerMenu";
+        }
+        model.addAttribute("message", "Tv successfully deleted");
+        model.addAttribute("userId", userId);
+        return "SellerMenu";
     }
 
-
 }
+
