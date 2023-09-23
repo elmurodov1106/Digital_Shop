@@ -258,7 +258,7 @@ nav ul li{
 .tabContainer {
     height:calc(671px - 45px);
     position: relative;
-    width:300%;
+    width:100%;
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
