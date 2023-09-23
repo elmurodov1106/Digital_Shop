@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="eng"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Digital Shop</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+  <link th:href="@{/css/seller.css}" rel="stylesheet">
+  <script type="text/javascript" th:src="@{/js/seller.js}"></script>
+<!--  <script type="text/javascript" th:src="@{/js/menu.js}"></script>-->
+
+
+</head>
+<style>
+  /* Add CSS to style your container and adjust the zoom level */
+  .seller {
+    /* Your container styles go here */
+    /* Example: */
+    width: 100%;
+    text-align: center;
+  }
+
+  .sellerHead {
+    /* Your header styles go here */
+    /* Example: */
+    padding: 1em;
+  }
+
+  /* Adjust the zoom level */
+  svg {
+    transform-origin: center;
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+  }
+
+  /* On hover, apply the zoom effect */
+  .sellerHead:hover svg {
+    transform: scale(1.4); /* Adjust the scale factor for zoom level */
+  }
+  /*.username {*/
+  /*    background-color: #f8f8f8; !* Background color for highlighting *!*/
+  /*    padding: 3px 6px; !* Add some padding for better visual appearance *!*/
+  /*    border-radius: 5px; !* Rounded corners *!*/
+  /*}*/
+
+</style>
+<body>
+<section id="sidebar">
+
+  <div class ="whitelable">
+    <div class="title"><a href="#">
+      <h1>Trading Analytics</h1>
+    </a></div><!--title-->
+
+  </div>
+  <div class="seller">
+    <div class="sellerHead">
+      <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 448 512" style="transform: scale(1.3); margin-left: -40px;">
+        <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+      </svg>
+      <a href="#">
+        <span class="username" th:text="${user.getName()}" style="color: black; font-size: 20px; margin-left: 20px; margin-right: 10px;"></span>
+      </a>
+    </div>
+  </div>
+
+
+
+
+  <script>
+
+    window.onload = function() {
+      window.scrollBy(0, 100);
+    }
+  </script>
+
+
+
+  <div id="sidebarNav">
+    <ul class="noToplLine">
+      <!--            <li class="selected"><a href=""><i class="fa fa-area-chart"></i>Dashboard</li>-->
+      <li><a href="#"><i class="fa fa-list-alt"></i>Products </a></li>
+      <li><a href="#"><i class="fa fa-pencil-square-o"></i>Orders </a></li>
+      <li><a href="/product/add"><i class="fa fa-desktop"></i>Add Product</a></li>
+      <li><a href="#"><i class="fa fa-truck"></i>Analytics</a></li>
+      <li><a href="#"><i class="fa fa-credit-card"></i>Price Managerment</a></li>
+    </ul>
+  </div><!----sidebarNav-->
+</section>
+
+<div layout:fragment="body" style="position: absolute;  width: 100%">
+
+</div>
+</body>
+</html>
