@@ -148,6 +148,17 @@ public class UserServiceImpl implements UserService {
        return userRepository.save(user);
     }
 
+    @Override
+    public UUID getIdByEmail(String email) {
+        UserEntity user = userRepository.findByEmail(email);
+        return user.getId();
+    }
+
+    public UserEntity getById(UUID userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException("UserNot Found"));
+    }
+
     private Boolean checkUserEmail(String email) {
         return userRepository.findUserEntityByEmail(email) != null;
     }
