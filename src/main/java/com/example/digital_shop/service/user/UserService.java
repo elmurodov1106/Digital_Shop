@@ -15,4 +15,8 @@ public interface UserService {
     UserEntity signIn(LoginDto loginDto);
     UserEntity saveSeller(SellerDto sellerDto);
     UserEntity updateUser(UserCreatDto userCreatDto, UUID userId);
+    UUID getIdByEmail(String email);
+
+    UserEntity getById(UUID userId);
+
 }
