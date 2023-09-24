@@ -5,7 +5,13 @@ import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +31,13 @@ public class AuthController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size,
             Model model
-            ) {
+    ) {
         List<ProductEntity> allProducts = productService.getAllProducts(page, size);
-        if(allProducts==null){
-            model.addAttribute("message","Product not found");
+        if (allProducts == null) {
+            model.addAttribute("message", "Product not found");
             return "index";
         }
-        model.addAttribute("products",allProducts);
+        model.addAttribute("products", allProducts);
         return "index";
     }
 
@@ -39,6 +45,33 @@ public class AuthController {
     public String about() {
         return "About";
     }
+
+//    @GetMapping("/seller/menu")
+//    public String seller(UUID userId, Model model) {
+//        userService.
+//        return "SellerMenu";
+//    }
+
+    @GetMapping("/seller/menu")
+    public String seller(
+            Model model
+    ) {
+        // Get the authentication object
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            // Get the email from the UserDetails
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String email = userDetails.getUsername(); // Assuming email is stored as the username
+
+            // Now you have the email
+            UUID userId = userService.getIdByEmail(email);
+            model.addAttribute("userIdForSeller", userId);
+        }
+
+        return "SellerMenu";
+    }
+
 
     @GetMapping("/contact")
     public String contact() {
@@ -92,9 +125,9 @@ public class AuthController {
     }
 
     @PostMapping("/new-code")
-    public String getNewVerifyCode(@RequestParam String email,Model model){
+    public String getNewVerifyCode(@RequestParam String email, Model model) {
         UserEntity user = userService.getNewVerifyCode(email);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "verify";
     }
 
@@ -110,9 +143,11 @@ public class AuthController {
             model.addAttribute("message", "Username or password is wrong!!! Please try again");
             return "signIn";
         }
-        if (user.getRole().getName().equals("Seller")){
+        if (user.getRole().getName().equals("Seller")) {
+            UUID userId = userService.getIdByEmail(loginDto.getEmail());
             model.addAttribute("user", user);
-            return "SellerMenu";
+            model.addAttribute("userId", userId);
+            return "redirect:/auth/seller/menu";
         }
         model.addAttribute("user", user);
         return "index";
