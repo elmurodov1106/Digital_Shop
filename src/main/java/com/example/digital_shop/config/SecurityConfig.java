@@ -26,6 +26,7 @@ public class SecurityConfig {
             "/auth/**",
             "/product/get-all",
             "/product/get-by-id",
+            "/product/**"
             };
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -36,12 +37,14 @@ public class SecurityConfig {
                             "/resources/**",
                             "/static/**",
                             "/css/**",
-                            "/js/**").permitAll()
+                            "/js/**",
+                            "images").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
                     .loginPage("/auth/index")
                     .defaultSuccessUrl("/index")
+                    .defaultSuccessUrl("/auth/seller/menu")
                     .and()
                     .build();
         }

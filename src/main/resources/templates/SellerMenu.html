@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet">
+    <title>Seller Menu</title>
+<!--    <link th:href="@{/css/seller.css}" rel="stylesheet">-->
     <link th:href="@{/css/seller.css}" rel="stylesheet">
     <script type="text/javascript" th:src="@{/js/seller.js}"></script>
 </head>
@@ -101,187 +101,334 @@
             </ul>
 
             <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-        </div>
-    </nav>
+<style>
+    /* Add CSS to style your container and adjust the zoom level */
+    .seller {
+        /* Your container styles go here */
+        /* Example: */
+        width: 100%;
+        text-align: center;
+    }
 
-    <nav>
-        <div class="nav-wrapper indigo darken-2">
-            <a style="margin-left: 20px;" class="breadcrumb" href="#!">Admin</a>
-            <a class="breadcrumb" href="#!">Index</a>
+    .sellerHead {
+        /* Your header styles go here */
+        /* Example: */
+        padding: 1em;
+    }
 
-            <div style="margin-right: 20px;" id="timestamp" class="right"></div>
-        </div>
-    </nav>
-</header>
+    /* Adjust the zoom level */
+    svg {
+        transform-origin: center;
+        transition: transform 0.3s ease; /* Add a smooth transition effect */
+    }
 
-<main>
-    <div class="row">
-        <div class="col s6">
-            <div style="padding: 35px;" align="center" class="card">
-                <div class="row">
-                    <div class="left card-title">
-                        <b>User Management</b>
-                    </div>
-                </div>
+    /* On hover, apply the zoom effect */
+    .sellerHead:hover svg {
+        transform: scale(1.4); /* Adjust the scale factor for zoom level */
+    }
+    /*.username {*/
+    /*    background-color: #f8f8f8; !* Background color for highlighting *!*/
+    /*    padding: 3px 6px; !* Add some padding for better visual appearance *!*/
+    /*    border-radius: 5px; !* Rounded corners *!*/
+    /*}*/
 
-                <div class="row">
-                    <a href="#!">
-                        <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                            <i class="indigo-text text-lighten-1 large material-icons">person</i>
-                            <span class="indigo-text text-lighten-1"><h5>Seller</h5></span>
-                        </div>
-                    </a>
-                    <div class="col s1">&nbsp;</div>
-                    <div class="col s1">&nbsp;</div>
+</style>
+<body >
+<section id="sidebar">
 
-                    <a href="#!">
-                        <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                            <i class="indigo-text text-lighten-1 large material-icons">people</i>
-                            <span class="indigo-text text-lighten-1"><h5>Customer</h5></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div class ="whitelable">
+        <div class="title"><a href="#">
+            <h1>Digital Shop </h1>
+        </a></div><!--title-->
 
-        <div class="col s6">
-            <div style="padding: 35px;" align="center" class="card">
-                <div class="row">
-                    <div class="left card-title">
-                        <b>Product Management</b>
-                    </div>
-                </div>
-                <div class="row">
-                    <a href="#!">
-                        <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                            <i class="indigo-text text-lighten-1 large material-icons">store</i>
-                            <span class="indigo-text text-lighten-1"><h5>Product</h5></span>
-                        </div>
-                    </a>
-
-                    <div class="col s1">&nbsp;</div>
-                    <div class="col s1">&nbsp;</div>
-
-                    <a href="#!">
-                        <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                            <i class="indigo-text text-lighten-1 large material-icons">assignment</i>
-                            <span class="indigo-text text-lighten-1"><h5>Orders</h5></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+    </div>
+    <div class="seller">
+        <div class="sellerHead">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 448 512" style="transform: scale(1.3); margin-left: -40px;">
+                <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+            </svg>
+            <a href="#">
+                <span class="username" style="color: black; font-size: 20px; margin-left: 20px; margin-right: 10px;">Profile</span>
+            </a>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col s6">
-            <div style="padding: 35px;" align="center" class="card">
-                <div class="row">
-                    <div class="left card-title">
-                        <b>Brand Management</b>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <a href="#!">
-                        <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                            <i class="indigo-text text-lighten-1 large material-icons">local_offer</i>
-                            <span class="indigo-text text-lighten-1"><h5>Brand</h5></span>
-                        </div>
-                    </a>
 
-                    <div class="col s1">&nbsp;</div>
-                    <div class="col s1">&nbsp;</div>
 
-                    <a href="#!">
-                        <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                            <i class="indigo-text text-lighten-1 large material-icons">loyalty</i>
-                            <span class="indigo-text text-lighten-1"><h5>Sub Brand</h5></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <script>
 
-        <div class="col s6">
-            <div style="padding: 35px;" align="center" class="card">
-                <div class="row">
-                    <div class="left card-title">
-                        <b>Category Management</b>
-                    </div>
-                </div>
-                <div class="row">
-                    <a href="#!">
-                        <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                            <i class="indigo-text text-lighten-1 large material-icons">view_list</i>
-                            <span class="indigo-text text-lighten-1"><h5>Category</h5></span>
-                        </div>
-                    </a>
-                    <div class="col s1">&nbsp;</div>
-                    <div class="col s1">&nbsp;</div>
+        window.onload = function() {
+            window.scrollBy(0, 100);
+        }
+    </script>
 
-                    <a href="#!">
-                        <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                            <i class="indigo-text text-lighten-1 large material-icons">view_list</i>
-                            <span class="truncate indigo-text text-lighten-1"><h5>Sub Category</h5></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="fixed-action-btn click-to-toggle" style="bottom: 45px; right: 24px;">
-        <a class="btn-floating btn-large pink waves-effect waves-light">
-            <i class="large material-icons">add</i>
-        </a>
 
-        <ul>
+    <div id="sidebarNav">
+        <ul class="noToplLine">
+            <!--            <li class="selected"><a href=""><i class="fa fa-area-chart"></i>Dashboard</li>-->
+            <li><a href="#"><i class="fa fa-list-alt"></i>Products </a></li>
+            <li><a href="#"><i class="fa fa-pencil-square-o"></i>Orders </a></li>
             <li>
-                <a class="btn-floating red"><i class="material-icons">note_add</i></a>
-                <a href="" class="btn-floating fab-tip">Add a note</a>
+                <!-- <h1 th:text="${principal.username}"></h1> -->
+                <a th:href="@{/product/add(userId=${userIdForSeller})}">
+                    <i class="fa fa-desktop"></i> Add Product
+                </a>
             </li>
 
-            <li>
-                <a class="btn-floating yellow darken-1"><i class="material-icons">add_a_photo</i></a>
-                <a href="" class="btn-floating fab-tip">Add a photo</a>
-            </li>
+            <li><a href="#"><i class="fa fa-truck"></i>Analytics</a></li>
+            <li><a href="#"><i class="fa fa-credit-card"></i>Price Managerment</a></li>
+            <li><a href="#"><i class="fa fa-credit-card"></i>Balance</a></li>
 
-            <li>
-                <a class="btn-floating green"><i class="material-icons">alarm_add</i></a>
-                <a href="" class="btn-floating fab-tip">Add an alarm</a>
-            </li>
-
-            <li>
-                <a class="btn-floating blue"><i class="material-icons">vpn_key</i></a>
-                <a href="" class="btn-floating fab-tip">Add a master password</a>
-            </li>
         </ul>
     </div>
-</main>
+</section>
 
-<footer class="indigo page-footer">
-    <div class="container">
-        <div class="row">
-            <div class="col s12">
-                <h5 class="white-text">Icon Credits</h5>
-                <ul id='credits'>
-                    <li>
-                        Gif Logo made using <a href="https://formtypemaker.appspot.com/" title="Form Type Maker">Form Type Maker</a> from <a href="https://github.com/romannurik/FORMTypeMaker" title="romannurik">romannurik</a>
-                    </li>
-                    <li>
-                        Icons made by <a href="https://material.io/icons/">Google</a>, available under <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License Version 2.0</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container">
-            <span>Made By <a style='font-weight: bold;' href="https://github.com/piedcipher" target="_blank">Tirth Patel</a></span>
-        </div>
-    </div>
+
+<section id=content>
+<!--    <div class="header">-->
+<!--        <nav>-->
+<!--            <ul>-->
+<!--                <li> <i class="fa fa-desktop"></i>Help Center</li>-->
+<!--                <li><i class="fa fa-desktop"></i>Account</li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </div>&lt;!&ndash;header&ndash;&gt;-->
+
+
+<!--    <div id="box">&lt;!&ndash;tabNav+tabContent&ndash;&gt;-->
+<!--        <div id="tabs">-->
+<!--            <nav class="tabNav">-->
+<!--                <div class="navItem active" data-tab-target="tab-1">UK Makret</div>-->
+
+<!--                <div class="navItem" data-tab-target="tab-2">USA Market</div>-->
+
+<!--                <div class="navItem" data-tab-target="tab-3">Europe Market</div>-->
+
+<!--                <div class="activeBar"></div>-->
+<!--            </nav>-->
+<!--        </div>&lt;!&ndash;tabsHeader&ndash;&gt;-->
+
+        <!--wrap for 3 tabcontent-->
+        <section class="tabContainer" data-active-tab="tab-1">
+
+            <div class="tabSection"><!--Start of tab1:tabsConent-->
+                <div class="widgetBox">
+                    <div class="widgetHeader">
+                        <h2>GMV on Domestic</h2><span tooltip="More Settings" flow="down"><i class="fa fa-cog"></i></span>
+                    </div><!--GMV on Domestic-->
+                    <div class="widgetContent">
+
+
+
+
+                        <!--doughunt-->
+                        <div class="pie">
+                            <div class="slice-pink"></div>
+                            <div class="slice-blue"></div>
+                            <div class="slice-green"></div>
+                            <div class="percent">
+                                <div class="number">GMV
+                                    <p>Domestic</p>
+                                </div>
+
+                            </div>
+
+                        </div><!--doughuntpie-->
+
+                        <!--chart legend-->
+                        <ul class="chartLegend">
+                            <li>
+                                <span class=circleBlue></span>
+                                <em>Actived</em>
+                            </li>
+                            <li>
+                                <span class=circlePink></span>
+                                <em>Blocked</em>
+                            </li>
+
+                            <li>
+                                <span class=circleGreen></span>
+                                <em>Others</em>
+                            </li>
+                        </ul>
+                        <!--end of chart legend-->
+
+                    </div><!--widgetContent-->
+
+
+
+                </div><!--widgetBox-->
+
+                <div class="widgetBox">
+                    <div class="widgetHeader">
+                        <h2>Item Performance</h2><span tooltip="More Settings" flow="down"><i class="fa fa-cog"></i></span>
+                    </div><!--GMV on Domestic-->
+                    <div class="widgetContent">
+
+                        <section id="bar">
+                            <table id="graphBar">
+
+                                <thead></thead>
+
+                                <tbody>
+                                <tr id="q1">
+                                    <td class="uk bar q1ukbar" style="height: 150px;"><p>$18,450.00</p></td>
+                                    <td class="usa bar q1usabar" style="height: 60px;"><p>$16,500.00</p></td>
+                                </tr>
+
+                                <tr id="q2">
+                                    <td class="uk bar q2ukbar" style="height: 100px;"><p>$34,340.72</p></td>
+                                    <td class="usa bar q2usabar" style="height: 85px;"><p>$32,340.72</p></td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+                        </section>
+
+
+
+
+
+
+                    </div><!--widgetContent-->
+                </div><!--widgetBox-->
+
+                <!--Start of table and panelHeader:container-->
+                <div class="Container">
+                    <div class="panel">
+                        <h3 class="pullLeft">Item Activity</h3>
+
+                        <div class="pullRight select-style">
+                            <form action="">
+                                <select name="" id="dropDownStyle">
+                                    <option value="" data-icon="">Last 30 Days</option>
+                                    <option value="" data-icon="">Last 60 Days</option>
+                                </select>
+                            </form>
+                        </div> <!--filter-->
+
+                    </div><!--panel-->
+
+
+                    <div class="scrollTable">
+                        <table class="layout pullLeft">
+                            <thead>
+                            <tr>
+                                <th>Items</th>
+                                <th>Marketplaces</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>product itemA</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                            </tr>
+
+                            <tr>
+                                <td>product itemA</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                            </tr>
+
+                            <tr>
+                                <td>product itemA</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                            </tr>
+
+                            <tr>
+                                <td>product itemA</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                            </tr>
+
+                            <tr>
+                                <td>product itemA</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                            </tr>
+
+                            <tr>
+                                <td>product itemA</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                            </tr>
+
+                            <tr>
+                                <td>product itemA</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                            </tr>
+
+                            <tr>
+                                <td>product itemA</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                                <td>UK</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div><!--table-->
+                </div><!--End of table and panelHeader:container-->
+
+            </div><!--end of tab1:tabsConent-->
+
+<!--            <div class="tabSection">not available in USA-->
+<!--            </div>-->
+<!--            <div class="tabSection">not available in Europe-->
+<!--            </div>-->
+        </section> <!--end ofwrap for 3 tabcontent-->
+
+
+
+
+
+
+
+</section>
+
+<footer>
+
 </footer>
-</body>
 
+
+<!--
+//show/hide tabsContent
+
+$("document").ready(function(){
+  $(".tabContent").hide();
+  $(".tabContent:first").show();
+});
+
+
+//tabnav
+ $('#tabs li').click(function() {
+   $(".tabContent").hide();
+  var activeTab = $(this).attr('rel');
+   $("#"+activeTab).fadeIn();
+   $('.tabSliderTrigger').removeClass('active');
+   $(this).addClass('active');
+});
+-->
+</body>
 </html>

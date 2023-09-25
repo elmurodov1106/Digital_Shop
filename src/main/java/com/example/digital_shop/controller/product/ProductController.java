@@ -2,7 +2,10 @@ package com.example.digital_shop.controller.product;
 
 import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.product.ProductEntity;
+import com.example.digital_shop.entity.user.UserEntity;
+import com.example.digital_shop.entity.user.UserState;
 import com.example.digital_shop.service.product.ProductService;
+import com.example.digital_shop.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,18 +23,25 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
+    private final UserService userService;
 
     @GetMapping("/add")
     public String addGet(
-            @RequestParam UUID userId, Model model) {
-      model.addAttribute("userId",userId);
-      return "ProductAdd";
+            @RequestParam(name = "userId", required = false) UUID userId,
+            Model model
+    ) {
+
+            model.addAttribute("userId", userId);
+
+        return "ProductAdd";
     }
+
+
 
     @PostMapping("/add")
     public String add(
             @ModelAttribute ProductCreatDto productCreatDto,
-            @RequestParam UUID userId,
+            @RequestParam(name = "userId",required = false) UUID userId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
             Model model
