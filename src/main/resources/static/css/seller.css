@@ -317,7 +317,7 @@ nav ul li{
 /**/
 .widgetBox{
     position:relative;
-    display:inline-box;
+
     margin:2em 1.3em;
     float:left;
     border: 1px solid #C0D1E3;
