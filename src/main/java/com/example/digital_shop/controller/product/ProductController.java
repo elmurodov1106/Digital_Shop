@@ -1,11 +1,11 @@
 package com.example.digital_shop.controller.product;
 
+import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.product.ProductEntity;
-import com.example.digital_shop.entity.user.UserEntity;
-import com.example.digital_shop.entity.user.UserState;
 import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +26,7 @@ public class ProductController {
     private final UserService userService;
 
     @GetMapping("/add")
-    public String addGet(
-            @RequestParam(name = "userId", required = false) UUID userId,
-            Model model
-    ) {
-
-            model.addAttribute("userId", userId);
-
+    public String addGet() {
         return "ProductAdd";
     }
 
@@ -41,13 +35,12 @@ public class ProductController {
     @PostMapping("/add")
     public String add(
             @ModelAttribute ProductCreatDto productCreatDto,
-            @RequestParam(name = "userId",required = false) UUID userId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
-            Model model
+            HttpServletRequest request
     ) throws IOException {
+        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
        productService.add(productCreatDto,userId,amount,image);
-        model.addAttribute("userId",userId);
         return "SellerMenu";
     }
 
@@ -83,40 +76,36 @@ public class ProductController {
 
     @PutMapping("/update")
     public String update(
-            @RequestParam UUID userId,
             @RequestBody ProductCreatDto productCreatDto,
             @RequestParam UUID productId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
+            HttpServletRequest request,
             Model model
     ) throws IOException {
+        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
         ProductEntity update = productService.update(productCreatDto, productId, amount, userId,image);
         if(update==null){
             model.addAttribute("message","Product not found");
-            model.addAttribute("userId",userId);
             return "SellerMenu";
         }
-        model.addAttribute("userId",userId);
         model.addAttribute("message","Product successfully updated");
         return "SellerMenu";
     }
 
     @DeleteMapping("/delete")
     public String delete(
-            @RequestParam UUID userId,
             @RequestParam UUID productId,
-            Model model
+            Model model,
+            HttpServletRequest request
     ) {
+        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
         Boolean aBoolean = productService.deleteById(productId, userId);
         if (aBoolean==null){
             model.addAttribute("message","Product not found");
-            model.addAttribute("userId",userId);
             return "SellerMenu";
         }
         model.addAttribute("message","Product successfully deleted");
-        model.addAttribute("userId",userId);
         return "SellerMenu";
     }
-
-
 }

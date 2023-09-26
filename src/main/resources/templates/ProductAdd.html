@@ -33,7 +33,6 @@
 
 <div class="container w-50 border mt-5" id="form">
     <form class="mt-5" action="/product/add" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="userId" th:value="${userId}" />
 
         <div class="mb-3">
             <label class="form-label">Product Name</label>
@@ -128,7 +127,6 @@
                 </div> <!-- form-group // -->
             </form>
         <!-- Add a hidden input for userIdForSeller -->
-        <input type="hidden" name="userIdForSeller" th:value="${userId}">
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-success text-white btn-outline-success form-control w-50 m-3" id="ekleButton">Add Product</button>
         </div>

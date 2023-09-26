@@ -6,7 +6,6 @@ import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -45,13 +44,6 @@ public class AuthController {
     public String about() {
         return "About";
     }
-
-//    @GetMapping("/seller/menu")
-//    public String seller(UUID userId, Model model) {
-//        userService.
-//        return "SellerMenu";
-//    }
-
     @GetMapping("/seller/menu")
     public String seller(
             Model model
@@ -137,16 +129,16 @@ public class AuthController {
     }
 
     @PostMapping("/sign-in")
-    public String signIn(@ModelAttribute LoginDto loginDto, Model model) {
+    public String signIn(@ModelAttribute LoginDto loginDto, Model model, HttpServletResponse response) {
         UserEntity user = userService.signIn(loginDto);
         if (user == null) {
             model.addAttribute("message", "Username or password is wrong!!! Please try again");
             return "signIn";
         }
+        Cookie cookie=new Cookie("userId",user.getId().toString());
+        response.addCookie(cookie);
         if (user.getRole().getName().equals("Seller")) {
-            UUID userId = userService.getIdByEmail(loginDto.getEmail());
             model.addAttribute("user", user);
-            model.addAttribute("userId", userId);
             return "redirect:/auth/seller/menu";
         }
         model.addAttribute("user", user);
