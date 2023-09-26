@@ -34,6 +34,9 @@
 <div class="container w-50 border mt-5" id="form">
     <form class="mt-5" action="/product/add" method="post" enctype="multipart/form-data">
 
+
+<!--        <input type="hidden" name="userId" th:value="${userId}" />-->
+
         <div class="mb-3">
             <label class="form-label">Product Name</label>
             <input type="text" class="form-control" name="name" required>
@@ -52,19 +55,22 @@
         </div>
         <div class="mb-3">
             <label for="productType" class="form-label">Product Category</label>
-            <select name="productType" id="productType" class="ms-1 d-block w-100" required>
+            <select name="productType" id="productType"  class="ms-1 d-block w-100" required>
                 <option></option>
                 <option value="Elektronik">Electronics</option>
-                <option value="Laptop">Laptop</option>
-                <option value="Phone">Phone</option>
-                <option value="Tv">Tv</option>
+<!--                <option value="Laptop">Laptop</option>-->
+<!--                <option value="Phone">Phone</option>-->
+<!--                <option value="Tv">Tv</option>-->
                 <option value="Product">Digital (Code etc.)</option>
             </select>
         </div>
+
+        <div id="dynamic-form"></div>
         <div class="mb-3">
             <label for="image" class="form-label">Product Image</label>
             <input type="file" class="form-control" name="image" id="image">
         </div>
+
                 <div class="form-group">
                     <label for="name" class="col-sm-3 control-label">Буюртмачи</label>
                     <div class="col-sm-9">
@@ -127,12 +133,14 @@
                 </div> <!-- form-group // -->
             </form>
         <!-- Add a hidden input for userIdForSeller -->
+
+
+
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-success text-white btn-outline-success form-control w-50 m-3" id="ekleButton">Add Product</button>
         </div>
     </form>
 </div>
-
 
 </body>
 </html>
