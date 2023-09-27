@@ -4,7 +4,6 @@ import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.service.product.ProductService;
-import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,6 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
-    private final UserService userService;
 
     @GetMapping("/add")
     public String addGet() {

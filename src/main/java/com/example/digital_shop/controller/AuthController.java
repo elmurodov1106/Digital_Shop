@@ -136,6 +136,7 @@ public class AuthController {
             return "signIn";
         }
         Cookie cookie=new Cookie("userId",user.getId().toString());
+        cookie.setPath("/");
         response.addCookie(cookie);
         if (user.getRole().getName().equals("Seller")) {
             model.addAttribute("user", user);
