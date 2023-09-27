@@ -1,9 +1,11 @@
 package com.example.digital_shop.controller.product;
 
 
+import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.PhoneDto;
 import com.example.digital_shop.entity.product.PhoneEntity;
 import com.example.digital_shop.service.phone.PhoneService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,11 +33,12 @@ public class PhoneController {
     @PostMapping("/add")
     public String add(
             @ModelAttribute PhoneDto phoneDto,
-            @RequestParam UUID userId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
-            Model model
+            Model model,
+            HttpServletRequest request
     )throws IOException {
+        UUID userId= UUID.fromString(CookieValue.getValue("userId",request));
         phoneService.add(phoneDto,userId,amount,image);
         model.addAttribute("userId",userId);
         return "SellerMenu";
@@ -71,43 +74,37 @@ public class PhoneController {
       model.addAttribute("phone",search);
       return "search";
     }
-
-    @PutMapping("/update")
+    @PostMapping("/update")
     public String update(
             @RequestBody PhoneDto phoneDto,
-            @RequestParam UUID userId,
             @RequestParam UUID phoneId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
-            Model model
+            Model model,
+            HttpServletRequest request
     )  throws IOException {
+        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
         PhoneEntity update = phoneService.update(phoneDto, phoneId,amount, userId,image);
         if(update==null){
             model.addAttribute("message","Phone not found");
-            model.addAttribute("userId",userId);
             return "SellerMenu";
         }
-        model.addAttribute("userId",userId);
         model.addAttribute("message","Product successfully updated");
         return "SellerMenu";
     }
-
-
-
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public String delete(
-            @RequestParam UUID userId,
             @RequestParam UUID phoneId,
-            Model model
+            Model model,
+            HttpServletRequest request
     ) {
+        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
         Boolean aphone = phoneService.deleteById(phoneId, userId);
         if (aphone==null){
             model.addAttribute("message","Phone not found");
-            model.addAttribute("userId",userId);
             return "SellerMenu";
         }
         model.addAttribute("message","Phone successfully deleted");
-        model.addAttribute("userId",userId);
         return "SellerMenu";
     }
 
