@@ -17,16 +17,14 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/product/phone")
+@RequestMapping("/phone")
 @RequiredArgsConstructor
 public class PhoneController {
 
     private final PhoneService phoneService;
 
     @GetMapping("/add")
-    public String addGet(
-            @RequestParam UUID userId, Model model) {
-        model.addAttribute("userId",userId);
+    public String addGet() {
         return "PhoneAdd";
     }
 
@@ -35,12 +33,10 @@ public class PhoneController {
             @ModelAttribute PhoneDto phoneDto,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
-            Model model,
             HttpServletRequest request
     )throws IOException {
         UUID userId= UUID.fromString(CookieValue.getValue("userId",request));
         phoneService.add(phoneDto,userId,amount,image);
-        model.addAttribute("userId",userId);
         return "SellerMenu";
     }
 
