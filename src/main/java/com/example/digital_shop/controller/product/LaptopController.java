@@ -8,7 +8,6 @@ import com.example.digital_shop.repository.laptop.LaptopRepository;
 import com.example.digital_shop.repository.product.ProductRepository;
 import com.example.digital_shop.service.laptop.LaptopService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +29,6 @@ public class LaptopController {
     public String addGet() {
         return "LaptopAdd";
     }
-
-
 
     @PostMapping("/add")
     public String add(
@@ -76,9 +73,9 @@ public class LaptopController {
       return "search";
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     public String update(
-            @Valid  @RequestBody LaptopDto laptopDto,
+            @RequestBody LaptopDto laptopDto,
             @RequestParam UUID laptopId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
@@ -96,7 +93,7 @@ public class LaptopController {
     }
 
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public String delete(
             @RequestParam UUID laptopId,
             Model model,
