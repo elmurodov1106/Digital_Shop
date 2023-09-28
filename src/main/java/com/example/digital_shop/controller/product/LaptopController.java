@@ -52,7 +52,7 @@ public class LaptopController {
       List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
       if (allLaptop.isEmpty()){
           model.addAttribute("message","Laptop not found");
-          return "index";
+          return "redirect:/auth/seller/menu";
       }
       model.addAttribute("laptops",allLaptop);;
       return "allLaptop";
