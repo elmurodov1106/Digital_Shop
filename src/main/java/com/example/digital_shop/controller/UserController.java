@@ -25,7 +25,7 @@ public class UserController {
         UUID userId= UUID.fromString(CookieValue.getValue("userId",request));
         UserEntity user = userService.getById(userId);
         model.addAttribute("user",user);
-        return "updateUser";
+        return "profile";
     }
     @PostMapping("/update")
     public ResponseEntity<UserEntity> update(

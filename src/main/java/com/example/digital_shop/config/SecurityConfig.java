@@ -26,7 +26,10 @@ public class SecurityConfig {
             "/auth/**",
             "/product/get-all",
             "/product/get-by-id",
-            "/product/**"
+            "/product/**",
+             "/phone/**",
+             "/laptop/**",
+             "/tv/**"
             };
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

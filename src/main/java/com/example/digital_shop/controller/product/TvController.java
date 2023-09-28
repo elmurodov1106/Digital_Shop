@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("product/tv")
+@RequestMapping("/tv")
 @RequiredArgsConstructor
 public class TvController {
     private final TvService tvService;
