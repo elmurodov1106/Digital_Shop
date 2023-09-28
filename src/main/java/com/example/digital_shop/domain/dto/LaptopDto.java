@@ -39,4 +39,6 @@ public class LaptopDto {
 
     @NotEmpty(message = "product type cannot be empty")
     private String productType;
+    @NotEmpty(message = "description cannot be empty")
+    private String description;
 }
