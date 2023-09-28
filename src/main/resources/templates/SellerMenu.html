@@ -169,11 +169,24 @@
         <ul class="noToplLine">
             <!--            <li class="selected"><a href=""><i class="fa fa-area-chart"></i>Dashboard</li>-->
             <li><a href="#"><i class="fa fa-list-alt"></i>Products </a></li>
-            <li><a href="#"><i class="fa fa-pencil-square-o"></i>Orders </a></li>
             <li>
-                <!-- <h1 th:text="${principal.username}"></h1> -->
                 <a th:href="@{/product/add}">
-                    <i class="fa fa-desktop"></i> Add Product
+                    <i class="fa fa-desktop"></i> Electronics Add
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/phone/add}">
+                    <i class="fa fa-desktop"></i> Phone Add
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/laptop/add}">
+                    <i class="fa fa-desktop"></i> Laptop Add
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/tv/add}">
+                    <i class="fa fa-desktop"></i> Tv Add
                 </a>
             </li>
 
@@ -187,30 +200,6 @@
 
 
 <section id=content>
-<!--    <div class="header">-->
-<!--        <nav>-->
-<!--            <ul>-->
-<!--                <li> <i class="fa fa-desktop"></i>Help Center</li>-->
-<!--                <li><i class="fa fa-desktop"></i>Account</li>-->
-<!--            </ul>-->
-<!--        </nav>-->
-<!--    </div>&lt;!&ndash;header&ndash;&gt;-->
-
-
-<!--    <div id="box">&lt;!&ndash;tabNav+tabContent&ndash;&gt;-->
-<!--        <div id="tabs">-->
-<!--            <nav class="tabNav">-->
-<!--                <div class="navItem active" data-tab-target="tab-1">UK Makret</div>-->
-
-<!--                <div class="navItem" data-tab-target="tab-2">USA Market</div>-->
-
-<!--                <div class="navItem" data-tab-target="tab-3">Europe Market</div>-->
-
-<!--                <div class="activeBar"></div>-->
-<!--            </nav>-->
-<!--        </div>&lt;!&ndash;tabsHeader&ndash;&gt;-->
-
-        <!--wrap for 3 tabcontent-->
         <section class="tabContainer" data-active-tab="tab-1">
 
             <div class="tabSection"><!--Start of tab1:tabsConent-->
