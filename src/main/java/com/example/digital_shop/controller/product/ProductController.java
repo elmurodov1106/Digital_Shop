@@ -3,6 +3,7 @@ package com.example.digital_shop.controller.product;
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.product.ProductEntity;
+import com.example.digital_shop.repository.product.ProductRepository;
 import com.example.digital_shop.service.product.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductRepository productRepository;
 
     @GetMapping("/add")
     public String addGet() {
@@ -44,15 +46,15 @@ public class ProductController {
 
     @GetMapping("/get-all")
     public String getAll(
-            @RequestParam int page,
-            @RequestParam int size,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size,
             Model model) {
-        List<ProductEntity> allProducts = productService.getAllProducts(page, size);
-        if(allProducts.isEmpty()){
+        List<ProductEntity> all = productRepository.findAll();
+        if(all.isEmpty()){
             model.addAttribute("message","Product not found");
-            return "index";
+            return "redirect:/auth/seller/menu";
         }
-        model.addAttribute("products",allProducts);
+        model.addAttribute("products",all);
         return "allProducts";
     }
 
