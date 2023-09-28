@@ -4,6 +4,8 @@ package com.example.digital_shop.controller.product;
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.LaptopDto;
 import com.example.digital_shop.entity.product.LaptopEntity;
+import com.example.digital_shop.repository.laptop.LaptopRepository;
+import com.example.digital_shop.repository.product.ProductRepository;
 import com.example.digital_shop.service.laptop.LaptopService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -22,6 +24,7 @@ import java.util.UUID;
 public class LaptopController {
 
     private final LaptopService laptopService;
+    private final LaptopRepository laptopRepository;
 
     @GetMapping("/add")
     public String addGet() {
@@ -32,21 +35,21 @@ public class LaptopController {
 
     @PostMapping("/add")
     public String add(
-            @RequestBody LaptopDto laptopDto,
+            @ModelAttribute LaptopDto laptopDto,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
-            HttpServletRequest request,
-            Model model
+            HttpServletRequest request
+//            Model model
     ) throws IOException {
         UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
         laptopService.add(laptopDto,userId,amount,image);
-        model.addAttribute("message","Laptop successfully added");
+//        model.addAttribute("message","Laptop successfully added");
         return "SellerMenu";
     }
     @GetMapping("/get-all")
     public String getAll(
-            @RequestParam(defaultValue = "10",required = false)  int size,
-            @RequestParam(defaultValue = "0",required = false)  int page,
+            @RequestParam(defaultValue = "10")  int size,
+            @RequestParam(defaultValue = "0")  int page,
             Model model
     ){
       List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
