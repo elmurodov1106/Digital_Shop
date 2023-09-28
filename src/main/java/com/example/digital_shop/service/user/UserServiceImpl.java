@@ -91,6 +91,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity signIn(LoginDto loginDto) {
         UserEntity user = userRepository.findUserEntityByEmail(loginDto.getEmail());
+        if(user==null){
+            return null;
+        }
         if (passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
             if (user.getState().equals(UserState.ACTIVE)) {
                 return user;
