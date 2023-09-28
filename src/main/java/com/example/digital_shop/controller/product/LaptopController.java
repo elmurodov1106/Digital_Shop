@@ -39,7 +39,6 @@ public class LaptopController {
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
             HttpServletRequest request
-//            Model model
     ) throws IOException {
         UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
         laptopService.add(laptopDto,userId,amount,image);
