@@ -27,6 +27,7 @@ public class SecurityConfig {
             "/product/get-all",
             "/product/get-by-id",
             "/product/**",
+            "/profile/**",
              "/phone/**",
              "/laptop/**",
              "/tv/**"
