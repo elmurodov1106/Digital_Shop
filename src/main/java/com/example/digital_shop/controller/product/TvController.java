@@ -27,7 +27,7 @@ public class TvController {
          return "TvAdd";
     }
 
-    @PostMapping("{userId}/add")
+    @PostMapping("/add")
     public String add(
             @ModelAttribute TvDto tvDto,
             @RequestParam Integer amount,
