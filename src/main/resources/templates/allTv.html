@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TV List</title>
+</head>
+<body>
+<div class="listing-section">
+  <div th:each="Tv: ${tv}">
+    <div class="Tv">
+      <div class="image-box">
+        <div class="images" id="image-1">
+          <img th:src="'data:image/png;base64,' + ${tv.image}" alt="Image">
+        </div>
+      </div>
+      <div class="text-box">
+        <h2 class="item" th:text="${tv.name}">NAME</h2>
+        <h3 class="price" th:text="${tv.cost}">PRICE</h3>
+        <h4 class="price" th:text="${tv.description}">DESCRIPTION</h4>
+        <!--                <p class="description">A bag of delicious oranges!</p>-->
+        <!--                <label for="item-1-quantity">Quantity:</label>-->
+        <!--                <input type="text" name="item-1-quantity" id="item-1-quantity" value="1">-->
+        <button type="button" name="item-1-button" id="item-1-button">Add to Order</button>
+      </div>
+    </div>
+  </div>5
+
+</div>
+</body>
+</html>

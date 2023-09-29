@@ -25,6 +25,7 @@ public class LaptopEntity extends ProductEntity {
     private Integer Ram;
     private Integer ScreenSize;
     private Integer Ghz;
+    private String description;
 //    private String model;
 //    private String name;
 //    private Double cost;
