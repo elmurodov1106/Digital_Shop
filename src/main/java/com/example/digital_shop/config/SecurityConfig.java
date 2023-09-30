@@ -22,6 +22,7 @@ public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
     private final String[] permitAll =
             {"/swagger-ui/**",
+
                     "/v3/api-docs/**",
                     "/auth/**",
                     "/product/get-all",
@@ -31,6 +32,17 @@ public class SecurityConfig {
                     "/laptop/**",
                     "/tv/**",
                     "/user/**",
+
+            "/v3/api-docs/**",
+            "/auth/**",
+            "/product/get-all",
+            "/product/get-by-id",
+            "/product/**",
+            "/profile/**",
+             "/phone/**",
+             "/laptop/**",
+             "/tv/**"
+
             };
 
     @Bean
