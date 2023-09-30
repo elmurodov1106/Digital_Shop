@@ -26,7 +26,7 @@
                 <li class="nav-item"><a href="#" class="nav-link">Products</a></li>
                 <li class="nav-item"><a href="/auth/contact" methods="get" class="nav-link">Contact Us</a></li>
                 <li class="nav-item"><a href="/auth/basket" methods="" class="nav-link">Basket</a></li>
-                <li class="nav-item"><a href="/user/profile" methods="get" class="nav-link" th:if="${user!=null}">Profile</a></li>
+                <li class="nav-item"><a href="/user/get-profile" methods="get" class="nav-link" th:if="${user!=null}">Profile</a></li>
                 <li class="nav-item"><a href="/auth/sign-in" methods="get" class="nav-link" th:if="${user==null}">Sign in</a></li>
                 <li class="nav-item"><a href="/auth/sign-up" methods="get" class="nav-link" th:if="${user==null}">Register</a></li>
             </ul>
