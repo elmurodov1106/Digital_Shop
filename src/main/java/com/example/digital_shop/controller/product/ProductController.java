@@ -37,10 +37,12 @@ public class ProductController {
             @ModelAttribute ProductCreatDto productCreatDto,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
-            HttpServletRequest request
+            HttpServletRequest request,
+            Model model
     ) throws IOException {
         UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
        productService.add(productCreatDto,userId,amount,image);
+       model.addAttribute("message","Product successfully added");
         return "SellerMenu";
     }
 

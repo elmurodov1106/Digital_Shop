@@ -4,8 +4,6 @@ package com.example.digital_shop.controller.product;
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.LaptopDto;
 import com.example.digital_shop.entity.product.LaptopEntity;
-import com.example.digital_shop.repository.laptop.LaptopRepository;
-import com.example.digital_shop.repository.product.ProductRepository;
 import com.example.digital_shop.service.laptop.LaptopService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +21,6 @@ import java.util.UUID;
 public class LaptopController {
 
     private final LaptopService laptopService;
-    private final LaptopRepository laptopRepository;
 
     @GetMapping("/add")
     public String addGet() {
@@ -35,11 +32,12 @@ public class LaptopController {
             @ModelAttribute LaptopDto laptopDto,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
-            HttpServletRequest request
+            HttpServletRequest request,
+            Model model
     ) throws IOException {
         UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
         laptopService.add(laptopDto,userId,amount,image);
-//        model.addAttribute("message","Laptop successfully added");
+        model.addAttribute("message","Laptop successfully added");
         return "SellerMenu";
     }
     @GetMapping("/get-all")

@@ -22,6 +22,17 @@ public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
     private final String[] permitAll =
             {"/swagger-ui/**",
+
+                    "/v3/api-docs/**",
+                    "/auth/**",
+                    "/product/get-all",
+                    "/product/get-by-id",
+                    "/product/**",
+                    "/phone/**",
+                    "/laptop/**",
+                    "/tv/**",
+                    "/user/**",
+
             "/v3/api-docs/**",
             "/auth/**",
             "/product/get-all",
@@ -31,27 +42,30 @@ public class SecurityConfig {
              "/phone/**",
              "/laptop/**",
              "/tv/**"
+
             };
-        @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            return http.csrf().disable()
-                    .authorizeHttpRequests()
-                    .requestMatchers(permitAll).permitAll()
-                    .requestMatchers(
-                            "/resources/**",
-                            "/static/**",
-                            "/css/**",
-                            "/js/**",
-                            "images").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                    .formLogin()
-                    .loginPage("/auth/index")
-                    .defaultSuccessUrl("/index")
-                    .defaultSuccessUrl("/auth/seller/menu")
-                    .and()
-                    .build();
-        }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.csrf().disable()
+                .authorizeHttpRequests()
+                .requestMatchers(permitAll).permitAll()
+                .requestMatchers(
+                        "/resources/**",
+                        "/static/**",
+                        "/css/**",
+                        "/js/**",
+                        "images").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/auth/index")
+                .defaultSuccessUrl("/index")
+                .defaultSuccessUrl("/auth/seller/menu")
+                .and()
+                .build();
+    }
+
     @Bean
     public AuthenticationManager authManager(HttpSecurity httpSecurity) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder
