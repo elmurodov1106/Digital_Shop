@@ -22,6 +22,7 @@ public class LaptopController {
 
     private final LaptopService laptopService;
 
+
     @GetMapping("/add")
     public String addGet() {
         return "LaptopAdd";
