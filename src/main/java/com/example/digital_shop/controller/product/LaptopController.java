@@ -23,7 +23,7 @@ import java.util.UUID;
 public class LaptopController {
 
     private final LaptopService laptopService;
-    private final LaptopRepository laptopRepository;
+
 
     @GetMapping("/add")
     public String addGet() {
