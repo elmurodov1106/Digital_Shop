@@ -4,6 +4,23 @@
   <meta charset="UTF-8">
   <title>Profile</title>
   <link th:href="@{/css/profile.css}" rel="stylesheet">
+  <style>
+    /* Center the container horizontally and vertically */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Center the content inside the container */
+    .container {
+      text-align: center;
+    }
+
+    /* Add additional styles as needed to center specific elements */
+  </style>
 </head>
 <body>
 <div class="container rounded bg-white mt-5 mb-5">
@@ -17,7 +34,7 @@
     </div>
     <div class="col-md-5 border-right">
       <div class="p-3 py-5">
-        <form action="/user/update" method="POST">
+        <form action="/user/get-update" method="get">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="text-right">Profile Settings</h1>
           </div>
@@ -28,7 +45,7 @@
             </div>
 
             <div class="col-md-6"><label class="labels">Email</label><input type="email" class="form-control"
-                                                                              th:value="${user.getEmail()}" name="email">
+                                                                            th:value="${user.getEmail()}" name="email">
             </div>
             <div class="col-md-6">
               <label class="labels">Password</label>
@@ -47,3 +64,4 @@
 </div>
 </body>
 </html>
+
