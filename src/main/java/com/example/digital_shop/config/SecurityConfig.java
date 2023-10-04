@@ -21,27 +21,18 @@ public class SecurityConfig {
     private final AuthService authService;
     private final PasswordEncoder passwordEncoder;
     private final String[] permitAll =
-            {"/swagger-ui/**",
-
+            {
+                    "/swagger-ui/**",
+//                    "/user/**",
                     "/v3/api-docs/**",
                     "/auth/**",
                     "/product/get-all",
                     "/product/get-by-id",
-                    "/product/**",
-                    "/phone/**",
-                    "/laptop/**",
-                    "/tv/**",
-                    "/user/**",
-
-            "/v3/api-docs/**",
-            "/auth/**",
-            "/product/get-all",
-            "/product/get-by-id",
-            "/product/**",
-            "/profile/**",
-             "/phone/**",
-             "/laptop/**",
-             "/tv/**"
+//                    "/product/**",
+//                    "/profile/**",
+//                    "/phone/**",
+//                    "/laptop/**",
+//                    "/tv/**"
 
             };
 
