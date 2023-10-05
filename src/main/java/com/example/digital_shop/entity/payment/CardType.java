@@ -8,5 +8,4 @@ public enum CardType {
     VISA,
     UZCARD,
     MASTER_CARD,
-    UNION_PAY
 }
