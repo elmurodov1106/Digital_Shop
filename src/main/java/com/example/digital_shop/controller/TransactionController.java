@@ -14,15 +14,15 @@ import java.util.UUID;
 @RequestMapping("/transaction")
 public class TransactionController {
     private final TransactionService transactionService;
-    @PostMapping("/save")
-    public String save(
-            @RequestBody TransactionDto transactionDto,
-            HttpServletRequest request
-    ){
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
-        transactionService.save(transactionDto,userId);
-        return "";
-    }
+//    @PostMapping("/save")
+//    public String save(
+//            @RequestBody TransactionDto transactionDto,
+//            HttpServletRequest request
+//    ){
+//        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+//        transactionService.save(transactionDto,userId);
+//        return "";
+//    }
     @GetMapping("/getAllTransactions")
     public String getAllTransaction(
             @RequestParam(required = false) int page,
@@ -39,5 +39,14 @@ public class TransactionController {
         UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
         transactionService.deleteById(transactionId,userId);
         return "";
+    }
+
+    @PutMapping("/transaction")
+    public String p2p(@RequestParam UUID sender,
+                      @RequestParam UUID receiver,
+                      @RequestParam Double amount,
+                      @RequestParam UUID productId){
+        transactionService.transferMoney(sender,receiver,amount,productId);
+        return "Ishladi";
     }
 }
