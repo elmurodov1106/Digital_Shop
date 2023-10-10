@@ -16,6 +16,7 @@ import java.util.UUID;
 public class CardEntity extends BaseEntity {
     private String cardNumber;
     private String expireDate;
+    private Double amount;
     private UUID ownerId;
     @Enumerated(value = EnumType.STRING)
     private CardType cardType;

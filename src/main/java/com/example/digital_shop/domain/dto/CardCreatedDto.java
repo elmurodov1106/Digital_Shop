@@ -2,6 +2,7 @@ package com.example.digital_shop.domain.dto;
 
 import com.example.digital_shop.entity.payment.CardType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +20,9 @@ public class CardCreatedDto {
     @NotBlank(message = "Expire date not entered")
     @Pattern(regexp = "^(0[1-9]|1[0-2])/(\\d{2})$")
     private String expireDate;
-
+    @NotBlank(message = "Amount not entered")
+    @Null(message = "Amount is Null")
+    private Double amount;
     @NotBlank(message = "Card type not entered")
     private CardType cardType;
 
