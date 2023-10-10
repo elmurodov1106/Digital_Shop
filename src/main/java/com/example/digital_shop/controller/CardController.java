@@ -1,66 +1,60 @@
 package com.example.digital_shop.controller;
 
+import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.CardCreatedDto;
-import com.example.digital_shop.entity.payment.CardEntity;
-import com.example.digital_shop.exception.RequestValidationException;
 import com.example.digital_shop.service.payment.CardService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import java.util.UUID;
 
-@RestController
+@Controller
 @RequestMapping("/payment")
 @RequiredArgsConstructor
 public class CardController {
 
     private final CardService cardService;
 
-    @PostMapping("/{ownerId}/add")
-    public ResponseEntity<CardEntity> add(
-           @Valid @RequestBody CardCreatedDto cardCreatedDto,
-            @PathVariable UUID ownerId,
-            BindingResult bindingResult
+    @PostMapping("/add")
+    public String add(
+            @Valid @RequestBody CardCreatedDto cardCreatedDto,
+            HttpServletRequest request
     ){
-        if(bindingResult.hasErrors()){
-            List<ObjectError> allErrors = bindingResult.getAllErrors();
-            throw new RequestValidationException(allErrors);
-        }
-        return ResponseEntity.ok(cardService.add(cardCreatedDto,ownerId));
+        UUID userId = UUID.fromString(CookieValue.getValue("userId",request));
+        cardService.add(cardCreatedDto,userId);
+        return "";
     }
 
     @GetMapping("/get-all")
-    public ResponseEntity<List<CardEntity>> getAll(
+    public String getAll(
             @RequestParam int size,
             @RequestParam int page
     ){
-        return ResponseEntity.status(200).body(cardService.getAllUserCards(size, page));
+        cardService.getAllUserCards(size, page);
+        return "";
     }
 
-    @PutMapping("/{ownerId}/update")
-    public ResponseEntity<CardEntity> update(
-          @Valid  @RequestBody CardCreatedDto cardCreatedDto,
-            @PathVariable UUID ownerId,
-            @RequestParam UUID card_id,
-            BindingResult bindingResult
+    @PutMapping("/update")
+    public String update(
+            @RequestBody CardCreatedDto cardCreatedDto,
+            @RequestParam UUID cardId,
+           HttpServletRequest request
         ){
-        if(bindingResult.hasErrors()){
-            List<ObjectError> allErrors = bindingResult.getAllErrors();
-            throw new RequestValidationException(allErrors);
-        }
-        return ResponseEntity.ok(cardService.update(cardCreatedDto,ownerId,card_id));
+        UUID userId = UUID.fromString(CookieValue.getValue("userId",request));
+        cardService.update(cardCreatedDto,cardId,userId);
+        return "";
     }
 
-    @DeleteMapping("/{ownerId}/delete")
-    public ResponseEntity<Boolean> delete(
-            @PathVariable UUID ownerId,
-            @RequestParam UUID card_id
+    @DeleteMapping("/delete")
+    public String delete(
+            @RequestParam UUID cardId,
+            HttpServletRequest request
     ){
-        return ResponseEntity.ok(cardService.deleteById(ownerId, card_id));
+        UUID userId = UUID.fromString(CookieValue.getValue("userId",request));
+        cardService.deleteById(userId, cardId);
+        return "";
     }
 
 }

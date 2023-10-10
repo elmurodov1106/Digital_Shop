@@ -14,12 +14,11 @@ import java.util.UUID;
 @Setter
 @Builder
 public class CardEntity extends BaseEntity {
-    private String card_number;
-    private String expire_date;
-
-    private UUID owner_id;
-
+    private String cardNumber;
+    private String expireDate;
+    private Double amount;
+    private UUID ownerId;
     @Enumerated(value = EnumType.STRING)
-    private CardType card_type;
+    private CardType cardType;
 
 }

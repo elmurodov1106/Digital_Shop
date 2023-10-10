@@ -4,6 +4,7 @@ import com.example.digital_shop.domain.dto.CardCreatedDto;
 import com.example.digital_shop.entity.payment.CardEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.payment.CardRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageRequest;
@@ -19,11 +20,11 @@ public class CardServiceImpl implements CardService{
     private final ModelMapper modelMapper;
 
     @Override
-    public CardEntity add(CardCreatedDto card, UUID owner_id) {
+    @Transactional
+    public CardEntity add(CardCreatedDto card, UUID ownerId) {
         CardEntity cardEntity = modelMapper.map(card, CardEntity.class);
-        cardEntity.setOwner_id(owner_id);
+        cardEntity.setOwnerId(ownerId);
        return cardRepository.save(cardEntity);
-
     }
 
     @Override
@@ -37,20 +38,22 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public Boolean deleteById(UUID card_id, UUID owner_id) {
-        CardEntity cardEntity = cardRepository.findById(card_id)
+    @Transactional
+    public Boolean deleteById(UUID cardId, UUID ownerId) {
+        CardEntity cardEntity = cardRepository.findById(cardId)
                 .orElseThrow(() -> new DataNotFoundException("Card not found"));
-        if (cardEntity.getOwner_id().equals(owner_id)) {
-            cardRepository.deleteById(card_id);
+        if (cardEntity.getOwnerId().equals(ownerId)) {
+            cardRepository.deleteById(cardId);
         }
         throw new DataNotFoundException("User not found");
     }
 
     @Override
-    public CardEntity update(CardCreatedDto update, UUID card_id, UUID owner_id) {
-        CardEntity cardEntity = cardRepository.findById(card_id)
+    @Transactional
+    public CardEntity update(CardCreatedDto update, UUID cardId, UUID ownerId) {
+        CardEntity cardEntity = cardRepository.findById(cardId)
                 .orElseThrow(() -> new DataNotFoundException("Card not found"));
-        if (cardEntity.getOwner_id().equals(owner_id)) {
+        if (cardEntity.getOwnerId().equals(ownerId)) {
             modelMapper.map(update, cardEntity);
             return cardRepository.save(cardEntity);
         }
