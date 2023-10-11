@@ -7,6 +7,6 @@ RUN ./gradlew clean build
 
 # Production stage
 FROM openjdk:17.0.1-jre-slim
-COPY --from=build /home/gradle/build/libs/Digital_Shop-0.0.1-SNAPSHOT-plain.jar Digital_Shop.jar
+COPY --from=build /build/libs/Digital_Shop-0.0.1-SNAPSHOT-plain.jar Digital_Shop.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "Digital_Shop.jar"]
