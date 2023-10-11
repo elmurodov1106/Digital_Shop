@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    username: postgres
-    password: 1999
-    url: jdbc:postgresql://localhost:5432/shopping
+    username: digital_shop_user
+    password: W8ZvSIIqQWhAbwkpPpqdOCyeozRe0SPx
+    url: jdbc:postgresql://dpg-ckj3le0mccbs73cqm2b0-a.oregon-postgres.render.com/digital_shop
     driver-class-name: org.postgresql.Driver
   thymeleaf:
     prefix: classpath:/templates/
