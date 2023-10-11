@@ -19,7 +19,7 @@ public class ProductEntity extends BaseEntity {
     protected String name;
     protected Double cost;
     protected UUID userId;
-    @Column(length = 100000)
+    @Column(length = 1000000000)
     protected String image;
 }
 

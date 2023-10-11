@@ -1,10 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Phone Add</title>
+    <link th:href="@{/css/addProduct.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/ProductAdd.js}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/3da5cff3a5.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
+<nav class="navbar navbar-expand navbar-light bg-light">
+    <div class="container-sm">
+        <a class="navbar-brand" href="/auth/seller/menu">Seller Menu</a>
+        <div class="navcontent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center">
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container w-50 border mt-5" id="form">
+    <form class="mt-5" action="/laptop/add" method="post" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label class="form-label">Laptop Name</label>
+            <input type="text" class="form-control" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Model</label>
+            <input type="text" class="form-control" name="model" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Cost</label>
+            <input type="number" class="form-control" name="cost" min="1" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Amount</label>
+            <input type="number" class="form-control" name="amount" min="1" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Colour</label>
+            <input type="text" class="form-control" name="colour"  required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Screen Size</label>
+            <input type="number" class="form-control" name="ScreenSize" min="1" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Weight</label>
+            <input type="number" class="form-control" name="weight" min="1" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Memory</label>
+            <input type="number" class="form-control" name="memory" min="1" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ram</label>
+            <input type="number" class="form-control" name="Ram" min="1" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Battery</label>
+            <input type="number" class="form-control" name="battery" min="1" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ghz</label>
+            <input type="number" class="form-control" name="Ghz" min="1" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-control" name="description" min="20"  required>
+        </div>
+        <div class="mb-3">
+            <label for="productType" class="form-label">Product Category</label>
+            <select name="productType" id="productType"  class="ms-1 d-block w-100" required>
+                <option></option>
+                <option value="Laptop">Laptop</option>
+            </select>
+        </div>
+
+        <div id="dynamic-form"></div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Laptop Image</label>
+            <input type="file" class="form-control" name="image" id="image">
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-success text-white btn-outline-success form-control w-50 m-3" id="ekleButton">Laptop Add</button>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

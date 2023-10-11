@@ -1,611 +1,74 @@
 <!DOCTYPE html>
-<html lang="eng"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Digital</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
+    <title>Digital Shop</title>
     <link th:href="@{/css/style.css}" rel="stylesheet">
-    <script type="text/javascript" th:src="@{/js/index_small.js}"></script>
-    <script type="text/javascript" th:src="@{/js/menu.js}"></script>
+    <script th:src="@{/js/index_small.js}" type="text/javascript"></script>
+    <script th:src="@{/js/menu.js}" type="text/javascript"></script>
+    <style>
+        /* Add custom styles for the fixed header */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
 
-<!--    <style>-->
-<!--        @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400");-->
+        }
 
-<!--        *,-->
-<!--        *::before,-->
-<!--        *::after {-->
-<!--            padding: 0;-->
-<!--            margin: 0;-->
-<!--            box-sizing: border-box;-->
-<!--        }-->
-<!--        :root {-->
-<!--            &#45;&#45;primary-color: hsl(9, 94%, 61%);-->
-<!--            &#45;&#45;primary-color-alt: hsl(28, 72%, 83%);-->
-<!--            &#45;&#45;second-color: #3e537c;-->
-<!--            &#45;&#45;second-color-alt: hsla(220, 33%, 36%, 65%);-->
-<!--            &#45;&#45;third-color: hsl(220, 36%, 28%);-->
-<!--            &#45;&#45;white-color: #fbfbfb;-->
-<!--            &#45;&#45;white-color-alt: hsl(12, 14%, 93%);-->
-<!--            &#45;&#45;dark-color: hsl(0, 0%, 0%);-->
-<!--        }-->
+        /* Add styles for the company logo */
+        .company-logo {
+            font-weight: bold;
+            font-size: 24px; /* Adjust font size as needed */
+            padding: 10px; /* Adjust padding as needed */
+        }
 
-<!--        /* ================= BASE ==================== */-->
-<!--        li {-->
-<!--            list-style: none;-->
-<!--        }-->
-<!--        a {-->
-<!--            text-decoration: none;-->
-<!--        }-->
-<!--        img {-->
-<!--            width: 100%;-->
-<!--            height: auto;-->
-<!--        }-->
-<!--        .bx {-->
-<!--            font-size: 2.5rem;-->
-<!--        }-->
-<!--        .container {-->
-<!--            padding: 0 2rem;-->
-<!--        }-->
+        /* Add styles for the menu toggle icon */
+        .menu-toggle {
+            padding: 10px; /* Adjust padding as needed */
+        }
 
-<!--        /* &#45;&#45; BODY &#45;&#45; */-->
-<!--        body {-->
-<!--            font-family: "Raleway", sans-serif;-->
-<!--            font-size: 1rem;-->
-<!--            background-color: var(&#45;&#45;white-color);-->
-<!--        }-->
+        /* Add styles for the navbar links */
+        .nav-items {
+            list-style-type: none;
+            padding: 0;
+        }
 
-<!--        /* ================= HEADER ================ */-->
-<!--        header {-->
-<!--            display: flex;-->
-<!--            align-items: center;-->
-<!--            justify-content: space-between;-->
-<!--            background-color: var(&#45;&#45;dark-color);-->
-<!--            padding: 1rem 2rem;-->
-<!--        }-->
-<!--        .company-logo {-->
-<!--            font-size: 2.5rem;-->
-<!--            background: -webkit-linear-gradient(-->
-<!--                    120deg,-->
-<!--                    var(&#45;&#45;primary-color-alt),-->
-<!--                    var(&#45;&#45;primary-color)-->
-<!--            );-->
-<!--            -webkit-background-clip: text;-->
-<!--            -webkit-text-fill-color: transparent;-->
-<!--        }-->
-<!--        .nav-items {-->
-<!--            display: flex;-->
-<!--        }-->
-<!--        .nav-item {-->
-<!--            margin: 0 2rem;-->
-<!--        }-->
-<!--        .nav-link {-->
-<!--            text-decoration: none;-->
-<!--            font-size: 1.1rem;-->
-<!--            letter-spacing: 0.05rem;-->
-<!--            position: relative;-->
-<!--            background: -webkit-linear-gradient(-->
-<!--                    var(&#45;&#45;primary-color-alt),-->
-<!--                    var(&#45;&#45;primary-color)-->
-<!--            );-->
-<!--            -webkit-background-clip: text;-->
-<!--            -webkit-text-fill-color: transparent;-->
-<!--        }-->
-<!--        .nav-link::before {-->
-<!--            content: "";-->
-<!--            background: linear-gradient(var(&#45;&#45;primary-color), var(&#45;&#45;primary-color-alt));-->
-<!--            width: 100%;-->
-<!--            height: 0.05rem;-->
-<!--            position: absolute;-->
-<!--            left: 0;-->
-<!--            bottom: 0;-->
-<!--            transform: scaleX(0);-->
-<!--            transform-origin: bottom right;-->
-<!--            transition: transform 150ms;-->
-<!--        }-->
-<!--        .nav-link:hover::before {-->
-<!--            transform: scaleX(1);-->
-<!--            transform-origin: bottom left;-->
-<!--        }-->
-<!--        .menu-toggle {-->
-<!--            display: none;-->
-<!--        }-->
-<!--        .bx-menu,-->
-<!--        .bx-x {-->
-<!--            cursor: pointer;-->
-<!--            background: -webkit-linear-gradient(-->
-<!--                    120deg,-->
-<!--                    var(&#45;&#45;primary-color-alt),-->
-<!--                    var(&#45;&#45;primary-color)-->
-<!--            );-->
-<!--            -webkit-background-clip: text;-->
-<!--            -webkit-text-fill-color: transparent;-->
-<!--            display: none !important;-->
-<!--        }-->
+        .nav-item {
+            display: inline-block;
+            margin-right: 10px; /* Adjust margin as needed */
+        }
 
-<!--        /* ================= MAIN ================ */-->
+        .nav-link {
+            text-decoration: none;
+        }
 
-<!--        /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; HOME SECTION &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--        .section-1 {-->
-<!--            background-color: var(&#45;&#45;dark-color);-->
-<!--            display: grid;-->
-<!--        }-->
-<!--        /* .home-computer-container {} */-->
-
-<!--        .slogan .company-title {-->
-<!--            background: -webkit-linear-gradient(-->
-<!--                    120deg,-->
-<!--                    var(&#45;&#45;primary-color-alt),-->
-<!--                    var(&#45;&#45;primary-color)-->
-<!--            );-->
-<!--            -webkit-background-clip: text;-->
-<!--            -webkit-text-fill-color: transparent;-->
-<!--            margin-top: 2rem;-->
-<!--            font-size: 1.5rem;-->
-<!--            font-weight: 600;-->
-<!--        }-->
-<!--        .slogan .company-slogan {-->
-<!--            background: -webkit-linear-gradient(-->
-<!--                    120deg,-->
-<!--                    var(&#45;&#45;primary-color-alt),-->
-<!--                    var(&#45;&#45;primary-color)-->
-<!--            );-->
-<!--            -webkit-background-clip: text;-->
-<!--            -webkit-text-fill-color: transparent;-->
-<!--            margin-top: 1rem;-->
-<!--            font-size: 1.2rem;-->
-<!--            font-weight: 400;-->
-<!--            line-height: 1.8rem;-->
-<!--        }-->
-
-<!--        /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; OFFER SECTION -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--        .section-2 {-->
-<!--            margin: 2rem 0;-->
-<!--        }-->
-<!--        .offer {-->
-<!--            background-color: var(&#45;&#45;dark-color);-->
-<!--            margin: 1rem 0;-->
-<!--            display: grid;-->
-<!--        }-->
-<!--        .offer img {-->
-<!--            background-color: var(&#45;&#45;dark-color);-->
-<!--            padding: 2rem 0;-->
-<!--        }-->
-<!--        .offer-1 img {-->
-<!--            background-color: var(&#45;&#45;dark-color);-->
-<!--            padding: 3rem 0;-->
-<!--        }-->
-<!--        .offer-description {-->
-<!--            background-color: var(&#45;&#45;white-color-alt);-->
-<!--            padding: 0 1rem;-->
-<!--        }-->
-<!--        .offer-description .offer-title {-->
-<!--            color: var(&#45;&#45;second-color);-->
-<!--            font-size: 1.8rem;-->
-<!--            font-weight: 400;-->
-<!--            padding: 1.5rem 0 0.5rem 0;-->
-<!--        }-->
-<!--        .offer-description .offer-hook {-->
-<!--            color: var(&#45;&#45;second-color-alt);-->
-<!--            font-size: 1.2rem;-->
-<!--        }-->
-<!--        .offer-description .cart-btn {-->
-<!--            cursor: pointer;-->
-<!--            color: var(&#45;&#45;second-color-alt);-->
-<!--            font-size: 1.1rem;-->
-<!--            display: grid;-->
-<!--            place-items: center;-->
-<!--            margin: 2rem 0 1rem 0;-->
-<!--            width: 10rem;-->
-<!--            height: 3rem;-->
-<!--            background-image: linear-gradient(-->
-<!--                    to top,-->
-<!--                    var(&#45;&#45;primary-color-alt),-->
-<!--                    var(&#45;&#45;primary-color)-->
-<!--            );-->
-<!--        }-->
-<!--        .offer-description .cart-btn:hover {-->
-<!--            background-image: linear-gradient(-->
-<!--                    to bottom,-->
-<!--                    var(&#45;&#45;primary-color-alt),-->
-<!--                    var(&#45;&#45;primary-color)-->
-<!--            );-->
-<!--        }-->
-
-<!--        /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; PRODUCT SECTION -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--        .section-3 {-->
-<!--            display: grid;-->
-<!--            place-items: center;-->
-<!--            justify-content: space-around;-->
-<!--            gap: 1rem;-->
-<!--            grid-template-columns: repeat(auto-fit, minmax(200px, 400px));-->
-<!--        }-->
-<!--        .product {-->
-<!--            cursor: pointer;-->
-<!--            background-color: var(&#45;&#45;white-color-alt);-->
-<!--            position: relative;-->
-<!--        }-->
-<!--        .product::before {-->
-<!--            content: "";-->
-<!--            background-image: linear-gradient(-->
-<!--                    to bottom,-->
-<!--                    hsla(29, 72%, 83%, 0.438),-->
-<!--                    hsla(9, 94%, 61%, 0.507)-->
-<!--            );-->
-<!--            position: absolute;-->
-<!--            top: 0;-->
-<!--            bottom: 0;-->
-<!--            left: 0;-->
-<!--            right: 0;-->
-<!--        }-->
-<!--        .product_add_cart {-->
-<!--            color: var(&#45;&#45;white-color-alt);-->
-<!--            font-size: 1.2rem;-->
-<!--            background-color: hsl(9, 94%, 65%);-->
-<!--            padding: 1rem 0.4rem;-->
-<!--            position: absolute;-->
-<!--            top: 50%;-->
-<!--            left: 50%;-->
-<!--            transform: translate(-50%, -50%);-->
-<!--            transition: transform 300ms, color 300ms, box-shadow 300ms;-->
-<!--        }-->
-<!--        .product_add_cart:hover {-->
-<!--            color: var(&#45;&#45;white-color);-->
-<!--            box-shadow: 0 1rem 0 -0.5rem hsl(17, 79%, 65%, 0.7),-->
-<!--            0 2rem 0 -1rem hsla(17, 79%, 65%, 0.65);-->
-<!--        }-->
-
-<!--        /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; SPONSOR SECTION -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--        .section-4 {-->
-<!--            margin: 4rem 0;-->
-<!--            display: flex;-->
-<!--            flex-wrap: wrap;-->
-<!--            align-items: center;-->
-<!--            justify-content: space-around;-->
-<!--        }-->
-<!--        .sponsor img {-->
-<!--            cursor: pointer;-->
-<!--            width: 40px;-->
-<!--            height: 40px;-->
-<!--            filter: grayscale(100%);-->
-<!--            opacity: 0.8;-->
-<!--            transition: opacity 300ms;-->
-<!--        }-->
-<!--        .sponsor img:hover {-->
-<!--            /* filter: grayscale(0); */-->
-<!--            opacity: 1;-->
-<!--        }-->
-
-<!--        /* ========= SUBSCRIBE SECTION ========== */-->
-<!--        .section-5 {-->
-<!--            display: flex;-->
-<!--            flex-direction: column;-->
-<!--            align-items: center;-->
-<!--            justify-content: center;-->
-<!--            margin: 2rem 0;-->
-<!--        }-->
-<!--        .subscribe-input-label {-->
-<!--            margin-bottom: 1rem;-->
-<!--            font-size: 1.5rem;-->
-<!--            font-weight: 400;-->
-<!--            letter-spacing: 0.05rem;-->
-<!--            color: var(&#45;&#45;second-color);-->
-<!--        }-->
-<!--        input[type="text"] {-->
-<!--            padding: 0 0.5rem;-->
-<!--            font-size: 1.1rem;-->
-<!--            width: 100%;-->
-<!--            height: 3rem;-->
-<!--            border: none;-->
-<!--            background-color: hsl(220, 33%, 90%);-->
-<!--            color: var(&#45;&#45;second-color-alt);-->
-<!--            transition: background-color 300ms;-->
-<!--        }-->
-<!--        input[type="text"]:focus {-->
-<!--            outline: none;-->
-<!--            background-color: hsl(220, 33%, 95%);-->
-<!--        }-->
-<!--        input[type="text"]::placeholder {-->
-<!--            color: var(&#45;&#45;second-color-alt);-->
-<!--        }-->
-<!--        input[type="submit"] {-->
-<!--            cursor: pointer;-->
-<!--            background-image: linear-gradient(-->
-<!--                    to top,-->
-<!--                    var(&#45;&#45;primary-color-alt),-->
-<!--                    var(&#45;&#45;primary-color)-->
-<!--            );-->
-<!--            color: var(&#45;&#45;white-color-alt);-->
-<!--            margin: 1rem 0;-->
-<!--            border: none;-->
-<!--            width: 100%;-->
-<!--            height: 3rem;-->
-<!--            font-size: 1.2rem;-->
-<!--            transition: color 300ms;-->
-<!--        }-->
-<!--        input[type="submit"]:hover {-->
-<!--            background-image: linear-gradient(-->
-<!--                    to bottom,-->
-<!--                    var(&#45;&#45;primary-color-alt),-->
-<!--                    var(&#45;&#45;primary-color)-->
-<!--            );-->
-<!--            color: var(&#45;&#45;white-color);-->
-<!--        }-->
-<!--        /* =============== FOOTER =============== */-->
-<!--        .top-footer {-->
-<!--            background-color: var(&#45;&#45;second-color);-->
-<!--            display: flex;-->
-<!--            flex-direction: column;-->
-<!--        }-->
-<!--        .footer-title {-->
-<!--            font-weight: 500;-->
-<!--            font-size: 1.2rem;-->
-<!--            padding: 1rem 0;-->
-<!--            background-image: -webkit-linear-gradient(-->
-<!--                    120deg,-->
-<!--                    var(&#45;&#45;primary-color-alt),-->
-<!--                    var(&#45;&#45;primary-color)-->
-<!--            );-->
-<!--            background-clip: text;-->
-<!--            -webkit-background-clip: text;-->
-<!--            -webkit-text-fill-color: transparent;-->
-<!--        }-->
-<!--        .footer-items h3 {-->
-<!--            cursor: pointer;-->
-<!--            font-weight: 300;-->
-<!--            font-size: 1.1rem;-->
-<!--            padding: 0.1rem 0;-->
-<!--            color: var(&#45;&#45;white-color-alt);-->
-<!--        }-->
-<!--        .footer-items h3:hover {-->
-<!--            text-decoration: underline;-->
-<!--        }-->
-<!--        .footer-items h3:last-child {-->
-<!--            padding-bottom: 2rem;-->
-<!--        }-->
-
-<!--        .end-footer {-->
-<!--            display: flex;-->
-<!--            flex-direction: column;-->
-<!--            align-items: center;-->
-<!--            justify-content: center;-->
-<!--            background-color: var(&#45;&#45;third-color);-->
-<!--        }-->
-<!--        .copyright {-->
-<!--            color: var(&#45;&#45;white-color-alt);-->
-<!--            padding: 1rem 0;-->
-<!--            font-size: 0.9rem;-->
-<!--        }-->
-<!--        .copyright b {-->
-<!--            font-weight: inherit;-->
-<!--            font-size: 0.9rem;-->
-<!--        }-->
-<!--        .designer {-->
-<!--            color: hsla(0, 0%, 98%, 0.541);-->
-<!--            padding-bottom: 0.5rem;-->
-<!--            font-size: 0.9rem;-->
-<!--        }-->
-<!--        .designer:hover {-->
-<!--            text-decoration: underline;-->
-<!--        }-->
-
-<!--        /* =============== MEDIA QUERIES ======= */-->
-
-<!--        @media screen and (max-width: 768px) {-->
-<!--            .container {-->
-<!--                padding: 0 1rem;-->
-<!--            }-->
-<!--            /* ================= HEADER ================ */-->
-<!--            header {-->
-<!--                padding: 0.5rem 1rem;-->
-<!--            }-->
-<!--            .navbar {-->
-<!--                background-color: var(&#45;&#45;dark-color);-->
-<!--                position: absolute;-->
-<!--                top: 3.5rem;-->
-<!--                right: 0;-->
-<!--                width: 100%;-->
-<!--                height: 100vh;-->
-<!--                display: none;-->
-<!--                justify-content: center;-->
-<!--                transform: scaleY(0);-->
-<!--                transform-origin: bottom;-->
-<!--                transition: transform 500ms;-->
-<!--            }-->
-<!--            .show-navbar {-->
-<!--                display: flex;-->
-<!--                transform: scaleY(1);-->
-<!--                transform-origin: top;-->
-<!--                transition: transform 300ms;-->
-<!--            }-->
-<!--            .nav-items {-->
-<!--                display: flex;-->
-<!--                flex-direction: column;-->
-<!--            }-->
-<!--            .nav-item {-->
-<!--                margin: 0.5rem 0;-->
-<!--            }-->
-<!--            .menu-toggle {-->
-<!--                display: none;-->
-<!--                cursor: pointer;-->
-<!--            }-->
-<!--            .bx-menu {-->
-<!--                display: block !important;-->
-<!--            }-->
-<!--            .show-bx {-->
-<!--                display: block !important;-->
-<!--            }-->
-<!--            .hide-bx {-->
-<!--                display: none !important;-->
-<!--            }-->
-<!--        }-->
-<!--        @media (min-width: 769px) {-->
-<!--            header {-->
-<!--                padding: 1rem 5rem;-->
-<!--            }-->
-<!--            /* ================= MAIN ================ */-->
-
-<!--            /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; HOME SECTION &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--            .section-1 {-->
-<!--                justify-content: space-between;-->
-<!--                grid-template-columns: 1fr 1fr;-->
-<!--                padding: 10rem 5rem 0 5rem;-->
-<!--            }-->
-<!--            .slogan .company-title {-->
-<!--                max-width: 30rem;-->
-<!--                font-size: 1.8rem;-->
-<!--                letter-spacing: 0.5rem;-->
-<!--            }-->
-<!--            .slogan .company-slogan {-->
-<!--                max-width: 20rem;-->
-<!--                font-size: 1.3rem;-->
-<!--            }-->
-<!--            /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; OFFER SECTION -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--            .section-2 {-->
-<!--                margin: 2rem 5rem;-->
-<!--            }-->
-<!--            .offer {-->
-<!--                margin: 5rem 0;-->
-<!--                align-items: center;-->
-<!--                justify-content: space-between;-->
-<!--                grid-template-rows: auto auto;-->
-<!--            }-->
-<!--            .offer-1 {-->
-<!--                grid-template-areas: "offer-1-img offer-desc-1";-->
-<!--            }-->
-<!--            .offer-1 img {-->
-<!--                background-color: var(&#45;&#45;dark-color);-->
-<!--                padding: 2rem 0;-->
-<!--            }-->
-<!--            .offer-2 {-->
-<!--                grid-template-areas: "offer-desc-2 offer-2-img";-->
-<!--            }-->
-<!--            .offer-1-img {-->
-<!--                grid-area: offer-1-img;-->
-<!--            }-->
-<!--            .offer-2-img {-->
-<!--                grid-area: offer-2-img;-->
-<!--            }-->
-<!--            .offer-desc-1 {-->
-<!--                grid-area: offer-desc-1;-->
-<!--            }-->
-<!--            .offer-desc-2 {-->
-<!--                grid-area: offer-desc-2;-->
-<!--            }-->
-<!--            .offer-description .offer-title {-->
-<!--                font-size: 1.9rem;-->
-<!--                padding: 1.5rem 0 0.5rem 0;-->
-<!--            }-->
-<!--            .offer-description .offer-hook {-->
-<!--                max-width: 30rem;-->
-<!--            }-->
-<!--            .offer-description {-->
-<!--                background-color: var(&#45;&#45;white-color-alt);-->
-<!--                padding: 2rem 1rem;-->
-<!--            }-->
-<!--            .offer-description .offer-title {-->
-<!--                padding: 0.5rem 0 1rem 0;-->
-<!--            }-->
-<!--            .offer-description .cart-btn {-->
-<!--                margin: 2rem 0 0.5rem 0;-->
-<!--            }-->
-<!--            /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; PRODUCT SECTION -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--            .section-3 {-->
-<!--                gap: 5rem;-->
-<!--            }-->
-<!--            .product::before {-->
-<!--                transform: scaleY(0);-->
-<!--                transform-origin: bottom;-->
-<!--                transition: transform 300ms;-->
-<!--            }-->
-<!--            .product:hover::before {-->
-<!--                transform: scaleY(1);-->
-<!--                transform-origin: top;-->
-<!--                transition: transform 300ms;-->
-<!--            }-->
-<!--            .product_add_cart {-->
-<!--                transform: scaleY(0);-->
-<!--                transform-origin: bottom;-->
-<!--            }-->
-<!--            .product:hover .product_add_cart {-->
-<!--                transform: translate(-50%, -50%) scaleY(1);-->
-<!--                transform-origin: top;-->
-<!--            }-->
-<!--            /* &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; SPONSOR SECTION -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; */-->
-<!--            .section-4 {-->
-<!--                margin: 5rem 0;-->
-<!--            }-->
-<!--            /* ========= SUBSCRIBE SECTION ========== */-->
-<!--            .section-5 {-->
-<!--                padding: 1rem 0;-->
-<!--            }-->
-<!--            .section-5 .subscribe-container {-->
-<!--                display: flex;-->
-<!--                align-items: center;-->
-<!--            }-->
-<!--            input[type="text"] {-->
-<!--                padding: 0 1rem;-->
-<!--                width: 15rem;-->
-<!--            }-->
-<!--            input[type="submit"] {-->
-<!--                width: 10rem;-->
-<!--            }-->
-<!--            /* =============== FOOTER =============== */-->
-<!--            .top-footer {-->
-<!--                flex-direction: row;-->
-<!--                justify-content: space-around;-->
-<!--                padding-bottom: 8rem;-->
-<!--                padding-top: 2rem;-->
-<!--            }-->
-<!--            .footer-title {-->
-<!--                font-size: 1rem;-->
-<!--                padding: 1rem 0;-->
-<!--            }-->
-<!--            .footer-items h3 {-->
-<!--                font-size: 0.9rem;-->
-<!--            }-->
-
-<!--            .end-footer {-->
-<!--                display: flex;-->
-<!--                flex-direction: column;-->
-<!--                align-items: center;-->
-<!--                justify-content: center;-->
-<!--                background-color: var(&#45;&#45;third-color);-->
-<!--            }-->
-<!--            .copyright {-->
-<!--                color: hsla(0, 0%, 98%, 0.747);-->
-<!--                padding: 1rem 0;-->
-<!--                font-size: 0.8rem;-->
-<!--            }-->
-<!--            .copyright b {-->
-<!--                font-size: 0.7rem;-->
-<!--            }-->
-<!--            .designer {-->
-<!--                color: hsla(0, 0%, 98%, 0.322);-->
-<!--                font-size: 0.8rem;-->
-<!--            }-->
-<!--        }-->
-<!--    </style>-->
+        /* Add styles for the menu icon */
+        .bx {
+            font-size: 24px; /* Adjust font size as needed */
+        }
+    </style>
 </head>
 <body>
+
 <div>
-<!--    navbar-->
+    <!--    navbar-->
     <header class="fixed-header" style="position: fixed; z-index: 1; width: 100%">
         <div class="company-logo">Digital Shop</div>
         <nav class="navbar">
             <ul class="nav-items">
-                <li class="nav-item"><a href="/auth/index"   methods="get" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="/auth/about"   methods="get" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="#"   class="nav-link">Laptop</a></li>
-                <li class="nav-item"><a href="#"   class="nav-link">Phone</a></li>
-                <li class="nav-item"><a href="#"   class="nav-link">Tv</a></li>
-                <li class="nav-item"><a href="#"   class="nav-link">Products</a></li>
-                <li class="nav-item"><a href="/auth/contact"   methods="get" class="nav-link">Contact Us</a></li>
-                <li class="nav-item"><a href="/auth/basket"   methods="" class="nav-link">Basket</a></li>
-                <li class="nav-item"><a href="/auth/sign-in"   methods="get" class="nav-link">Sign in</a></li>
-                <li class="nav-item"><a href="/auth/sign-up"   methods="get" class="nav-link">Register</a></li>
+                <li class="nav-item"><a href="/auth/index" methods="get" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/auth/about" methods="get" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Laptop</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Phone</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Tv</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Products</a></li>
+                <li class="nav-item"><a href="/auth/contact" methods="get" class="nav-link">Contact Us</a></li>
+                <li class="nav-item"><a href="/auth/basket" methods="" class="nav-link">Basket</a></li>
+                <li class="nav-item"><a href="/user/get-profile" methods="get" class="nav-link" th:if="${user!=null}">Profile</a></li>
+                <li class="nav-item"><a href="/auth/sign-in" methods="get" class="nav-link" th:if="${user==null}">Sign in</a></li>
+                <li class="nav-item"><a href="/auth/sign-up" methods="get" class="nav-link" th:if="${user==null}">Register</a></li>
             </ul>
         </nav>
         <div class="menu-toggle">
@@ -616,7 +79,30 @@
     </header>
 </div>
 
-<div layout:fragment="body" style="position: absolute;  width: 100%">
+<header class="fixed-header">
+    <div class="company-logo">Digital Shop</div>
+    <nav class="navbar">
+        <ul class="nav-items">
+            <li class="nav-item"><a href="/auth/index" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="/auth/about" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Laptop</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Phone</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Tv</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Products</a></li>
+            <li class="nav-item"><a href="/auth/contact" class="nav-link">Contact Us</a></li>
+            <li class="nav-item"><a href="/auth/basket" class="nav-link">Basket</a></li>
+            <li class="nav-item" th:if="${user!=null}"><a href="/user/get-profile" class="nav-link">Profile</a></li>
+            <li class="nav-item" th:if="${user==null}"><a href="/auth/sign-in" class="nav-link">Sign in</a></li>
+            <li class="nav-item" th:if="${user==null}"><a href="/auth/sign-up" class="nav-link">Register</a></li>
+        </ul>
+    </nav>
+    <div class="menu-toggle">
+        <i class="bx bx-menu"></i>
+    </div>
+</header>
+
+
+<div layout:fragment="body" style="position: absolute; width: 100%">
 
 </div>
 </body>

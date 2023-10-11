@@ -23,6 +23,8 @@ public class TvEntity extends ProductEntity {
     private Double isSmart;
     private Integer Size;
     private Integer ScreenSpeed;
+    private String description;
+
 }
 
 

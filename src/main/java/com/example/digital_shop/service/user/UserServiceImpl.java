@@ -91,6 +91,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity signIn(LoginDto loginDto) {
         UserEntity user = userRepository.findUserEntityByEmail(loginDto.getEmail());
+        if(user==null){
+            return null;
+        }
         if (passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
             if (user.getState().equals(UserState.ACTIVE)) {
                 return user;
@@ -146,6 +149,17 @@ public class UserServiceImpl implements UserService {
         user.setRole(user1.getRole());
         user.setCreatedDate(user1.getCreatedDate());
        return userRepository.save(user);
+    }
+
+    @Override
+    public UUID getIdByEmail(String email) {
+        UserEntity user = userRepository.findByEmail(email);
+        return user.getId();
+    }
+
+    public UserEntity getById(UUID userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException("UserNot Found"));
     }
 
     private Boolean checkUserEmail(String email) {

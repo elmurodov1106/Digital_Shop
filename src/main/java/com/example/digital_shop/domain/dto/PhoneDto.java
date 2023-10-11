@@ -37,4 +37,14 @@ public class PhoneDto {
 
     @NotEmpty(message = "description cannot be empty")
     private String description;
+    @NotEmpty(message = "name cannot be empty")
+    private String name;
+
+    @NotEmpty(message = "model cannot be empty")
+    private String model;
+
+    @NotEmpty(message = "cost cannot be empty")
+    private Double cost;
+
+    private String productType;
 }

@@ -2,7 +2,6 @@ package com.example.digital_shop.domain.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -10,7 +9,12 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 @Builder
 public class LaptopDto {
+    @NotEmpty(message = "name cannot be empty")
+    private String name;
 
+    @NotEmpty(message = "model cannot be empty")
+    private String model;
+    private Integer battery;
     @NotEmpty(message = "colour cannot be empty")
     private String colour;
 
@@ -28,15 +32,12 @@ public class LaptopDto {
 
     @NotEmpty(message = "Ghz cannot be empty")
     private Integer Ghz;
-    @NotEmpty(message = "name cannot be empty")
-    private String name;
-
-    @NotEmpty(message = "model cannot be empty")
-    private String model;
 
     @NotEmpty(message = "cost cannot be empty")
     private Double cost;
 
     @NotEmpty(message = "product type cannot be empty")
     private String productType;
+    @NotEmpty(message = "description cannot be empty")
+    private String description;
 }

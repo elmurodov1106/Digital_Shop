@@ -1,9 +1,11 @@
 package com.example.digital_shop.controller.product;
 
-
+import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.product.ProductEntity;
+import com.example.digital_shop.repository.product.ProductRepository;
 import com.example.digital_shop.service.product.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,38 +23,40 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductRepository productRepository;
 
     @GetMapping("/add")
-    public String addGet(
-            @RequestParam UUID userId, Model model) {
-      model.addAttribute("userId",userId);
-      return "ProductAdd";
+    public String addGet() {
+        return "ProductAdd";
     }
+
+
 
     @PostMapping("/add")
     public String add(
             @ModelAttribute ProductCreatDto productCreatDto,
-            @RequestParam UUID userId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
+            HttpServletRequest request,
             Model model
     ) throws IOException {
+        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
        productService.add(productCreatDto,userId,amount,image);
-        model.addAttribute("userId",userId);
+       model.addAttribute("message","Product successfully added");
         return "SellerMenu";
     }
 
     @GetMapping("/get-all")
     public String getAll(
-            @RequestParam int page,
-            @RequestParam int size,
+            @RequestParam(defaultValue = "2") int page,
+            @RequestParam(defaultValue = "10") int size,
             Model model) {
-        List<ProductEntity> allProducts = productService.getAllProducts(page, size);
-        if(allProducts.isEmpty()){
+        List<ProductEntity> all = productRepository.findAll();
+        if(all.isEmpty()){
             model.addAttribute("message","Product not found");
-            return "index";
+            return "redirect:/auth/seller/menu";
         }
-        model.addAttribute("products",allProducts);
+        model.addAttribute("products",all);
         return "allProducts";
     }
 
@@ -74,40 +78,36 @@ public class ProductController {
 
     @PutMapping("/update")
     public String update(
-            @RequestParam UUID userId,
             @RequestBody ProductCreatDto productCreatDto,
             @RequestParam UUID productId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
+            HttpServletRequest request,
             Model model
     ) throws IOException {
+        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
         ProductEntity update = productService.update(productCreatDto, productId, amount, userId,image);
         if(update==null){
             model.addAttribute("message","Product not found");
-            model.addAttribute("userId",userId);
             return "SellerMenu";
         }
-        model.addAttribute("userId",userId);
         model.addAttribute("message","Product successfully updated");
         return "SellerMenu";
     }
 
     @DeleteMapping("/delete")
     public String delete(
-            @RequestParam UUID userId,
             @RequestParam UUID productId,
-            Model model
+            Model model,
+            HttpServletRequest request
     ) {
+        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
         Boolean aBoolean = productService.deleteById(productId, userId);
         if (aBoolean==null){
             model.addAttribute("message","Product not found");
-            model.addAttribute("userId",userId);
             return "SellerMenu";
         }
         model.addAttribute("message","Product successfully deleted");
-        model.addAttribute("userId",userId);
         return "SellerMenu";
     }
-
-
 }

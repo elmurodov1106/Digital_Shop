@@ -28,10 +28,14 @@ public class ProductServiceImpl implements ProductService {
     private final InventoryRepository inventoryRepository;
     @Override
     @Transactional
-    public ProductEntity add(ProductCreatDto product, UUID userId, Integer amount, MultipartFile image) throws IOException {
+    public ProductEntity add(ProductCreatDto product, UUID userId, Integer amount, MultipartFile image){
         ProductEntity productEntity = modelMapper.map(product, ProductEntity.class);
         productEntity.setUserId(userId);
-        productEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+        try {
+            productEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         ProductEntity savedProduct = productRepository.save(productEntity);
         InventoryCreateDto inventoryCreateDto = new InventoryCreateDto();
         inventoryCreateDto.setProductId(savedProduct.getId());
