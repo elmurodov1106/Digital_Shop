@@ -1,11 +1,13 @@
 package com.example.digital_shop.controller;
 
+import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.*;
 import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.module.ModuleDescriptor;
 import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
@@ -49,15 +52,11 @@ public class AuthController {
     public String seller(
             Model model
     ) {
-        // Get the authentication object
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
-            // Get the email from the UserDetails
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String email = userDetails.getUsername(); // Assuming email is stored as the username
-
-            // Now you have the email
+            String email = userDetails.getUsername();
             UUID userId = userService.getIdByEmail(email);
             model.addAttribute("userIdForSeller", userId);
         }
@@ -67,7 +66,10 @@ public class AuthController {
 
 
     @GetMapping("/contact")
-    public String contact() {
+    public String contact(HttpServletRequest request, Model model) {
+        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UserEntity byId = userService.getById(userId);
+        model.addAttribute("user",byId);
         return "contactUs";
     }
 

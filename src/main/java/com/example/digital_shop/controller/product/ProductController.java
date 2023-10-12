@@ -95,7 +95,7 @@ public class ProductController {
         return "SellerMenu";
     }
 
-    @DeleteMapping("/delete")
+    @GetMapping("/delete")
     public String delete(
             @RequestParam UUID productId,
             Model model,

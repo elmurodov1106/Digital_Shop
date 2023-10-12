@@ -23,7 +23,7 @@ public class SecurityConfig {
     private final String[] permitAll =
             {
                     "/swagger-ui/**",
-//                    "/user/**",
+                    "/user/**",
                     "/v3/api-docs/**",
                     "/auth/**",
                     "/product/get-all",
