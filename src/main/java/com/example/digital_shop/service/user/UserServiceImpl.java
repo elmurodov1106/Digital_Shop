@@ -45,6 +45,10 @@ public class UserServiceImpl implements UserService {
         }
         UserEntity userEntity = modelMapper.map(userCreatDto, UserEntity.class);
         userEntity.setState(UserState.UNVERIFIED);
+        UserEntity userEntityByEmail = userRepository.findUserEntityByEmail(userEntity.getEmail());
+        if(userEntityByEmail!=null){
+            return null;
+        }
         RoleEntity userRole = roleRepository.findRoleEntityByNameEqualsIgnoreCase("User");
         if (userRole != null) {
             VerificationCode verificationCode = generateVerificationCode.generateVerificationCode(userEntity);

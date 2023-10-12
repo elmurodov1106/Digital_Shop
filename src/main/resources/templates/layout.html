@@ -58,17 +58,17 @@
         <div class="company-logo">Digital Shop</div>
         <nav class="navbar">
             <ul class="nav-items">
-                <li class="nav-item"><a href="/auth/index" methods="get" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="/auth/about" methods="get" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/auth/index" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/auth/about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Laptop</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Phone</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Tv</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Products</a></li>
-                <li class="nav-item"><a href="/auth/contact" methods="get" class="nav-link">Contact Us</a></li>
-                <li class="nav-item"><a href="/auth/basket" methods="" class="nav-link">Basket</a></li>
-                <li class="nav-item"><a href="/user/get-profile" methods="get" class="nav-link" th:if="${user!=null}">Profile</a></li>
-                <li class="nav-item"><a href="/auth/sign-in" methods="get" class="nav-link" th:if="${user==null}">Sign in</a></li>
-                <li class="nav-item"><a href="/auth/sign-up" methods="get" class="nav-link" th:if="${user==null}">Register</a></li>
+                <li class="nav-item"><a href="/auth/contact" class="nav-link">Contact Us</a></li>
+                <li class="nav-item"><a href="/auth/basket" class="nav-link">Basket</a></li>
+                <li class="nav-item" th:if="${user!=null}"><a href="/user/get-profile"  class="nav-link">Profile</a></li>
+                <li class="nav-item" th:if="${user==null}"><a href="/auth/sign-in" class="nav-link">Sign in</a></li>
+                <li class="nav-item" th:if="${user==null}"><a href="/auth/sign-up" class="nav-link">Register</a></li>
             </ul>
         </nav>
         <div class="menu-toggle">
