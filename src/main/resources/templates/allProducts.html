@@ -44,7 +44,7 @@
 <!--                <label for="item-1-quantity">Quantity:</label>-->
 <!--                <input type="text" name="item-1-quantity" id="item-1-quantity" value="1">-->
                <a href="/product/delete" >
-                   <input type="hidden" name="productId" value="${product.id}">
+                   <input type="hidden" name="productId" th:text="${product.id}">
                    <button type="button" name="item-1-button" id="item-1-button">Delete Product</button>
                </a>
             </div>

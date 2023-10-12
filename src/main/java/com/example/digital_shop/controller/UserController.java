@@ -19,7 +19,10 @@ import java.util.UUID;
 public class UserController {
     private final UserService userService;
     @GetMapping("/menu")
-    public String menu(){
+    public String menu(HttpServletRequest request, Model model){
+        UUID userId = UUID.fromString(CookieValue.getValue("userId", request));
+        UserEntity byId = userService.getById(userId);
+        model.addAttribute("user",byId);
         return "index";
     }
     @GetMapping("/update")
