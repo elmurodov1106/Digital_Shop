@@ -18,6 +18,10 @@ import java.util.UUID;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    @GetMapping("/menu")
+    public String menu(){
+        return "index";
+    }
     @GetMapping("/update")
     public String updateGet(
             HttpServletRequest request,
