@@ -35,7 +35,7 @@ public class AuthController {
             @RequestParam(defaultValue = "10") int size,
             Model model
     ) {
-        List<ProductEntity> allProducts = productService.getAllProducts(page, size);
+        List<ProductEntity> allProducts = productService.getAll();
         if (allProducts == null) {
             model.addAttribute("message", "Product not found");
             return "index";
