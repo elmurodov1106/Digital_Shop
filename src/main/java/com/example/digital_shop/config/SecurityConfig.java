@@ -28,11 +28,11 @@ public class SecurityConfig {
                     "/auth/**",
                     "/product/get-all",
                     "/product/get-by-id",
-//                    "/product/**",
-//                    "/profile/**",
-//                    "/phone/**",
-//                    "/laptop/**",
-//                    "/tv/**"
+                    "/product/**",
+                    "/profile/**",
+                    "/phone/**",
+                    "/laptop/**",
+                    "/tv/**"
 
             };
 
