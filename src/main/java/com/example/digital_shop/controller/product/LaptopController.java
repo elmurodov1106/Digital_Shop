@@ -36,7 +36,10 @@ public class LaptopController {
             HttpServletRequest request,
             Model model
     ) throws IOException {
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId=checkCookie(request);
+        if(userId ==null){
+            return "index";
+        }
         laptopService.add(laptopDto,userId,amount,image);
         model.addAttribute("message","Laptop successfully added");
         return "SellerMenu";
@@ -81,7 +84,10 @@ public class LaptopController {
             Model model,
             HttpServletRequest request
     )throws IOException{
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId=checkCookie(request);
+        if(userId ==null){
+            return "index";
+        }
         LaptopEntity update = laptopService.update(laptopDto,laptopId,userId, amount,image);
         if (update==null){
             model.addAttribute("message","laptop not found");
@@ -98,7 +104,10 @@ public class LaptopController {
             Model model,
             HttpServletRequest request
     ){
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId=checkCookie(request);
+        if(userId ==null){
+            return "index";
+        }
         Boolean aBoolean = laptopService.deleteById(laptopId,userId);
         if (aBoolean==null){
             model.addAttribute("message","Laptop not found");
@@ -106,6 +115,13 @@ public class LaptopController {
         }
         model.addAttribute("message","Laptop successfully deleted");
         return "SellerMenu";
+    }
+    private UUID checkCookie(HttpServletRequest request){
+        String userId = CookieValue.getValue("userId",request);
+        if(!userId.equals("null")){
+            return UUID.fromString(userId);
+        }
+        return null;
     }
 
 }

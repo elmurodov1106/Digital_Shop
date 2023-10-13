@@ -51,7 +51,7 @@ public class ProductController {
 
     @GetMapping("/get-all")
     public String getAll(
-            @RequestParam(defaultValue = "2") int page,
+            @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             Model model) {
         List<ProductEntity> all = productRepository.findAll();
