@@ -70,13 +70,6 @@ public class AuthController {
         model.addAttribute("user",byId);
         return "contactUs";
     }
-
-    @GetMapping("/basket")
-    public String basket() {
-        return "basket";
-    }
-
-
     @PostMapping("/sign-up")
     public String signUp(@ModelAttribute UserCreatDto userCreatDto,
                          Model model) {
