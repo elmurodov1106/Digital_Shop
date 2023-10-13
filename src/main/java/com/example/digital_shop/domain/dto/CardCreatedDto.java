@@ -19,9 +19,9 @@ public class CardCreatedDto {
     @NotBlank(message = "Expire date not entered")
     @Pattern(regexp = "^(0[1-9]|1[0-2])/(\\d{2})$")
     private String expireDate;
-    @NotBlank(message = "Amount not entered")
-    @Null(message = "Amount is Null")
-    private Double amount;
+    @NotBlank(message = "Balance not entered")
+    @Null(message = "Balance is Null")
+    private Double balance;
 
 
 }
