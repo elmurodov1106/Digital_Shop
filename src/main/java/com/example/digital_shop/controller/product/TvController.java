@@ -8,6 +8,7 @@ import com.example.digital_shop.repository.tv.TvRepository;
 import com.example.digital_shop.service.tv.TvService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,10 @@ public class TvController {
             @RequestParam MultipartFile image,
             HttpServletRequest request
     ) throws IOException {
-        UUID userId = UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId = checkCookie(request);
+        if(userId == null){
+            return "index";
+        }
         tvService.add(tvDto, userId, amount, image);
         return "SellerMenu";
     }
@@ -72,15 +76,19 @@ public class TvController {
         return "search";
     }
 
-    @PutMapping("/{userId}/update")
+    @PostMapping("/update")
     public String update(
             @RequestBody TvDto tvDto,
-            @PathVariable UUID userId,
             @RequestParam UUID tvId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
+            HttpServletRequest request,
             Model model
     ) throws IOException {
+        UUID userId = checkCookie(request);
+        if(userId == null){
+            return "index";
+        }
         TvEntity update = tvService.update(tvDto, userId, tvId, amount, image);
         if (update == null) {
             model.addAttribute("message", "Tv not found");
@@ -93,12 +101,13 @@ public class TvController {
     }
 
 
-    @DeleteMapping("/{userId}/delete")
+    @GetMapping("/delete")
     public String delete(
-            @PathVariable UUID userId,
             @RequestParam UUID tvId,
-            Model model
+            Model model,
+            HttpServletRequest request
     ) {
+        UUID userId = checkCookie(request);
         Boolean tv = tvService.deleteById(tvId, userId);
         if (tv == null) {
             model.addAttribute("message", "Tv not found");
@@ -108,6 +117,13 @@ public class TvController {
         model.addAttribute("message", "Tv successfully deleted");
         model.addAttribute("userId", userId);
         return "SellerMenu";
+    }
+    private UUID checkCookie(HttpServletRequest request){
+        String userId = CookieValue.getValue("userId",request);
+        if(!userId.equals("null")){
+            return UUID.fromString(userId);
+        }
+        return null;
     }
 
 }
