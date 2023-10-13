@@ -3,8 +3,10 @@ package com.example.digital_shop.controller;
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.OrderDto;
 import com.example.digital_shop.entity.order.OrderEntity;
+import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.order.OrderService;
+import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +27,7 @@ public class OrderController {
 
     private final OrderService orderService;
     private final UserService userService;
+    private final ProductService productService;
 
     @PostMapping("/add")
     public String add(
@@ -54,6 +58,7 @@ public class OrderController {
             return "index";
         }
         model.addAttribute("orders",userOrders);
+        model.addAttribute("products",getAll(userOrders));
         return "basket";
     }
     @PutMapping("/{userId}/update")
@@ -72,10 +77,6 @@ public class OrderController {
     ){
         return ResponseEntity.ok(orderService.deleteById(orderId,userId));
     }
-    @GetMapping("/get")
-    public String basket() {
-        return "basket";
-    }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
         if(!userId.equals("null")){
@@ -83,6 +84,12 @@ public class OrderController {
         }
         return null;
     }
-
+   private List<ProductEntity> getAll(List<OrderEntity> orders){
+        List<ProductEntity> products = new ArrayList<>();
+       for (OrderEntity order : orders) {
+           products.add(productService.getById(order.getProductId().getId()));
+       }
+       return products;
+   }
 
 }
