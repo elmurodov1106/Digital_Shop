@@ -18,9 +18,22 @@ import java.util.UUID;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    @GetMapping("/home")
+    public String home(HttpServletRequest request, Model model){
+        UUID userId = checkCookie(request);
+        if (userId == null){
+            return "index";
+        }
+        UserEntity byId = userService.getById(userId);
+        model.addAttribute("user",byId);
+        return "index";
+    }
     @GetMapping("/menu")
     public String menu(HttpServletRequest request, Model model){
-        UUID userId = UUID.fromString(CookieValue.getValue("userId", request));
+        UUID userId = checkCookie(request);
+        if (userId == null){
+            return "index";
+        }
         UserEntity byId = userService.getById(userId);
         model.addAttribute("user",byId);
         if(byId.getRole().getName().equals("Seller")){
@@ -32,27 +45,46 @@ public class UserController {
     public String updateGet(
             HttpServletRequest request,
             Model model){
-        UUID userId= UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId = checkCookie(request);
+        if (userId == null){
+            return "index";
+        }
         UserEntity user = userService.getById(userId);
         model.addAttribute("user",user);
         return "profile";
     }
     @PostMapping("/update")
-    public ResponseEntity<UserEntity> update(
+    public String update(
             @RequestBody UserCreatDto userCreatDto,
-            HttpServletRequest request){
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
-        return ResponseEntity.ok(userService.updateUser(userCreatDto,userId));
+            HttpServletRequest request,
+            Model model){
+        UUID userId = checkCookie(request);
+        if (userId == null){
+            return "index";
+        }
+        UserEntity userEntity = userService.updateUser(userCreatDto, userId);
+        model.addAttribute("user",userEntity);
+        return "index";
     }
     @GetMapping("/get-profile")
     public String getUserProfile(
             HttpServletRequest request,
             Model model
     ){
-        UUID userId =UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId = checkCookie(request);
+        if (userId == null){
+            return "index";
+        }
         UserEntity user = userService.getById(userId);
         model.addAttribute("user",user);
         return "profile";
+    }
+    private UUID checkCookie(HttpServletRequest request){
+        String userId = CookieValue.getValue("userId",request);
+        if(!userId.equals("null")){
+            return UUID.fromString(userId);
+        }
+        return null;
     }
 
 }
