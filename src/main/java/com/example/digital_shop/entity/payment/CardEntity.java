@@ -17,7 +17,7 @@ public class CardEntity extends BaseEntity {
     private String cardName;
     private String cardNumber;
     private String expireDate;
-    private Double amount;
+    private Double balance;
     private UUID ownerId;
 
 }
