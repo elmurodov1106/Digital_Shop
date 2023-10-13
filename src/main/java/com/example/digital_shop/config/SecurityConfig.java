@@ -31,7 +31,9 @@ public class SecurityConfig {
                     "/product/**",
                     "/profile/**",
                     "/phone/**",
+                    "/card/**",
                     "/laptop/**",
+                    "/payment/**",
                     "/tv/**"
 
             };
