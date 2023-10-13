@@ -26,7 +26,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @ManyToOne(cascade = CascadeType.ALL)
     protected RoleEntity role;
     @Enumerated(EnumType.STRING)
-    protected UserState state;
+    protected UserState state=UserState.UNVERIFIED;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
