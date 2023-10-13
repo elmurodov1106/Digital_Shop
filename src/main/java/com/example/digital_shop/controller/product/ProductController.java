@@ -40,7 +40,10 @@ public class ProductController {
             HttpServletRequest request,
             Model model
     ) throws IOException {
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId= checkCookie(request);
+        if(userId == null){
+            return "index";
+        }
        productService.add(productCreatDto,userId,amount,image);
        model.addAttribute("message","Product successfully added");
         return "SellerMenu";
@@ -85,7 +88,10 @@ public class ProductController {
             HttpServletRequest request,
             Model model
     ) throws IOException {
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId= checkCookie(request);
+        if(userId == null){
+            return "index";
+        }
         ProductEntity update = productService.update(productCreatDto, productId, amount, userId,image);
         if(update==null){
             model.addAttribute("message","Product not found");
@@ -101,7 +107,10 @@ public class ProductController {
             Model model,
             HttpServletRequest request
     ) {
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId= checkCookie(request);
+        if(userId == null){
+            return "index";
+        }
         Boolean aBoolean = productService.deleteById(productId, userId);
         if (aBoolean==null){
             model.addAttribute("message","Product not found");
@@ -110,4 +119,12 @@ public class ProductController {
         model.addAttribute("message","Product successfully deleted");
         return "SellerMenu";
     }
+    private UUID checkCookie(HttpServletRequest request){
+        String userId = CookieValue.getValue("userId",request);
+        if(!userId.equals("null")){
+            return UUID.fromString(userId);
+        }
+        return null;
+    }
+
 }
