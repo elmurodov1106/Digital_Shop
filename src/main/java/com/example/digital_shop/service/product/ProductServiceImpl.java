@@ -89,6 +89,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductEntity getById(UUID productId) {
+        return productRepository.findProductEntityById(productId);
+    }
+
+    @Override
     @Transactional
     public ProductEntity update(ProductCreatDto update, UUID productId, Integer amount, UUID userId,MultipartFile image) throws IOException {
         ProductEntity productEntity = productRepository.findProductEntityById(productId);

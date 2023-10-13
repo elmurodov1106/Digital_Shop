@@ -16,5 +16,6 @@ public interface ProductService {
     Boolean deleteById(UUID id,UUID userId);
 
     List<ProductEntity> getAll();
+    ProductEntity getById(UUID productId);
     ProductEntity update(ProductCreatDto update,UUID productId,Integer amount,UUID userId,MultipartFile image) throws IOException;
 }
