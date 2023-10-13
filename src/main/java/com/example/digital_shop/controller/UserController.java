@@ -23,6 +23,9 @@ public class UserController {
         UUID userId = UUID.fromString(CookieValue.getValue("userId", request));
         UserEntity byId = userService.getById(userId);
         model.addAttribute("user",byId);
+        if(byId.getRole().getName().equals("Seller")){
+            return "SellerMenu";
+        }
         return "index";
     }
     @GetMapping("/update")
