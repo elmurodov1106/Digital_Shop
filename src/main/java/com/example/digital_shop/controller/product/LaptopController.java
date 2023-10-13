@@ -5,6 +5,7 @@ import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.LaptopDto;
 import com.example.digital_shop.entity.product.LaptopEntity;
 import com.example.digital_shop.service.laptop.LaptopService;
+import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import java.util.UUID;
 public class LaptopController {
 
     private final LaptopService laptopService;
+    private final UserService userService;
 
 
     @GetMapping("/add")
@@ -48,12 +50,18 @@ public class LaptopController {
     public String getAll(
             @RequestParam(defaultValue = "10")  int size,
             @RequestParam(defaultValue = "0")  int page,
-            Model model
+            Model model,
+            HttpServletRequest request
     ){
       List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
       if (allLaptop.isEmpty()){
+          UUID userId = checkCookie(request);
+          if(userId!= null){
+
+              model.addAttribute("user",userService.getById(userId));
+          }
           model.addAttribute("message","Laptop not found");
-          return "redirect:/auth/seller/menu";
+          return "index";
       }
       model.addAttribute("laptops",allLaptop);;
       return "allLaptop";

@@ -66,10 +66,16 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Boolean deleteById(UUID productId, UUID userId) {
         ProductEntity productNotFound = productRepository.findProductEntityById(productId);
+        System.out.println(productId);
+        System.out.println(userId);
+        System.out.println(productNotFound.getId());
         if(productNotFound==null){
+            System.out.println(true);
             return null;
         }
+        System.out.println(productNotFound.getUserId());
         if (productNotFound.getUserId().equals(userId)) {
+            System.out.println(true);
             inventoryRepository.deleteByProductIdEquals(productId);
             productRepository.deleteById(productId);
             return true;
