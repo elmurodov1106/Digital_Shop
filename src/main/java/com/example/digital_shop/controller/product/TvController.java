@@ -4,11 +4,10 @@ package com.example.digital_shop.controller.product;
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.TvDto;
 import com.example.digital_shop.entity.product.TvEntity;
-import com.example.digital_shop.repository.tv.TvRepository;
 import com.example.digital_shop.service.tv.TvService;
+import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TvController {
     private final TvService tvService;
-
+   private final UserService userService;
 
     @GetMapping("/add")
     public String addGet(){
@@ -49,11 +48,13 @@ public class TvController {
     public String getAll(
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "0") int page,
-            Model model) {
+            Model model,HttpServletRequest request) {
         List<TvEntity> allTv = tvService.getAllTv(size, page);
         if (allTv.isEmpty()) {
+            UUID userId = checkCookie(request);
+            model.addAttribute("user",userService.getById(userId));
             model.addAttribute("message", "Tv not found");
-            return "redirect:/auth/seller/menu";
+            return "index";
         }
         model.addAttribute("tv", allTv);
         return "allTv";

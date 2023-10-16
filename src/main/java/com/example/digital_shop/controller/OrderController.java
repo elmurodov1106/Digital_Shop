@@ -10,6 +10,7 @@ import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,13 +62,20 @@ public class OrderController {
         model.addAttribute("products",getAll(userOrders));
         return "basket";
     }
-    @PutMapping("/{userId}/update")
-    public ResponseEntity<OrderEntity> update(
+    @PostMapping("/update")
+    public String update(
             @RequestBody OrderDto orderDto,
-            @PathVariable UUID userId,
-            @RequestParam UUID orderId
+            @RequestParam UUID orderId,
+            HttpServletRequest request,
+            Model model
     ){
-        return ResponseEntity.ok(orderService.update(orderDto,orderId,userId));
+        UUID userId = checkCookie(request);
+        if(userId == null){
+            return "index";
+        }
+        orderService.update(orderDto,orderId,userId);
+        model.addAttribute("message","Updated");
+        return "basket";
     }
 
     @DeleteMapping("/{userId}/delete")

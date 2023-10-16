@@ -66,9 +66,6 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Boolean deleteById(UUID productId, UUID userId) {
         ProductEntity productNotFound = productRepository.findProductEntityById(productId);
-        System.out.println(productId);
-        System.out.println(userId);
-        System.out.println(productNotFound.getId());
         if(productNotFound==null){
             System.out.println(true);
             return null;
@@ -91,6 +88,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductEntity getById(UUID productId) {
         return productRepository.findProductEntityById(productId);
+    }
+
+    @Override
+    public List<ProductEntity> getSellerProduct(UUID sellerId,int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        List<ProductEntity> productEntitiesByUserIdEquals = productRepository.findProductEntitiesByUserIdEquals(sellerId, pageable);
+        if(productEntitiesByUserIdEquals.isEmpty()){
+            return null;
+        }
+        return productEntitiesByUserIdEquals;
     }
 
     @Override

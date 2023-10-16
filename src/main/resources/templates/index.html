@@ -38,7 +38,7 @@
       <div th:each="laptop: ${laptop}">
          <div class="product product-4">
             <img th:src="'data:image/png;base64,' + ${laptop.image}" alt="computer to sell" class="product-img">
-            <span class="product_add_cart">ADD TO CART</span>
+           <form action="/order/add" method="post">Add to cart</form>
          </div>
       </div>
    </section>
@@ -54,55 +54,28 @@
       <div class="sponsor sponsor-4"><img src="https://raw.githubusercontent.com/r-e-d-ant/Computer-store-website/b90ac65459206fef22e9b87313f587185554263b/assets/images/ibm.svg" alt=""></div>
    </section>
 </main>
-<!--<footer>-->
-<!--   <div class="container top-footer">-->
-<!--      <div class="footer-item">-->
-<!--         <h2 class="footer-title">ADDRESS</h2>-->
-<!--         <div class="footer-items">-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing st18</h3>-->
-<!--         </div>-->
-<!--      </div>-->
-<!--      &lt;!&ndash; footer item 2 &ndash;&gt;-->
-<!--      <div class="footer-item">-->
-<!--         <h2 class="footer-title">SERVICES</h2>-->
-<!--         <div class="footer-items">-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--         </div>-->
-<!--      </div>-->
-<!--      &lt;!&ndash; footer item 3 &ndash;&gt;-->
-<!--      <div class="footer-item">-->
-<!--         <h2 class="footer-title">SUPPLIERS</h2>-->
-<!--         <div class="footer-items">-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--         </div>-->
-<!--      </div>-->
-<!--      &lt;!&ndash; footer item 4 &ndash;&gt;-->
-<!--      <div class="footer-item">-->
-<!--         <h2 class="footer-title">INVESTMENT</h2>-->
-<!--         <div class="footer-items">-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--            <h3>Adipisicing elit.</h3>-->
-<!--         </div>-->
-<!--      </div>-->
-<!--   </div>-->
-<!--   <div class="container end-footer">-->
-<!--      <div class="copyright">copyright © 2021 - Present • <b>DOWNTOWN TECH LIVER</b></div>-->
-<!--      <a class="designer" href="#">Thierry M</a>-->
-<!--   </div>-->
-<!--</footer>-->
-
+<footer>
+   <div class="container top-footer">
+      <div class="footer-item">
+         <h2 class="footer-title">ADDRESS</h2>
+      </div>
+      <!-- footer item 2 -->
+      <div class="footer-item">
+         <h2 class="footer-title">SERVICES</h2>
+      </div>
+      <!-- footer item 3 -->
+      <div class="footer-item">
+         <h2 class="footer-title">SUPPLIERS</h2>
+      </div>
+      <!-- footer item 4 -->
+      <div class="footer-item">
+         <h2 class="footer-title">INVESTMENT</h2>
+      </div>
+   </div>
+   <div class="container end-footer">
+      <div class="copyright">copyright © 2023 - Present • <b>DIGITAL SHOP</b></div>
+      <a class="designer" href="#">Yusupov Ulugbek</a>
+   </div>
+</footer>
 </body>
 </html>
