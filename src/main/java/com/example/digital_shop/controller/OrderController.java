@@ -14,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -48,9 +46,11 @@ public class OrderController {
     @GetMapping("/get-user-orders")
     public String getUserOrders(HttpServletRequest request,Model model){
         UUID userId=checkCookie(request);
-        if(userId ==null){
+        if(userId == null){
+            System.out.println(userId);
             return "index";
         }
+        System.out.println(userId);
         List<OrderEntity> userOrders = orderService.getUserOrders(userId);
         model.addAttribute("user",userService.getById(userId));
         if(userOrders.isEmpty()){
