@@ -60,10 +60,10 @@
             <ul class="nav-items">
                 <li class="nav-item"><a href="/auth/index" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="/auth/about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Laptop</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Phone</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Tv</a></li>j
-                <li class="nav-item"><a href="#" class="nav-link">Products</a></li>
+                <li class="nav-item"><a href="/laptop/get-all" class="nav-link">Laptop</a></li>
+                <li class="nav-item"><a href="/phone/get-all" class="nav-link">Phone</a></li>
+                <li class="nav-item"><a href="/tv/get-all" class="nav-link">Tv</a></li>j
+                <li class="nav-item"><a href="/product/get-all" class="nav-link">Products</a></li>
                 <li class="nav-item"><a href="/auth/contact" class="nav-link">Contact Us</a></li>
                 <li class="nav-item"><a href="/order/get-user-orders" class="nav-link">Basket</a></li>
                 <li class="nav-item" th:if="${user!=null}"><a href="/user/get-profile"  class="nav-link">Profile</a></li>
@@ -79,27 +79,27 @@
     </header>
 </div>
 
-<header class="fixed-header">
-    <div class="company-logo">Digital Shop</div>
-    <nav class="navbar">
-        <ul class="nav-items">
-            <li class="nav-item"><a href="/user/home" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="/auth/about" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="/laptop/get-all" class="nav-link">Laptop</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Phone</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Tv</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Products</a></li>
-            <li class="nav-item"><a href="/auth/contact" class="nav-link">Contact Us</a></li>
-            <li class="nav-item"><a href="/order/get" class="nav-link">Basket</a></li>
-            <li class="nav-item" th:if="${user!=null}"><a href="/user/get-profile" class="nav-link">Profile</a></li>
-            <li class="nav-item" th:if="${user==null}"><a href="/auth/sign-in" class="nav-link">Sign in</a></li>
-            <li class="nav-item" th:if="${user==null}"><a href="/auth/sign-up" class="nav-link">Register</a></li>
-        </ul>
-    </nav>
-    <div class="menu-toggle">
-        <i class="bx bx-menu"></i>
-    </div>
-</header>
+<!--<header class="fixed-header">-->
+<!--    <div class="company-logo">Digital Shop</div>-->
+<!--    <nav class="navbar">-->
+<!--        <ul class="nav-items">-->
+<!--            <li class="nav-item"><a href="/user/home" class="nav-link">Home</a></li>-->
+<!--            <li class="nav-item"><a href="/auth/about" class="nav-link">About</a></li>-->
+<!--            <li class="nav-item"><a href="/laptop/get-all" class="nav-link">Laptop</a></li>-->
+<!--            <li class="nav-item"><a href="/phone/get-all" class="nav-link">Phone</a></li>-->
+<!--            <li class="nav-item"><a href="/tv/get-all" class="nav-link">Tv</a></li>-->
+<!--            <li class="nav-item"><a href="/products/get-all" class="nav-link">Products</a></li>-->
+<!--            <li class="nav-item"><a href="/auth/contact" class="nav-link">Contact Us</a></li>-->
+<!--            <li class="nav-item"><a href="/order/get" class="nav-link">Basket</a></li>-->
+<!--            <li class="nav-item" th:if="${user!=null}"><a href="/user/get-profile" class="nav-link">Profile</a></li>-->
+<!--            <li class="nav-item" th:if="${user==null}"><a href="/auth/sign-in" class="nav-link">Sign in</a></li>-->
+<!--            <li class="nav-item" th:if="${user==null}"><a href="/auth/sign-up" class="nav-link">Register</a></li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--    <div class="menu-toggle">-->
+<!--        <i class="bx bx-menu"></i>-->
+<!--    </div>-->
+<!--</header>-->
 
 
 <div layout:fragment="body" style="position: absolute; width: 100%">

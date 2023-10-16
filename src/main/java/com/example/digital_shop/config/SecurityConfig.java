@@ -33,6 +33,7 @@ public class SecurityConfig {
                     "/phone/**",
                     "/card/**",
                     "/laptop/**",
+                    "/order/**",
                     "/payment/**",
                     "/tv/**",
                     "/order/**"
