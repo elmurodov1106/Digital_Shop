@@ -1,7 +1,6 @@
 package com.example.digital_shop.controller;
 
 import com.example.digital_shop.domain.dto.HistoryDto;
-import com.example.digital_shop.repository.history.HistoryRepository;
 import com.example.digital_shop.service.history.HistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

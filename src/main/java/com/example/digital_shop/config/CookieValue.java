@@ -1,6 +1,5 @@
 package com.example.digital_shop.config;
 
-import com.example.digital_shop.exception.DataNotFoundException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 

@@ -3,7 +3,6 @@ package com.example.digital_shop.controller.product;
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.product.ProductEntity;
-import com.example.digital_shop.repository.product.ProductRepository;
 import com.example.digital_shop.service.product.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,6 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
-    private final ProductRepository productRepository;
 
     @GetMapping("/add")
     public String addGet() {
@@ -54,13 +52,13 @@ public class ProductController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             Model model) {
-        List<ProductEntity> all = productRepository.findAll();
+        List<ProductEntity> all = productService.getAllProducts(size,page);
         if(all.isEmpty()){
             model.addAttribute("message","Product not found");
-            return "redirect:/auth/seller/menu";
+            return "index";
         }
         model.addAttribute("products",all);
-        return "allProducts";
+        return "index";
     }
 
     @GetMapping("/search")
@@ -118,6 +116,20 @@ public class ProductController {
         }
         model.addAttribute("message","Product successfully deleted");
         return "SellerMenu";
+    }
+    @GetMapping("/get-seller-products")
+    public String getSellerProducts(
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "0") int page,
+            HttpServletRequest request,
+            Model model){
+       UUID sellerId = checkCookie(request);
+       if(sellerId == null){
+           model.addAttribute("message","Seller not found");
+           return "index";
+       }
+       model.addAttribute("products",productService.getSellerProduct(sellerId,page,size));
+       return "allProducts";
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
