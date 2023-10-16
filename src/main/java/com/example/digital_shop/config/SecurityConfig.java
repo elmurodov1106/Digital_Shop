@@ -34,7 +34,8 @@ public class SecurityConfig {
                     "/card/**",
                     "/laptop/**",
                     "/payment/**",
-                    "/tv/**"
+                    "/tv/**",
+                    "/order/**"
 
             };
 

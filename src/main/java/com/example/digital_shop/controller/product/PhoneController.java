@@ -51,7 +51,7 @@ public class PhoneController {
         List<PhoneEntity> allPhone = phoneService.getAllPhone(size, page);
         if (allPhone.isEmpty()){
             model.addAttribute("message","Phone not found");
-            return "redirect:/auth/seller/menu";
+            return "index";
         }
         model.addAttribute("phone",allPhone);
         return "allPhones";
