@@ -41,6 +41,20 @@
            <form action="/order/add" method="post">Add to cart</form>
          </div>
       </div>
+
+      <div th:each="phone: ${phone}">
+         <div class="product product-4">
+            <img th:src="'data:image/png;base64,' + ${phone.image}" alt="computer to sell" class="product-img">
+            <form action="/order/add" method="post">Add to cart</form>
+         </div>
+      </div>
+
+      <div th:each="tv: ${tv}">
+         <div class="product product-4">
+            <img th:src="'data:image/png;base64,' + ${tv.image}" alt="computer to sell" class="product-img">
+            <form action="/order/add" method="post">Add to cart</form>
+         </div>
+      </div>
    </section>
 
    <!-- SPONSOR SECTION -->

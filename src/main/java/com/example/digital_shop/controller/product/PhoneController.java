@@ -45,8 +45,8 @@ public class PhoneController {
 
     @GetMapping("/get-all")
     public String getAll(
-            @RequestParam int size,
-            @RequestParam int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "0") int page,
             Model model) {
         List<PhoneEntity> allPhone = phoneService.getAllPhone(size, page);
         if (allPhone.isEmpty()){
