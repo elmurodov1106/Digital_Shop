@@ -67,14 +67,37 @@ public class ProductServiceImpl implements ProductService {
     public Boolean deleteById(UUID productId, UUID userId) {
         ProductEntity productNotFound = productRepository.findProductEntityById(productId);
         if(productNotFound==null){
+            System.out.println(true);
             return null;
         }
+        System.out.println(productNotFound.getUserId());
         if (productNotFound.getUserId().equals(userId)) {
+            System.out.println(true);
             inventoryRepository.deleteByProductIdEquals(productId);
             productRepository.deleteById(productId);
             return true;
         }
         return null;
+    }
+
+    @Override
+    public List<ProductEntity> getAll() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public ProductEntity getById(UUID productId) {
+        return productRepository.findProductEntityById(productId);
+    }
+
+    @Override
+    public List<ProductEntity> getSellerProduct(UUID sellerId,int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        List<ProductEntity> productEntitiesByUserIdEquals = productRepository.findProductEntitiesByUserIdEquals(sellerId, pageable);
+        if(productEntitiesByUserIdEquals.isEmpty()){
+            return null;
+        }
+        return productEntitiesByUserIdEquals;
     }
 
     @Override
@@ -94,4 +117,6 @@ public class ProductServiceImpl implements ProductService {
         }
         return null;
     }
+
+
 }

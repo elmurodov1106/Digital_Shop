@@ -4,8 +4,8 @@ package com.example.digital_shop.controller.product;
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.TvDto;
 import com.example.digital_shop.entity.product.TvEntity;
-import com.example.digital_shop.repository.tv.TvRepository;
 import com.example.digital_shop.service.tv.TvService;
+import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TvController {
     private final TvService tvService;
-
+   private final UserService userService;
 
     @GetMapping("/add")
     public String addGet(){
@@ -36,7 +36,10 @@ public class TvController {
             @RequestParam MultipartFile image,
             HttpServletRequest request
     ) throws IOException {
-        UUID userId = UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId = checkCookie(request);
+        if(userId == null){
+            return "index";
+        }
         tvService.add(tvDto, userId, amount, image);
         return "SellerMenu";
     }
@@ -45,11 +48,13 @@ public class TvController {
     public String getAll(
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "0") int page,
-            Model model) {
+            Model model,HttpServletRequest request) {
         List<TvEntity> allTv = tvService.getAllTv(size, page);
         if (allTv.isEmpty()) {
+            UUID userId = checkCookie(request);
+            model.addAttribute("user",userService.getById(userId));
             model.addAttribute("message", "Tv not found");
-            return "redirect:/auth/seller/menu";
+            return "index";
         }
         model.addAttribute("tv", allTv);
         return "allTv";
@@ -72,15 +77,19 @@ public class TvController {
         return "search";
     }
 
-    @PutMapping("/{userId}/update")
+    @PostMapping("/update")
     public String update(
             @RequestBody TvDto tvDto,
-            @PathVariable UUID userId,
             @RequestParam UUID tvId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
+            HttpServletRequest request,
             Model model
     ) throws IOException {
+        UUID userId = checkCookie(request);
+        if(userId == null){
+            return "index";
+        }
         TvEntity update = tvService.update(tvDto, userId, tvId, amount, image);
         if (update == null) {
             model.addAttribute("message", "Tv not found");
@@ -93,12 +102,13 @@ public class TvController {
     }
 
 
-    @DeleteMapping("/{userId}/delete")
+    @GetMapping("/delete")
     public String delete(
-            @PathVariable UUID userId,
             @RequestParam UUID tvId,
-            Model model
+            Model model,
+            HttpServletRequest request
     ) {
+        UUID userId = checkCookie(request);
         Boolean tv = tvService.deleteById(tvId, userId);
         if (tv == null) {
             model.addAttribute("message", "Tv not found");
@@ -108,6 +118,13 @@ public class TvController {
         model.addAttribute("message", "Tv successfully deleted");
         model.addAttribute("userId", userId);
         return "SellerMenu";
+    }
+    private UUID checkCookie(HttpServletRequest request){
+        String userId = CookieValue.getValue("userId",request);
+        if(!userId.equals("null")){
+            return UUID.fromString(userId);
+        }
+        return null;
     }
 
 }

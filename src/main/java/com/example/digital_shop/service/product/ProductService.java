@@ -14,5 +14,9 @@ public interface ProductService {
     List<ProductEntity> getAllProducts(int size, int page);
     List<ProductEntity> search(int page,int size,String name);
     Boolean deleteById(UUID id,UUID userId);
+
+    List<ProductEntity> getAll();
+    ProductEntity getById(UUID productId);
+    List<ProductEntity> getSellerProduct(UUID sellerId, int page, int size);
     ProductEntity update(ProductCreatDto update,UUID productId,Integer amount,UUID userId,MultipartFile image) throws IOException;
 }

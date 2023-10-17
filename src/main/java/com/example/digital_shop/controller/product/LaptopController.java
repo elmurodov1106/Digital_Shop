@@ -5,6 +5,7 @@ import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.LaptopDto;
 import com.example.digital_shop.entity.product.LaptopEntity;
 import com.example.digital_shop.service.laptop.LaptopService;
+import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import java.util.UUID;
 public class LaptopController {
 
     private final LaptopService laptopService;
+    private final UserService userService;
 
 
     @GetMapping("/add")
@@ -36,7 +38,10 @@ public class LaptopController {
             HttpServletRequest request,
             Model model
     ) throws IOException {
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId=checkCookie(request);
+        if(userId ==null){
+            return "index";
+        }
         laptopService.add(laptopDto,userId,amount,image);
         model.addAttribute("message","Laptop successfully added");
         return "SellerMenu";
@@ -45,12 +50,18 @@ public class LaptopController {
     public String getAll(
             @RequestParam(defaultValue = "10")  int size,
             @RequestParam(defaultValue = "0")  int page,
-            Model model
+            Model model,
+            HttpServletRequest request
     ){
       List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
       if (allLaptop.isEmpty()){
+          UUID userId = checkCookie(request);
+          if(userId!= null){
+
+              model.addAttribute("user",userService.getById(userId));
+          }
           model.addAttribute("message","Laptop not found");
-          return "redirect:/auth/seller/menu";
+          return "index";
       }
       model.addAttribute("laptops",allLaptop);;
       return "allLaptop";
@@ -81,7 +92,10 @@ public class LaptopController {
             Model model,
             HttpServletRequest request
     )throws IOException{
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId=checkCookie(request);
+        if(userId ==null){
+            return "index";
+        }
         LaptopEntity update = laptopService.update(laptopDto,laptopId,userId, amount,image);
         if (update==null){
             model.addAttribute("message","laptop not found");
@@ -98,7 +112,10 @@ public class LaptopController {
             Model model,
             HttpServletRequest request
     ){
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId=checkCookie(request);
+        if(userId ==null){
+            return "index";
+        }
         Boolean aBoolean = laptopService.deleteById(laptopId,userId);
         if (aBoolean==null){
             model.addAttribute("message","Laptop not found");
@@ -106,6 +123,13 @@ public class LaptopController {
         }
         model.addAttribute("message","Laptop successfully deleted");
         return "SellerMenu";
+    }
+    private UUID checkCookie(HttpServletRequest request){
+        String userId = CookieValue.getValue("userId",request);
+        if(!userId.equals("null")){
+            return UUID.fromString(userId);
+        }
+        return null;
     }
 
 }

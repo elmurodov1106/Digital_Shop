@@ -172,10 +172,13 @@
 <!--            <li><a href="#"><i class="fa fa-list-alt"></i>Products </a></li>-->
 
             <li><a th:href="@{/product/get-all}"><i class="fa fa-list-alt"></i>Products </a></li>
-            <li><a href="#"><i class="fa fa-pencil-square-o"></i>Orders </a></li>
+
+
+
+<!--            <li><a href="#"><i class="fa fa-pencil-square-o"></i>Orders </a></li>-->
 
             <li>
-                <a th:href="@{/product/add}">
+                <a href="/product/add">
                     <i class="fa fa-desktop"></i> Electronics Add
                 </a>
             </li>
@@ -211,203 +214,203 @@
                 </a>
             </li>
 
-            <li><a href="#"><i class="fa fa-truck"></i>Analytics</a></li>
-            <li><a href="#"><i class="fa fa-credit-card"></i>Price Managerment</a></li>
-            <li><a href="#"><i class="fa fa-credit-card"></i>Balance</a></li>
+<!--            <li><a href="#"><i class="fa fa-truck"></i>Analytics</a></li>-->
+<!--            <li><a href="#"><i class="fa fa-credit-card"></i>Price Managerment</a></li>-->
+<!--            <li><a href="#"><i class="fa fa-credit-card"></i>Balance</a></li>-->
 
-        </ul>
-    </div>
-</section>
-
-
-<section id=content>
-        <section class="tabContainer" data-active-tab="tab-1">
-
-            <div class="tabSection"><!--Start of tab1:tabsConent-->
-                <div class="widgetBox">
-                    <div class="widgetHeader">
-                        <h2>GMV on Domestic</h2><span tooltip="More Settings" flow="down"><i class="fa fa-cog"></i></span>
-                    </div><!--GMV on Domestic-->
-                    <div class="widgetContent">
+<!--        </ul>-->
+<!--    </div>-->
+<!--</section>-->
 
 
+<!--<section id=content>-->
+<!--        <section class="tabContainer" data-active-tab="tab-1">-->
 
-
-                        <!--doughunt-->
-                        <div class="pie">
-                            <div class="slice-pink"></div>
-                            <div class="slice-blue"></div>
-                            <div class="slice-green"></div>
-                            <div class="percent">
-                                <div class="number">GMV
-                                    <p>Domestic</p>
-                                </div>
-
-                            </div>
-
-                        </div><!--doughuntpie-->
-
-                        <!--chart legend-->
-                        <ul class="chartLegend">
-                            <li>
-                                <span class=circleBlue></span>
-                                <em>Actived</em>
-                            </li>
-                            <li>
-                                <span class=circlePink></span>
-                                <em>Blocked</em>
-                            </li>
-
-                            <li>
-                                <span class=circleGreen></span>
-                                <em>Others</em>
-                            </li>
-                        </ul>
-                        <!--end of chart legend-->
-
-                    </div><!--widgetContent-->
-
-
-
-                </div><!--widgetBox-->
-
-                <div class="widgetBox">
-                    <div class="widgetHeader">
-                        <h2>Item Performance</h2><span tooltip="More Settings" flow="down"><i class="fa fa-cog"></i></span>
-                    </div><!--GMV on Domestic-->
-                    <div class="widgetContent">
-
-                        <section id="bar">
-                            <table id="graphBar">
-
-                                <thead></thead>
-
-                                <tbody>
-                                <tr id="q1">
-                                    <td class="uk bar q1ukbar" style="height: 150px;"><p>$18,450.00</p></td>
-                                    <td class="usa bar q1usabar" style="height: 60px;"><p>$16,500.00</p></td>
-                                </tr>
-
-                                <tr id="q2">
-                                    <td class="uk bar q2ukbar" style="height: 100px;"><p>$34,340.72</p></td>
-                                    <td class="usa bar q2usabar" style="height: 85px;"><p>$32,340.72</p></td>
-                                </tr>
-
-                                </tbody>
-                            </table>
-
-                        </section>
+<!--            <div class="tabSection">&lt;!&ndash;Start of tab1:tabsConent&ndash;&gt;-->
+<!--                <div class="widgetBox">-->
+<!--                    <div class="widgetHeader">-->
+<!--                        <h2>GMV on Domestic</h2><span tooltip="More Settings" flow="down"><i class="fa fa-cog"></i></span>-->
+<!--                    </div>&lt;!&ndash;GMV on Domestic&ndash;&gt;-->
+<!--                    <div class="widgetContent">-->
 
 
 
 
+<!--                        &lt;!&ndash;doughunt&ndash;&gt;-->
+<!--                        <div class="pie">-->
+<!--                            <div class="slice-pink"></div>-->
+<!--                            <div class="slice-blue"></div>-->
+<!--                            <div class="slice-green"></div>-->
+<!--                            <div class="percent">-->
+<!--                                <div class="number">GMV-->
+<!--                                    <p>Domestic</p>-->
+<!--                                </div>-->
+
+<!--                            </div>-->
+
+<!--                        </div>&lt;!&ndash;doughuntpie&ndash;&gt;-->
+
+<!--                        &lt;!&ndash;chart legend&ndash;&gt;-->
+<!--                        <ul class="chartLegend">-->
+<!--                            <li>-->
+<!--                                <span class=circleBlue></span>-->
+<!--                                <em>Actived</em>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <span class=circlePink></span>-->
+<!--                                <em>Blocked</em>-->
+<!--                            </li>-->
+
+<!--                            <li>-->
+<!--                                <span class=circleGreen></span>-->
+<!--                                <em>Others</em>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                        &lt;!&ndash;end of chart legend&ndash;&gt;-->
+
+<!--                    </div>&lt;!&ndash;widgetContent&ndash;&gt;-->
 
 
-                    </div><!--widgetContent-->
-                </div><!--widgetBox-->
 
-                <!--Start of table and panelHeader:container-->
-                <div class="Container">
-                    <div class="panel">
-                        <h3 class="pullLeft">Item Activity</h3>
+<!--                </div>&lt;!&ndash;widgetBox&ndash;&gt;-->
 
-                        <div class="pullRight select-style">
-                            <form action="">
-                                <select name="" id="dropDownStyle">
-                                    <option value="" data-icon="">Last 30 Days</option>
-                                    <option value="" data-icon="">Last 60 Days</option>
-                                </select>
-                            </form>
-                        </div> <!--filter-->
+<!--                <div class="widgetBox">-->
+<!--                    <div class="widgetHeader">-->
+<!--                        <h2>Item Performance</h2><span tooltip="More Settings" flow="down"><i class="fa fa-cog"></i></span>-->
+<!--                    </div>&lt;!&ndash;GMV on Domestic&ndash;&gt;-->
+<!--                    <div class="widgetContent">-->
 
-                    </div><!--panel-->
+<!--                        <section id="bar">-->
+<!--                            <table id="graphBar">-->
+
+<!--                                <thead></thead>-->
+
+<!--                                <tbody>-->
+<!--                                <tr id="q1">-->
+<!--                                    <td class="uk bar q1ukbar" style="height: 150px;"><p>$18,450.00</p></td>-->
+<!--                                    <td class="usa bar q1usabar" style="height: 60px;"><p>$16,500.00</p></td>-->
+<!--                                </tr>-->
+
+<!--                                <tr id="q2">-->
+<!--                                    <td class="uk bar q2ukbar" style="height: 100px;"><p>$34,340.72</p></td>-->
+<!--                                    <td class="usa bar q2usabar" style="height: 85px;"><p>$32,340.72</p></td>-->
+<!--                                </tr>-->
+
+<!--                                </tbody>-->
+<!--                            </table>-->
+
+<!--                        </section>-->
 
 
-                    <div class="scrollTable">
-                        <table class="layout pullLeft">
-                            <thead>
-                            <tr>
-                                <th>Items</th>
-                                <th>Marketplaces</th>
-                            </tr>
-                            </thead>
 
-                            <tbody>
-                            <tr>
-                                <td>product itemA</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                            </tr>
 
-                            <tr>
-                                <td>product itemA</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                            </tr>
 
-                            <tr>
-                                <td>product itemA</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                            </tr>
 
-                            <tr>
-                                <td>product itemA</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                            </tr>
+<!--                    </div>&lt;!&ndash;widgetContent&ndash;&gt;-->
+<!--                </div>&lt;!&ndash;widgetBox&ndash;&gt;-->
 
-                            <tr>
-                                <td>product itemA</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                            </tr>
+<!--                &lt;!&ndash;Start of table and panelHeader:container&ndash;&gt;-->
+<!--                <div class="Container">-->
+<!--                    <div class="panel">-->
+<!--                        <h3 class="pullLeft">Item Activity</h3>-->
 
-                            <tr>
-                                <td>product itemA</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                            </tr>
+<!--                        <div class="pullRight select-style">-->
+<!--                            <form action="">-->
+<!--                                <select name="" id="dropDownStyle">-->
+<!--                                    <option value="" data-icon="">Last 30 Days</option>-->
+<!--                                    <option value="" data-icon="">Last 60 Days</option>-->
+<!--                                </select>-->
+<!--                            </form>-->
+<!--                        </div> &lt;!&ndash;filter&ndash;&gt;-->
 
-                            <tr>
-                                <td>product itemA</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                            </tr>
+<!--                    </div>&lt;!&ndash;panel&ndash;&gt;-->
 
-                            <tr>
-                                <td>product itemA</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                                <td>UK</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div><!--table-->
-                </div><!--End of table and panelHeader:container-->
 
-            </div><!--end of tab1:tabsConent-->
+<!--                    <div class="scrollTable">-->
+<!--                        <table class="layout pullLeft">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th>Items</th>-->
+<!--                                <th>Marketplaces</th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
 
-<!--            <div class="tabSection">not available in USA-->
-<!--            </div>-->
-<!--            <div class="tabSection">not available in Europe-->
-<!--            </div>-->
-        </section> <!--end ofwrap for 3 tabcontent-->
+<!--                            <tbody>-->
+<!--                            <tr>-->
+<!--                                <td>product itemA</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                            </tr>-->
+
+<!--                            <tr>-->
+<!--                                <td>product itemA</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                            </tr>-->
+
+<!--                            <tr>-->
+<!--                                <td>product itemA</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                            </tr>-->
+
+<!--                            <tr>-->
+<!--                                <td>product itemA</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                            </tr>-->
+
+<!--                            <tr>-->
+<!--                                <td>product itemA</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                            </tr>-->
+
+<!--                            <tr>-->
+<!--                                <td>product itemA</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                            </tr>-->
+
+<!--                            <tr>-->
+<!--                                <td>product itemA</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                            </tr>-->
+
+<!--                            <tr>-->
+<!--                                <td>product itemA</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td>-->
+<!--                                <td>UK</td> -->
+<!--                                <td>UK</td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>&lt;!&ndash;table&ndash;&gt;-->
+<!--                </div>&lt;!&ndash;End of table and panelHeader:container&ndash;&gt;-->
+
+<!--            </div>&lt;!&ndash;end of tab1:tabsConent&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <div class="tabSection">not available in USA&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="tabSection">not available in Europe&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--        </section> &lt;!&ndash;end ofwrap for 3 tabcontent&ndash;&gt;-->
 
 
 

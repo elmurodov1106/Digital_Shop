@@ -45,6 +45,10 @@ public class UserServiceImpl implements UserService {
         }
         UserEntity userEntity = modelMapper.map(userCreatDto, UserEntity.class);
         userEntity.setState(UserState.UNVERIFIED);
+        UserEntity userEntityByEmail = userRepository.findUserEntityByEmail(userEntity.getEmail());
+        if(userEntityByEmail!=null){
+            return null;
+        }
         RoleEntity userRole = roleRepository.findRoleEntityByNameEqualsIgnoreCase("User");
         if (userRole != null) {
             VerificationCode verificationCode = generateVerificationCode.generateVerificationCode(userEntity);
@@ -114,6 +118,9 @@ public class UserServiceImpl implements UserService {
         if(role==null){
             role = roleRepository.save(new RoleEntity("Seller"));
         }
+        if(sellerInfo1!= null){
+            return null;
+        }
         UserEntity user=
                 new UserEntity(sellerDto.getName(),
                         sellerDto.getEmail(),
@@ -121,19 +128,15 @@ public class UserServiceImpl implements UserService {
                         role,
                         UserState.UNVERIFIED);
         UserEntity save = userRepository.save(user);
-        if(sellerInfo1==null){
-            SellerInfo sellerInfo=new SellerInfo
-                    (sellerDto.getLastName(),
-                            sellerDto.getFatherName(),
-                            sellerDto.getBirthDate()
-                            ,sellerDto.getPassportNumber()
-                            ,save
-                            ,sellerDto.getPhoneNumber());
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            sellerRepository.save(sellerInfo);
-        }else {
-            return null;
-        }
+        SellerInfo sellerInfo = new SellerInfo
+                (sellerDto.getLastName(),
+                        sellerDto.getFatherName(),
+                        sellerDto.getBirthDate()
+                        , sellerDto.getPassportNumber()
+                        , save
+                        , sellerDto.getPhoneNumber());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        sellerRepository.save(sellerInfo);
         VerificationCode verificationCode=generateVerificationCode.generateVerificationCode(save);
         mailService.sendVerificationCode(save.getEmail(),verificationCode.getSendingCode());
       return save;

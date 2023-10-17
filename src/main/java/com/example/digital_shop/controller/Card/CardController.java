@@ -1,4 +1,4 @@
-package com.example.digital_shop.controller;
+package com.example.digital_shop.controller.Card;
 
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.CardCreatedDto;
@@ -17,14 +17,19 @@ public class CardController {
 
     private final CardService cardService;
 
+    @GetMapping("/add")
+    public String addPage(){
+        return "addCard";
+    }
+
     @PostMapping("/add")
     public String add(
-            @Valid @RequestBody CardCreatedDto cardCreatedDto,
+            @ModelAttribute CardCreatedDto cardCreatedDto,
             HttpServletRequest request
     ){
         UUID userId = UUID.fromString(CookieValue.getValue("userId",request));
         cardService.add(cardCreatedDto,userId);
-        return "";
+        return "redirect:/";
     }
 
     @GetMapping("/get-all")

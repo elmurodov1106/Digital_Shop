@@ -32,11 +32,11 @@ public class TransactionServiceImpl implements TransactionService {
         if(!product.getUserId().equals(receiverCard.getOwnerId())){
             throw new DataNotFoundException("Receiver card not found");
         }
-        if (senderCard.getAmount() < amount) {
+        if (senderCard.getBalance() < amount) {
             throw new InsufficientBalanceException("Amount not found");
         }
-        updateAccountBalance(senderCard.getId(), senderCard.getAmount() - amount);
-        updateAccountBalance(receiverCard.getId(), receiverCard.getAmount() + amount);
+        updateAccountBalance(senderCard.getId(), senderCard.getBalance() - amount);
+        updateAccountBalance(receiverCard.getId(), receiverCard.getBalance() + amount);
         HistoryEntity history = HistoryEntity.builder()
                 .paymentAmount(amount)
                 .receiverCardId(receiverCard.getId())
@@ -51,7 +51,7 @@ public class TransactionServiceImpl implements TransactionService {
     public void updateAccountBalance(UUID accountId, double newBalance) {
         CardEntity card = cardRepository.findCardEntityById(accountId)
                 .orElseThrow(() -> new DataNotFoundException("Not found"));
-        card.setAmount(newBalance);
+        card.setBalance(newBalance);
         cardRepository.save(card);
     }
 }

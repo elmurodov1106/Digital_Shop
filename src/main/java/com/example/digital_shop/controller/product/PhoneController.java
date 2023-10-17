@@ -35,7 +35,10 @@ public class PhoneController {
             @RequestParam MultipartFile image,
             HttpServletRequest request
     )throws IOException {
-        UUID userId= UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId=checkCookie(request);
+        if(userId ==null){
+            return "index";
+        }
         phoneService.add(phoneDto,userId,amount,image);
         return "SellerMenu";
     }
@@ -48,7 +51,7 @@ public class PhoneController {
         List<PhoneEntity> allPhone = phoneService.getAllPhone(size, page);
         if (allPhone.isEmpty()){
             model.addAttribute("message","Phone not found");
-            return "redirect:/auth/seller/menu";
+            return "index";
         }
         model.addAttribute("phone",allPhone);
         return "allPhones";
@@ -79,7 +82,10 @@ public class PhoneController {
             Model model,
             HttpServletRequest request
     )  throws IOException {
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId=checkCookie(request);
+        if(userId ==null){
+            return "index";
+        }
         PhoneEntity update = phoneService.update(phoneDto, phoneId,amount, userId,image);
         if(update==null){
             model.addAttribute("message","Phone not found");
@@ -94,7 +100,10 @@ public class PhoneController {
             Model model,
             HttpServletRequest request
     ) {
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId=checkCookie(request);
+        if(userId ==null){
+            return "index";
+        }
         Boolean aphone = phoneService.deleteById(phoneId, userId);
         if (aphone==null){
             model.addAttribute("message","Phone not found");
@@ -103,13 +112,12 @@ public class PhoneController {
         model.addAttribute("message","Phone successfully deleted");
         return "SellerMenu";
     }
-
-
-
-
-
-
-
-
+    private UUID checkCookie(HttpServletRequest request){
+        String userId = CookieValue.getValue("userId",request);
+        if(!userId.equals("null")){
+            return UUID.fromString(userId);
+        }
+        return null;
+    }
 
 }
