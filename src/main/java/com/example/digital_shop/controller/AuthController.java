@@ -29,21 +29,26 @@ public class AuthController {
 
     @GetMapping("/index")
     public String yourPage(
-            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            Model model
+            Model model,
+            HttpServletRequest request
     ) {
         List<ProductEntity> allProducts = productService.getAll();
-        if (allProducts == null) {
-            model.addAttribute("message", "Product not found");
-            return "index";
+        UUID userId= checkCookie(request);
+        if(userId!= null){
+         model.addAttribute("user",userService.getById(userId));
         }
         model.addAttribute("products", allProducts);
         return "index";
     }
 
     @GetMapping("/about")
-    public String about() {
+    public String about(HttpServletRequest request, Model model) {
+        UUID userId = checkCookie(request);
+        if(userId!=null){
+            model.addAttribute("user",userService.getById(userId));
+        }
         return "About";
     }
     @GetMapping("/seller/menu")
@@ -134,8 +139,9 @@ public class AuthController {
         response.addCookie(cookie);
         if (user.getRole().getName().equals("Seller")) {
             model.addAttribute("user", user);
-            return "redirect:/auth/seller/menu";
+            return "SellerMenu";
         }
+        model.addAttribute("products",productService.getAllProducts(10,0));
         model.addAttribute("user", user);
         return "index";
     }
@@ -154,5 +160,12 @@ public class AuthController {
         }
         model.addAttribute("user", user);
         return "verify";
+    }
+    private UUID checkCookie(HttpServletRequest request){
+        String userId = CookieValue.getValue("userId",request);
+        if(!userId.equals("null")){
+            return UUID.fromString(userId);
+        }
+        return null;
     }
 }

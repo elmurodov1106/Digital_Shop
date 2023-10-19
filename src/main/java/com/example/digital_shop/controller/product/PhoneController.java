@@ -4,7 +4,6 @@ package com.example.digital_shop.controller.product;
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.PhoneDto;
 import com.example.digital_shop.entity.product.PhoneEntity;
-import com.example.digital_shop.repository.phone.PhoneRepository;
 import com.example.digital_shop.service.phone.PhoneService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +48,7 @@ public class PhoneController {
             @RequestParam(defaultValue = "0") int page,
             Model model) {
         List<PhoneEntity> allPhone = phoneService.getAllPhone(size, page);
-        if (allPhone.isEmpty()){
+        if (allPhone == null){
             model.addAttribute("message","Phone not found");
             return "index";
         }

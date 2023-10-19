@@ -2,11 +2,13 @@ package com.example.digital_shop.controller.Card;
 
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.CardCreatedDto;
+import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.payment.CardService;
+import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
@@ -16,6 +18,7 @@ import java.util.UUID;
 public class CardController {
 
     private final CardService cardService;
+    private final UserService userService;
 
     @GetMapping("/add")
     public String addPage(){
@@ -24,12 +27,20 @@ public class CardController {
 
     @PostMapping("/add")
     public String add(
-            @ModelAttribute CardCreatedDto cardCreatedDto,
-            HttpServletRequest request
+            @ModelAttribute
+            CardCreatedDto cardCreatedDto,
+            HttpServletRequest request,
+            Model model
     ){
-        UUID userId = UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId = checkCookie(request);
+        if(userId == null){
+            return "index";
+        }
+        UserEntity byId = userService.getById(userId);
         cardService.add(cardCreatedDto,userId);
-        return "redirect:/";
+        model.addAttribute("user",byId);
+        model.addAttribute("message","Card successfully added");
+        return "index";
     }
 
     @GetMapping("/get-all")
@@ -60,6 +71,13 @@ public class CardController {
         UUID userId = UUID.fromString(CookieValue.getValue("userId",request));
         cardService.deleteById(userId, cardId);
         return "";
+    }
+    private UUID checkCookie(HttpServletRequest request){
+        String userId = CookieValue.getValue("userId",request);
+        if(!userId.equals("null")){
+            return UUID.fromString(userId);
+        }
+        return null;
     }
 
 }
