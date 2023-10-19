@@ -21,12 +21,17 @@
 <!--                <p class="description">A bag of delicious oranges!</p>-->
 <!--                <label for="item-1-quantity">Quantity:</label>-->
 <!--                <input type="text" name="item-1-quantity" id="item-1-quantity" value="1">-->
-                <form method="get" action="/laptop/delete">
+                <form method="get" action="/order/add">
+                    <select name="amount" id="amount"  class="ms-1 d-block w-100" required>
+                        <option></option>
+                        <option value="Laptop">Laptop</option>
+                    </select>
                     <input type="hidden" name="laptopId" th:value="${laptop.id}">
-                <button type="button" name="item-1-button" id="item-1-button">Delete Product</button>
+                <button type="button" name="item-1-button" id="item-1-button">Add to cart</button>
+                    </form>
             </div>
         </div>
-    </div>5
+    </div>
 
 </div>
 </body>
