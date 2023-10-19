@@ -54,7 +54,7 @@ public class OrderController {
         }
         List<OrderEntity> userOrders = orderService.getUserOrders(userId);
         model.addAttribute("user",userService.getById(userId));
-        if(userOrders.isEmpty()){
+        if(userOrders == null){
             model.addAttribute("message","You dont have any orders");
             return "index";
         }

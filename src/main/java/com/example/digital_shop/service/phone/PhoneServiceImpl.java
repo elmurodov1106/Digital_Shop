@@ -53,7 +53,7 @@ public class PhoneServiceImpl implements PhoneService{
         Pageable pageable = PageRequest.of(page, size);
         List<PhoneEntity> content = phoneRepository.findAll(pageable).getContent();
         if(content.isEmpty()){
-            throw new DataNotFoundException("Phones not found");
+            return null;
         }
         return content;
     }
