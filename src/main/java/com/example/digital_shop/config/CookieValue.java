@@ -8,9 +8,11 @@ public class CookieValue {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals(name)) {
-                    return cookie.getValue();
+                    if (!cookie.getValue().equals("")) {
+                        return cookie.getValue();
+                    }
                 }
             }
-            return "null";
+            return null;
     }
 }
