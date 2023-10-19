@@ -1,0 +1,23 @@
+version: '3'
+services:
+  # Spring Boot Application
+  spring-app:
+    image: your-spring-boot-image:latest
+    ports:
+      - "8081:8081"  # Map container port 8080 to host port 8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/digital_shop
+    depends_on:
+      - db
+
+  # PostgreSQL Database
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"  # Map container port 5432 to host port 5432
+    environment:
+      POSTGRES_DB: digital_shop
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+
+# Add more services as needed (e.g., Redis, message queue, etc.)

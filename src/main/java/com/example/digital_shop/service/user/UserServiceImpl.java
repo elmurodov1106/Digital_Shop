@@ -111,15 +111,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity saveSeller(SellerDto sellerDto) {
         RoleEntity role = checkRole("Seller");
-        SellerInfo sellerInfo1 = checkPassport(sellerDto.getPassportNumber());
-        if(checkUserEmail(sellerDto.getEmail())){
+        if(checkUserEmail(sellerDto.getEmail())|| checkPassport(sellerDto.getPassportNumber())|| checkPhoneNumber(sellerDto.getPhoneNumber())){
             return null;
         }
         if(role==null){
             role = roleRepository.save(new RoleEntity("Seller"));
-        }
-        if(sellerInfo1!= null){
-            return null;
         }
         UserEntity user=
                 new UserEntity(sellerDto.getName(),
@@ -162,14 +158,17 @@ public class UserServiceImpl implements UserService {
 
     public UserEntity getById(UUID userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new DataNotFoundException("UserNot Found"));
+                .orElseThrow(() -> new DataNotFoundException("User Not Found"));
     }
 
     private Boolean checkUserEmail(String email) {
-        return userRepository.findUserEntityByEmail(email) != null;
+        return userRepository.findUserEntityByEmail(email) == null;
     }
-    public SellerInfo checkPassport(String passport){
-        return sellerRepository.findSellerInfoByPassportNumberEquals(passport);
+    public Boolean checkPassport(String passport){
+        return sellerRepository.findSellerInfoByPassportNumberEquals(passport) == null;
+    }
+    public Boolean checkPhoneNumber(String phoneNumber){
+        return sellerRepository.findSellerInfoByPhoneNumberEquals(phoneNumber) == null;
     }
     public RoleEntity checkRole(String name){
         return roleRepository.findRoleEntityByNameEqualsIgnoreCase(name);
