@@ -1,5 +1,5 @@
 body {
-    background: rgb(99, 39, 120)
+    background: rgb(202, 219, 236)
 }
 
 .form-control:focus {
@@ -8,22 +8,22 @@ body {
 }
 
 .profile-button {
-    background: rgb(99, 39, 120);
+    background: rgb(202, 219, 236);
     box-shadow: none;
     border: none
 }
 
 .profile-button:hover {
-    background: #682773
+    background: #cadbec
 }
 
 .profile-button:focus {
-    background: #682773;
+    background: #cadbec;
     box-shadow: none
 }
 
 .profile-button:active {
-    background: #682773;
+    background: #cadbec;
     box-shadow: none
 }
 
@@ -42,3 +42,4 @@ body {
     cursor: pointer;
     border: solid 1px #BA68C8
 }
+
