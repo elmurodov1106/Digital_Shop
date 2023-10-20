@@ -29,21 +29,26 @@ public class AuthController {
 
     @GetMapping("/index")
     public String yourPage(
-            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            Model model
+            Model model,
+            HttpServletRequest request
     ) {
         List<ProductEntity> allProducts = productService.getAll();
-        if (allProducts == null) {
-            model.addAttribute("message", "Product not found");
-            return "index";
+        UUID userId= checkCookie(request);
+        if(userId!= null){
+         model.addAttribute("user",userService.getById(userId));
         }
         model.addAttribute("products", allProducts);
         return "index";
     }
 
     @GetMapping("/about")
-    public String about() {
+    public String about(HttpServletRequest request, Model model) {
+        UUID userId = checkCookie(request);
+        if(userId!=null){
+            model.addAttribute("user",userService.getById(userId));
+        }
         return "About";
     }
     @GetMapping("/seller/menu")
@@ -134,8 +139,9 @@ public class AuthController {
         response.addCookie(cookie);
         if (user.getRole().getName().equals("Seller")) {
             model.addAttribute("user", user);
-            return "redirect:/auth/seller/menu";
+            return "SellerMenu";
         }
+        model.addAttribute("products",productService.getAllProducts(10,0));
         model.addAttribute("user", user);
         return "index";
     }
@@ -149,10 +155,26 @@ public class AuthController {
     public String sellerSignUp(@ModelAttribute SellerDto sellerDto, Model model) {
         UserEntity user = userService.saveSeller(sellerDto);
         if (user == null) {
-            model.addAttribute("message", "Email already exists");
+            model.addAttribute("message", "This email or passport or phone number already exists!!! Please sign in");
             return "SellerSignUp";
         }
         model.addAttribute("user", user);
         return "verify";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletResponse response){
+        Cookie cookie=new Cookie("userId","");
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        return "index";
+    }
+    private UUID checkCookie(HttpServletRequest request){
+        String userId = CookieValue.getValue("userId",request);
+        System.out.println(userId);
+        if(userId!=null){
+            System.out.println(userId);
+            return UUID.fromString(userId);
+        }
+        return null;
     }
 }

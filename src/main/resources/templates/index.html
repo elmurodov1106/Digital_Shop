@@ -12,7 +12,7 @@
    <!-- HOME SECTION -->
    <section class="container section-1">
       <div class="slogan">
-         <h1 class="company-title">DOWNTOWN TECH LIVER</h1>
+         <h1 class="company-title">DIGITAL SHOP</h1>
          <h2 class="company-slogan">
             The biggest computer shop in the area where customers come first.
          </h2>
@@ -39,6 +39,20 @@
          <div class="product product-4">
             <img th:src="'data:image/png;base64,' + ${laptop.image}" alt="computer to sell" class="product-img">
            <form action="/order/add" method="post">Add to cart</form>
+         </div>
+      </div>
+
+      <div th:each="phone: ${phone}">
+         <div class="product product-4">
+            <img th:src="'data:image/png;base64,' + ${phone.image}" alt="computer to sell" class="product-img">
+            <form action="/order/add" method="post">Add to cart</form>
+         </div>
+      </div>
+
+      <div th:each="tv: ${tv}">
+         <div class="product product-4">
+            <img th:src="'data:image/png;base64,' + ${tv.image}" alt="computer to sell" class="product-img">
+            <form action="/order/add" method="post">Add to cart</form>
          </div>
       </div>
    </section>

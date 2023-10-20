@@ -2,7 +2,9 @@ package com.example.digital_shop.service.order;
 
 import com.example.digital_shop.domain.dto.OrderDto;
 import com.example.digital_shop.entity.order.OrderEntity;
+import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
+import com.example.digital_shop.repository.UserRepository;
 import com.example.digital_shop.repository.order.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,6 +22,7 @@ public class OrderServiceImpl implements OrderService{
 
     private final OrderRepository orderRepository;
     private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
 
     @Override
     public OrderEntity add(OrderDto orderDto, UUID userId, Integer amount) {
@@ -43,7 +46,7 @@ public class OrderServiceImpl implements OrderService{
     public Boolean deleteById(UUID id, UUID userId) {
         OrderEntity orderEntity = orderRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("Order not found"));
-        if (orderEntity.getUserId().equals(userId)){
+        if (orderEntity.getUserId().getId().equals(userId)){
             orderRepository.deleteById(id);
             return true;
         }
@@ -54,18 +57,20 @@ public class OrderServiceImpl implements OrderService{
     public OrderEntity update(OrderDto update, UUID id, UUID userId) {
         OrderEntity orderEntity = orderRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("Order not found"));
-        if (orderEntity.getUserId().equals(userId)) {
+        if (orderEntity.getUserId().getId().equals(userId)) {
             modelMapper.map(update, orderEntity);
             return orderRepository.save(orderEntity);
         }
-        throw new DataNotFoundException("Order not found");
+        return null;
     }
 
     @Override
     public List<OrderEntity> getUserOrders(UUID userId) {
-        List<OrderEntity> orders = orderRepository.getOrderEntitiesByUserIdEquals(userId);
+        UserEntity user = userRepository.findById(userId).orElseThrow(()->new DataNotFoundException("User not found"));
+        List<OrderEntity> orders = orderRepository.getOrderEntitiesByUserIdEquals(user);
+        System.out.println(orders);
         if(orders.isEmpty()){
-            throw new DataNotFoundException("Orders not found");
+           return null;
         }
         return orders;
     }
