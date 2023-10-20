@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" >
 <head>
     <meta charset="UTF-8">
     <title>TV List</title>
 </head>
-<body>
+<body layout:fragment="body">
 <div class="listing-section">
   <div th:each="tv: ${tv}">
     <div class="Tv">
@@ -23,7 +25,7 @@
         <button type="button" name="item-1-button" id="item-1-button">Delete Product</button>
       </div>
     </div>
-  </div>5
+  </div>
 
 </div>
 </body>
