@@ -14,22 +14,35 @@
       margin: 0;
     }
 
-    /* Center the content inside the container */
-    .container {
-      text-align: center;
+    /* Add additional styles as needed to center specific elements */
+
+    /* Style for the menu button */
+    .menu-button {
+      font-size: 24px; /* Increase the font size for a bigger button */
+      position: absolute;
+      top: 10px;
+      left: 10px;
     }
 
-    /* Add additional styles as needed to center specific elements */
+    /* Style for the user image */
+    .user-image {
+      width: 300px; /* Increase the width to make the image larger */
+    }
+
+    /* Style for the text under the user image */
+    .user-text {
+      font-size: 20px; /* Increase the font size to make the text larger */
+    }
   </style>
 </head>
 <body>
 <div class="container rounded bg-white mt-5 mb-5">
+  <a class="btn btn-primary profile-button menu-button" href="/user/menu">Menu</a>
   <div class="row">
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-        <img class="rounded-circle mt-5" width="150px"
+        <img class="rounded-circle mt-5 user-image"
              src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-        <span> </span>
       </div>
     </div>
     <div class="col-md-5 border-right">
@@ -40,17 +53,12 @@
           </div>
           <div class="row mt-2">
             <div class="col-md-6">
-              <label class="labels">Name</label>
-              <input type="text" class="form-control" placeholder="first name" name="name" th:value="${user.getName()}">
+              <label style="font-size: 20px; " class="labels">Name</label>
+              <input style="font-size: 20px;" type="text" class="form-control" placeholder="Name" name="name" th:value="${user.getName()}">
             </div>
 
-            <div class="col-md-6"><label class="labels">Email</label><input type="email" class="form-control"
+            <div class="col-md-6"><label style="font-size: 20px;" class="labels">Email</label><input style="font-size: 20px; margin-left: 10px" 20px; type="email" class="form-control"
                                                                             th:value="${user.getEmail()}" name="email">
-            </div>
-            <div class="col-md-6">
-              <label class="labels">Menu</label>
-<!--              <bu type="password" class="form-control" name="password" id="password-field" th:value="${user.getPassword()}">-->
-              <a class="btn btn-primary profile-button" href="/user/menu">Menu</a>
             </div>
           </div>
           <!-- Display other user information (email, password, etc.) here -->
@@ -65,4 +73,3 @@
 </div>
 </body>
 </html>
-
