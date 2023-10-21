@@ -66,7 +66,6 @@
                 <li class="nav-item"><a href="/product/get-all" class="nav-link">Products</a></li>
                 <li class="nav-item"><a href="/auth/contact" class="nav-link">Contact Us</a></li>
                 <li class="nav-item"><a href="/order/get-user-orders" class="nav-link">Basket</a></li>
-                <li class="nav-item" th:if="${user!=null}"><a href="/payment/add" class="nav-link">Add Card</a></li>
                 <li class="nav-item" th:if="${user!=null}"><a href="/user/get-profile"  class="nav-link">Profile</a></li>
                 <li class="nav-item" th:if="${user==null}"><a href="/auth/sign-in" class="nav-link">Sign in</a></li>
                 <li class="nav-item" th:if="${user==null}"><a href="/auth/sign-up" class="nav-link">Register</a></li>
