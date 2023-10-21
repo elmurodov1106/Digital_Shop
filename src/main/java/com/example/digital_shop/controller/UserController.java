@@ -50,7 +50,7 @@ public class UserController {
         }
         UserEntity user = userService.getById(userId);
         model.addAttribute("user",user);
-        return "profile";
+        return "UserUpdate";
     }
     @PostMapping("/update")
     public String update(
