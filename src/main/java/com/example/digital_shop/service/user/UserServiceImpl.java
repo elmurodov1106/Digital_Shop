@@ -139,16 +139,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity updateUser(UserCreatDto userCreatDto, UUID userId) {
-        UserEntity user1 = userRepository.findById(userId)
+    public UserEntity updateUser(String name, UUID userId) {
+        UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new DataNotFoundException("User not found"));
-        UserEntity user=modelMapper.map(userCreatDto,UserEntity.class);
-        user.setId(userId);
-        user.setState(user1.getState());
-        user.setRole(user1.getRole());
-        user.setCreatedDate(user1.getCreatedDate());
-       return userRepository.save(user);
+
+        if (name != null && !name.isEmpty()) {
+            user.setName(name);
+        }
+
+        return userRepository.save(user);
     }
+
 
     @Override
     public UUID getIdByEmail(String email) {
