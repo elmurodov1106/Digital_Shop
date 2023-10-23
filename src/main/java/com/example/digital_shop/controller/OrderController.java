@@ -54,7 +54,7 @@ public class OrderController {
         model.addAttribute("user",userService.getById(userId));
         if(userOrders == null){
             model.addAttribute("message","You dont have any orders");
-            return "index";
+            return "basket";
         }
         model.addAttribute("orders",userOrders);
         model.addAttribute("products",getAll(userOrders));
