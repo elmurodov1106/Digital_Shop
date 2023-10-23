@@ -54,12 +54,12 @@ public class LaptopController {
             HttpServletRequest request
     ){
       List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
+        UUID userId = checkCookie(request);
+        if(userId!= null){
+            model.addAttribute("user",userService.getById(userId));
+        }
+        model.addAttribute("user",userService.getById(userId));
       if (allLaptop.isEmpty()){
-          UUID userId = checkCookie(request);
-          if(userId!= null){
-
-              model.addAttribute("user",userService.getById(userId));
-          }
           model.addAttribute("message","Laptop not found");
           return "index";
       }
@@ -126,7 +126,7 @@ public class LaptopController {
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
-        if(!userId.equals("null")){
+        if(userId!=null){
             return UUID.fromString(userId);
         }
         return null;

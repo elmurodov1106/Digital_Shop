@@ -4,7 +4,9 @@ package com.example.digital_shop.controller.product;
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.PhoneDto;
 import com.example.digital_shop.entity.product.PhoneEntity;
+import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.phone.PhoneService;
+import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ import java.util.UUID;
 public class PhoneController {
 
     private final PhoneService phoneService;
+    private final UserService userService;
     @GetMapping("/add")
     public String addGet() {
         return "PhoneAdd";
@@ -46,8 +49,15 @@ public class PhoneController {
     public String getAll(
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "0") int page,
-            Model model) {
+            Model model,
+            HttpServletRequest request) {
         List<PhoneEntity> allPhone = phoneService.getAllPhone(size, page);
+        UUID userId = checkCookie(request);
+        if(userId==null){
+            return "index";
+        }
+        UserEntity byId = userService.getById(userId);
+        model.addAttribute("user",byId);
         if (allPhone == null){
             model.addAttribute("message","Phone not found");
             return "index";
@@ -113,7 +123,7 @@ public class PhoneController {
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
-        if(!userId.equals("null")){
+        if(userId!=null){
             return UUID.fromString(userId);
         }
         return null;

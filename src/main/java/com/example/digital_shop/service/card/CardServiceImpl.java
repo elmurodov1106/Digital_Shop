@@ -1,4 +1,4 @@
-package com.example.digital_shop.service.payment;
+package com.example.digital_shop.service.card;
 
 import com.example.digital_shop.domain.dto.CardCreatedDto;
 import com.example.digital_shop.entity.payment.CardEntity;
@@ -34,7 +34,7 @@ public class CardServiceImpl implements CardService{
         if(cards.isEmpty()){
             throw new DataNotFoundException("Card not found");
         }
-        return cards;
+       return cards;
     }
 
     @Override
@@ -50,11 +50,11 @@ public class CardServiceImpl implements CardService{
 
     @Override
     @Transactional
-    public CardEntity update(CardCreatedDto update, UUID cardId, UUID ownerId) {
+    public CardEntity update(String name, UUID cardId, UUID ownerId) {
         CardEntity cardEntity = cardRepository.findById(cardId)
                 .orElseThrow(() -> new DataNotFoundException("Card not found"));
         if (cardEntity.getOwnerId().equals(ownerId)) {
-            modelMapper.map(update, cardEntity);
+            cardEntity.setCardName(name);
             return cardRepository.save(cardEntity);
         }
         throw new DataNotFoundException("User not found");
