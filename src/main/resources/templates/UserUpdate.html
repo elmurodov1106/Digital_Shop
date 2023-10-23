@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Update</title>
+    <title>Update</title>
     <link th:href="@{/css/addProduct.css}" rel="stylesheet">
     <script type="text/javascript" th:src="@{/js/ProductAdd.js}"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -24,14 +24,13 @@
     <form class="mt-5" action="/user/update" method="post" >
 
         <div class="mb-3">
-            <label class="form-label">Name </label>
-            <input type="text" class="form-control" name="name" th:placeholder="${user.getName()}" th:value="${user.getName()}" >
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" th:placeholder="${user.getName()}" th:value="${user.name}" >
         </div>
         <div class="mb-3">
             <label class="form-label">Email</label>
-            <input type="email" class="form-control" name="email" th:placeholder="${user.getEmail()}" th:value="${user.getEmail()()}" >
+            <input type="email" class="form-control" name="email" th:placeholder="${user.getEmail()}" th:value="${user.email}" >
         </div>
-
 
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-success text-white btn-outline-success form-control w-50 m-3" id="ekleButton">Save</button>
