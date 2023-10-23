@@ -38,11 +38,14 @@ public class CardController {
         if(userId == null){
             return "index";
         }
-        UserEntity byId = userService.getById(userId);
+        UserEntity user = userService.getById(userId);
         cardService.add(cardCreatedDto,userId);
-        model.addAttribute("user",byId);
+        model.addAttribute("user",user);
+        if (user.getRole().getName().equals("Customer")){
+            return "index";
+        }
         model.addAttribute("message","Card successfully added");
-        return "index";
+        return "SellerMenu";
     }
 
     @GetMapping("/get-all")
@@ -54,11 +57,16 @@ public class CardController {
         return "";
     }
 
-    @PutMapping("/update")
+    @GetMapping("/update")
+    public String updatePage(){
+        return "updateCard";
+    }
+    @PostMapping("/update")
     public String update(
             @RequestParam String name,
             @RequestParam UUID cardId,
-           HttpServletRequest request
+           HttpServletRequest request,
+            Model model
         ){
         UUID userId = checkCookie(request);
         cardService.update(name,cardId,userId);
