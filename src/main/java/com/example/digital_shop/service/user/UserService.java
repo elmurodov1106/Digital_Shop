@@ -14,7 +14,7 @@ public interface UserService {
     UserEntity getNewVerifyCode(String email);
     UserEntity signIn(LoginDto loginDto);
     UserEntity saveSeller(SellerDto sellerDto);
-    UserEntity updateUser(UserCreatDto userCreatDto, UUID userId);
+    UserEntity updateUser(String  name, UUID userId);
     UUID getIdByEmail(String email);
 
     UserEntity getById(UUID userId);
