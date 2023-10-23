@@ -141,6 +141,7 @@ public class ProductController {
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
+        assert userId != null;
         if(!userId.equals("null")){
             return UUID.fromString(userId);
         }
