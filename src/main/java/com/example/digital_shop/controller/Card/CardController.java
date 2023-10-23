@@ -36,11 +36,14 @@ public class CardController {
         if(userId == null){
             return "index";
         }
-        UserEntity byId = userService.getById(userId);
+        UserEntity user = userService.getById(userId);
         cardService.add(cardCreatedDto,userId);
-        model.addAttribute("user",byId);
+        model.addAttribute("user",user);
+        if (user.getRole().getName().equals("Customer")){
+            return "index";
+        }
         model.addAttribute("message","Card successfully added");
-        return "index";
+        return "SellerMenu";
     }
 
     @GetMapping("/get-all")
@@ -52,25 +55,47 @@ public class CardController {
         return "";
     }
 
-    @PutMapping("/update")
+    @GetMapping("/update")
+    public String updatePage(){
+        return "updateCard";
+    }
+    @PostMapping("/update")
     public String update(
             @RequestBody CardCreatedDto cardCreatedDto,
             @RequestParam UUID cardId,
-           HttpServletRequest request
+           HttpServletRequest request,
+            Model model
         ){
-        UUID userId = UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId = checkCookie(request);
+        if(userId == null){
+            return "index";
+        }
+        UserEntity user = userService.getById(userId);
         cardService.update(cardCreatedDto,cardId,userId);
-        return "";
+        if (user.getRole().getName().equals("Customer")){
+            return "index";
+        }
+        model.addAttribute("message","Card successfully updated");
+        return "SellerMenu";
     }
 
     @DeleteMapping("/delete")
     public String delete(
             @RequestParam UUID cardId,
-            HttpServletRequest request
+            HttpServletRequest request,
+            Model model
     ){
-        UUID userId = UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId = checkCookie(request);
+        if(userId == null){
+            return "index";
+        }
+        UserEntity user = userService.getById(userId);
         cardService.deleteById(userId, cardId);
-        return "";
+        if (user.getRole().getName().equals("Customer")){
+            return "index";
+        }
+        model.addAttribute("message","Card successfully added");
+        return "SellerMenu";
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);

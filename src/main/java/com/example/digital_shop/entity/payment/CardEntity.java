@@ -2,8 +2,6 @@ package com.example.digital_shop.entity.payment;
 
 import com.example.digital_shop.entity.BaseEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.*;
 import java.util.UUID;
 
