@@ -2,6 +2,8 @@ package com.example.digital_shop.controller.Card;
 
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.CardCreatedDto;
+import com.example.digital_shop.entity.payment.CardEntity;
+import com.example.digital_shop.entity.product.LaptopEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.repository.RoleRepository;
 import com.example.digital_shop.service.card.CardService;
@@ -11,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -41,20 +45,42 @@ public class CardController {
         UserEntity user = userService.getById(userId);
         cardService.add(cardCreatedDto,userId);
         model.addAttribute("user",user);
-        if (user.getRole().getName().equals("Customer")){
-            return "index";
+        if (user.getRole().getName().equals("Seller")){
+            return "SellerMenu";
         }
         model.addAttribute("message","Card successfully added");
-        return "SellerMenu";
+        return "index";
     }
 
+//    @GetMapping("/get-all")
+//    public String getAll(
+//            @RequestParam int size,
+//            @RequestParam int page,
+//            Model model
+//    ){
+//        List<CardEntity> allUserCards = cardService.getAllUserCards(size, page);
+//        model.addAttribute("cardList",allUserCards);
+//        return "CardList";
+//    }
     @GetMapping("/get-all")
     public String getAll(
-            @RequestParam int size,
-            @RequestParam int page
+            @RequestParam(defaultValue = "10")  int size,
+            @RequestParam(defaultValue = "0")  int page,
+            Model model,
+            HttpServletRequest request
     ){
-        cardService.getAllUserCards(size, page);
-        return "";
+        List<CardEntity> allUserCards = cardService.getAllUserCards(size, page);
+        UUID userId = checkCookie(request);
+        if(userId!= null){
+            model.addAttribute("user",userService.getById(userId));
+        }
+        model.addAttribute("user",userService.getById(userId));
+        if (allUserCards.isEmpty()){
+            model.addAttribute("message","Card not found");
+            return "index";
+        }
+        model.addAttribute("cardList",allUserCards);;
+        return "CardList";
     }
 
     @GetMapping("/update")

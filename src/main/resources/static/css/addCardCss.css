@@ -102,6 +102,11 @@ span {
     padding-left: 5px;
     cursor: pointer;
 }
+.x-svg{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
 
 .btn {
     background-color: #F9E450;
