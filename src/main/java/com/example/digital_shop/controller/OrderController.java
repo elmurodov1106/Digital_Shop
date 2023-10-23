@@ -10,8 +10,6 @@ import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.Banner;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +54,7 @@ public class OrderController {
         model.addAttribute("user",userService.getById(userId));
         if(userOrders == null){
             model.addAttribute("message","You dont have any orders");
-            return "index";
+            return "basket";
         }
         model.addAttribute("orders",userOrders);
         model.addAttribute("products",getAll(userOrders));
@@ -78,16 +76,24 @@ public class OrderController {
         return "basket";
     }
 
-    @DeleteMapping("/{userId}/delete")
-    public ResponseEntity<Boolean> delete(
-            @PathVariable UUID userId,
-            @RequestParam UUID orderId
+    @DeleteMapping("/delete")
+    public String delete(
+            @RequestParam UUID orderId,
+            HttpServletRequest request,
+            Model model
     ){
-        return ResponseEntity.ok(orderService.deleteById(orderId,userId));
+        UUID userId = checkCookie(request);
+        Boolean aBoolean = orderService.deleteById(orderId, userId);
+        if(aBoolean){
+            model.addAttribute("message","Order Succefully deleted");
+            return "basket";
+        }
+        model.addAttribute("message","Error deleting order");
+        return "basket";
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
-        if(!userId.equals("null")){
+        if(userId!= null){
             return UUID.fromString(userId);
         }
         return null;

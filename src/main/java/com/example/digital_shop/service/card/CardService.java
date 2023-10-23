@@ -1,4 +1,4 @@
-package com.example.digital_shop.service.payment;
+package com.example.digital_shop.service.card;
 
 
 import com.example.digital_shop.domain.dto.CardCreatedDto;
@@ -10,5 +10,5 @@ public interface CardService {
     CardEntity add(CardCreatedDto card, UUID ownerId);
     List<CardEntity> getAllUserCards(int size, int page);
     Boolean deleteById(UUID cardId, UUID ownerId);
-    CardEntity update(CardCreatedDto update,UUID cardId,UUID ownerId);
+    CardEntity update(String name,UUID cardId,UUID ownerId);
 }

@@ -35,23 +35,34 @@
       </div>
       </div>
 
-      <div th:each="laptop: ${laptop}">
+      <div th:each="lap: ${laptop}">
          <div class="product product-4">
-            <img th:src="'data:image/png;base64,' + ${laptop.image}" alt="computer to sell" class="product-img">
-           <form action="/order/add" method="post">Add to cart</form>
-         </div>
+            <img th:src="'data:image/png;base64,' + ${lap.image}" alt="computer to sell" class="product-img">
+
+            <h2 class="item" th:text="${lap.name}">Nomi</h2>
+            <h2 class="item" th:text="${lap.model}">Model</h2>
+            <div class="text-box">
+            <form action="/order/add" method="post">Add to cart</form>
+            </div>
+            </div>
       </div>
 
-      <div th:each="phone: ${phone}">
+      <div th:each="ph: ${phone}">
          <div class="product product-4">
-            <img th:src="'data:image/png;base64,' + ${phone.image}" alt="computer to sell" class="product-img">
+            <img th:src="'data:image/png;base64,' + ${ph.image}" alt="computer to sell" class="product-img">
+            <h2 class="item" th:text="${ph.name}">Nomi</h2>
+            <h2 class="item" th:text="${ph.model}">Model</h2>
+            <div class="text-box">
             <form action="/order/add" method="post">Add to cart</form>
          </div>
       </div>
 
-      <div th:each="tv: ${tv}">
+      <div th:each="tvs: ${tv}">
          <div class="product product-4">
-            <img th:src="'data:image/png;base64,' + ${tv.image}" alt="computer to sell" class="product-img">
+            <img th:src="'data:image/png;base64,' + ${tvs.image}" alt="computer to sell" class="product-img">
+            <h2 class="item" th:text="${tvs.name}">Nomi</h2>
+            <h2 class="item" th:text="${tvs.model}">Model</h2>
+            <div class="text-box">
             <form action="/order/add" method="post">Add to cart</form>
          </div>
       </div>
@@ -89,6 +100,7 @@
    <div class="container end-footer">
       <div class="copyright">copyright © 2023 - Present • <b>DIGITAL SHOP</b></div>
       <a class="designer" href="https://t.me/Yusupov0377">Yusupov Ulugbek</a>
+      <a class="designer" href="https://t.me/Elmurodov_1106">Mansurbek Elmurodov</a>
    </div>
 </footer>
 </body>

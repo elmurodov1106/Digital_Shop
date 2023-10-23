@@ -30,6 +30,17 @@ public class ProductController {
         return "ProductAdd";
     }
 
+    @GetMapping("/information/{productId}")
+    public String information(
+            @PathVariable UUID productId,
+            Model model
+    ) {
+        ProductEntity product = productService.getById(productId);
+        model.addAttribute("product",product);
+
+        return "ProductInformation";
+    }
+
 
 
     @PostMapping("/add")
@@ -141,7 +152,7 @@ public class ProductController {
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
-        if(!userId.equals("null")){
+        if(userId!=null){
             return UUID.fromString(userId);
         }
         return null;

@@ -8,6 +8,7 @@
     <script type="text/javascript" th:src="@{/js/seller.js}"></script>
 </head>
 <body>
+<div th:text="${message}"  class="error-message"></div>
 
 <!--<ul id="slide-out" class="side-nav fixed z-depth-2">-->
 <!--    <li class="center no-padding">-->
@@ -171,7 +172,12 @@
 
 <!--            <li><a href="#"><i class="fa fa-list-alt"></i>Products </a></li>-->
 
-            <li><a th:href="@{/product/get-seller-products}"><i class="fa fa-list-alt"></i>Products </a></li>
+            <li><a th:href="@{/product/get-seller-products}"><i class="fa fa-list-alt"></i> Products </a></li>
+
+
+            <li><a th:href="@{/payment/get-all}"><i class="fa fa-list-alt"></i> My  Card </a></li>
+
+
 
 
 

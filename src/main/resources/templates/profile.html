@@ -12,6 +12,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
+      position: relative; /* Set body to a relative position */
     }
 
     /* Add additional styles as needed to center specific elements */
@@ -21,23 +22,31 @@
       font-size: 24px; /* Increase the font size for a bigger button */
       position: absolute;
       top: 10px;
-      left: 10px;
+      right: 1600px; /* Adjusted the right position for your design */
     }
 
     /* Style for the user image */
     .user-image {
-      width: 300px; /* Increase the width to make the image larger */
+      width: 350px; /* Increase the width to make the image larger */
     }
 
     /* Style for the text under the user image */
     .user-text {
       font-size: 20px; /* Increase the font size to make the text larger */
     }
+
+    /* Style for the Log Out button */
+    .log-out-button {
+      font-size: 24px; /* Increase the font size for a bigger button */
+      position: absolute;
+      top: 10px;
+      right: 20px; /* Adjusted the right position for your design */
+    }
   </style>
 </head>
 <body>
 <div class="container rounded bg-white mt-5 mb-5">
-  <a class="btn btn-primary profile-button menu-button" href="/user/menu">Menu</a>
+  <a class="btn btn-primary menu-button" href="/user/menu">Menu</a>
   <div class="row">
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -47,29 +56,28 @@
     </div>
     <div class="col-md-5 border-right">
       <div class="p-3 py-5">
-        <form action="/user/get-update" method="get">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="text-right">Profile Settings</h1>
-          </div>
+
           <div class="row mt-2">
             <div class="col-md-6">
-              <label style="font-size: 20px; " class="labels">Name</label>
-              <input style="font-size: 20px;" type="text" class="form-control" placeholder="Name" name="name" th:value="${user.getName()}">
+              <label style="font-size: 15px; " class="labels">Name</label>
+              <input style="font-size: 15px;" type="text" class="form-control" placeholder="Name" name="name" th:value="${user.getName()}">
             </div>
-
-            <div class="col-md-6"><label style="font-size: 20px;" class="labels">Email</label><input style="font-size: 20px; margin-left: 10px" 20px; type="email" class="form-control"
-                                                                            th:value="${user.getEmail()}" name="email">
+            <div class="col-md-6">
+              <label style="font-size: 15px;" class="labels">Email</label>
+              <input style="font-size: 15px; margin-left: 10px" class="form-control" th:value="${user.getEmail()}" name="email">
             </div>
           </div>
-          <!-- Display other user information (email, password, etc.) here -->
+          <!-- Other user information input fields go here -->
           <div class="mt-5 text-center">
-            <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
-            <a class="btn btn-danger profile-button" href="/auth/logout">Log Out</a>
+<!--            <a style=" font-size: 20px " class="btn btn-primary" href="/auth/seller/menu">Save</a>-->
+            <a style=" font-size: 20px " class="btn btn-primary"  th:href="@{/user/update}">Update Profile</a>
+
           </div>
-        </form>
+
       </div>
     </div>
   </div>
+  <a class="btn btn-danger log-out-button" href="/auth/logout">Log Out</a>
 </div>
 </body>
 </html>

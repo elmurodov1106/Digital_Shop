@@ -50,20 +50,20 @@ public class UserController {
         }
         UserEntity user = userService.getById(userId);
         model.addAttribute("user",user);
-        return "profile";
+        return "UserUpdate";
     }
     @PostMapping("/update")
     public String update(
-            @RequestBody UserCreatDto userCreatDto,
+            @RequestParam String name,
             HttpServletRequest request,
             Model model){
         UUID userId = checkCookie(request);
         if (userId == null){
             return "index";
         }
-        UserEntity userEntity = userService.updateUser(userCreatDto, userId);
+        UserEntity userEntity = userService.updateUser(name, userId);
         model.addAttribute("user",userEntity);
-        return "index";
+        return "profile";
     }
     @GetMapping("/get-profile")
     public String getUserProfile(
