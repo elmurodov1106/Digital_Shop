@@ -2,8 +2,6 @@ package com.example.digital_shop.entity.payment;
 
 import com.example.digital_shop.entity.BaseEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.*;
 import java.util.UUID;
 
@@ -17,7 +15,6 @@ public class CardEntity extends BaseEntity {
     private String cardName;
     private String cardNumber;
     private String expireDate;
-    private Double balance;
+    private Double balance = 100000.0;
     private UUID ownerId;
-
 }

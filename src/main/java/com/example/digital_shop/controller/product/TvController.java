@@ -50,9 +50,9 @@ public class TvController {
             @RequestParam(defaultValue = "0") int page,
             Model model,HttpServletRequest request) {
         List<TvEntity> allTv = tvService.getAllTv(size, page);
+        UUID userId = checkCookie(request);
+        model.addAttribute("user",userService.getById(userId));
         if (allTv.isEmpty()) {
-            UUID userId = checkCookie(request);
-            model.addAttribute("user",userService.getById(userId));
             model.addAttribute("message", "Tv not found");
             return "index";
         }
