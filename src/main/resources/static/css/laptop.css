@@ -26,7 +26,7 @@ a {
     text-decoration: none;
 }
 img {
-    width: 25%;
+    width: 50%;
     height: auto;
 }
 .bx {
@@ -576,6 +576,6 @@ input[type="submit"]:hover {
 .boxes{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 100px;
+    margin-top: 180px;
 }
 
