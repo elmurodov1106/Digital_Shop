@@ -1,6 +1,7 @@
 package com.example.digital_shop.domain.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @AllArgsConstructor
@@ -40,4 +41,6 @@ public class LaptopDto {
     private String productType;
     @NotEmpty(message = "description cannot be empty")
     private String description;
+    @NotNull(message = "amount cannot be null")
+    private Integer amount;
 }

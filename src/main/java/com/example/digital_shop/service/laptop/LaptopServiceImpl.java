@@ -1,9 +1,6 @@
 package com.example.digital_shop.service.laptop;
 
-
-import com.example.digital_shop.domain.dto.InventoryCreateDto;
 import com.example.digital_shop.domain.dto.LaptopDto;
-import com.example.digital_shop.entity.inventory.InventoryEntity;
 import com.example.digital_shop.entity.product.LaptopEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
@@ -34,13 +31,7 @@ public class LaptopServiceImpl implements LaptopService{
         LaptopEntity laptopEntity = modelMapper.map(laptop, LaptopEntity.class);
         laptopEntity.setUserId(userId);
         laptopEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-        LaptopEntity savedLaptopEntity = laptopRepository.save(laptopEntity);
-        InventoryCreateDto inventoryCreateDto = new InventoryCreateDto();
-        inventoryCreateDto.setProductId(savedLaptopEntity.getId());
-        inventoryCreateDto.setProductCount(amount);
-        InventoryEntity inventoryEntity = modelMapper.map(inventoryCreateDto, InventoryEntity.class);
-        inventoryRepository.save(inventoryEntity);
-        return savedLaptopEntity;
+        return laptopRepository.save(laptopEntity);
 
     }
 
@@ -85,11 +76,8 @@ public class LaptopServiceImpl implements LaptopService{
         if (laptopEntity == null) {
             return null;
         }
-        InventoryEntity inventoryEntity = inventoryRepository.getByProductId(laptopId);
         if (laptopEntity.getUserId().equals(userId)) {
             modelMapper.map(update, laptopEntity);
-            inventoryEntity.setProductCount(amount);
-            inventoryRepository.save(inventoryEntity);
             laptopEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
             return laptopRepository.save(laptopEntity);
         }
