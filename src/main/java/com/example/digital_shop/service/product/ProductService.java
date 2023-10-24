@@ -14,7 +14,7 @@ public interface ProductService {
     List<ProductEntity> getAllProducts(int size, int page);
     List<ProductEntity> search(int page,int size,String name);
     Boolean deleteById(UUID id,UUID userId);
-
+    List<ProductEntity> findProductEntityByOwnerId(UUID userId);
     List<ProductEntity> getAll();
     ProductEntity getById(UUID productId);
     List<ProductEntity> getSellerProduct(UUID sellerId, int page, int size);
