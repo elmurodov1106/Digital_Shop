@@ -45,11 +45,8 @@ public class CardController {
         UserEntity user = userService.getById(userId);
         cardService.add(cardCreatedDto,userId);
         model.addAttribute("user",user);
-        if (user.getRole().getName().equals("Seller")){
-            return "SellerMenu";
-        }
         model.addAttribute("message","Card successfully added");
-        return "index";
+        return "redirect:/payment/get-all";
     }
 
 //    @GetMapping("/get-all")
@@ -84,22 +81,38 @@ public class CardController {
     }
 
     @GetMapping("/update")
-    public String updatePage(){
+    public String updateGet(
+            @RequestParam UUID cardId,
+            HttpServletRequest request,
+            Model model){
+        UUID userId = checkCookie(request);
+        if (userId == null){
+            return "index";
+        }
+        UserEntity user = userService.getById(userId);
+        List<CardEntity> cardEntityByOwnerId = cardService.findCardEntityByOwnerId(userId);
+        model.addAttribute("user",user);
+        model.addAttribute("cardId",cardId);
+        model.addAttribute("cardList",cardEntityByOwnerId);
         return "updateCard";
     }
+
     @PostMapping("/update")
-    public String update(
-            @RequestParam String name,
+    public String updateCard(
+            @RequestParam String cardName,
             @RequestParam UUID cardId,
-           HttpServletRequest request,
+            HttpServletRequest request,
             Model model
-        ){
+    ) {
         UUID userId = checkCookie(request);
-        cardService.update(name,cardId,userId);
-        return "";
+        UserEntity user= userService.getById(userId);
+        cardService.update(cardName, cardId, userId);
+            model.addAttribute("message","Successfully updated");
+            return "redirect:/payment/get-all";
     }
 
-    @DeleteMapping("/delete")
+
+    @GetMapping("/delete")
     public String delete(
             @RequestParam UUID cardId,
             HttpServletRequest request,
@@ -107,7 +120,7 @@ public class CardController {
     ){
         UUID userId = checkCookie(request);
         UserEntity user= userService.getById(userId);
-        Boolean aBoolean = cardService.deleteById(userId, cardId);
+        Boolean aBoolean = cardService.deleteById(cardId,userId);
         model.addAttribute("user",user);
         if(user.getRole().getName().equals("Seller")){
             if(aBoolean){
@@ -118,7 +131,7 @@ public class CardController {
         }
         if(aBoolean){
             model.addAttribute("message","Successfully deleted");
-            return "index";
+            return "redirect:/payment/get-all";
         }
         return "index";
     }
