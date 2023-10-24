@@ -1,11 +1,7 @@
 package com.example.digital_shop.service.phone;
 
-
-import com.example.digital_shop.domain.dto.InventoryCreateDto;
 import com.example.digital_shop.domain.dto.PhoneDto;
-import com.example.digital_shop.entity.inventory.InventoryEntity;
 import com.example.digital_shop.entity.product.PhoneEntity;
-import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
 import com.example.digital_shop.repository.phone.PhoneRepository;
 import jakarta.transaction.Transactional;
@@ -38,16 +34,8 @@ public class PhoneServiceImpl implements PhoneService{
         PhoneEntity phoneEntity = modelMapper.map(phoneDto,PhoneEntity.class);
         phoneEntity.setUserId(userId);
         phoneEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-        PhoneEntity save = phoneRepository.save(phoneEntity);
-        InventoryCreateDto inventoryCreateDto = new InventoryCreateDto();
-        inventoryCreateDto.setProductId(save.getId());
-        inventoryCreateDto.setProductCount(amount);
-        InventoryEntity inventoryEntity = modelMapper.map(inventoryCreateDto, InventoryEntity.class);
-        inventoryRepository.save(inventoryEntity);
-        return save;
+        return phoneRepository.save(phoneEntity);
     }
-
-
     @Override
     public List<PhoneEntity> getAllPhone(int size, int page) {
         Pageable pageable = PageRequest.of(page, size);
@@ -71,13 +59,6 @@ public class PhoneServiceImpl implements PhoneService{
     @Transactional
     public Boolean deleteById(UUID phoneId, UUID userId) {
         PhoneEntity phoneNotFound = phoneRepository.findPhoneEntityById(phoneId);
-//                .orElseThrow(() -> new DataNotFoundException("Phone not found"));
-//        if (phoneNotFound.getUserId().equals(userId)) {
-//            phoneRepository.deleteById(productId);
-////            deleteInventory(productId, token);
-//            return true;
-//        }
-//        throw new DataNotFoundException("Phone not found");
         if (phoneNotFound == null) {
             return null;
         }
@@ -88,39 +69,18 @@ public class PhoneServiceImpl implements PhoneService{
         }
         return null;
     }
-
-
-
-
-
     @Override
     @Transactional
     public PhoneEntity update(PhoneDto phoneDto, UUID phoneId,Integer amount, UUID userId,MultipartFile image) throws IOException {
-//        PhoneEntity phoneEntity = phoneRepository.findById(phoneId)
-//                .orElseThrow(() -> new DataNotFoundException("Phone not found"));
-//        if (phoneEntity.getUserId().equals(userId)) {
-//            modelMapper.map(phoneDto, phoneEntity);
-//            return phoneRepository.save(phoneEntity);
-//        }
-//        throw new DataNotFoundException("Phone not found");
         PhoneEntity phoneEntity = phoneRepository.findPhoneEntityById(phoneId);
         if (phoneEntity==null){
             return null;
         }
-        InventoryEntity inventoryEntity = inventoryRepository.getByProductId(phoneId);
         if (phoneEntity.getUserId().equals(userId)){
             modelMapper.map(phoneDto,phoneEntity);
-            inventoryEntity.setProductCount(amount);
-            inventoryRepository.save(inventoryEntity);
             phoneEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
             return phoneRepository.save(phoneEntity);
         }
         return null;
     }
-
-
-
-
-
-
 }

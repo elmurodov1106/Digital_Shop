@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public UserEntity save(UserCreatDto userCreatDto) {
-        if(checkUserEmail(userCreatDto.getEmail())){
+        if(!checkUserEmail(userCreatDto.getEmail())){
             return null;
         }
         UserEntity userEntity = modelMapper.map(userCreatDto, UserEntity.class);
@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity saveSeller(SellerDto sellerDto) {
         RoleEntity role = checkRole("Seller");
-        if(checkUserEmail(sellerDto.getEmail())|| checkPassport(sellerDto.getPassportNumber())|| checkPhoneNumber(sellerDto.getPhoneNumber())){
+        if(!checkUserEmail(sellerDto.getEmail())|| !checkPassport(sellerDto.getPassportNumber())|| !checkPhoneNumber(sellerDto.getPhoneNumber())){
             return null;
         }
         if(role==null){
