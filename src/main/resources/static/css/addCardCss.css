@@ -143,3 +143,36 @@ span {
     cursor: pointer;
 }
 
+/* Add Card Button */
+.back-button {
+    display: block;
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    left: 10px; /* Adjust the left position as needed */
+    padding: 10px 20px;
+    background-color: #0074D9; /* Change the background color */
+    color: #FFF; /* Text color */
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #0056A8;
+}
+.add-card-button {
+    /* Your Add Card button styles go here */
+    background-color: #0074D9;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 10px; /* Adjust the right position as needed */
+}
+
+
