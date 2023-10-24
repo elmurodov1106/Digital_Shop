@@ -2,7 +2,9 @@ package com.example.digital_shop.service.card;
 
 import com.example.digital_shop.domain.dto.CardCreatedDto;
 import com.example.digital_shop.entity.payment.CardEntity;
+import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
+import com.example.digital_shop.repository.UserRepository;
 import com.example.digital_shop.repository.payment.CardRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.UUID;
 public class CardServiceImpl implements CardService{
     private final CardRepository cardRepository;
     private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
 
     @Override
     @Transactional
@@ -38,12 +41,20 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
+    public List<CardEntity> findCardEntityByOwnerId(UUID userId) {
+        UserEntity userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException("User not found"));
+        return cardRepository.findCardEntityByOwnerId(userId);
+    }
+
+    @Override
     @Transactional
     public Boolean deleteById(UUID cardId, UUID ownerId) {
         CardEntity cardEntity = cardRepository.findById(cardId)
                 .orElseThrow(() -> new DataNotFoundException("Card not found"));
         if (cardEntity.getOwnerId().equals(ownerId)) {
             cardRepository.deleteById(cardId);
+            return true;
         }
         throw new DataNotFoundException("User not found");
     }
