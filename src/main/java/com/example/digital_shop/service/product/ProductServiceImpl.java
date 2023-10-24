@@ -4,6 +4,9 @@ import com.example.digital_shop.domain.dto.InventoryCreateDto;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.inventory.InventoryEntity;
 import com.example.digital_shop.entity.product.ProductEntity;
+import com.example.digital_shop.entity.user.UserEntity;
+import com.example.digital_shop.exception.DataNotFoundException;
+import com.example.digital_shop.repository.UserRepository;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
 import com.example.digital_shop.repository.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +29,8 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
     private final InventoryRepository inventoryRepository;
+    private final UserRepository userRepository;
+
     @Override
     @Transactional
     public ProductEntity add(ProductCreatDto product, UUID userId, Integer amount, MultipartFile image){
@@ -43,6 +48,13 @@ public class ProductServiceImpl implements ProductService {
         InventoryEntity inventoryEntity = modelMapper.map(inventoryCreateDto, InventoryEntity.class);
         inventoryRepository.save(inventoryEntity);
         return savedProduct;
+    }
+
+    @Override
+    public List<ProductEntity> findProductEntityByOwnerId(UUID userId) {
+        UserEntity userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException("User not found"));
+        return productRepository.findProductEntityByUserIdEqualsIgnoreCase(userId);
     }
 
     @Override
