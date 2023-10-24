@@ -121,7 +121,7 @@ public class TvController {
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
-        if(!userId.equals("null")){
+        if(userId!=null){
             return UUID.fromString(userId);
         }
         return null;
