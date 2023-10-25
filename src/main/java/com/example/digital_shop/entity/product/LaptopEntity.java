@@ -1,6 +1,7 @@
 package com.example.digital_shop.entity.product;
 
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,11 +19,6 @@ public class LaptopEntity extends ProductEntity {
     private Integer Ram;
     private Integer ScreenSize;
     private Integer Ghz;
-
     private String description;
-//    private String model;
-//    private String name;
-//    private Double cost;
-//    private UUID userId;
 
 }

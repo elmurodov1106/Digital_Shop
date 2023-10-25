@@ -25,9 +25,13 @@ public class CardServiceImpl implements CardService{
     @Override
     @Transactional
     public CardEntity add(CardCreatedDto card, UUID ownerId) {
-        CardEntity cardEntity = modelMapper.map(card, CardEntity.class);
-        cardEntity.setOwnerId(ownerId);
-       return cardRepository.save(cardEntity);
+        CardEntity cardEntity1 = cardRepository.findCardEntityByCardNumberEqualsIgnoreCase(card.getCardNumber());
+        if (cardEntity1 == null) {
+            CardEntity cardEntity = modelMapper.map(card, CardEntity.class);
+            cardEntity.setOwnerId(ownerId);
+            return cardRepository.save(cardEntity);
+        }
+        return null;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.digital_shop.repository.product;
 
+
 import com.example.digital_shop.entity.product.ProductEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,5 @@ public interface ProductRepository extends JpaRepository<ProductEntity, UUID> {
     List<ProductEntity> searchProductEntitiesByModelContainingIgnoreCase(String model, Pageable pageable);
     List<ProductEntity> findProductEntitiesByUserIdEquals(UUID userId, Pageable pageable);
     ProductEntity findProductEntityById(UUID productId);
+    List<ProductEntity> findProductEntityByUserIdEquals(UUID userId);
 }

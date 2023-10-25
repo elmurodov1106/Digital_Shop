@@ -70,7 +70,7 @@ public class AuthController {
 
     @GetMapping("/contact")
     public String contact(HttpServletRequest request, Model model) {
-        UUID userId=UUID.fromString(CookieValue.getValue("userId",request));
+        UUID userId=checkCookie(request);
         UserEntity byId = userService.getById(userId);
         model.addAttribute("user",byId);
         return "contactUs";
@@ -78,6 +78,10 @@ public class AuthController {
     @PostMapping("/sign-up")
     public String signUp(@ModelAttribute UserCreatDto userCreatDto,
                          Model model) {
+        if (!userCreatDto.getEmail().endsWith("@gmail.com")){
+            model.addAttribute("message","Email did not  match");
+            return "signUp";
+        }
         UserEntity save = userService.save(userCreatDto);
         if (save == null) {
             model.addAttribute("message", "Email already exists");
@@ -181,9 +185,7 @@ public class AuthController {
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
-        System.out.println(userId);
         if(userId!=null){
-            System.out.println(userId);
             return UUID.fromString(userId);
         }
         return null;
