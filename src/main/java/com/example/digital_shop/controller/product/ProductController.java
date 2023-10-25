@@ -78,7 +78,7 @@ public class ProductController {
             return "index";
         }
         model.addAttribute("products",all);
-        return "index";
+        return "allProducts";
     }
 
     @GetMapping("/search")

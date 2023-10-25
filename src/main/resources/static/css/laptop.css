@@ -576,6 +576,6 @@ input[type="submit"]:hover {
 .boxes{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 180px;
+    margin-top: 150px;
 }
 

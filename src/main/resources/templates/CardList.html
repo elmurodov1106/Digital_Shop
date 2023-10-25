@@ -9,12 +9,21 @@
   <link th:href="@{/css/addCardCss.css}" rel="stylesheet">
 </head>
 <body>
+<div th:if="${#lists.isEmpty(cardList)}">
+  <p>No cards found.</p>
+</div>
+<div th:unless="${#lists.isEmpty(cardList)}">
+
+
 <div class="main">
   <!-- Back Button -->
   <a href="/auth/menu" class="back-button"> <-Back</a>
 
   <!-- Add Card Button -->
   <a href="/payment/add" class="add-card-button">Add Card</a>
+  <div th:if="${#lists.isEmpty(cardList)}">
+    <p>No cards found.</p>
+  </div>
 
   <div th:each="cardlist: ${cardList}">
     <div class="container">
@@ -53,6 +62,8 @@
         </tbody>
       </table>
     </div>
+  </div>
+</div>
   </div>
 </div>
 </body>
