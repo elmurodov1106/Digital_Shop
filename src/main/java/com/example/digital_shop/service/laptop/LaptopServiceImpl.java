@@ -84,5 +84,14 @@ public class LaptopServiceImpl implements LaptopService{
         return null;
     }
 
-
+    @Override
+    public List<LaptopEntity> getSellerLaptop(UUID sellerId) {
+        List<LaptopEntity> laptopEntityById = laptopRepository.findLaptopEntitiesByUserIdEquals(sellerId);
+        if(laptopEntityById.isEmpty()){
+            return null;
+        }
+        return laptopEntityById;
     }
+
+
+}
