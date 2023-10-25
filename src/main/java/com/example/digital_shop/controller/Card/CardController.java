@@ -57,16 +57,18 @@ public class CardController {
             Model model,
             HttpServletRequest request
     ){
-        List<CardEntity> allUserCards = cardService.getAllUserCards(size, page);
         UUID userId = checkCookie(request);
+        List<CardEntity> allUserCards = cardService.getAllUserCards(size, page,userId);
         if(userId!= null){
             model.addAttribute("user",userService.getById(userId));
         }
         model.addAttribute("user",userService.getById(userId));
         if (allUserCards.isEmpty()){
+            model.addAttribute("user",userService.getById(userId));
             model.addAttribute("message","Card not found");
             return "index";
         }
+        model.addAttribute("user",userService.getById(userId));
         model.addAttribute("cardList",allUserCards);;
         return "CardList";
     }
@@ -98,6 +100,7 @@ public class CardController {
         UUID userId = checkCookie(request);
         UserEntity user= userService.getById(userId);
         cardService.update(cardName, cardId, userId);
+        model.addAttribute("user",user);
             model.addAttribute("message","Successfully updated");
             return "redirect:/payment/get-all";
     }
@@ -115,12 +118,14 @@ public class CardController {
         model.addAttribute("user",user);
         if(user.getRole().getName().equals("Seller")){
             if(aBoolean){
+                model.addAttribute("user",user);
                 model.addAttribute("message","Successfully deleted");
             }
             model.addAttribute("message","Card not found");
             return "SellerMenu";
         }
         if(aBoolean){
+            model.addAttribute("user",user);
             model.addAttribute("message","Successfully deleted");
             return "redirect:/payment/get-all";
         }
