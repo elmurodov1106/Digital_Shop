@@ -13,4 +13,5 @@ public interface LaptopRepository extends JpaRepository<LaptopEntity, UUID> {
     List<LaptopEntity> searchLaptopEntitiesByNameContainingIgnoreCase(String name, Pageable pageable);
 
     LaptopEntity findLaptopEntityById(UUID phoneId);
+    List<LaptopEntity> findLaptopEntitiesByUserIdEquals(UUID userId);
 }

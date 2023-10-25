@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserService {
                         sellerDto.getBirthDate()
                         , sellerDto.getPassportNumber()
                         , save
-                        , sellerDto.getPhoneNumber());
+                        , sellerDto.getPhoneNumber(),0.0);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         sellerRepository.save(sellerInfo);
         VerificationCode verificationCode=generateVerificationCode.generateVerificationCode(save);

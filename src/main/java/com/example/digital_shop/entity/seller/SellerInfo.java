@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
 
@@ -30,4 +31,6 @@ public class SellerInfo extends BaseEntity {
     private UserEntity user;
     @Column(unique = true,nullable = false)
     private String phoneNumber;
+    @ColumnDefault("0.0")
+    private Double balance;
 }

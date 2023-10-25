@@ -4,6 +4,8 @@ import com.example.digital_shop.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+
 import java.util.UUID;
 
 @Entity(name = "card_entity")
@@ -17,6 +19,7 @@ public class CardEntity extends BaseEntity {
     @Column(unique = true,nullable = false)
     private String cardNumber;
     private String expireDate;
-    private Double balance = 100000.0;
+    @ColumnDefault("100000.0")
+    private Double balance;
     private UUID ownerId;
 }

@@ -53,18 +53,37 @@ public class LaptopController {
             Model model,
             HttpServletRequest request
     ){
-      List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
+        UUID userId = checkCookie(request);
+        if(userId== null){
+           return "signIn";
+        }
+        List<LaptopEntity> allLaptop = laptopService.getSellerLaptop(userId);
+        model.addAttribute("user",userService.getById(userId));
+        if (allLaptop==null){
+            model.addAttribute("message","Laptop not found");
+            return "allLaptop";
+        }
+        model.addAttribute("laptops",allLaptop);;
+        return "allLaptop";
+    }
+    @GetMapping("/get-seller")
+    public String getSellerlaptop(
+            @RequestParam(defaultValue = "10")  int size,
+            @RequestParam(defaultValue = "0")  int page,
+            Model model,
+            HttpServletRequest request
+    ){
+        List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
         UUID userId = checkCookie(request);
         if(userId!= null){
             model.addAttribute("user",userService.getById(userId));
         }
-        model.addAttribute("user",userService.getById(userId));
-      if (allLaptop.isEmpty()){
-          model.addAttribute("message","Laptop not found");
-          return "index";
-      }
-      model.addAttribute("laptops",allLaptop);;
-      return "allLaptop";
+        if (allLaptop.isEmpty()){
+            model.addAttribute("message","Laptop not found");
+            return "allLaptop";
+        }
+        model.addAttribute("laptops",allLaptop);;
+        return "allLaptop";
     }
 
     @GetMapping("/search-by-name")
