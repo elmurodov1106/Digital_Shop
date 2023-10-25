@@ -150,6 +150,17 @@ public class AuthController {
         return "index";
     }
 
+    @GetMapping("/menu")
+    public String menu( Model model,  HttpServletRequest request){
+        UUID userId = checkCookie(request);
+        UserEntity user= userService.getById(userId);
+        model.addAttribute("user",user);
+        if(user.getRole().getName().equals("Seller")){
+            return "SellerMenu";
+        }
+        return "index";
+    }
+
     @GetMapping("/seller/sign-up")
     public String sellerSignUpGet() {
         return "SellerSignUp";
