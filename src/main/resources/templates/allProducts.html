@@ -36,6 +36,7 @@
 
 
 <div class="listing-section">
+    <div class="laptops">
     <div th:each="product: ${products}">
         <div class="product">
             <div class="image-box">
@@ -46,14 +47,6 @@
             <div class="text-box">
                 <h2 class="item" th:text="${product.name}">Nomi</h2>
                 <h3 class="price" th:text="${product.cost}">Narxi</h3>
-<!--                <tbody>-->
-<!--                <tr>-->
-<!--                    <td th:text="${'Product Name: ' + product.getName()}"></td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td th:text="${'Card Number: ' + product.getCost()}"></td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
 <!--                <p class="description">A bag of delicious oranges!</p>-->
 <!--                <label for="item-1-quantity">Quantity:</label>-->
 <!--                <input type="text" name="item-1-quantity" id="item-1-quantity" value="1">-->
@@ -73,7 +66,9 @@
             </div>
         </div>
     </div>
+
 </div>
+</nav>
 
 <!--<div class="cart-section">-->
 
