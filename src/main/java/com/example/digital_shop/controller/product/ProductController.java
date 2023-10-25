@@ -99,7 +99,7 @@ public class ProductController {
 
     @PostMapping("/update")
     public String update(
-            @RequestBody ProductCreatDto productCreatDto,
+            @ModelAttribute ProductCreatDto productCreatDto,
             @RequestParam UUID productId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
