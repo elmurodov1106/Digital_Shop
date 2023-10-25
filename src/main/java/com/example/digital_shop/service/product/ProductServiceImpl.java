@@ -54,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductEntity> findProductEntityByOwnerId(UUID userId) {
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new DataNotFoundException("User not found"));
-        return productRepository.findProductEntityByUserIdEqualsIgnoreCase(userId);
+        return productRepository.findProductEntityByUserIdEquals(userId);
     }
 
     @Override

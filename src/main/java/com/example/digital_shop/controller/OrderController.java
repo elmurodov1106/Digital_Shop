@@ -48,7 +48,7 @@ public class OrderController {
     public String getUserOrders(HttpServletRequest request,Model model){
         UUID userId=checkCookie(request);
         if(userId ==null){
-            return "index";
+            return "signIn";
         }
         List<OrderEntity> userOrders = orderService.getUserOrders(userId);
         model.addAttribute("user",userService.getById(userId));
