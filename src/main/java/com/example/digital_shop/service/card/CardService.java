@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface CardService {
     CardEntity add(CardCreatedDto card, UUID ownerId);
-    List<CardEntity> getAllUserCards(int size, int page);
+    List<CardEntity> getAllUserCards(int size, int page,UUID userId);
     List<CardEntity> findCardEntityByOwnerId(UUID userId);
     Boolean deleteById(UUID cardId, UUID ownerId);
     CardEntity update(String name,UUID cardId,UUID ownerId);
