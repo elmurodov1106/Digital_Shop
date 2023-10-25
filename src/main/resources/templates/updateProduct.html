@@ -1,7 +1,6 @@
-<!doctype html>
+<!Doctype html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -36,14 +35,18 @@
         <!-- Assuming you have a cardList model attribute that contains a list of cards -->
         <form action="/product/update" method="post">
             <input type="hidden" name="productId" th:value="${productId}">
-            <label for="productName">Name</label>
-            <input type="text" id="productName" name="productName" placeholder="Product Name"/>
-
-            <label for="productModel">Name</label>
-            <input type="text" id="productModel" name="productModel" placeholder="Product Model"/>
-
-
-            <br>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Product Name"/>
+            <label for="model">Model</label>
+            <input type="text" id="model" name="model" placeholder="Product Model"/>
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" name="amount" placeholder="Amount"/>
+            <label for="cost">Model</label>
+            <input type="text" id="cost" name="cost" placeholder="Product Cost"/>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" class="form-control" name="image" id="image">
+            </div>
             <button type="submit" class="btn">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <!-- Your SVG path here -->
@@ -55,6 +58,6 @@
 
 </div>
 </div>
-
+</a>
 </body>
 </html>
