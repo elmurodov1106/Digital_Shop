@@ -66,7 +66,7 @@ public class CardController {
         if (allUserCards.isEmpty()){
             model.addAttribute("user",userService.getById(userId));
             model.addAttribute("message","Card not found");
-            return "index";
+            return "CardList";
         }
         model.addAttribute("user",userService.getById(userId));
         model.addAttribute("cardList",allUserCards);;

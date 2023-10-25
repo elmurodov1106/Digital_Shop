@@ -24,4 +24,7 @@ public class ProductCreatDto {
     private String productType;
     @NotNull(message = "amount cannot be null")
     private Integer amount;
+
+    @NotEmpty(message = "description cannot be empty")
+    private String description;
 }
