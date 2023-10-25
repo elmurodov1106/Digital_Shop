@@ -80,10 +80,10 @@ public class LaptopController {
         }
         if (allLaptop.isEmpty()){
             model.addAttribute("message","Laptop not found");
-            return "allLaptop";
+            return "sellerLaptop";
         }
         model.addAttribute("laptops",allLaptop);;
-        return "allLaptop";
+        return "sellerLaptop";
     }
 
     @GetMapping("/search-by-name")
