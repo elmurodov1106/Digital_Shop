@@ -52,7 +52,7 @@ public class TvController {
         List<TvEntity> allTv = tvService.getAllTv(size, page);
         UUID userId = checkCookie(request);
         model.addAttribute("user",userService.getById(userId));
-        if (allTv.isEmpty()) {
+        if (allTv == null) {
             model.addAttribute("message", "Tv not found");
             return "index";
         }
@@ -121,7 +121,7 @@ public class TvController {
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
-        if(!userId.equals("null")){
+        if(userId!=null){
             return UUID.fromString(userId);
         }
         return null;

@@ -3,6 +3,7 @@ package com.example.digital_shop.controller.product;
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.product.ProductEntity;
+import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -116,6 +117,24 @@ public class ProductController {
         }
         model.addAttribute("message","Product successfully updated");
         return "SellerMenu";
+    }
+
+
+    @GetMapping("/update")
+    public String updateGet(
+            @RequestParam UUID productId,
+            HttpServletRequest request,
+            Model model){
+        UUID userId = checkCookie(request);
+        if (userId == null){
+            return "index";
+        }
+        UserEntity user = userService.getById(userId);
+        List<ProductEntity> productEntityByOwnerId = productService.findProductEntityByOwnerId(userId);
+        model.addAttribute("user",user);
+        model.addAttribute("productId",productId);
+        model.addAttribute("productList",productEntityByOwnerId);
+        return "updateProduct";
     }
 
     @GetMapping("/delete")

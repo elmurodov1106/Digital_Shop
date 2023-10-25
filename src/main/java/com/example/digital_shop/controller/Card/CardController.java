@@ -24,8 +24,6 @@ public class CardController {
 
     private final CardService cardService;
     private final UserService userService;
-    private final RoleRepository roleRepository;
-
     @GetMapping("/add")
     public String addPage(){
         return "addCard";
@@ -37,28 +35,21 @@ public class CardController {
             CardCreatedDto cardCreatedDto,
             HttpServletRequest request,
             Model model
-    ){
+    ) {
         UUID userId = checkCookie(request);
-        if(userId == null){
+        if (userId == null) {
             return "index";
         }
         UserEntity user = userService.getById(userId);
-        cardService.add(cardCreatedDto,userId);
-        model.addAttribute("user",user);
-        model.addAttribute("message","Card successfully added");
-        return "redirect:/payment/get-all";
+        CardEntity add = cardService.add(cardCreatedDto, userId);
+        model.addAttribute("user", user);
+        if (add != null) {
+            model.addAttribute("message", "Card successfully added");
+            return "redirect:/payment/get-all";
+        }
+        model.addAttribute("message","Card already exist");
+        return "addCard";
     }
-
-//    @GetMapping("/get-all")
-//    public String getAll(
-//            @RequestParam int size,
-//            @RequestParam int page,
-//            Model model
-//    ){
-//        List<CardEntity> allUserCards = cardService.getAllUserCards(size, page);
-//        model.addAttribute("cardList",allUserCards);
-//        return "CardList";
-//    }
     @GetMapping("/get-all")
     public String getAll(
             @RequestParam(defaultValue = "10")  int size,

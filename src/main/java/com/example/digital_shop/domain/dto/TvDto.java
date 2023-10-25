@@ -1,6 +1,7 @@
 package com.example.digital_shop.domain.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,4 +31,6 @@ public class TvDto {
 
     private String productType;
     private String description;
+    @NotNull(message = "amount cannot be null")
+    private Integer amount;
 }
