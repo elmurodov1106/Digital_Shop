@@ -122,7 +122,7 @@ public class CardController {
                 model.addAttribute("message","Successfully deleted");
             }
             model.addAttribute("message","Card not found");
-            return "SellerMenu";
+            return "redirect:/payment/get-all";
         }
         if(aBoolean){
             model.addAttribute("user",user);
