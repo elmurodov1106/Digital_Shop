@@ -1,5 +1,6 @@
 package com.example.digital_shop.repository.tv;
 
+import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.product.TvEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +14,7 @@ public interface TvRepository extends JpaRepository<TvEntity, UUID> {
     List<TvEntity> searchTvEntitiesByModelContainingIgnoreCase(String model, Pageable pageable);
 
     TvEntity findTvEntityById(UUID tvId);
+
+    List<TvEntity> findTvEntitiesByUserIdEquals(UUID userId);
 
 }
