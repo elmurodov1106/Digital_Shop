@@ -1,7 +1,6 @@
 package com.example.digital_shop.controller;
 
 import com.example.digital_shop.config.CookieValue;
-import com.example.digital_shop.domain.dto.UserCreatDto;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -80,7 +79,7 @@ public class UserController {
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
-        if(!userId.equals("null")){
+        if(userId!=null){
             return UUID.fromString(userId);
         }
         return null;

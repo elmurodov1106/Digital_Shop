@@ -67,7 +67,7 @@ public class LaptopController {
         return "allLaptop";
     }
     @GetMapping("/get-seller")
-    public String getSellerlaptop(
+    public String getSellerLaptop(
             @RequestParam(defaultValue = "10")  int size,
             @RequestParam(defaultValue = "0")  int page,
             Model model,
