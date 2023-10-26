@@ -2,7 +2,9 @@ package com.example.digital_shop.service.tv;
 
 import com.example.digital_shop.domain.dto.TvDto;
 import com.example.digital_shop.entity.product.TvEntity;
+import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
+import com.example.digital_shop.repository.UserRepository;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
 import com.example.digital_shop.repository.tv.TvRepository;
 import jakarta.transaction.Transactional;
@@ -27,6 +29,7 @@ public class TvServiceImpl implements TvService {
     private final TvRepository tvRepository;
     private final ModelMapper modelMapper;
     private final InventoryRepository inventoryRepository;
+    private final UserRepository userRepository;
     @Override
     @Transactional
     public TvEntity add(TvDto tvDto, UUID userId, Integer amount, MultipartFile image) throws IOException {
@@ -90,12 +93,17 @@ public class TvServiceImpl implements TvService {
 
 
     @Override
-    public List<TvEntity> getSellerTv(UUID sellerId) {
-        List<TvEntity> tvEntitiesByUserIdEquals = tvRepository.findTvEntitiesByUserIdEquals(sellerId);
-        if (tvEntitiesByUserIdEquals.isEmpty()) {
-            return null;
-        }
+    public List<TvEntity> getSellerTv(int size,int page,UUID sellerId) {
+        Pageable pageable = PageRequest.of(page, size);
+        List<TvEntity> tvEntitiesByUserIdEquals = tvRepository.findTvEntitiesByUserIdEquals(pageable,sellerId);
         return tvEntitiesByUserIdEquals;
+    }
+
+    @Override
+    public List<TvEntity> findTvEntityByOwnerId(UUID userId) {
+        UserEntity userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException("User not found"));
+        return tvRepository.findTvEntityByUserIdEquals(userId);
     }
 }
 

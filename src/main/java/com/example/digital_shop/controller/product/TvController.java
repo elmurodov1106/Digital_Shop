@@ -4,6 +4,7 @@ package com.example.digital_shop.controller.product;
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.TvDto;
 import com.example.digital_shop.entity.product.TvEntity;
+import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.tv.TvService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -55,7 +56,7 @@ public class TvController {
         if(userId == null){
             return "signIn";
         }
-        List<TvEntity> allTv = tvService.getSellerTv(userId);
+        List<TvEntity> allTv = tvService.getAllTv(size,page);
         model.addAttribute("user",userService.getById(userId));
         if (allTv == null) {
             model.addAttribute("message", "Tv not found");
@@ -90,11 +91,12 @@ public class TvController {
             HttpServletRequest request
     ){
         UUID userId = checkCookie(request);
-        List<TvEntity> allTv = tvService.getAllTv(size, page);
+        List<TvEntity> allTv = tvService.getSellerTv(size,page,userId);
         if(userId!= null){
             model.addAttribute("user",userService.getById(userId));
         }
         if (allTv.isEmpty()){
+            model.addAttribute("tvs",allTv);;
             model.addAttribute("message","Tv not found");
             return "sellerTv";
         }
@@ -102,9 +104,25 @@ public class TvController {
         return "sellerTv";
     }
 
+    @GetMapping("/update")
+    public String updateGet(
+            @RequestParam UUID tvId,
+            HttpServletRequest request,
+            Model model){
+        UUID userId = checkCookie(request);
+        if (userId == null){
+            return "index";
+        }
+        UserEntity user = userService.getById(userId);
+        List<TvEntity> tvEntityByOwnerId = tvService.findTvEntityByOwnerId(userId);
+        model.addAttribute("user",user);
+        model.addAttribute("tvId",tvId);
+        model.addAttribute("tvList",tvEntityByOwnerId);
+        return "updateTv";
+    }
     @PostMapping("/update")
     public String update(
-            @RequestBody TvDto tvDto,
+            @ModelAttribute TvDto tvDto,
             @RequestParam UUID tvId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,

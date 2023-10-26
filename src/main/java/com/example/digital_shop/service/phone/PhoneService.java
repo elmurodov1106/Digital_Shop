@@ -19,7 +19,7 @@ public interface PhoneService {
     Boolean deleteById(UUID id,UUID userId);
     PhoneEntity update(PhoneDto update,UUID id,Integer amount, UUID userId,MultipartFile image) throws IOException;
 
-    List<PhoneEntity> getSellerPhone(UUID sellerId);
+    List<PhoneEntity> getSellerPhone(int page,int size,UUID sellerId);
 
 
 }
