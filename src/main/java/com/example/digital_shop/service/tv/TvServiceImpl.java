@@ -87,5 +87,15 @@ public class TvServiceImpl implements TvService {
         }
         return null;
     }
+
+
+    @Override
+    public List<TvEntity> getSellerTv(UUID sellerId) {
+        List<TvEntity> tvEntitiesByUserIdEquals = tvRepository.findTvEntitiesByUserIdEquals(sellerId);
+        if (tvEntitiesByUserIdEquals.isEmpty()) {
+            return null;
+        }
+        return tvEntitiesByUserIdEquals;
+    }
 }
 
