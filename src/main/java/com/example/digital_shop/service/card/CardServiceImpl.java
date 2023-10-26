@@ -35,14 +35,12 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public List<CardEntity> getAllUserCards(int size, int page,UUID userId) {
+    public List<CardEntity> getAllUserCards(int size, int page, UUID userId) {
         Pageable pageable = PageRequest.of(page, size);
-        List<CardEntity> cards = cardRepository.findCardEntitiesByOwnerId(pageable,userId);
-        if(cards.isEmpty()){
-            throw new DataNotFoundException("Card not found");
-        }
-       return cards;
+        List<CardEntity> cards = cardRepository.findCardEntitiesByOwnerId(pageable, userId);
+        return cards; // This will return an empty list if no cards are found.
     }
+
 
     @Override
     public List<CardEntity> findCardEntityByOwnerId(UUID userId) {

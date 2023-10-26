@@ -66,7 +66,7 @@ public class CardController {
         if (allUserCards.isEmpty()){
             model.addAttribute("user",userService.getById(userId));
             model.addAttribute("message","Card not found");
-            return "index";
+            return "CardList";
         }
         model.addAttribute("user",userService.getById(userId));
         model.addAttribute("cardList",allUserCards);;
@@ -122,7 +122,7 @@ public class CardController {
                 model.addAttribute("message","Successfully deleted");
             }
             model.addAttribute("message","Card not found");
-            return "SellerMenu";
+            return "redirect:/payment/get-all";
         }
         if(aBoolean){
             model.addAttribute("user",user);

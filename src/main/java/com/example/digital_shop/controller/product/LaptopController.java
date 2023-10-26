@@ -73,17 +73,17 @@ public class LaptopController {
             Model model,
             HttpServletRequest request
     ){
-        List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
         UUID userId = checkCookie(request);
+        List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
         if(userId!= null){
             model.addAttribute("user",userService.getById(userId));
         }
         if (allLaptop.isEmpty()){
             model.addAttribute("message","Laptop not found");
-            return "allLaptop";
+            return "sellerLaptop";
         }
         model.addAttribute("laptops",allLaptop);;
-        return "allLaptop";
+        return "sellerLaptop";
     }
 
     @GetMapping("/search-by-name")
@@ -125,7 +125,7 @@ public class LaptopController {
     }
 
 
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String delete(
             @RequestParam UUID laptopId,
             Model model,

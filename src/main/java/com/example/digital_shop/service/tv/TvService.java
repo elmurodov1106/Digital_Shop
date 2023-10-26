@@ -16,4 +16,7 @@ public interface TvService {
     List<TvEntity> search(int page,int size,String name);
     Boolean deleteById(UUID id,UUID userId);
     TvEntity update(TvDto update, UUID tvId, UUID userId, Integer amount, MultipartFile image) throws IOException;
+
+    List<TvEntity> getSellerTv(UUID sellerId);
+
 }
