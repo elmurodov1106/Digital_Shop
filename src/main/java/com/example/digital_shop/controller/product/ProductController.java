@@ -78,7 +78,7 @@ public class ProductController {
             return "index";
         }
         model.addAttribute("products",all);
-        return "allProducts";
+        return "index";
     }
 
     @GetMapping("/search")
@@ -178,3 +178,12 @@ public class ProductController {
     }
 
 }
+
+
+
+
+
+
+
+
+

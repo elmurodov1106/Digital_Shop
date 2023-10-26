@@ -1,7 +1,11 @@
 package com.example.digital_shop.service.phone;
 
 import com.example.digital_shop.domain.dto.PhoneDto;
+import com.example.digital_shop.domain.dto.ProductCreatDto;
+import com.example.digital_shop.entity.inventory.InventoryEntity;
+import com.example.digital_shop.entity.product.LaptopEntity;
 import com.example.digital_shop.entity.product.PhoneEntity;
+import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
 import com.example.digital_shop.repository.phone.PhoneRepository;
 import jakarta.transaction.Transactional;
@@ -83,4 +87,14 @@ public class PhoneServiceImpl implements PhoneService{
         }
         return null;
     }
+
+    public List<PhoneEntity> getSellerPhone(UUID sellerId) {
+        List<PhoneEntity> phoneEntitiesByUserIdEquals = phoneRepository.findPhoneEntitiesByUserIdEquals(sellerId);
+        if(phoneEntitiesByUserIdEquals.isEmpty()){
+            return null;
+        }
+        return phoneEntitiesByUserIdEquals;
+    }
+
+
 }
