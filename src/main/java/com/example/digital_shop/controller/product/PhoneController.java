@@ -103,7 +103,7 @@ public class PhoneController {
         model.addAttribute("message","Product successfully updated");
         return "SellerMenu";
     }
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String delete(
             @RequestParam UUID phoneId,
             Model model,
@@ -121,6 +121,29 @@ public class PhoneController {
         model.addAttribute("message","Phone successfully deleted");
         return "SellerMenu";
     }
+
+    @GetMapping("/get-seller")
+    public String getSellerPhone(
+            @RequestParam(defaultValue = "10")  int size,
+            @RequestParam(defaultValue = "0")  int page,
+            Model model,
+            HttpServletRequest request
+    ){
+        List<PhoneEntity> allPhone = phoneService.getAllPhone(size, page);
+        UUID userId = checkCookie(request);
+        if(userId!= null){
+            model.addAttribute("user",userService.getById(userId));
+        }
+        if (allPhone.isEmpty()){
+            model.addAttribute("message","Phone not found");
+            return "sellerPhone";
+        }
+        model.addAttribute("phones",allPhone);;
+        return "sellerPhone";
+    }
+
+
+
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
         if(userId!=null){
