@@ -48,13 +48,18 @@ public class TvController {
     public String getAll(
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "0") int page,
-            Model model,HttpServletRequest request) {
-        List<TvEntity> allTv = tvService.getAllTv(size, page);
+            Model model,
+            HttpServletRequest request
+    ){
         UUID userId = checkCookie(request);
+        if(userId == null){
+            return "signIn";
+        }
+        List<TvEntity> allTv = tvService.getSellerTv(userId);
         model.addAttribute("user",userService.getById(userId));
         if (allTv == null) {
             model.addAttribute("message", "Tv not found");
-            return "index";
+            return "allTv";
         }
         model.addAttribute("tv", allTv);
         return "allTv";
@@ -75,6 +80,26 @@ public class TvController {
         }
         model.addAttribute("tv", search);
         return "search";
+    }
+
+    @GetMapping("/get-seller")
+    public String getSellerTv(
+            @RequestParam(defaultValue = "10")  int size,
+            @RequestParam(defaultValue = "0")  int page,
+            Model model,
+            HttpServletRequest request
+    ){
+        UUID userId = checkCookie(request);
+        List<TvEntity> allTv = tvService.getAllTv(size, page);
+        if(userId!= null){
+            model.addAttribute("user",userService.getById(userId));
+        }
+        if (allTv.isEmpty()){
+            model.addAttribute("message","Tv not found");
+            return "sellerTv";
+        }
+        model.addAttribute("tvs",allTv);;
+        return "sellerTv";
     }
 
     @PostMapping("/update")
@@ -102,23 +127,26 @@ public class TvController {
     }
 
 
+
     @GetMapping("/delete")
     public String delete(
             @RequestParam UUID tvId,
             Model model,
             HttpServletRequest request
-    ) {
-        UUID userId = checkCookie(request);
-        Boolean tv = tvService.deleteById(tvId, userId);
-        if (tv == null) {
-            model.addAttribute("message", "Tv not found");
-            model.addAttribute("userId", userId);
+    ){
+        UUID userId=checkCookie(request);
+        if(userId ==null){
+            return "index";
+        }
+        Boolean aBoolean = tvService.deleteById(tvId,userId);
+        if (aBoolean==null){
+            model.addAttribute("message","Tv not found");
             return "SellerMenu";
         }
-        model.addAttribute("message", "Tv successfully deleted");
-        model.addAttribute("userId", userId);
+        model.addAttribute("message","Laptop successfully deleted");
         return "SellerMenu";
     }
+
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
         if(userId!=null){
