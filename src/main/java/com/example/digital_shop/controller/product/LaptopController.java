@@ -73,8 +73,8 @@ public class LaptopController {
             Model model,
             HttpServletRequest request
     ){
-        List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
         UUID userId = checkCookie(request);
+        List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
         if(userId!= null){
             model.addAttribute("user",userService.getById(userId));
         }
@@ -125,7 +125,7 @@ public class LaptopController {
     }
 
 
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String delete(
             @RequestParam UUID laptopId,
             Model model,
