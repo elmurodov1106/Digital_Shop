@@ -8,6 +8,7 @@
     <script src="https://kit.fontawesome.com/3da5cff3a5.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<div th:text="${message}"  class="error-message"></div>
 <nav class="navbar navbar-expand navbar-light bg-light">
     <div class="container-sm">
         <a class="navbar-brand" href="/auth/seller/menu">Seller Menu</a>
@@ -50,10 +51,11 @@
                             <button type="submit" name="item-1-button" id="item-1-button">Delete Laptop</button>
                         </form>
 
-                        <!--                        <form action="/phone/update" method="get">-->
-                        <!--                            <input type="hidden" name="productId" th:value="${phone.getId()}">-->
-                        <!--                            <button type="submit" class="edit-svg"> Update </button>-->
-                        <!--                        </form>-->
+                        <form action="/laptop/update" method="get">
+                            <input type="hidden" name="laptopId" th:value="${laptop.getId()}">
+                            <button type="submit" class="edit-svg"> Update </button>
+                        </form>
+
 
                     </div>
 

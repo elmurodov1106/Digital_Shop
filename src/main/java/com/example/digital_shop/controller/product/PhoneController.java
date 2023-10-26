@@ -129,12 +129,13 @@ public class PhoneController {
             Model model,
             HttpServletRequest request
     ){
-        List<PhoneEntity> allPhone = phoneService.getAllPhone(size, page);
         UUID userId = checkCookie(request);
+        List<PhoneEntity> allPhone = phoneService.getSellerPhone( page,size,userId);
         if(userId!= null){
             model.addAttribute("user",userService.getById(userId));
         }
         if (allPhone.isEmpty()){
+            model.addAttribute("phones",allPhone);;
             model.addAttribute("message","Phone not found");
             return "sellerPhone";
         }

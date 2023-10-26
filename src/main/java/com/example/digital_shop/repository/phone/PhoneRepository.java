@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface PhoneRepository extends JpaRepository<PhoneEntity, UUID> {
     List<PhoneEntity> searchPhoneEntitiesByModelContainingIgnoreCase(String model, Pageable pageable);
     PhoneEntity findPhoneEntityById(UUID phoneId);
-    List<PhoneEntity> findPhoneEntitiesByUserIdEquals(UUID userId);
+    List<PhoneEntity> findPhoneEntitiesByUserIdEquals(Pageable pageable,UUID userId);
 
 
 

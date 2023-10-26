@@ -88,11 +88,9 @@ public class PhoneServiceImpl implements PhoneService{
         return null;
     }
 
-    public List<PhoneEntity> getSellerPhone(UUID sellerId) {
-        List<PhoneEntity> phoneEntitiesByUserIdEquals = phoneRepository.findPhoneEntitiesByUserIdEquals(sellerId);
-        if(phoneEntitiesByUserIdEquals.isEmpty()){
-            return null;
-        }
+    public List<PhoneEntity> getSellerPhone(int page,int size,UUID sellerId) {
+        Pageable pageable = PageRequest.of(page, size);
+        List<PhoneEntity> phoneEntitiesByUserIdEquals = phoneRepository.findPhoneEntitiesByUserIdEquals(pageable,sellerId);
         return phoneEntitiesByUserIdEquals;
     }
 

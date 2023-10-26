@@ -15,6 +15,7 @@ public interface TvRepository extends JpaRepository<TvEntity, UUID> {
 
     TvEntity findTvEntityById(UUID tvId);
 
-    List<TvEntity> findTvEntitiesByUserIdEquals(UUID userId);
+    List<TvEntity> findTvEntitiesByUserIdEquals(Pageable pageable,UUID userId);
 
+    List<TvEntity> findTvEntityByUserIdEquals(UUID userId);
 }
