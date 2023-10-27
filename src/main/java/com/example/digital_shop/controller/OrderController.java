@@ -28,10 +28,19 @@ public class OrderController {
     private final UserService userService;
     private final ProductService productService;
 
+
+//    @GetMapping("/add")
+//    public String add(
+//            @RequestParam UUID productId,
+//            Model model
+//
+//            ){
+//        model.addAttribute("productId",productId);
+//        return "AddBasket";
+//    }
     @PostMapping("/add")
     public String add(
-            @RequestBody OrderDto orderDto,
-            @RequestParam Integer amount,
+            @ModelAttribute OrderDto orderDto,
             HttpServletRequest request,
             Model model
     ){
@@ -39,7 +48,8 @@ public class OrderController {
         if(userId ==null){
             return "index";
         }
-         orderService.add(orderDto,userId,amount);
+        orderDto.setUserId(userId);
+         orderService.add(orderDto);
         UserEntity user= userService.getById(userId);
         model.addAttribute("user",user);
         return "index";
