@@ -1,6 +1,7 @@
 package com.example.digital_shop.service.laptop;
 
 import com.example.digital_shop.domain.dto.LaptopDto;
+import com.example.digital_shop.domain.dto.LaptopUpdateDto;
 import com.example.digital_shop.entity.product.LaptopEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
@@ -74,13 +75,52 @@ public class LaptopServiceImpl implements LaptopService{
 
     @Override
     @Transactional
-    public LaptopEntity update(LaptopDto update, UUID laptopId, UUID userId,Integer amount,MultipartFile image) throws IOException {
+    public LaptopEntity update(LaptopUpdateDto update, UUID laptopId, UUID userId, Integer amount, MultipartFile image) throws IOException {
         LaptopEntity laptopEntity = laptopRepository.findLaptopEntityById(laptopId);
         if (laptopEntity == null) {
             return null;
         }
         if (laptopEntity.getUserId().equals(userId)) {
-            modelMapper.map(update, laptopEntity);
+            if(!update.getName().equals("")){
+                laptopEntity.setName(update.getName());
+            }
+            if(!update.getModel().equals("")){
+                laptopEntity.setModel(update.getModel());
+            }
+            if(update.getCost()!=null){
+                laptopEntity.setCost(update.getCost());
+            }
+            if(update.getAmount()!=null&& update.getAmount()>=1){
+                laptopEntity.setAmount(update.getAmount());
+            }
+            if(!update.getProductType().equals("")){
+               laptopEntity.setProductType(update.getProductType());
+            }
+            String s = Base64.getEncoder().encodeToString(image.getBytes());
+            if (!s.equals(" ") && !s.equals("")) {
+               laptopEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+            }
+            if(update.getBattery()!=null){
+                laptopEntity.setBattery(update.getBattery());
+            }
+            if(!update.getColour().equals("")){
+                laptopEntity.setColour(update.getColour());
+            }
+            if(update.getGhz()!=null){
+                laptopEntity.setGhz(update.getGhz());
+            }
+            if(update.getMemory()!=null){
+                laptopEntity.setMemory(update.getMemory());
+            }
+            if(update.getScreenSize()!=null){
+                laptopEntity.setScreenSize(update.getScreenSize());
+            }
+            if(update.getRam()!=null){
+                laptopEntity.setRam(update.getRam());
+            }
+            if(update.getWeight()!=null){
+                laptopEntity.setWeight(update.getWeight());
+            }
             laptopEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
             return laptopRepository.save(laptopEntity);
         }

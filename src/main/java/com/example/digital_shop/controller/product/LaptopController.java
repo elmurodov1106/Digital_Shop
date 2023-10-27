@@ -3,6 +3,7 @@ package com.example.digital_shop.controller.product;
 
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.LaptopDto;
+import com.example.digital_shop.domain.dto.LaptopUpdateDto;
 import com.example.digital_shop.entity.product.LaptopEntity;
 import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.user.UserEntity;
@@ -123,7 +124,7 @@ public class LaptopController {
 
     @PostMapping("/update")
     public String update(
-            @ModelAttribute LaptopDto laptopDto,
+            @RequestBody LaptopUpdateDto laptopUpdateDto,
             @RequestParam UUID laptopId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
@@ -134,7 +135,7 @@ public class LaptopController {
         if(userId ==null){
             return "index";
         }
-        LaptopEntity update = laptopService.update(laptopDto,laptopId,userId, amount,image);
+        LaptopEntity update = laptopService.update(laptopUpdateDto,laptopId,userId, amount,image);
         if (update==null){
             model.addAttribute("message","laptop not found");
             return "SellerMenu";

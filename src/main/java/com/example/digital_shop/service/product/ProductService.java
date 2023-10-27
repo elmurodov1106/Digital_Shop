@@ -2,6 +2,7 @@ package com.example.digital_shop.service.product;
 
 
 import com.example.digital_shop.domain.dto.ProductCreatDto;
+import com.example.digital_shop.domain.dto.ProductUpdateDto;
 import com.example.digital_shop.entity.product.ProductEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,5 +19,5 @@ public interface ProductService {
     List<ProductEntity> getAll();
     ProductEntity getById(UUID productId);
     List<ProductEntity> getSellerProduct(UUID sellerId, int page, int size);
-    ProductEntity update(ProductCreatDto update,UUID productId,Integer amount,UUID userId,MultipartFile image) throws IOException;
+    ProductEntity update(ProductUpdateDto update, UUID productId, Integer amount, UUID userId, MultipartFile image) throws IOException;
 }

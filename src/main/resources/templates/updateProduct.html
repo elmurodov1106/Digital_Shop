@@ -32,31 +32,31 @@
 </nav>
 
 <div class="container w-50 border mt-5" id="form">
-    <form class="mt-5" action="/product/update" method="post" enctype="multipart/form-data">
+    <form class="mt-5" action="/product/update" method="post" enctype="multipart/form-data" th:object="${product}">
 
 
         <!--        <input type="hidden" name="userId" th:value="${userId}" />-->
 
         <div class="mb-3">
             <label class="form-label">Product Name</label>
-            <input type="text" class="form-control" name="name" required>
+            <input type="text" class="form-control" name="name" >
         </div>
         <div class="mb-3">
             <label class="form-label">Model</label>
-            <input type="text" class="form-control" name="model" required>
+            <input type="text" class="form-control" name="model">
         </div>
         <div class="mb-3">
             <label class="form-label">Cost</label>
-            <input type="number" class="form-control" name="cost" min="1" required>
+            <input type="number" class="form-control" name="cost" min="1">
         </div>
         <div class="mb-3">
             <label class="form-label">Amount</label>
-            <input type="number" class="form-control" name="amount" min="1" required>
+            <input type="number" class="form-control" name="amount">
         </div>
 
         <div class="mb-3">
             <label for="productType" class="form-label">Product Category</label>
-            <select name="productType" id="productType"  class="ms-1 d-block w-100" required>
+            <select name="productType" id="productType"  class="ms-1 d-block w-100">
                 <option></option>
                 <option value="Electronic">Electronics</option>
             </select>
