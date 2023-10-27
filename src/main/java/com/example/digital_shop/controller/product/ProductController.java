@@ -161,11 +161,17 @@ public class ProductController {
             HttpServletRequest request,
             Model model){
        UUID sellerId = checkCookie(request);
-       if(sellerId == null){
+        List<ProductEntity> sellerProduct = productService.getSellerProduct(sellerId, page, size);
+        if(sellerId == null){
            model.addAttribute("message","Seller not found");
            return "index";
        }
-       model.addAttribute("products",productService.getSellerProduct(sellerId,page,size));
+        if (sellerProduct.isEmpty()){
+            model.addAttribute("products",sellerProduct);;
+            model.addAttribute("message","Product not found");
+            return "sellerProducts";
+        }
+       model.addAttribute("products",sellerProduct);
        return "sellerProducts";
     }
     private UUID checkCookie(HttpServletRequest request){

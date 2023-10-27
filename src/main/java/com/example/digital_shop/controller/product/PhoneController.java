@@ -53,14 +53,14 @@ public class PhoneController {
             HttpServletRequest request) {
         List<PhoneEntity> allPhone = phoneService.getAllPhone(size, page);
         UUID userId = checkCookie(request);
-        if(userId==null){
-            return "index";
-        }
-        UserEntity byId = userService.getById(userId);
-        model.addAttribute("user",byId);
+//        if(userId==null){
+//            return "signIn";
+//        }
+//        UserEntity byId = userService.getById(userId);
+//        model.addAttribute("user",byId);
         if (allPhone == null){
             model.addAttribute("message","Phone not found");
-            return "index";
+            return "allPhones";
         }
         model.addAttribute("phone",allPhone);
         return "allPhones";

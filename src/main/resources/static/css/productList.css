@@ -17,6 +17,8 @@
     width: 23%;
     border-radius: 2%;
     margin: 1%;
+    height: 500px;
+
 }
 
 .product:hover {
@@ -275,6 +277,11 @@ button:active {
 .boxes{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 180px;
+    margin-top: 90px;
+    width: 100%;
 }
+.laptops{
+    width: 1300px;
+}
+
 

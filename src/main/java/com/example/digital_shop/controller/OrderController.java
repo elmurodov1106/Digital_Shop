@@ -40,13 +40,13 @@ public class OrderController {
 //    }
     @PostMapping("/add")
     public String add(
-            @ModelAttribute OrderDto orderDto,
+            @ModelAttribute OrderEntity orderDto,
             HttpServletRequest request,
             Model model
     ){
         UUID userId=checkCookie(request);
         if(userId ==null){
-            return "index";
+            return "signIn";
         }
         orderDto.setUserId(userId);
          orderService.add(orderDto);
@@ -111,7 +111,7 @@ public class OrderController {
    private List<ProductEntity> getAll(List<OrderEntity> orders){
         List<ProductEntity> products = new ArrayList<>();
        for (OrderEntity order : orders) {
-           products.add(productService.getById(order.getProductId().getId()));
+           products.add(productService.getById(order.getProductId()));
        }
        return products;
    }

@@ -25,9 +25,8 @@ public class OrderServiceImpl implements OrderService{
     private final UserRepository userRepository;
 
     @Override
-    public OrderEntity add(OrderDto orderDto) {
-       OrderEntity orderEntity = modelMapper.map(orderDto, OrderEntity.class);
-        return orderRepository.save(orderEntity);
+    public OrderEntity add(OrderEntity orderDto) {
+        return orderRepository.save(orderDto);
     }
 
     @Override
@@ -46,7 +45,7 @@ public class OrderServiceImpl implements OrderService{
     public Boolean deleteById(UUID id, UUID userId) {
         OrderEntity orderEntity = orderRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("Order not found"));
-        if (orderEntity.getUserId().getId().equals(userId)){
+        if (orderEntity.getUserId().equals(userId)){
             orderRepository.deleteById(id);
             return true;
         }
@@ -57,7 +56,7 @@ public class OrderServiceImpl implements OrderService{
     public OrderEntity update(OrderDto update, UUID id, UUID userId) {
         OrderEntity orderEntity = orderRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("Order not found"));
-        if (orderEntity.getUserId().getId().equals(userId)) {
+        if (orderEntity.getUserId().equals(userId)) {
             modelMapper.map(update, orderEntity);
             return orderRepository.save(orderEntity);
         }
@@ -67,7 +66,7 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public List<OrderEntity> getUserOrders(UUID userId) {
         UserEntity user = userRepository.findById(userId).orElseThrow(()->new DataNotFoundException("User not found"));
-        List<OrderEntity> orders = orderRepository.getOrderEntitiesByUserIdEquals(user);
+        List<OrderEntity> orders = orderRepository.getOrderEntitiesByUserIdEquals(user.getId());
         System.out.println(orders);
         if(orders.isEmpty()){
            return null;

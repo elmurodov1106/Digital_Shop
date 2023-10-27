@@ -45,9 +45,6 @@ public class LaptopServiceImpl implements LaptopService{
     public List<LaptopEntity> getAllLaptops(int size, int page) {
         Pageable pageable = PageRequest.of(page, size);
         List<LaptopEntity> content = laptopRepository.findAll(pageable).getContent();
-        if(content.isEmpty()){
-            throw new DataNotFoundException("Laptop not found");
-        }
         return content;
     }
 

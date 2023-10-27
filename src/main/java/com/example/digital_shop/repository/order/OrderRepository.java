@@ -13,5 +13,5 @@ import java.util.UUID;
 
 @RestController
 public interface OrderRepository extends JpaRepository<OrderEntity, UUID> {
-    List<OrderEntity> getOrderEntitiesByUserIdEquals(UserEntity userId);
+    List<OrderEntity> getOrderEntitiesByUserIdEquals(UUID userId);
 }

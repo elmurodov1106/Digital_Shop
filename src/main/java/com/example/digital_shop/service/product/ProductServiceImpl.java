@@ -103,10 +103,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductEntity> getSellerProduct(UUID sellerId,int page, int size) {
         Pageable pageable = PageRequest.of(page,size);
-        List<ProductEntity> productEntitiesByUserIdEquals = productRepository.findProductEntitiesByUserIdAndProductTypeEqualsIgnoreCase(sellerId,"product" ,pageable);
-        if(productEntitiesByUserIdEquals.isEmpty()){
-            return null;
-        }
+        List<ProductEntity> productEntitiesByUserIdEquals = productRepository.findProductEntitiesByUserIdAndProductTypeEqualsIgnoreCase(sellerId,"Electronic" ,pageable);
         return productEntitiesByUserIdEquals;
     }
 
