@@ -2,6 +2,7 @@ package com.example.digital_shop.controller.product;
 
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
+import com.example.digital_shop.domain.dto.ProductUpdateDto;
 import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.product.ProductService;
@@ -99,7 +100,7 @@ public class ProductController {
 
     @PostMapping("/update")
     public String update(
-            @ModelAttribute ProductCreatDto productCreatDto,
+            @ModelAttribute ProductUpdateDto productUpdateDto,
             @RequestParam UUID productId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
@@ -110,7 +111,7 @@ public class ProductController {
         if(userId == null){
             return "index";
         }
-        ProductEntity update = productService.update(productCreatDto, productId, amount, userId,image);
+        ProductEntity update = productService.update(productUpdateDto, productId, amount, userId,image);
         if(update==null){
             model.addAttribute("message","Product not found");
             return "SellerMenu";
@@ -131,9 +132,11 @@ public class ProductController {
         }
         UserEntity user = userService.getById(userId);
         List<ProductEntity> productEntityByOwnerId = productService.findProductEntityByOwnerId(userId);
+        ProductEntity product = productService.getById(productId);
         model.addAttribute("user",user);
         model.addAttribute("productId",productId);
         model.addAttribute("productList",productEntityByOwnerId);
+        model.addAttribute("product",product);
         return "updateProduct";
     }
 

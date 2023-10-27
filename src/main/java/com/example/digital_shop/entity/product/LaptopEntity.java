@@ -13,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LaptopEntity extends ProductEntity {
+    private Integer battery;
     private String colour;
     private Double weight;
     private Integer memory;

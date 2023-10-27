@@ -2,6 +2,7 @@ package com.example.digital_shop.service.product;
 
 import com.example.digital_shop.domain.dto.InventoryCreateDto;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
+import com.example.digital_shop.domain.dto.ProductUpdateDto;
 import com.example.digital_shop.entity.inventory.InventoryEntity;
 import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.user.UserEntity;
@@ -105,7 +106,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductEntity> getSellerProduct(UUID sellerId,int page, int size) {
         Pageable pageable = PageRequest.of(page,size);
-        List<ProductEntity> productEntitiesByUserIdEquals = productRepository.findProductEntitiesByUserIdEquals(sellerId, pageable);
+        List<ProductEntity> productEntitiesByUserIdEquals = productRepository.findProductEntitiesByUserIdAndProductTypeEqualsIgnoreCase(sellerId,"product" ,pageable);
         if(productEntitiesByUserIdEquals.isEmpty()){
             return null;
         }
@@ -114,17 +115,34 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ProductEntity update(ProductCreatDto update, UUID productId, Integer amount, UUID userId,MultipartFile image) throws IOException {
+    public ProductEntity update(ProductUpdateDto update, UUID productId, Integer amount, UUID userId, MultipartFile image) throws IOException {
         ProductEntity productEntity = productRepository.findProductEntityById(productId);
+        System.out.println("update"+update.toString());
         if(productEntity==null){
             return null;
         }
-        InventoryEntity inventoryEntity = inventoryRepository.getByProductId(productId);
         if (productEntity.getUserId().equals(userId)) {
-            modelMapper.map(update, productEntity);
-            inventoryEntity.setProductCount(amount);
-            inventoryRepository.save(inventoryEntity);
-            productEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+            if(!update.getName().equals("")){
+                productEntity.setName(update.getName());
+            }
+            if(!update.getModel().equals("")){
+                productEntity.setModel(update.getModel());
+            }
+            if(update.getCost()!=null){
+                productEntity.setCost(update.getCost());
+            }
+            if(update.getAmount()!=null&& update.getAmount()>=1){
+                productEntity.setAmount(update.getAmount());
+            }
+            if(!update.getProductType().equals("")){
+                productEntity.setProductType(update.getProductType());
+            }
+            String s = Base64.getEncoder().encodeToString(image.getBytes());
+            if (!s.equals(" ") && !s.equals("")) {
+                productEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+                return productRepository.save(productEntity);
+            }
+            productEntity.setImage(productEntity.getImage());
             return productRepository.save(productEntity);
         }
         return null;

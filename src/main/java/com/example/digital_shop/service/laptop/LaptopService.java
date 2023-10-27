@@ -3,6 +3,7 @@ package com.example.digital_shop.service.laptop;
 
 
 import com.example.digital_shop.domain.dto.LaptopDto;
+import com.example.digital_shop.domain.dto.LaptopUpdateDto;
 import com.example.digital_shop.entity.product.LaptopEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +16,6 @@ public interface LaptopService {
     List<LaptopEntity> getAllLaptops(int size, int page);
     List<LaptopEntity> search(int page,int size,String name);
     Boolean deleteById(UUID laptopId, UUID userId);
-    LaptopEntity update(LaptopDto update,UUID id,UUID userId,Integer amount, MultipartFile image) throws IOException;
+    LaptopEntity update(LaptopUpdateDto update, UUID id, UUID userId, Integer amount, MultipartFile image) throws IOException;
     List<LaptopEntity> getSellerLaptop(UUID sellerId);
 }
