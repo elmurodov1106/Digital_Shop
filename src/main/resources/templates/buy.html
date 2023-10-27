@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy</title>
+    <link th:href="@{/css/buy.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/buy.js}"></script>
+</head>
+<body>
+
+</body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <!-- CREDIT CARD FORM STARTS HERE -->
+            <div class="panel panel-default credit-card-box">
+                <div class="panel-heading display-table">
+                    <div class="row display-tr">
+                        <h3 class="panel-title display-td">Payment Details</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form role="form" id="payment-form" method="POST" action="javascript:void(0);">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cardNumber">CARD NUMBER</label>
+                                    <div class="input-group">
+                                        <div
+                                                class="form-control"
+                                                id="cardNumber"
+                                        ></div>
+                                        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-7 col-md-7">
+                                <div class="form-group">
+                                    <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span
+                                            class="visible-xs-inline">EXP</span> DATE</label>
+                                    <div
+                                            class="form-control"
+                                            id="cardExpiry"
+                                    ></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <form action="/transaction/create" method="post">
+                                    <input type="hidden" name="sender" value="PUT_SENDER_UUID_HERE">
+                                    <input type="hidden" name="amount" value="PUT_AMOUNT_HERE">
+                                    <input type="hidden" name="productId" value="PUT_PRODUCT_ID_HERE">
+                                    <button class="pay btn btn-success btn-lg btn-block" type="submit">Pay</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row" style="display:none;">
+                            <div class="col-xs-12">
+                                <p class="payment-errors"></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- CREDIT CARD FORM ENDS HERE -->
+
+        </div>
+
+    </div>
+</div>
+</html>
