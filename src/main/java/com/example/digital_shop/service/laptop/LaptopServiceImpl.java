@@ -93,9 +93,6 @@ public class LaptopServiceImpl implements LaptopService{
             if(update.getAmount()!=null&& update.getAmount()>=1){
                 laptopEntity.setAmount(update.getAmount());
             }
-            if(!update.getProductType().equals("")){
-               laptopEntity.setProductType(update.getProductType());
-            }
             String s = Base64.getEncoder().encodeToString(image.getBytes());
             if (!s.equals(" ") && !s.equals("")) {
                laptopEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
@@ -130,8 +127,11 @@ public class LaptopServiceImpl implements LaptopService{
     @Override
     public List<LaptopEntity> getSellerLaptop(int page,int size,UUID sellerId) {
         Pageable pageable = PageRequest.of(page, size);
-        List<LaptopEntity> laptopEntityById = laptopRepository.findLaptopEntitiesByUserIdEquals(pageable,sellerId);
-        return laptopEntityById;
+        List<LaptopEntity> laptopEntity= laptopRepository.findLaptopEntitiesByUserIdEquals(pageable,sellerId);
+        if(laptopEntity.isEmpty()){
+            return null;
+        }
+        return laptopEntity;
     }
 
     @Override
