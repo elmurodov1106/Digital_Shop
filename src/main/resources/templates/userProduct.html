@@ -45,14 +45,21 @@
           </div>
         </div>
         <div class="text-box">
-          <h2 class="item" th:text="${product.name}">Nomi</h2>
-          <h3 class="price" th:text="${product.cost}">Narxi</h3>
+          <label for="product-name"> Name:</label>
+          <h2 class="item" th:text="${product.name}" id="product-name"></h2>
+          <label for="product-price">Price:$</label>
+          <h3 class="price" th:text="${product.cost}" id="product-price"></h3>
+          <label for="product-description">Description: </label>
+          <h3 class="price" th:text="${product.description}" id="product-description"></h3>
           <!--                <p class="description">A bag of delicious oranges!</p>-->
           <!--                <label for="item-1-quantity">Quantity:</label>-->
           <!--                <input type="text" name="item-1-quantity" id="item-1-quantity" value="1">-->
           <form  action="/order/add" method="post">
             <input type="hidden" name="productId" th:value="${product.id}">
-            <input type="number" name="amount" placeholder="amount"  min="1">
+            <div>
+              <label for="amount">Amount: </label>
+              <input type="number" name="amount" id="amount" min="1">
+            </div>
             <input type="hidden" name="cost" th:value="${product.cost}">
             <!--              <input type="hidden" name="userId" th:value="">-->
             <button type="submit" name="item-1-button" id="item-1-button"> Add Basket</button>
