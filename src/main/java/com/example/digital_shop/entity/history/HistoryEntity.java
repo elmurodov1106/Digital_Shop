@@ -13,7 +13,7 @@ import java.util.UUID;
 @Builder
 public class HistoryEntity extends BaseEntity {
     private UUID senderCardId;
-    private UUID receiverCardId;
+    private UUID receiverId;
     private UUID productId;
     private Double paymentAmount;
 }

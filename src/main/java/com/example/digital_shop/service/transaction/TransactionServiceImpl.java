@@ -3,14 +3,18 @@ package com.example.digital_shop.service.transaction;
 import com.example.digital_shop.entity.history.HistoryEntity;
 import com.example.digital_shop.entity.payment.CardEntity;
 import com.example.digital_shop.entity.product.ProductEntity;
+import com.example.digital_shop.entity.seller.SellerInfo;
 import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.exception.InsufficientBalanceException;
+import com.example.digital_shop.repository.SellerRepository;
 import com.example.digital_shop.repository.history.HistoryRepository;
 import com.example.digital_shop.repository.payment.CardRepository;
 import com.example.digital_shop.repository.product.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,31 +23,38 @@ public class TransactionServiceImpl implements TransactionService {
     private final HistoryRepository historyRepository;
     private final CardRepository cardRepository;
     private final ProductRepository productRepository;
+    private final SellerRepository sellerRepository;
 
     @Override
     @Transactional
-    public void transferMoney(UUID senderAccountId, UUID receiverAccountId, double amount, UUID productId) {
-        CardEntity receiverCard = cardRepository.findCardEntityById(receiverAccountId)
-                .orElseThrow(() -> new DataNotFoundException("Card not found"));
-        CardEntity senderCard = cardRepository.findCardEntityById(senderAccountId)
-                .orElseThrow(() -> new DataNotFoundException("Card not found"));
-
+    public String transferMoney(UUID senderAccountId, double amount, UUID productId) {
+        Optional<CardEntity> senderCard = cardRepository.findCardEntityById(senderAccountId);
+        CardEntity card;
+        if(senderCard.isPresent()){
+            card = senderCard.get();
+        }else {
+            return null;
+        }
         ProductEntity product = productRepository.findProductEntityById(productId);
-        if(!product.getUserId().equals(receiverCard.getOwnerId())){
-            throw new DataNotFoundException("Receiver card not found");
+        Optional<SellerInfo> seller = sellerRepository.findById(product.getUserId());
+        SellerInfo sellerInfo = null;
+        if(seller.isPresent()){
+           sellerInfo = seller.get();
         }
-        if (senderCard.getBalance() < amount) {
-            throw new InsufficientBalanceException("Amount not found");
+        if (card.getBalance() < amount) {
+            return "insufficient balance";
         }
-        updateAccountBalance(senderCard.getId(), senderCard.getBalance() - amount);
-        updateAccountBalance(receiverCard.getId(), receiverCard.getBalance() + amount);
+        updateAccountBalance(card.getId(), card.getBalance() - amount);
+        assert sellerInfo != null;
+        sellerInfo.setBalance(sellerInfo.getBalance()+ amount);
         HistoryEntity history = HistoryEntity.builder()
                 .paymentAmount(amount)
-                .receiverCardId(receiverCard.getId())
-                .senderCardId(senderCard.getId())
+                .receiverId(product.getUserId())
+                .senderCardId(card.getId())
                 .productId(product.getId())
                 .build();
         historyRepository.save(history);
+        return "Successfully bought";
     }
 
     @Override
