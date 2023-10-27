@@ -20,5 +20,5 @@ public interface ProductService {
     List<ProductEntity> getAll();
     ProductEntity getById(UUID productId);
     List<ProductEntity> getSellerProduct(UUID sellerId, int page, int size);
-    ProductEntity update(ProductUpdateDto update, UUID productId, Integer amount, UUID userId, MultipartFile image) throws IOException;
+    ProductEntity update(ProductUpdateDto update, UUID productId, UUID userId, MultipartFile image) throws IOException;
 }

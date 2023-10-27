@@ -3,6 +3,7 @@ package com.example.digital_shop.controller.product;
 
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.PhoneDto;
+import com.example.digital_shop.domain.dto.PhoneUpdateDto;
 import com.example.digital_shop.entity.product.PhoneEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.phone.PhoneService;
@@ -84,9 +85,8 @@ public class PhoneController {
     }
     @PostMapping("/update")
     public String update(
-            @RequestBody PhoneDto phoneDto,
+            @RequestBody PhoneUpdateDto phoneUpdateDto,
             @RequestParam UUID phoneId,
-            @RequestParam Integer amount,
             @RequestParam MultipartFile image,
             Model model,
             HttpServletRequest request
@@ -95,7 +95,7 @@ public class PhoneController {
         if(userId ==null){
             return "index";
         }
-        PhoneEntity update = phoneService.update(phoneDto, phoneId,amount, userId,image);
+        PhoneEntity update = phoneService.update(phoneUpdateDto, phoneId, userId,image);
         if(update==null){
             model.addAttribute("message","Phone not found");
             return "SellerMenu";

@@ -1,6 +1,7 @@
 package com.example.digital_shop.service.phone;
 
 import com.example.digital_shop.domain.dto.PhoneDto;
+import com.example.digital_shop.domain.dto.PhoneUpdateDto;
 import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.entity.inventory.InventoryEntity;
 import com.example.digital_shop.entity.product.LaptopEntity;
@@ -75,14 +76,52 @@ public class PhoneServiceImpl implements PhoneService{
     }
     @Override
     @Transactional
-    public PhoneEntity update(PhoneDto phoneDto, UUID phoneId,Integer amount, UUID userId,MultipartFile image) throws IOException {
+    public PhoneEntity update(PhoneUpdateDto update, UUID phoneId, UUID userId, MultipartFile image) throws IOException {
         PhoneEntity phoneEntity = phoneRepository.findPhoneEntityById(phoneId);
         if (phoneEntity==null){
             return null;
         }
         if (phoneEntity.getUserId().equals(userId)){
-            modelMapper.map(phoneDto,phoneEntity);
-            phoneEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+            if(!update.getName().equals("")){
+                phoneEntity.setName(update.getName());
+            }
+            if(!update.getModel().equals("")){
+                phoneEntity.setModel(update.getModel());
+            }
+            if(update.getCost()!=null){
+                phoneEntity.setCost(update.getCost());
+            }
+            if(update.getAmount()!=null&& update.getAmount()>=1){
+                phoneEntity.setAmount(update.getAmount());
+            }
+            String s = Base64.getEncoder().encodeToString(image.getBytes());
+            if (!s.equals(" ") && !s.equals("")) {
+                phoneEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+            }
+            if(update.getBattery()!=null){
+                phoneEntity.setBattery(update.getBattery());
+            }
+            if(!update.getColour().equals("")){
+                phoneEntity.setColour(update.getColour());
+            }
+            if(update.getMemory()!=null){
+                phoneEntity.setMemory(update.getMemory());
+            }
+            if(update.getRam()!=null){
+                phoneEntity.setRam(update.getRam());
+            }
+            if(update.getWeight()!=null){
+                phoneEntity.setWeight(update.getWeight());
+            }
+            if(update.getBackCamera()!=null){
+                phoneEntity.setBackCamera(update.getBackCamera());
+            }
+            if(update.getFrontCamera()!=null){
+                phoneEntity.setFrontCamera(update.getFrontCamera());
+            }
+            if(!update.getSize().equals("")){
+                phoneEntity.setSize(update.getSize());
+            }
             return phoneRepository.save(phoneEntity);
         }
         return null;

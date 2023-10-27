@@ -98,7 +98,6 @@ public class ProductController {
     public String update(
             @ModelAttribute ProductUpdateDto productUpdateDto,
             @RequestParam UUID productId,
-            @RequestParam Integer amount,
             @RequestParam MultipartFile image,
             HttpServletRequest request,
             Model model
@@ -107,7 +106,7 @@ public class ProductController {
         if(userId == null){
             return "index";
         }
-        ProductEntity update = productService.update(productUpdateDto, productId, amount, userId,image);
+        ProductEntity update = productService.update(productUpdateDto, productId, userId,image);
         if(update==null){
             model.addAttribute("message","Product not found");
             return "SellerMenu";

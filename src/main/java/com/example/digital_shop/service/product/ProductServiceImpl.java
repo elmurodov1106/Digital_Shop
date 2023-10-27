@@ -104,12 +104,15 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductEntity> getSellerProduct(UUID sellerId,int page, int size) {
         Pageable pageable = PageRequest.of(page,size);
         List<ProductEntity> productEntitiesByUserIdEquals = productRepository.findProductEntitiesByUserIdAndProductTypeEqualsIgnoreCase(sellerId,"Electronic" ,pageable);
+        if(productEntitiesByUserIdEquals.isEmpty()){
+            return null;
+        }
         return productEntitiesByUserIdEquals;
     }
 
     @Override
     @Transactional
-    public ProductEntity update(ProductUpdateDto update, UUID productId, Integer amount, UUID userId, MultipartFile image) throws IOException {
+    public ProductEntity update(ProductUpdateDto update, UUID productId, UUID userId, MultipartFile image) throws IOException {
         ProductEntity productEntity = productRepository.findProductEntityById(productId);
         System.out.println("update"+update.toString());
         if(productEntity==null){

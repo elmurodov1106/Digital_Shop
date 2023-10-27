@@ -7,17 +7,18 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class LaptopUpdateDto {
-    private String name;
-    private String model;
-    private Integer battery;
+public class PhoneUpdateDto {
     private String colour;
+    private String size;
     private Double weight;
     private Integer memory;
     private Integer Ram;
-    private Integer ScreenSize;
-    private Integer Ghz;
-    private Double cost;
+    private Double battery;
+    private Integer FrontCamera;
+    private Integer BackCamera;
     private String description;
+    private String name;
+    private String model;
+    private Double cost;
     private Integer amount;
 }
