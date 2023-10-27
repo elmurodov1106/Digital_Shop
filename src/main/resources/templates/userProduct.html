@@ -3,266 +3,72 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Products</title>
+  <meta charset="UTF-8">
+  <title>Product List</title>
+  <link th:href="@{/css/productList.css}" rel="stylesheet">
+  <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+  <script src="https://kit.fontawesome.com/3da5cff3a5.js" crossorigin="anonymous"></script>
 </head>
 <body layout:fragment="body">
-<!-- partial:index.partial.html -->
-<div class="section">
-  <!-- container -->
-  <div class="container">
-    <!-- row -->
-    <div class="row">
-      <!-- section title -->
-      <div class="col-md-12">
-        <div class="section-title">
-          <h3 class="title">New Products
-          </h3>
-          <div class="section-nav">
-            <ul class="section-tab-nav tab-nav">
-              <li>
-                <a data-toggle="tab" href="#tab1">Laptops
-                </a>
-              </li>
-              <li>
-                <a data-toggle="tab" href="#tab1">Smartphones
-                </a>
-              </li>
-              <li>
-                <a data-toggle="tab" href="#tab1">Cameras
-                </a>
-              </li>
-              <li class="active">
-                <a data-toggle="tab" href="#tab1">Accessories
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <!-- Products tab & slick -->
-      <div class="col-md-12 mainn mainn-raised">
-        <div class="products-tabs">
-          <!-- tab -->
-          <div id="tab1" class="tab-pane active">
-            <div class="products-slick" data-nav="#slick-nav-1">
-              <div class="product">
-                <a href="#">
-                  <div class="product-img">
-                    <img src="https://i.ibb.co/rygRLTd/product02.png" style="max-height: 170px;" alt="">
-                    <div class="product-label">
-                      <span class="sale">-30%
-                      </span>
-                      <span class="new">NEW
-                      </span>
-                    </div>
-                  </div>
-                </a>
-                <div class="product-body">
-                  <p class="product-category">Gadgets
-                  </p>
-                  <h3 class="product-name header-cart-item-name">
-                    <a
-                            href="#" tabindex="-1">sony Headphones
-                    </a>
-                  </h3>
-                  <h4 class="product-price header-cart-item-info">3500
-                    <del
-                            class="product-old-price">$990.00
-                    </del>
-                  </h4>
-                  <div class="product-rating">
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                  </div>
-                </div>
-              </div>
-              <div class="product">
-                <a href="#">
-                  <div class="product-img">
-                    <img src="https://i.ibb.co/sjwZzS4/product04.png"
-                         style="max-height: 170px;" alt="">
-                    <div class="product-label">
-                      <span class="sale">-30%
-                      </span>
-                      <span class="new">NEW
-                      </span>
-                    </div>
-                  </div>
-                </a>
-                <div class="product-body">
-                  <p class="product-category">Gadgets
-                  </p>
-                  <h3 class="product-name header-cart-item-name">
-                    <a
-                            href="#" tabindex="-1">samsung Headphones
-                    </a>
-                  </h3>
-                  <h4 class="product-price header-cart-item-info">3500
-                    <del
-                            class="product-old-price">$990.00
-                    </del>
-                  </h4>
-                  <div class="product-rating">
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                  </div>
-                </div>
-              </div>
-              <div class="product">
-                <a href="#">
-                  <div class="product-img">
-                    <img src="https://i.ibb.co/N9wCcJ3/product01.png"
-                         style="max-height: 170px;" alt="">
-                    <div class="product-label">
-                      <span class="sale">-30%
-                      </span>
-                      <span class="new">NEW
-                      </span>
-                    </div>
-                  </div>
-                </a>
-                <div class="product-body">
-                  <p class="product-category">Electronics
-                  </p>
-                  <h3 class="product-name header-cart-item-name">
-                    <a
-                            href="#" tabindex="-1">HP i5 laptop
-                    </a>
-                  </h3>
-                  <h4 class="product-price header-cart-item-info">5500
-                    <del
-                            class="product-old-price">$990.00
-                    </del>
-                  </h4>
-                  <div class="product-rating">
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                  </div>
-                </div>
-              </div>
-              <div class="product">
-                <a href="#">
-                  <div class="product-img">
-                    <img src="https://i.ibb.co/2hR1nrN/product03.png"
-                         style="max-height: 170px;" alt="">
-                    <div class="product-label">
-                      <span class="sale">-30%
-                      </span>
-                      <span class="new">NEW
-                      </span>
-                    </div>
-                  </div>
-                </a>
-                <div class="product-body">
-                  <p class="product-category">Electronics
-                  </p>
-                  <h3 class="product-name header-cart-item-name">
-                    <a
-                            href="#" tabindex="-1">HP i7 laptop 8gb
-                      ram
-                    </a>
-                  </h3>
-                  <h4 class="product-price header-cart-item-info">5500
-                    <del
-                            class="product-old-price">$990.00
-                    </del>
-                  </h4>
-                  <div class="product-rating">
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                  </div>
-                </div>
-              </div>
-              <div class="product">
-                <a href="#">
-                  <div class="product-img">
-                    <img src="https://i.ibb.co/sjwZzS4/product04.png"
-                         style="max-height: 170px;" alt="">
-                    <div class="product-label">
-                      <span class="sale">-30%
-                      </span>
-                      <span class="new">NEW
-                      </span>
-                    </div>
-                  </div>
-                </a>
-                <div class="product-body">
-                  <p class="product-category">Gadgets
-                  </p>
-                  <h3 class="product-name header-cart-item-name">
-                    <a
-                            href="#" tabindex="-1">samsung Headphones
-                    </a>
-                  </h3>
-                  <h4 class="product-price header-cart-item-info">3500
-                    <del
-                            class="product-old-price">$990.00
-                    </del>
-                  </h4>
-                  <div class="product-rating">
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                    <i class="fa fa-star">
-                    </i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="products-slick" data-nav="#slick-nav-1" >
-            </div>
-          </div>
-          <!-- /tab -->
-        </div>
-      </div>
-    </div>
-    <!-- Products tab & slick -->
-  </div>
-  <!-- /row -->
-</div>
-<!-- /container -->
-</div>
-<!-- partial -->
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <div class="container-sm">
+<!--    <a class="navbar-brand" href="/auth/seller/menu">Seller Menu</a>-->
+    <div class="navcontent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center">
+        <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
+        <!--                    <a class="nav-link active fs-4" aria-current="page" href="#">Add Products</a>-->
+        <!--                </li>-->
+        <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
+        <!--                    <a class="nav-link active fs-4 " aria-current="page" href="#">Update Products</a>-->
+        <!--                </li>-->
+        <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
+        <!--                    <a class="nav-link active fs-4 " href="#" tabindex="-1" aria-disabled="true">Database</a>-->
+        <!--                </li>-->
 
+      </ul>
+    </div>
+    <!--        <button class="btn btn-success ps-5 pe-5 pt-2 pb-2" onclick="quit()">Quit</button>-->
+  </div>
+
+
+  <div class="listing-section">
+    <div class="laptops">
+      <div th:each="product: ${products}">
+        <div class="product">
+          <div class="image-box">
+            <div class="images" id="image-1">
+              <img th:src="'data:image/png;base64,' + ${product.image}" alt="Image">
+            </div>
+          </div>
+          <div class="text-box">
+            <h2 class="item" th:text="${product.name}">Nomi</h2>
+            <h3 class="price" th:text="${product.cost}">Narxi</h3>
+            <!--                <p class="description">A bag of delicious oranges!</p>-->
+            <!--                <label for="item-1-quantity">Quantity:</label>-->
+            <!--                <input type="text" name="item-1-quantity" id="item-1-quantity" value="1">-->
+            <form  action="/order/add" method="post">
+              <input type="hidden" name="productId" th:value="${product.id}">
+              <input type="number" name="amount" placeholder="amount" th:default="1" min="1">
+              <input type="hidden" name="cost" th:value="${product.cost}">
+<!--              <input type="hidden" name="userId" th:value="">-->
+              <button type="submit" name="item-1-button" id="item-1-button"> Add Basket</button>
+            </form>
+
+<!--            <form action="/product/update" method="get">-->
+<!--              <input type="hidden" name="productId" th:value="${product.getId()}">-->
+<!--              <button type="submit" class="edit-svg"> Update </button>-->
+<!--            </form>-->
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
 </body>
 </html>
+
+

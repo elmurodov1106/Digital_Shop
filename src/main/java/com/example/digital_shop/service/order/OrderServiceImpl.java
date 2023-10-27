@@ -25,7 +25,7 @@ public class OrderServiceImpl implements OrderService{
     private final UserRepository userRepository;
 
     @Override
-    public OrderEntity add(OrderDto orderDto, UUID userId, Integer amount) {
+    public OrderEntity add(OrderDto orderDto) {
        OrderEntity orderEntity = modelMapper.map(orderDto, OrderEntity.class);
         return orderRepository.save(orderEntity);
     }
