@@ -5,6 +5,8 @@ import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.LaptopDto;
 import com.example.digital_shop.domain.dto.LaptopUpdateDto;
 import com.example.digital_shop.entity.product.LaptopEntity;
+import com.example.digital_shop.entity.product.ProductEntity;
+import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.laptop.LaptopService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -58,13 +60,13 @@ public class LaptopController {
         if(userId== null){
            return "signIn";
         }
-        List<LaptopEntity> allLaptop = laptopService.getSellerLaptop(userId);
+        List<LaptopEntity> allLaptop = laptopService.getAllLaptops(page,size);
         model.addAttribute("user",userService.getById(userId));
         if (allLaptop==null){
             model.addAttribute("message","Laptop not found");
             return "allLaptop";
         }
-        model.addAttribute("laptops",allLaptop);;
+        model.addAttribute("laptops",allLaptop);
         return "allLaptop";
     }
     @GetMapping("/get-seller")
@@ -75,11 +77,12 @@ public class LaptopController {
             HttpServletRequest request
     ){
         UUID userId = checkCookie(request);
-        List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size, page);
+        List<LaptopEntity> allLaptop = laptopService.getSellerLaptop(page,size,userId);
         if(userId!= null){
             model.addAttribute("user",userService.getById(userId));
         }
         if (allLaptop.isEmpty()){
+            model.addAttribute("laptops",allLaptop);
             model.addAttribute("message","Laptop not found");
             return "sellerLaptop";
         }
@@ -101,6 +104,22 @@ public class LaptopController {
       }
       model.addAttribute("laptop",search);
       return "search";
+    }
+    @GetMapping("/update")
+    public String updateGet(
+            @RequestParam UUID laptopId,
+            HttpServletRequest request,
+            Model model){
+        UUID userId = checkCookie(request);
+        if (userId == null){
+            return "index";
+        }
+        UserEntity user = userService.getById(userId);
+        List<LaptopEntity> laptopEntityByOwnerId = laptopService.findLaptopEntityByOwnerId(userId);
+        model.addAttribute("user",user);
+        model.addAttribute("laptopId",laptopId);
+        model.addAttribute("laptopList",laptopEntityByOwnerId);
+        return "updateLaptop";
     }
 
     @PostMapping("/update")

@@ -18,4 +18,6 @@ public interface LaptopService {
     Boolean deleteById(UUID laptopId, UUID userId);
     LaptopEntity update(LaptopUpdateDto update, UUID id, UUID userId, Integer amount, MultipartFile image) throws IOException;
     List<LaptopEntity> getSellerLaptop(UUID sellerId);
+    LaptopEntity update(LaptopDto update,UUID id,UUID userId,Integer amount, MultipartFile image) throws IOException;
+    List<LaptopEntity> findLaptopEntityByOwnerId(UUID userId);
 }

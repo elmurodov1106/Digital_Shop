@@ -170,7 +170,7 @@ public class ProductController {
            return "index";
        }
        model.addAttribute("products",productService.getSellerProduct(sellerId,page,size));
-       return "allProducts";
+       return "sellerProducts";
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);

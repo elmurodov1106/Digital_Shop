@@ -3,7 +3,9 @@ package com.example.digital_shop.service.laptop;
 import com.example.digital_shop.domain.dto.LaptopDto;
 import com.example.digital_shop.domain.dto.LaptopUpdateDto;
 import com.example.digital_shop.entity.product.LaptopEntity;
+import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
+import com.example.digital_shop.repository.UserRepository;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
 import com.example.digital_shop.repository.laptop.LaptopRepository;
 import jakarta.transaction.Transactional;
@@ -25,6 +27,7 @@ public class LaptopServiceImpl implements LaptopService{
     private final LaptopRepository laptopRepository;
     private final ModelMapper modelMapper;
     private final InventoryRepository inventoryRepository;
+    private final UserRepository userRepository;
 
     @Override
     @Transactional
@@ -125,12 +128,17 @@ public class LaptopServiceImpl implements LaptopService{
     }
 
     @Override
-    public List<LaptopEntity> getSellerLaptop(UUID sellerId) {
-        List<LaptopEntity> laptopEntityById = laptopRepository.findLaptopEntitiesByUserIdEquals(sellerId);
-        if(laptopEntityById.isEmpty()){
-            return null;
-        }
+    public List<LaptopEntity> getSellerLaptop(int page,int size,UUID sellerId) {
+        Pageable pageable = PageRequest.of(page, size);
+        List<LaptopEntity> laptopEntityById = laptopRepository.findLaptopEntitiesByUserIdEquals(pageable,sellerId);
         return laptopEntityById;
+    }
+
+    @Override
+    public List<LaptopEntity> findLaptopEntityByOwnerId(UUID userId) {
+        UserEntity userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException("User not found"));
+        return laptopRepository.findProductEntityByUserIdEquals(userId);
     }
 
 
