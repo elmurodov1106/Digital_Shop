@@ -16,10 +16,10 @@ import java.util.UUID;
 @Setter
 @Builder
 public class OrderEntity extends BaseEntity {
-    @ManyToOne
-    private ProductEntity productId;
-    @ManyToOne
-    private UserEntity userId;
+
+    private UUID productId;
+
+    private UUID userId;
     private Double cost;
 
     private Double amount;

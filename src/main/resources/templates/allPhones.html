@@ -4,35 +4,75 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Phone List</title>
-    <link th:href="@{/css/phone.css}" rel="stylesheet">
+    <title>Product List</title>
+    <link th:href="@{/css/productList.css}" rel="stylesheet">
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <script src="https://kit.fontawesome.com/3da5cff3a5.js" crossorigin="anonymous"></script>
 </head>
 <body layout:fragment="body">
 <div  class="boxes">
-    <div  th:each="phones: ${phone}">
+
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <div class="container-sm">
+            <!--    <a class="navbar-brand" href="/auth/seller/menu">Seller Menu</a>-->
+            <div class="navcontent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center">
+                    <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
+                    <!--                    <a class="nav-link active fs-4" aria-current="page" href="#">Add Products</a>-->
+                    <!--                </li>-->
+                    <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
+                    <!--                    <a class="nav-link active fs-4 " aria-current="page" href="#">Update Products</a>-->
+                    <!--                </li>-->
+                    <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
+                    <!--                    <a class="nav-link active fs-4 " href="#" tabindex="-1" aria-disabled="true">Database</a>-->
+                    <!--                </li>-->
+
+                </ul>
+            </div>
+            <!--        <button class="btn btn-success ps-5 pe-5 pt-2 pb-2" onclick="quit()">Quit</button>-->
+        </div>
+
+
+    </nav>
+
+    <div class="listing-section">
         <div class="laptops">
-            <div class="image-box">
-                <div class="images" id="image-1">
-                    <img th:src="'data:image/png;base64,' + ${phones.image}" alt="Image">
+            <div th:each="phone: ${phone}">
+                <div class="product">
+                    <div class="image-box">
+                        <div class="images" id="image-1">
+                            <img th:src="'data:image/png;base64,' + ${phone.image}" alt="Image">
+                        </div>
+                    </div>
+                    <div class="text-box">
+                        <h2 class="item" th:text="${phone.name}">Nomi</h2>
+                        <h3 class="price" th:text="${phone.cost}">Narxi</h3>
+                        <!--                <p class="description">A bag of delicious oranges!</p>-->
+                        <!--                <label for="item-1-quantity">Quantity:</label>-->
+                        <!--                <input type="text" name="item-1-quantity" id="item-1-quantity" value="1">-->
+                        <form  action="/order/add" method="post">
+                            <input type="hidden" name="productId" th:value="${phone.id}">
+                            <input type="number" name="amount" placeholder="amount"  min="1">
+                            <input type="hidden" name="cost" th:value="${phone.cost}">
+                            <!--              <input type="hidden" name="userId" th:value="">-->
+                            <button type="submit" name="item-1-button" id="item-1-button"> Add Basket</button>
+                        </form>
+
+                        <!--            <form action="/product/update" method="get">-->
+                        <!--              <input type="hidden" name="productId" th:value="${product.getId()}">-->
+                        <!--              <button type="submit" class="edit-svg"> Update </button>-->
+                        <!--            </form>-->
+
+                    </div>
+
+
                 </div>
             </div>
-            <div class="text-box">
-                <h2 class="item" th:text="${phones.name}">NAME</h2>
-                <h3 class="price" th:text="${phones.cost}">PRICE</h3>
-                <h3 class="description" th:text="${phones.description}">DESCRIPTION</h3>
-                <!--                <p class="description">A bag of delicious oranges!</p>-->
-                <label for="item-1-quantity">Quantity:</label>
-                <input type="number" name="item-1-quantity" id="item-1-quantity" max="2">
-                <form method="get" action="/order/add">
-                    <input type="hidden" name="laptopId" th:value="${phones.id}">
-                    <button type="button" name="item-1-button" id="item-1-button">Add to Basket</button>
-                </form>
-            </div>
         </div>
+
     </div>
-
-</div>
-
 </div>
 </body>
 </html>
+
+
