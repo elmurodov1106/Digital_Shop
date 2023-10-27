@@ -66,20 +66,16 @@ public class ProductController {
     public String getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            Model model,
-            HttpServletRequest request) {
-        UUID userId = checkCookie(request);
-        if(userId == null){
-            return "index";
-        }
-        model.addAttribute("user",userService.getById(userId));
+            Model model
+           ) {
         List<ProductEntity> all = productService.getAllProducts(size,page);
         if(all.isEmpty()){
+            model.addAttribute("products",all);
             model.addAttribute("message","Product not found");
-            return "index";
+            return "userProduct";
         }
         model.addAttribute("products",all);
-        return "index";
+        return "userProduct";
     }
 
     @GetMapping("/search")
