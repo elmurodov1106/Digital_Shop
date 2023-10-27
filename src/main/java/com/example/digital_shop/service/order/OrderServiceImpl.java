@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -73,5 +74,17 @@ public class OrderServiceImpl implements OrderService{
            return null;
         }
         return orders;
+    }
+
+    @Override
+    public OrderEntity getUserOrder(UUID userId, UUID orderId) {
+        Optional<UserEntity> byId = userRepository.findById(userId);
+        UserEntity user;
+        if (byId.isPresent()){
+           user = byId.get();
+        }else {
+            return null;
+        }
+       return orderRepository.findOrderEntityByUserIdAndIdEquals(user,orderId);
     }
 }
