@@ -49,15 +49,15 @@ public class TvController {
     public String getAll(
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "0") int page,
-            Model model,
-            HttpServletRequest request
+            Model model
+//            HttpServletRequest request
     ){
-        UUID userId = checkCookie(request);
-        if(userId == null){
-            return "signIn";
-        }
+//        UUID userId = checkCookie(request);
+//        if(userId == null){
+//            return "signIn";
+//        }
         List<TvEntity> allTv = tvService.getAllTv(size,page);
-        model.addAttribute("user",userService.getById(userId));
+//        model.addAttribute("user",userService.getById(userId));
         if (allTv == null) {
             model.addAttribute("message", "Tv not found");
             return "allTv";

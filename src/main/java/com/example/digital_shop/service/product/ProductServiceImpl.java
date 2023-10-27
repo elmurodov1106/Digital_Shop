@@ -62,9 +62,6 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductEntity> getAllProducts(int size, int page) {
         Pageable pageable = PageRequest.of(page, size);
         List<ProductEntity> content = productRepository.findAll(pageable).getContent();
-        if (content.isEmpty()) {
-            return null;
-        }
         return content;
     }
 

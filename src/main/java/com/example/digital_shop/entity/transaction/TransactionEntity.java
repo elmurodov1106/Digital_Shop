@@ -14,8 +14,8 @@ import java.util.UUID;
 @Getter
 @Setter
 public class TransactionEntity extends BaseEntity {
-    private String senderCard;
-    private String receiverCard;
+    private UUID senderCard;
+    private UUID receiverId;
     private Timestamp date;
     private UUID userId;
 }

@@ -28,18 +28,28 @@ public class OrderController {
     private final UserService userService;
     private final ProductService productService;
 
+
+//    @GetMapping("/add")
+//    public String add(
+//            @RequestParam UUID productId,
+//            Model model
+//
+//            ){
+//        model.addAttribute("productId",productId);
+//        return "AddBasket";
+//    }
     @PostMapping("/add")
     public String add(
-            @RequestBody OrderDto orderDto,
-            @RequestParam Integer amount,
+            @ModelAttribute OrderEntity orderDto,
             HttpServletRequest request,
             Model model
     ){
         UUID userId=checkCookie(request);
         if(userId ==null){
-            return "index";
+            return "signIn";
         }
-         orderService.add(orderDto,userId,amount);
+        orderDto.setUserId(userId);
+         orderService.add(orderDto);
         UserEntity user= userService.getById(userId);
         model.addAttribute("user",user);
         return "index";
@@ -101,7 +111,7 @@ public class OrderController {
    private List<ProductEntity> getAll(List<OrderEntity> orders){
         List<ProductEntity> products = new ArrayList<>();
        for (OrderEntity order : orders) {
-           products.add(productService.getById(order.getProductId().getId()));
+           products.add(productService.getById(order.getProductId()));
        }
        return products;
    }

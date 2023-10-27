@@ -56,12 +56,12 @@ public class LaptopController {
             Model model,
             HttpServletRequest request
     ){
-        UUID userId = checkCookie(request);
-        if(userId== null){
-           return "signIn";
-        }
-        List<LaptopEntity> allLaptop = laptopService.getAllLaptops(page,size);
-        model.addAttribute("user",userService.getById(userId));
+//        UUID userId = checkCookie(request);
+//        if(userId== null){
+//           return "signIn";
+//        }
+        List<LaptopEntity> allLaptop = laptopService.getAllLaptops(size,page);
+//        model.addAttribute("user",userService.getById(userId));
         if (allLaptop==null){
             model.addAttribute("message","Laptop not found");
             return "allLaptop";
@@ -124,7 +124,7 @@ public class LaptopController {
 
     @PostMapping("/update")
     public String update(
-            @RequestBody LaptopUpdateDto laptopUpdateDto,
+            @ModelAttribute LaptopUpdateDto laptopUpdateDto,
             @RequestParam UUID laptopId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,

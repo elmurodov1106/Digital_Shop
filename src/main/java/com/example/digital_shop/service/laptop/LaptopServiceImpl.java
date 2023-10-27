@@ -45,9 +45,6 @@ public class LaptopServiceImpl implements LaptopService{
     public List<LaptopEntity> getAllLaptops(int size, int page) {
         Pageable pageable = PageRequest.of(page, size);
         List<LaptopEntity> content = laptopRepository.findAll(pageable).getContent();
-        if(content.isEmpty()){
-            throw new DataNotFoundException("Laptop not found");
-        }
         return content;
     }
 
@@ -75,8 +72,8 @@ public class LaptopServiceImpl implements LaptopService{
 
     @Override
     @Transactional
-    public LaptopEntity update(LaptopUpdateDto update, UUID laptopId, UUID userId, Integer amount, MultipartFile image) throws IOException {
-        LaptopEntity laptopEntity = laptopRepository.findLaptopEntityById(laptopId);
+    public LaptopEntity update(LaptopUpdateDto update, UUID Id, UUID userId, Integer amount, MultipartFile image) throws IOException {
+        LaptopEntity laptopEntity = laptopRepository.findLaptopEntityById(Id);
         if (laptopEntity == null) {
             return null;
         }
@@ -133,6 +130,8 @@ public class LaptopServiceImpl implements LaptopService{
         }
         return laptopEntity;
     }
+
+
 
     @Override
     public List<LaptopEntity> findLaptopEntityByOwnerId(UUID userId) {

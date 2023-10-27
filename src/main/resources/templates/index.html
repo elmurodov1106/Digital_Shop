@@ -5,6 +5,9 @@
 <head>
    <title>Home Page</title>
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <link th:href="@{/css/productList.css}" rel="stylesheet">
+   <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+   <script src="https://kit.fontawesome.com/3da5cff3a5.js" crossorigin="anonymous"></script>
 </head>
 
 <body layout:fragment="body">
@@ -23,52 +26,76 @@
       </div>
    </section>
 
-   <!--    OFFER SECTION-->
-   <section class="container section-2">
-   </section>
    <!-- PRODUCT SECTION -->
-   <section class="container section-3">
-      <!-- product - 4 -->
-      <div th:each="product: ${products}">
-      <div class="product product-4">
-         <img th:src="'data:image/png;base64,' + ${product.image}" alt="computer to sell" class="product-img">
-         <span class="product_add_cart">ADD TO CART</span>
-      </div>
-      </div>
+   <div  class="boxes">
 
-      <div th:each="lap: ${laptop}">
-         <div class="product product-4">
-            <img th:src="'data:image/png;base64,' + ${lap.image}" alt="computer to sell" class="product-img">
+      <nav class="navbar navbar-expand navbar-light bg-light">
+         <div class="container-sm">
+            <!--    <a class="navbar-brand" href="/auth/seller/menu">Seller Menu</a>-->
+            <div class="navcontent">
+               <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center">
+                  <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
+                  <!--                    <a class="nav-link active fs-4" aria-current="page" href="#">Add Products</a>-->
+                  <!--                </li>-->
+                  <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
+                  <!--                    <a class="nav-link active fs-4 " aria-current="page" href="#">Update Products</a>-->
+                  <!--                </li>-->
+                  <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
+                  <!--                    <a class="nav-link active fs-4 " href="#" tabindex="-1" aria-disabled="true">Database</a>-->
+                  <!--                </li>-->
 
-            <h2 class="item" th:text="${lap.name}">Nomi</h2>
-            <h2 class="item" th:text="${lap.model}">Model</h2>
-            <div class="text-box">
-            <form action="/order/add" method="post">Add to cart</form>
-<!--               <form class="mt-5" action="/order/add" method="post" enctype="multipart/form-data">-->
+               </ul>
             </div>
+            <!--        <button class="btn btn-success ps-5 pe-5 pt-2 pb-2" onclick="quit()">Quit</button>-->
+         </div>
+
+
+      </nav>
+
+      <div class="listing-section">
+         <div class="laptops">
+            <div th:each="product: ${products}">
+               <div class="product">
+                  <div class="image-box">
+                     <div class="images" id="image-1">
+                        <img th:src="'data:image/png;base64,' + ${product.image}" alt="Image">
+                     </div>
+                  </div>
+                  <div class="text-box">
+                     <label for="product-name"> Name:</label>
+                     <h2 class="item" th:text="${product.name}" id="product-name"></h2>
+                     <label for="product-price">Price:$</label>
+                     <h3 class="price" th:text="${product.cost}" id="product-price"></h3>
+                     <label for="product-description">Description: </label>
+                     <h3 class="price" th:text="${product.description}" id="product-description"></h3>
+                     <!--                <p class="description">A bag of delicious oranges!</p>-->
+                     <!--                <label for="item-1-quantity">Quantity:</label>-->
+                     <!--                <input type="text" name="item-1-quantity" id="item-1-quantity" value="1">-->
+                     <form  action="/order/add" method="post">
+                        <input type="hidden" name="productId" th:value="${product.id}">
+                        <div>
+                           <label for="amount">Amount: </label>
+                           <input type="number" name="amount" id="amount" min="1">
+                        </div>
+                        <input type="hidden" name="cost" th:value="${product.cost}">
+                        <!--              <input type="hidden" name="userId" th:value="">-->
+                        <button type="submit" name="item-1-button" id="item-1-button"> Add Basket</button>
+                     </form>
+
+                     <!--            <form action="/product/update" method="get">-->
+                     <!--              <input type="hidden" name="productId" th:value="${product.getId()}">-->
+                     <!--              <button type="submit" class="edit-svg"> Update </button>-->
+                     <!--            </form>-->
+
+                  </div>
+
+
+               </div>
             </div>
-      </div>
-
-      <div th:each="ph: ${phone}">
-         <div class="product product-4">
-            <img th:src="'data:image/png;base64,' + ${ph.image}" alt="computer to sell" class="product-img">
-            <h2 class="item" th:text="${ph.name}">Nomi</h2>
-            <h2 class="item" th:text="${ph.model}">Model</h2>
-            <div class="text-box">
-            <form action="/order/add" method="post">Add to cart</form>
          </div>
-      </div>
 
-      <div th:each="tvs: ${tv}">
-         <div class="product product-4">
-            <img th:src="'data:image/png;base64,' + ${tvs.image}" alt="computer to sell" class="product-img">
-            <h2 class="item" th:text="${tvs.name}">Nomi</h2>
-            <h2 class="item" th:text="${tvs.model}">Model</h2>
-            <div class="text-box">
-            <form action="/order/add" method="post">Add to cart</form>
-         </div>
       </div>
-   </section>
+   </div>
 
    <!-- SPONSOR SECTION -->
    <section class="container section-4">
