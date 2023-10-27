@@ -124,7 +124,7 @@ public class LaptopController {
 
     @PostMapping("/update")
     public String update(
-            @RequestBody LaptopUpdateDto laptopUpdateDto,
+            @ModelAttribute LaptopUpdateDto laptopUpdateDto,
             @RequestParam UUID laptopId,
             @RequestParam Integer amount,
             @RequestParam MultipartFile image,
