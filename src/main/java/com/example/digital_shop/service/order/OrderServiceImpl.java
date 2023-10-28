@@ -68,7 +68,6 @@ public class OrderServiceImpl implements OrderService{
     public List<OrderEntity> getUserOrders(UUID userId) {
         UserEntity user = userRepository.findById(userId).orElseThrow(()->new DataNotFoundException("User not found"));
         List<OrderEntity> orders = orderRepository.getOrderEntitiesByUserIdEquals(user.getId());
-        System.out.println(orders);
         if(orders.isEmpty()){
            return null;
         }
@@ -77,13 +76,13 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public OrderEntity getUserOrder(UUID userId, UUID orderId) {
-        Optional<UserEntity> byId = userRepository.findById(userId);
-        UserEntity user;
-        if (byId.isPresent()){
-           user = byId.get();
-        }else {
-            return null;
-        }
-       return orderRepository.findOrderEntityByUserIdAndIdEquals(user,orderId);
+////        Optional<UserEntity> byId = userRepository.findById(userId);
+////        UserEntity user;
+//        if (byId.isPresent()){
+//           user = byId.get();
+//        }else {
+//            return null;
+//        }
+       return orderRepository.findOrderEntityByIdAndUserIdEquals(userId,orderId);
     }
 }

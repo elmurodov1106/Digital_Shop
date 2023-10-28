@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public interface PhoneService {
     PhoneEntity add(PhoneDto phoneDto, UUID userId, Integer amount, MultipartFile image) throws IOException;
-
+   PhoneEntity getById(UUID phoneId);
     List<PhoneEntity> getAllPhone(int size, int page);
     List<PhoneEntity> search(int page,int size,String name);
     Boolean deleteById(UUID id,UUID userId);
