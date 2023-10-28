@@ -17,5 +17,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, UUID> {
 
     List<OrderEntity> getOrderEntitiesByUserIdEquals(UUID userId);
 
- 
+
+    OrderEntity findOrderEntityByUserIdAndIdEquals(UserEntity user, UUID orderId);
 }
