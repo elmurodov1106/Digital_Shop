@@ -18,8 +18,11 @@ public class TransactionController {
     private final TransactionService transactionService;
     private final OrderService orderService;
 
-    @GetMapping("/transaction")
-    public String TransactionPage(@RequestParam UUID orderId, Model model, HttpServletRequest request) {
+    @GetMapping("/order")
+    public String TransactionPage(
+            @RequestParam UUID orderId,
+            Model model,
+            HttpServletRequest request) {
         UUID userId = checkCookie(request);
         if(userId==null){
             return "signIn";
@@ -32,6 +35,9 @@ public class TransactionController {
         model.addAttribute("order",userOrder);
         return "buy";
     }
+
+
+
 
     @PostMapping("/create")
     public String p2p(@RequestParam UUID sender,
