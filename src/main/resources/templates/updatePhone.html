@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phone update</title>
+  <link th:href="@{/css/addProduct.css}" rel="stylesheet">
+  <script type="text/javascript" th:src="@{/js/ProductAdd.js}"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/3da5cff3a5.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <div class="container-sm">
+    <a class="navbar-brand" href="/auth/seller/menu">Seller Menu</a>
+    <div class="navcontent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center">
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container w-50 border mt-5" id="form">
+  <form class="mt-5" action="/phone/update" method="post" enctype="multipart/form-data">
+
+    <div class="mb-3">
+      <label class="form-label">Phone Name</label>
+      <input type="text" class="form-control" name="name" th:filed="*{name}" th:value="${phone.name}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Model</label>
+      <input type="text" class="form-control" name="model" th:value="${phone.model}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Cost</label>
+      <input type="number" class="form-control" name="cost" min="1" th:value="${phone.cost}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Amount</label>
+      <input type="number" class="form-control" name="amount" min="1" th:value="${phone.amount}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Colour</label>
+      <input type="text" class="form-control" name="colour" th:value="${phone.colour}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Size</label>
+      <input type="number" class="form-control" name="size"  min="1" th:value="${phone.size}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Weight</label>
+      <input type="number" class="form-control" name="weight" min="1" th:value="${phone.weight}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Memory</label>
+      <input type="number" class="form-control" name="memory" min="1" th:value="${phone.memory}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Ram</label>
+      <input type="number" class="form-control" name="Ram" min="1" th:value="${phone.ram}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Battery</label>
+      <input type="number" class="form-control" name="battery" min="1" th:value="${phone.battery}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">FrontCamera</label>
+      <input type="number" class="form-control" name="FrontCamera" min="1" th:value="${phone.frontCamera}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">BackCamera</label>
+      <input type="number" class="form-control" name="BackCamera" min="1" th:value="${phone.backCamera}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <input type="text" class="form-control" name="description" min="10"  th:value="${phone.description}">
+    </div>
+    <div id="dynamic-form"></div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Phone Image</label>
+      <input type="file" class="form-control" name="image" id="image">
+    </div>
+    <input type="hidden" name="phoneId" th:value="${phone.id}">
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-success text-white btn-outline-success form-control w-50 m-3" id="ekleButton">Submit</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

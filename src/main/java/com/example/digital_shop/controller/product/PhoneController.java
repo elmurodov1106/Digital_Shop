@@ -5,7 +5,6 @@ import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.PhoneDto;
 import com.example.digital_shop.domain.dto.PhoneUpdateDto;
 import com.example.digital_shop.entity.product.PhoneEntity;
-import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.phone.PhoneService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -83,9 +82,19 @@ public class PhoneController {
       model.addAttribute("phone",search);
       return "search";
     }
+    @GetMapping("/update")
+    public String updateGet(@RequestParam UUID phoneId,Model model){
+        PhoneEntity byId = phoneService.getById(phoneId);
+        if(byId==null){
+            model.addAttribute("message","Phone not found");
+            return "allPhones";
+        }
+        model.addAttribute("phone",byId);
+        return "updatePhone";
+    }
     @PostMapping("/update")
     public String update(
-            @RequestBody PhoneUpdateDto phoneUpdateDto,
+            @ModelAttribute PhoneUpdateDto phoneUpdateDto,
             @RequestParam UUID phoneId,
             @RequestParam MultipartFile image,
             Model model,
