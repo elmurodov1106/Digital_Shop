@@ -5,28 +5,77 @@
 <head>
   <meta charset="UTF-8">
   <title>Basket</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/basket.css}" />
-  <script type="text/javascript" th:src="@{/js/basket.js}"></script>
+  <link th:href="@{/css/productList.css}" rel="stylesheet">
+  <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+  <script src="https://kit.fontawesome.com/3da5cff3a5.js" crossorigin="anonymous"></script>
 </head>
-<body>
-<div id="container" layout:fragment="body">
-  <div th:if="${not #strings.isEmpty(message)}">
-    <div th:text="${message}" class="error-message"></div>
-    <p>Debug: Message is not empty: <span th:text="${message}"></span></p>
-  </div>
+<body layout:fragment="body">
+<div  class="boxes">
+
+  <nav class="navbar navbar-expand navbar-light bg-light">
+    <div class="container-sm">
+      <!--    <a class="navbar-brand" href="/auth/seller/menu">Seller Menu</a>-->
+      <div class="navcontent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center">
+          <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
+          <!--                    <a class="nav-link active fs-4" aria-current="page" href="#">Add Products</a>-->
+          <!--                </li>-->
+          <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
+          <!--                    <a class="nav-link active fs-4 " aria-current="page" href="#">Update Products</a>-->
+          <!--                </li>-->
+          <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
+          <!--                    <a class="nav-link active fs-4 " href="#" tabindex="-1" aria-disabled="true">Database</a>-->
+          <!--                </li>-->
+
+        </ul>
+      </div>
+      <!--        <button class="btn btn-success ps-5 pe-5 pt-2 pb-2" onclick="quit()">Quit</button>-->
+    </div>
 
 
+  </nav>
 
-  <div id="footer">
-    <ul>
-      <li>Change the amount of stuff and see the subtotal and total change</li>
-      <li>Try to change the amount of items to minus amounts or 0</li>
-      <li>Delete items and see the totals change</li>
-    </ul>
-    <hr />
-    This is my first entry for this week's <a href="https://codepen.io/tag/rodeo-007">CodePen Pattern Rodeo</a>.<br />
-    If you like this pen, please heart it :)
+  <div class="listing-section" >
+    <div class="laptops">
+      <div th:each="product: ${products}">
+        <div class="product">
+          <div class="image-box">
+            <div class="images" id="image-1">
+              <img th:src="'data:image/png;base64,' + ${product.image}"  alt="Image">
+            </div>
+          </div>
+          <div class="text-box">
+            <label for="product-name"> Name:</label>
+            <h2 class="item" th:text="${product.name}" id="product-name"></h2>
+            <label for="product-price">Price:$</label>
+            <h3 class="price" th:text="${product.cost}" id="product-price"></h3>
+            <label for="product-description">Description: </label>
+            <h3 class="price" th:text="${product.description}" id="product-description"></h3>
+            <form  action="/order/delete">
+              <input type="hidden" name="orderId" th:value="${orders.getId()}">
+              <button type="submit" name="item-1-button" >Delete</button>
+            </form>
+
+            <form  action="/transaction/transaction">
+              <input type="hidden" name="orderId" th:value="${orders.getId()}">
+              <button type="submit" name="item-1-button" id="item-1-button">Buy</button>
+            </form>
+
+            <!--            <form action="/product/update" method="get">-->
+            <!--              <input type="hidden" name="productId" th:value="${product.getId()}">-->
+            <!--              <button type="submit" class="edit-svg"> Update </button>-->
+            <!--            </form>-->
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 </body>
 </html>
+
+
