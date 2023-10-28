@@ -69,6 +69,7 @@ public class OrderController {
             return "basket";
         }
         model.addAttribute("orders",getOrder(userOrders));
+        System.out.println("getOrder(userOrders) = " + getOrder(userOrders).getId());
 
 
         model.addAttribute("products",getAll(userOrders));
