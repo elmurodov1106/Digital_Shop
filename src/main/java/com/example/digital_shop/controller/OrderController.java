@@ -52,10 +52,12 @@ public class OrderController {
          orderService.add(orderDto);
         UserEntity user= userService.getById(userId);
         model.addAttribute("user",user);
-        return "index";
+        return "redirect:/auth/index";
     }
     @GetMapping("/get-user-orders")
-    public String getUserOrders(HttpServletRequest request,Model model){
+    public String getUserOrders(
+            HttpServletRequest request,
+            Model model){
         UUID userId=checkCookie(request);
         if(userId ==null){
             return "signIn";
@@ -66,8 +68,10 @@ public class OrderController {
             model.addAttribute("message","You dont have any orders");
             return "basket";
         }
-        model.addAttribute("orders",userOrders);
+        model.addAttribute("orders",getOrder(userOrders));
+
         model.addAttribute("products",getAll(userOrders));
+        System.out.println(getAll(userOrders));
         return "basket";
     }
     @PostMapping("/update")
@@ -86,7 +90,7 @@ public class OrderController {
         return "basket";
     }
 
-    @DeleteMapping("/delete")
+    @GetMapping("/delete")
     public String delete(
             @RequestParam UUID orderId,
             HttpServletRequest request,
@@ -94,7 +98,11 @@ public class OrderController {
     ){
         UUID userId = checkCookie(request);
         Boolean aBoolean = orderService.deleteById(orderId, userId);
+        List<OrderEntity> userOrders = orderService.getUserOrders(userId);
         if(aBoolean){
+            model.addAttribute("orders",getOrder(userOrders));
+
+            model.addAttribute("products",getAll(userOrders));
             model.addAttribute("message","Order Succefully deleted");
             return "basket";
         }
@@ -115,5 +123,12 @@ public class OrderController {
        }
        return products;
    }
+
+    private OrderEntity getOrder(List<OrderEntity> orders){
+        for(OrderEntity order : orders) {
+        return order;
+        }
+        return null;
+    }
 
 }
