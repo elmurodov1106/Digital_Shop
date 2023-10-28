@@ -16,6 +16,7 @@ import java.util.UUID;
 public interface OrderRepository extends JpaRepository<OrderEntity, UUID> {
 
     List<OrderEntity> getOrderEntitiesByUserIdEquals(UUID userId);
-   OrderEntity findOrderEntityByIdAndUserIdEquals(UUID userId, UUID id);
- 
+
+
+    OrderEntity findOrderEntityByUserIdAndIdEquals(UserEntity user, UUID orderId);
 }
