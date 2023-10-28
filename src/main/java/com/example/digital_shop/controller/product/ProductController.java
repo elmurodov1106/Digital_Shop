@@ -9,6 +9,7 @@ import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -66,8 +67,17 @@ public class ProductController {
     public String getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            Model model
+            Model model,
+            HttpServletRequest request
            ) {
+        UUID userId = checkCookie(request);
+        UserEntity user = null;
+        if(userId!=null){
+            user=userService.getById(userId);
+            if(user!=null){
+                model.addAttribute("user",user);
+            }
+        }
         List<ProductEntity> all = productService.getAllProducts(size,page);
         if(all.isEmpty()){
             model.addAttribute("products",all);

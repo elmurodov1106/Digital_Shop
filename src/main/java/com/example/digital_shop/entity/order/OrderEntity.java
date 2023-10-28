@@ -15,12 +15,10 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
+@ToString
 public class OrderEntity extends BaseEntity {
-
     private UUID productId;
-
     private UUID userId;
     private Double cost;
-
     private Double amount;
 }

@@ -2,11 +2,7 @@ package com.example.digital_shop.service.phone;
 
 import com.example.digital_shop.domain.dto.PhoneDto;
 import com.example.digital_shop.domain.dto.PhoneUpdateDto;
-import com.example.digital_shop.domain.dto.ProductCreatDto;
-import com.example.digital_shop.entity.inventory.InventoryEntity;
-import com.example.digital_shop.entity.product.LaptopEntity;
 import com.example.digital_shop.entity.product.PhoneEntity;
-import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
 import com.example.digital_shop.repository.phone.PhoneRepository;
 import jakarta.transaction.Transactional;
@@ -41,6 +37,12 @@ public class PhoneServiceImpl implements PhoneService{
         phoneEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
         return phoneRepository.save(phoneEntity);
     }
+
+    @Override
+    public PhoneEntity getById(UUID phoneId) {
+        return phoneRepository.findPhoneEntityById(phoneId);
+    }
+
     @Override
     public List<PhoneEntity> getAllPhone(int size, int page) {
         Pageable pageable = PageRequest.of(page, size);
@@ -81,7 +83,7 @@ public class PhoneServiceImpl implements PhoneService{
         if (phoneEntity==null){
             return null;
         }
-        if (phoneEntity.getUserId().equals(userId)){
+         if (phoneEntity.getUserId().equals(userId)){
             if(!update.getName().equals("")){
                 phoneEntity.setName(update.getName());
             }
@@ -129,8 +131,7 @@ public class PhoneServiceImpl implements PhoneService{
 
     public List<PhoneEntity> getSellerPhone(int page,int size,UUID sellerId) {
         Pageable pageable = PageRequest.of(page, size);
-        List<PhoneEntity> phoneEntitiesByUserIdEquals = phoneRepository.findPhoneEntitiesByUserIdEquals(pageable,sellerId);
-        return phoneEntitiesByUserIdEquals;
+        return phoneRepository.findPhoneEntitiesByUserIdEquals(pageable,sellerId);
     }
 
 

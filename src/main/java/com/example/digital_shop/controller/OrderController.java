@@ -66,6 +66,7 @@ public class OrderController {
             model.addAttribute("message","You dont have any orders");
             return "basket";
         }
+        System.out.println(userOrders.get(0).toString());
         model.addAttribute("orders",userOrders);
         model.addAttribute("products",getAll(userOrders));
         return "basket";
