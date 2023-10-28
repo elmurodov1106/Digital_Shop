@@ -70,6 +70,7 @@ public class OrderController {
         }
         model.addAttribute("orders",getOrder(userOrders));
 
+
         model.addAttribute("products",getAll(userOrders));
         System.out.println(getAll(userOrders));
         return "basket";
