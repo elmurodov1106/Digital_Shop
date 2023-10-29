@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <title>Basket</title>
   <link th:href="@{/css/productList.css}" rel="stylesheet">
-  <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
   <script src="https://kit.fontawesome.com/3da5cff3a5.js" crossorigin="anonymous"></script>
 </head>
 <body layout:fragment="body">
@@ -37,27 +37,27 @@
 
   <div class="listing-section" >
     <div class="laptops">
-      <div th:each="product: ${products}">
+      <div th:each="order: ${orders}">
         <div class="product">
           <div class="image-box">
             <div class="images" id="image-1">
-              <img th:src="'data:image/png;base64,' + ${product.image}"  alt="Image">
+              <img th:src="'data:image/png;base64,' + ${order.product.image}"  alt="Image">
             </div>
           </div>
           <div class="text-box">
             <label for="product-name"> Name:</label>
-            <h2 class="item" th:text="${product.name}" id="product-name"></h2>
+            <h2 class="item" th:text="${order.product.name}" id="product-name"></h2>
             <label for="product-price">Price:$</label>
-            <h3 class="price" th:text="${product.cost}" id="product-price"></h3>
-            <label for="product-description">Description: </label>
-            <h3 class="price" th:text="${product.description}" id="product-description"></h3>
-            <form  action="/order/delete">
-              <input type="hidden" name="orderId" th:value="${orders.getId()}">
+            <h3 class="price" th:text="${order.cost}" id="product-price"></h3>
+            <label for="product-description">Amount </label>
+            <h3 class="price" th:text="${order.amount}" id="product-description"></h3>
+            <form  action="/order/delete" method="get">
+              <input type="hidden" name="orderId" th:value="${order.id}">
               <button type="submit" name="item-1-button" >Delete</button>
             </form>
 
-            <form  action="/transaction/transaction">
-              <input type="hidden" name="orderId" th:value="${orders.getId()}">
+            <form  action="/transaction/create" method="get">
+              <input type="hidden" name="orderId" th:value="${order.id}">
               <button type="submit" name="item-1-button" id="item-1-button">Buy</button>
             </form>
 

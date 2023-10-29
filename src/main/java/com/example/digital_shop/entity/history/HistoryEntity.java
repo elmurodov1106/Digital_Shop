@@ -12,8 +12,9 @@ import java.util.UUID;
 @Setter
 @Builder
 public class HistoryEntity extends BaseEntity {
-    private UUID senderCardId;
-    private UUID receiverId;
-    private UUID productId;
-    private Double paymentAmount;
+    private UUID sender;
+    private UUID receiver;
+    private String productName;
+    private Integer amount;
+    private Double cost;
 }

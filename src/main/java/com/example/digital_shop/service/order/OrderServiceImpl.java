@@ -2,10 +2,13 @@ package com.example.digital_shop.service.order;
 
 import com.example.digital_shop.domain.dto.OrderDto;
 import com.example.digital_shop.entity.order.OrderEntity;
+import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.UserRepository;
 import com.example.digital_shop.repository.order.OrderRepository;
+import com.example.digital_shop.repository.product.ProductRepository;
+import jakarta.persistence.criteria.Order;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageRequest;
@@ -24,10 +27,25 @@ public class OrderServiceImpl implements OrderService{
     private final OrderRepository orderRepository;
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
+    private final ProductRepository productRepository;
 
     @Override
-    public OrderEntity add(OrderEntity orderDto) {
-        return orderRepository.save(orderDto);
+    public OrderEntity add(OrderDto orderDto) {
+        ProductEntity product = productRepository.findProductEntityById(orderDto.getProductId());
+        if(product==null){
+            return null;
+        }
+        orderDto.setCost(orderDto.getAmount()*product.getCost());
+        OrderEntity order = orderRepository.getUserAndProduct(orderDto.getUserId(),orderDto.getProductId());
+        if(order!=null){
+            return null;
+        }
+        OrderEntity map = OrderEntity.builder()
+                .userId(orderDto.getUserId())
+                .amount(orderDto.getAmount())
+                .cost(orderDto.getCost()).build();
+        map.setProduct(product);
+        return orderRepository.save(map);
     }
 
     @Override
@@ -83,6 +101,6 @@ public class OrderServiceImpl implements OrderService{
 //        }else {
 //            return null;
 //        }
-       return orderRepository.findOrderEntityByIdAndUserIdEquals(userId,orderId);
+       return orderRepository.getUserOrder(userId,orderId);
     }
 }

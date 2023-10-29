@@ -12,10 +12,10 @@ import lombok.Setter;
 @Builder
 public class CardCreatedDto {
     @NotBlank(message = "Card name not entered")
-    private String cardName;
+    private String name;
     @NotBlank(message = "Card number not entered")
     @Pattern(regexp = "\\d{16}")
-    private String cardNumber;
+    private String number;
     @NotBlank(message = "Expire date not entered")
     @Pattern(regexp = "^(0[1-9]|1[0-2])/(\\d{2})$")
     private String expireDate;

@@ -3,7 +3,6 @@ package com.example.digital_shop.controller;
 import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.domain.dto.OrderDto;
 import com.example.digital_shop.entity.order.OrderEntity;
-import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.order.OrderService;
 import com.example.digital_shop.service.product.ProductService;
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,21 +23,9 @@ public class OrderController {
 
     private final OrderService orderService;
     private final UserService userService;
-    private final ProductService productService;
-
-
-//    @GetMapping("/add")
-//    public String add(
-//            @RequestParam UUID productId,
-//            Model model
-//
-//            ){
-//        model.addAttribute("productId",productId);
-//        return "AddBasket";
-//    }
     @PostMapping("/add")
     public String add(
-            @ModelAttribute OrderEntity orderDto,
+            @ModelAttribute OrderDto orderDto,
             HttpServletRequest request,
             Model model
     ){
@@ -68,11 +53,7 @@ public class OrderController {
             model.addAttribute("message","You dont have any orders");
             return "basket";
         }
-        model.addAttribute("orders",getOrder(userOrders));
-
-
-        model.addAttribute("products",getAll(userOrders));
-        System.out.println(getAll(userOrders));
+        model.addAttribute("orders",userOrders);
         return "basket";
     }
     @PostMapping("/update")
@@ -101,9 +82,6 @@ public class OrderController {
         Boolean aBoolean = orderService.deleteById(orderId, userId);
         List<OrderEntity> userOrders = orderService.getUserOrders(userId);
         if(aBoolean){
-            model.addAttribute("orders",getOrder(userOrders));
-
-            model.addAttribute("products",getAll(userOrders));
             model.addAttribute("message","Order Succefully deleted");
             return "basket";
         }
@@ -117,19 +95,12 @@ public class OrderController {
         }
         return null;
     }
-   private List<ProductEntity> getAll(List<OrderEntity> orders){
-        List<ProductEntity> products = new ArrayList<>();
-       for (OrderEntity order : orders) {
-           products.add(productService.getById(order.getProductId()));
-       }
-       return products;
-   }
 
-    private OrderEntity getOrder(List<OrderEntity> orders){
-        for(OrderEntity order : orders) {
-        return order;
-        }
-        return null;
-    }
+//    private OrderEntity getOrder(List<OrderEntity> orders){
+//        for(OrderEntity order : orders) {
+//        return order;
+//        }
+//        return null;
+//    }
 
 }

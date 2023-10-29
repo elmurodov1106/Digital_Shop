@@ -15,9 +15,9 @@ import java.util.UUID;
 @Setter
 @Builder
 public class CardEntity extends BaseEntity {
-    private String cardName;
+    private String name;
     @Column(unique = true,nullable = false)
-    private String cardNumber;
+    private String number;
     private String expireDate;
     @ColumnDefault("100000.0")
     private Double balance;

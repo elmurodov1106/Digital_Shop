@@ -22,6 +22,6 @@ public class OrderDto {
     private Double cost;
 
     @NotEmpty(message = "amount cannot be empty")
-    private Double amount;
+    private Integer amount;
 
 }

@@ -19,7 +19,7 @@ public class HistoryServiceImpl implements HistoryService {
     public List<HistoryEntity> getSenderCardHistory(int size, int page, UUID senderCardId) {
         Pageable pageable = PageRequest.of(size,page);
         List<HistoryEntity> historyEntities =
-                historyRepository.findHistoryEntitiesBySenderCardIdEqualsIgnoreCase(pageable,senderCardId);
+                historyRepository.findHistoryEntitiesBySenderEqualsIgnoreCase(pageable,senderCardId);
         if (historyEntities.isEmpty()){
             throw new DataNotFoundException("User History not found");
         }

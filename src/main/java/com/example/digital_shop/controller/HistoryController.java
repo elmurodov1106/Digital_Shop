@@ -18,7 +18,7 @@ public class HistoryController {
             @RequestParam int page,
             @RequestParam HistoryDto historyDto
     ){
-        historyService.getSenderCardHistory(size, page,historyDto.getSenderCardId());
+        historyService.getSenderCardHistory(size, page,historyDto.getSender());
         return "";
     }
     @GetMapping("/getAllHistories")
