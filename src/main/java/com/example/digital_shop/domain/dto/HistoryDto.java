@@ -11,11 +11,11 @@ import java.util.UUID;
 @Builder
 public class HistoryDto {
     @NotBlank(message = "SenderCardId not entered")
-    private UUID senderCardId;
+    private UUID sender;
     @NotBlank(message = "ReceiverCardId not entered")
-    private UUID receiverCardId;
+    private UUID receiver;
     @NotBlank(message = "ProductId not entered")
-    private UUID productId;
+    private String productName;
     @NotBlank(message = "PaymentAmount not entered")
-    private Double paymentAmount;
+    private Double amount;
 }

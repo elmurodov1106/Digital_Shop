@@ -1,7 +1,7 @@
 package com.example.digital_shop.entity.order;
 
 import com.example.digital_shop.entity.BaseEntity;
-
+import com.example.digital_shop.entity.product.ProductEntity;
 import jakarta.persistence.Entity;
 import lombok.*;
 
@@ -15,8 +15,9 @@ import java.util.UUID;
 @Builder
 @ToString
 public class OrderEntity extends BaseEntity {
-    private UUID productId;
+    @ManyToOne
+    private ProductEntity product;
     private UUID userId;
     private Double cost;
-    private Double amount;
+    private Integer amount;
 }

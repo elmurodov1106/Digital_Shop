@@ -1,12 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Buy</title>
-    <link th:href="@{/css/buy.css}" rel="stylesheet">
-    <script type="text/javascript" th:src="@{/js/buy.js}"></script>
+    <title>Card List</title>
 </head>
 <body>
+<h1>Card List</h1>
+<form method="post" action="/transaction/create">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Balance</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="card : ${cards}">
+            <td th:text="${card.name}"></td>
+            <td th:text="${card.balance}"></td>
+            <td>
+                <label>
+                    <input type="radio" name="cardId" th:value="${card.id}" />
+                    <input type="hidden" name="orderId" th:value="${order.id}">
+                    Select
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <button type="submit" >Pay</button>
+    </div>
+</form>
+
+<script>
+    function editSelectedCard() {
+        window.location.href = "/transaction/create";
+    }
+</script>
+</body>
+</html>
+=======
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-4">

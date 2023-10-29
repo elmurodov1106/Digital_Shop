@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 @Repository
 public interface HistoryRepository extends JpaRepository<HistoryEntity, UUID> {
-    List<HistoryEntity> findHistoryEntitiesBySenderCardIdEqualsIgnoreCase(Pageable pageable, UUID senderCardId);
+    List<HistoryEntity> findHistoryEntitiesBySenderEqualsIgnoreCase(Pageable pageable, UUID senderCardId);
 //    List<HistoryEntity> findHistoryEntitiesBySenderCardIdEqualsIgnoreCase(UUID senderCardId);
 
 }

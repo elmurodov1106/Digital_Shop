@@ -25,10 +25,11 @@ public class CardServiceImpl implements CardService{
     @Override
     @Transactional
     public CardEntity add(CardCreatedDto card, UUID ownerId) {
-        CardEntity cardEntity1 = cardRepository.findCardEntityByCardNumberEqualsIgnoreCase(card.getCardNumber());
+        CardEntity cardEntity1 = cardRepository.findCardEntityByNumberEqualsIgnoreCase(card.getNumber());
         if (cardEntity1 == null) {
             CardEntity cardEntity = modelMapper.map(card, CardEntity.class);
             cardEntity.setOwnerId(ownerId);
+            cardEntity.setBalance(1000000.0);
             return cardRepository.save(cardEntity);
         }
         return null;
@@ -37,8 +38,7 @@ public class CardServiceImpl implements CardService{
     @Override
     public List<CardEntity> getAllUserCards(int size, int page, UUID userId) {
         Pageable pageable = PageRequest.of(page, size);
-        List<CardEntity> cards = cardRepository.findCardEntitiesByOwnerId(pageable, userId);
-        return cards; // This will return an empty list if no cards are found.
+        return cardRepository.findCardEntitiesByOwnerId(pageable, userId);
     }
 
 
@@ -67,7 +67,7 @@ public class CardServiceImpl implements CardService{
         CardEntity cardEntity = cardRepository.findById(cardId)
                 .orElseThrow(() -> new DataNotFoundException("Card not found"));
         if (cardEntity.getOwnerId().equals(ownerId)) {
-            cardEntity.setCardName(name);
+            cardEntity.setName(name);
             return cardRepository.save(cardEntity);
         }
         throw new DataNotFoundException("User not found");

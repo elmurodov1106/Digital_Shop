@@ -1,6 +1,7 @@
 package com.example.digital_shop.service.transaction;
 
 import com.example.digital_shop.entity.history.HistoryEntity;
+import com.example.digital_shop.entity.order.OrderEntity;
 import com.example.digital_shop.entity.payment.CardEntity;
 import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.seller.SellerInfo;
@@ -8,12 +9,14 @@ import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.exception.InsufficientBalanceException;
 import com.example.digital_shop.repository.SellerRepository;
 import com.example.digital_shop.repository.history.HistoryRepository;
+import com.example.digital_shop.repository.order.OrderRepository;
 import com.example.digital_shop.repository.payment.CardRepository;
 import com.example.digital_shop.repository.product.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,10 +27,11 @@ public class TransactionServiceImpl implements TransactionService {
     private final CardRepository cardRepository;
     private final ProductRepository productRepository;
     private final SellerRepository sellerRepository;
+    private final OrderRepository orderRepository;
 
     @Override
     @Transactional
-    public String transferMoney(UUID senderAccountId, double amount, UUID productId) {
+    public String transferMoney(UUID senderAccountId, UUID orderId) {
         Optional<CardEntity> senderCard = cardRepository.findCardEntityById(senderAccountId);
         CardEntity card;
         if(senderCard.isPresent()){
@@ -35,25 +39,28 @@ public class TransactionServiceImpl implements TransactionService {
         }else {
             return null;
         }
-        ProductEntity product = productRepository.findProductEntityById(productId);
-        Optional<SellerInfo> seller = sellerRepository.findById(product.getUserId());
-        SellerInfo sellerInfo = null;
-        if(seller.isPresent()){
-           sellerInfo = seller.get();
-        }
-        if (card.getBalance() < amount) {
+        OrderEntity byId = orderRepository.getReferenceById(orderId);
+        ProductEntity product = productRepository.findProductEntityById(byId.getProduct().getId());
+        SellerInfo sellerInfo = sellerRepository.findSellerInfoByUserIdEquals(product.getUserId());
+        if (card.getBalance() < byId.getCost()) {
             return "insufficient balance";
         }
-        updateAccountBalance(card.getId(), card.getBalance() - amount);
-        assert sellerInfo != null;
-        sellerInfo.setBalance(sellerInfo.getBalance()+ amount);
+        updateAccountBalance(card.getId(), card.getBalance() - byId.getCost());
+        sellerInfo.setBalance(sellerInfo.getBalance()+ byId.getCost());
         HistoryEntity history = HistoryEntity.builder()
-                .paymentAmount(amount)
-                .receiverId(product.getUserId())
-                .senderCardId(card.getId())
-                .productId(product.getId())
+                .amount(byId.getAmount())
+                .receiver(product.getUserId())
+                .sender(card.getId())
+                .productName(product.getName())
+                .cost(byId.getCost())
                 .build();
         historyRepository.save(history);
+        orderRepository.deleteById(orderId);
+        if(Objects.equals(product.getAmount(), byId.getAmount())){
+            productRepository.deleteById(product.getId());
+        }
+        product.setAmount(product.getAmount()- byId.getAmount());
+        productRepository.save(product);
         return "Successfully bought";
     }
 

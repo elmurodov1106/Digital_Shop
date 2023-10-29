@@ -9,4 +9,5 @@ import java.util.UUID;
 public interface SellerRepository extends JpaRepository<SellerInfo,UUID> {
     SellerInfo findSellerInfoByPhoneNumberEquals(String phoneNumber);
     SellerInfo findSellerInfoByPassportNumberEquals(String passportNumber);
+    SellerInfo findSellerInfoByUserIdEquals(UUID userId);
 }
