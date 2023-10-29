@@ -37,14 +37,22 @@
                 <div class="product">
                     <div class="image-box">
                         <div class="images" id="image-1">
-                            <img th:src="'data:image/png;base64,' + ${phone.image}" alt="Image">
+                            <img th:src="'data:image/png;base64,' + ${phone.image}" alt="Image" style=" width:350px; height:200px">
                         </div>
                     </div>
                     <div class="text-box">
-                        <h2 class="item" th:text="${phone.name}">Nomi</h2>
-                        <h3 class="price" th:text="${phone.cost}">Narxi</h3>
-                        <h3 class="price" th:text="${phone.amount}">Soni</h3>
-                        <h3 class="price" th:text="${phone.description}">Description</h3>
+                        <div style="display: flex; ">
+                            <p> Name:</p>
+                            <h2 class="item" th:text="${phone.name}" id="phone-name"></h2>
+                        </div>
+                        <div style="display: flex; ">
+                            <p>Price:$</p>
+                            <h3 class="price" th:text="${phone.cost}" id="phone-price"></h3>
+                        </div>
+                        <p>Description:</p>
+                        <div style="display: flex; ">
+                            <h3 class="description" th:text="${phone.getDescription()}" id="phone-description"></h3>
+                        </div>
                         <form method="get" action="/phone/update">
                             <input type="hidden" name="phoneId" th:value="${phone.id}">
                             <button type="submit" class="edit-svg">Update</button>
@@ -55,7 +63,7 @@
                         </form>
 
 <!--                        <form action="/phone/update" method="get">-->
-<!--                            <input type="hidden" name="productId" th:value="${phone.getId()}">-->
+<!--                            <input type="hidden" name="phoneId" th:value="${phone.getId()}">-->
 <!--                            <button type="submit" class="edit-svg"> Update </button>-->
 <!--                        </form>-->
 
