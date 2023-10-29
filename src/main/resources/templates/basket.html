@@ -41,16 +41,22 @@
         <div class="product">
           <div class="image-box">
             <div class="images" id="image-1">
-              <img th:src="'data:image/png;base64,' + ${product.image}"  alt="Image">
+              <img th:src="'data:image/png;base64,' + ${product.image}"  alt="Image" style=" width:350px; height:200px">
             </div>
           </div>
           <div class="text-box">
-            <label for="product-name"> Name:</label>
-            <h2 class="item" th:text="${product.name}" id="product-name"></h2>
-            <label for="product-price">Price:$</label>
+            <div style="display: flex; ">
+              <p> Name:</p>
+              <h2 class="item" th:text="${product.name}" id="product-name"></h2>
+            </div>
+            <div style="display: flex; ">
+            <p>Price:$</p>
             <h3 class="price" th:text="${product.cost}" id="product-price"></h3>
-            <label for="product-description">Description: </label>
-            <h3 class="price" th:text="${product.description}" id="product-description"></h3>
+            </div>
+            <p>Description:</p>
+            <div style="display: flex; ">
+            <h3 class="description" th:text="${product.getDescription()}" id="product-description"></h3>
+            </div>
             <form  action="/transaction/transaction" method="get" >
               <input type="hidden" th:value="${orders.getId()}" name="orderId">
               <button type="submit" > Buy </button>
