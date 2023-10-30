@@ -72,12 +72,12 @@ public class AuthController {
 
     @GetMapping("/contact")
     public String contact(HttpServletRequest request, Model model) {
-        UUID userId=checkCookie(request);
-        UserEntity user = userService.getById(userId);
-        if (user == null) {
-            return "contactUs";
-        }
-        model.addAttribute("user",user);
+//        UUID userId=checkCookie(request);
+//        UserEntity user = userService.getById(userId);
+//        if (user == null) {
+//            return "contactUs";
+//        }
+//        model.addAttribute("user",user);
         return "contactUs";
     }
     @PostMapping("/sign-up")
@@ -189,7 +189,7 @@ public class AuthController {
         Cookie cookie=new Cookie("userId","");
         cookie.setPath("/");
         response.addCookie(cookie);
-        return "index";
+        return "redirect:/auth/index";
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);

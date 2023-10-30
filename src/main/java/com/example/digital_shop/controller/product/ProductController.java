@@ -5,6 +5,7 @@ import com.example.digital_shop.domain.dto.ProductCreatDto;
 import com.example.digital_shop.domain.dto.ProductUpdateDto;
 import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.user.UserEntity;
+import com.example.digital_shop.service.order.OrderService;
 import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ public class ProductController {
 
     private final ProductService productService;
     private final UserService userService;
+    private final OrderService orderService;
 
     @GetMapping("/add")
     public String addGet() {
