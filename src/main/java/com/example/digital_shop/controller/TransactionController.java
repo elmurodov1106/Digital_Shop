@@ -46,10 +46,17 @@ public class TransactionController {
     @PostMapping("/create")
     public String p2p(@RequestParam UUID cardId,
                       @RequestParam UUID orderId,
-                      Model model){
+                      Model model,HttpServletRequest request){
+        UUID userId = checkCookie(request);
+        if(userId==null){
+            return "signIn";
+        }
+        OrderEntity userOrder = orderService.getUserOrder(userId, orderId);
         String message = transactionService.transferMoney(cardId, orderId);
+        model.addAttribute("orders",userOrder);
+
         model.addAttribute("message",message);
-        return "basket";
+        return "redirect:/order/get-user-orders";
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
