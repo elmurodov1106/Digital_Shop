@@ -50,12 +50,13 @@ public class OrderController {
         List<OrderEntity> userOrders = orderService.getUserOrders(userId);
         model.addAttribute("user",userService.getById(userId));
         if(userOrders == null){
+            model.addAttribute("user",userService.getById(userId));
             model.addAttribute("message","You dont have any orders");
             return "basket";
         }
         model.addAttribute("orders",userOrders);
-        model.addAttribute("orders",getOrder(userOrders));
-        model.addAttribute("products",getAll(userOrders));
+//        model.addAttribute("orders",getOrder(userOrders));
+//        model.addAttribute("products",getAll(userOrders));
         return "basket";
     }
     @PostMapping("/update")
