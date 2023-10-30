@@ -54,6 +54,8 @@ public class OrderController {
             return "basket";
         }
         model.addAttribute("orders",userOrders);
+        model.addAttribute("orders",getOrder(userOrders));
+        model.addAttribute("products",getAll(userOrders));
         return "basket";
     }
     @PostMapping("/update")
