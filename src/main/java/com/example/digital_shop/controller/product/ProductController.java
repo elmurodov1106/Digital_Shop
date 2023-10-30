@@ -177,8 +177,7 @@ public class ProductController {
            model.addAttribute("message","Seller not found");
            return "index";
        }
-        if (sellerProduct.isEmpty()){
-            model.addAttribute("products",sellerProduct);;
+        if (sellerProduct == null){
             model.addAttribute("message","Product not found");
             return "sellerProducts";
         }
