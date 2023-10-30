@@ -81,8 +81,7 @@ public class LaptopController {
         if(userId!= null){
             model.addAttribute("user",userService.getById(userId));
         }
-        if (allLaptop.isEmpty()){
-            model.addAttribute("laptops",allLaptop);
+        if (allLaptop == null){
             model.addAttribute("message","Laptop not found");
             return "sellerLaptop";
         }

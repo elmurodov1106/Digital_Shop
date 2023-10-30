@@ -9,6 +9,7 @@ import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.UserRepository;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
+import com.example.digital_shop.repository.order.OrderRepository;
 import com.example.digital_shop.repository.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -31,6 +32,7 @@ public class ProductServiceImpl implements ProductService {
     private final ModelMapper modelMapper;
     private final InventoryRepository inventoryRepository;
     private final UserRepository userRepository;
+    private final OrderRepository orderRepository;
 
     @Override
     @Transactional
@@ -77,13 +79,10 @@ public class ProductServiceImpl implements ProductService {
     public Boolean deleteById(UUID productId, UUID userId) {
         ProductEntity productNotFound = productRepository.findProductEntityById(productId);
         if(productNotFound==null){
-            System.out.println(true);
             return null;
         }
-        System.out.println(productNotFound.getUserId());
         if (productNotFound.getUserId().equals(userId)) {
-            System.out.println(true);
-            inventoryRepository.deleteByProductIdEquals(productId);
+            orderRepository.deleteProductOrder(productId);
             productRepository.deleteById(productId);
             return true;
         }
