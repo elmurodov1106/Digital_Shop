@@ -6,6 +6,7 @@ import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.UserRepository;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
+import com.example.digital_shop.repository.order.OrderRepository;
 import com.example.digital_shop.repository.tv.TvRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ public class TvServiceImpl implements TvService {
     private final ModelMapper modelMapper;
     private final InventoryRepository inventoryRepository;
     private final UserRepository userRepository;
+    private final OrderRepository orderRepository;
     @Override
     @Transactional
     public TvEntity add(TvDto tvDto, UUID userId, Integer amount, MultipartFile image) throws IOException {
@@ -67,7 +69,7 @@ public class TvServiceImpl implements TvService {
             return null;
         }
         if (tvNotFound.getUserId().equals(userId)){
-            inventoryRepository.deleteByProductIdEquals(tvId);
+            orderRepository.deleteProductOrder(tvId);
             tvRepository.deleteById(tvId);
             return true;
         }

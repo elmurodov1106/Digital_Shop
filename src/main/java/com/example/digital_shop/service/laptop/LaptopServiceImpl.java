@@ -8,6 +8,7 @@ import com.example.digital_shop.exception.DataNotFoundException;
 import com.example.digital_shop.repository.UserRepository;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
 import com.example.digital_shop.repository.laptop.LaptopRepository;
+import com.example.digital_shop.repository.order.OrderRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -26,7 +27,7 @@ import java.util.UUID;
 public class LaptopServiceImpl implements LaptopService{
     private final LaptopRepository laptopRepository;
     private final ModelMapper modelMapper;
-    private final InventoryRepository inventoryRepository;
+    private final OrderRepository orderRepository;
     private final UserRepository userRepository;
 
     @Override
@@ -36,11 +37,7 @@ public class LaptopServiceImpl implements LaptopService{
         laptopEntity.setUserId(userId);
         laptopEntity.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
         return laptopRepository.save(laptopEntity);
-
     }
-
-
-
     @Override
     public List<LaptopEntity> getAllLaptops(int size, int page) {
         Pageable pageable = PageRequest.of(page, size);
@@ -63,7 +60,7 @@ public class LaptopServiceImpl implements LaptopService{
           return null;
       }
       if (laptopEntity.getUserId().equals(userId)){
-          inventoryRepository.deleteByProductIdEquals(laptopId);
+          orderRepository.deleteProductOrder(laptopId);
           laptopRepository.deleteById(laptopId);
           return true;
       }

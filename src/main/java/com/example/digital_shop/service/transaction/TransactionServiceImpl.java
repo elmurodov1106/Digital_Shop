@@ -12,6 +12,7 @@ import com.example.digital_shop.repository.history.HistoryRepository;
 import com.example.digital_shop.repository.order.OrderRepository;
 import com.example.digital_shop.repository.payment.CardRepository;
 import com.example.digital_shop.repository.product.ProductRepository;
+import com.example.digital_shop.service.product.ProductService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class TransactionServiceImpl implements TransactionService {
     private final HistoryRepository historyRepository;
     private final CardRepository cardRepository;
     private final ProductRepository productRepository;
+    private final ProductService productService;
     private final SellerRepository sellerRepository;
     private final OrderRepository orderRepository;
 
@@ -58,7 +60,8 @@ public class TransactionServiceImpl implements TransactionService {
         cardRepository.save(card);
         orderRepository.deleteById(orderId);
         if(Objects.equals(product.getAmount(), byId.getAmount())){
-            productRepository.deleteById(product.getId());
+           productService.deleteById(product.getId(),product.getUserId());
+           return "Successfully bought";
         }
         product.setAmount(product.getAmount()- byId.getAmount());
         productRepository.save(product);

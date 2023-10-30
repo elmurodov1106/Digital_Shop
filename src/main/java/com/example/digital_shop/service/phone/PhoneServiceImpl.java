@@ -4,6 +4,7 @@ import com.example.digital_shop.domain.dto.PhoneDto;
 import com.example.digital_shop.domain.dto.PhoneUpdateDto;
 import com.example.digital_shop.entity.product.PhoneEntity;
 import com.example.digital_shop.repository.inventory.InventoryRepository;
+import com.example.digital_shop.repository.order.OrderRepository;
 import com.example.digital_shop.repository.phone.PhoneRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class PhoneServiceImpl implements PhoneService{
 
     private final PhoneRepository phoneRepository;
     private final ModelMapper modelMapper;
-    private final InventoryRepository inventoryRepository;
+    private final OrderRepository orderRepository;
 
 
 
@@ -70,7 +71,7 @@ public class PhoneServiceImpl implements PhoneService{
             return null;
         }
         if (phoneNotFound.getUserId().equals(userId)){
-            inventoryRepository.deleteByProductIdEquals(phoneId);
+            orderRepository.deleteProductOrder(phoneId);
             phoneRepository.deleteById(phoneId);
             return true;
         }
