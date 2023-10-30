@@ -18,7 +18,7 @@ import java.util.UUID;
 public interface OrderRepository extends JpaRepository<OrderEntity, UUID> {
 
     List<OrderEntity> getOrderEntitiesByUserIdEquals(UUID userId);
-
+   OrderEntity findOrderEntityByIdEquals(UUID orderId);
     @Query("SELECT o FROM orders o WHERE o.id = :order_id AND o.userId = :user_id")
     OrderEntity getUserOrder(@Param("user_id") UUID userId, @Param("order_id") UUID id);
     @Query("SELECT o FROM orders o WHERE o.product.id = :product_id AND o.userId = :user_id")
