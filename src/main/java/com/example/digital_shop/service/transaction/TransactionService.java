@@ -4,5 +4,4 @@ import java.util.UUID;
 
 public interface TransactionService {
     String transferMoney(UUID senderAccountId, UUID orderId);
-    void updateAccountBalance(UUID accountId, double newBalance);
 }

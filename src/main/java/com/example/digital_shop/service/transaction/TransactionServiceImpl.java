@@ -39,13 +39,13 @@ public class TransactionServiceImpl implements TransactionService {
         }else {
             return null;
         }
-        OrderEntity byId = orderRepository.getReferenceById(orderId);
+        OrderEntity byId = orderRepository.findOrderEntityByIdEquals(orderId);
         ProductEntity product = productRepository.findProductEntityById(byId.getProduct().getId());
         SellerInfo sellerInfo = sellerRepository.findSellerInfoByUserIdEquals(product.getUserId());
         if (card.getBalance() < byId.getCost()) {
             return "insufficient balance";
         }
-        updateAccountBalance(card.getId(), card.getBalance() - byId.getCost());
+        card.setBalance(card.getBalance()-byId.getCost());
         sellerInfo.setBalance(sellerInfo.getBalance()+ byId.getCost());
         HistoryEntity history = HistoryEntity.builder()
                 .amount(byId.getAmount())
@@ -55,6 +55,7 @@ public class TransactionServiceImpl implements TransactionService {
                 .cost(byId.getCost())
                 .build();
         historyRepository.save(history);
+        cardRepository.save(card);
         orderRepository.deleteById(orderId);
         if(Objects.equals(product.getAmount(), byId.getAmount())){
             productRepository.deleteById(product.getId());
@@ -62,14 +63,5 @@ public class TransactionServiceImpl implements TransactionService {
         product.setAmount(product.getAmount()- byId.getAmount());
         productRepository.save(product);
         return "Successfully bought";
-    }
-
-    @Override
-    @Transactional
-    public void updateAccountBalance(UUID accountId, double newBalance) {
-        CardEntity card = cardRepository.findCardEntityById(accountId)
-                .orElseThrow(() -> new DataNotFoundException("Not found"));
-        card.setBalance(newBalance);
-        cardRepository.save(card);
     }
 }

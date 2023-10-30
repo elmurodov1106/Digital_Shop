@@ -38,7 +38,6 @@ public class SecurityConfig {
                     "/tv/**",
                     "/order/**",
                     "transaction/**"
-
             };
 
     @Bean
