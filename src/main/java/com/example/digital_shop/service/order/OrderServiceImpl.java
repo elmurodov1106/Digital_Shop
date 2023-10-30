@@ -96,13 +96,13 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public OrderEntity getUserOrder(UUID userId, UUID orderId) {
        return orderRepository.getUserOrder(userId,orderId);
-        Optional<UserEntity> byId = userRepository.findById(userId);
-        UserEntity user;
-        if (byId.isPresent()){
-           user = byId.get();
-        }else {
-            return null;
-        }
-       return orderRepository.findOrderEntityByUserIdAndIdEquals(user,orderId);
+//        Optional<UserEntity> byId = userRepository.findById(userId);
+//        UserEntity user;
+//        if (byId.isPresent()){
+//           user = byId.get();
+//        }else {
+//            return null;
+//        }
+//       return orderRepository.findOrderEntityByUserIdAndIdEquals(user,orderId);
     }
 }

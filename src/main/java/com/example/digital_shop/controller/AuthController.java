@@ -5,6 +5,7 @@ import com.example.digital_shop.domain.dto.*;
 import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.product.ProductService;
+import com.example.digital_shop.service.seller.SellerService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import java.util.UUID;
 public class AuthController {
     private final UserService userService;
     private final ProductService productService;
+    private final SellerService sellerService;
 
     @GetMapping("/index")
     public String yourPage(
@@ -71,8 +73,11 @@ public class AuthController {
     @GetMapping("/contact")
     public String contact(HttpServletRequest request, Model model) {
         UUID userId=checkCookie(request);
-        UserEntity byId = userService.getById(userId);
-        model.addAttribute("user",byId);
+        UserEntity user = userService.getById(userId);
+        if (user == null) {
+            return "contactUs";
+        }
+        model.addAttribute("user",user);
         return "contactUs";
     }
     @PostMapping("/sign-up")
@@ -143,6 +148,7 @@ public class AuthController {
         response.addCookie(cookie);
         if (user.getRole().getName().equals("Seller")) {
             model.addAttribute("user", user);
+
             return "SellerMenu";
         }
         model.addAttribute("products",productService.getAllProducts(10,0));

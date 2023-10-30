@@ -10,6 +10,8 @@
   <script src="https://kit.fontawesome.com/3da5cff3a5.js" crossorigin="anonymous"></script>
 </head>
 <body layout:fragment="body">
+<div style="margin-top: 100px; color: #D10024; text-align: center; font-weight: bold; font-size: 20px" th:text="${message}"  class="error-message"></div>
+
 <div  class="boxes">
 
   <nav class="navbar navbar-expand navbar-light bg-light">
@@ -45,12 +47,18 @@
             </div>
           </div>
           <div class="text-box">
-            <label for="product-name"> Name:</label>
-            <h2 class="item" th:text="${order.product.name}" id="product-name"></h2>
-            <label for="product-price">Price:$</label>
-            <h3 class="price" th:text="${order.cost}" id="product-price"></h3>
-            <label for="product-description">Amount </label>
-            <h3 class="price" th:text="${order.amount}" id="product-description"></h3>
+            <div style="display: flex; ">
+              <p> Name:</p>
+              <h2 class="item" th:text="${order.product.name}" id="order-name"></h2>
+            </div>
+            <div style="display: flex; ">
+              <p>Price:$</p>
+              <h3 class="price" th:text="${order.cost}" id="order-price"></h3>
+            </div>
+            <p>Amount:</p>
+            <div style="display: flex; ">
+              <h3 class="amount" th:text="${order.amount}" id="order-amount"></h3>
+            </div>
             <form  action="/order/delete" method="get">
               <input type="hidden" name="orderId" th:value="${order.id}">
               <button type="submit" name="item-1-button" >Delete</button>

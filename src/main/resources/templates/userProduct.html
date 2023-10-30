@@ -55,7 +55,7 @@
           </div>
           <p>Description:</p>
           <div style="display: flex; ">
-            <h3 class="description" th:text="${product.getDescription()}" id="product-description"></h3>
+            <h3 class="description" th:text="${product.description}" id="product-description"></h3>
           </div>
           <form  action="/order/add" method="post">
             <input type="hidden" name="productId" th:value="${product.id}">

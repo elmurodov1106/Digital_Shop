@@ -12,6 +12,7 @@ public class CookieValue {
                     if (StringUtils.isNotBlank(cookie.getValue())) {
                         return cookie.getValue();
                     }
+                    return null;
                 }
             }
             return null;
