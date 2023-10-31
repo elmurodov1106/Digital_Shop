@@ -47,7 +47,7 @@ public class TvServiceImpl implements TvService {
         Pageable pageable = PageRequest.of(page, size);
         List<TvEntity> content = tvRepository.findAll(pageable).getContent();
         if(content.isEmpty()){
-            throw new DataNotFoundException("Tv not found");
+          return null;
         }
         return content;
     }

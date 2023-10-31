@@ -5,8 +5,6 @@ import com.example.digital_shop.entity.order.OrderEntity;
 import com.example.digital_shop.entity.payment.CardEntity;
 import com.example.digital_shop.entity.product.ProductEntity;
 import com.example.digital_shop.entity.seller.SellerInfo;
-import com.example.digital_shop.exception.DataNotFoundException;
-import com.example.digital_shop.exception.InsufficientBalanceException;
 import com.example.digital_shop.repository.SellerRepository;
 import com.example.digital_shop.repository.history.HistoryRepository;
 import com.example.digital_shop.repository.order.OrderRepository;
