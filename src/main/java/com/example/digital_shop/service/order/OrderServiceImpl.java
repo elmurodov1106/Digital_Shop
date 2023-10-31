@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService{
         }
         orderDto.setCost(orderDto.getAmount()*product.getCost());
         OrderEntity order = orderRepository.getUserAndProduct(orderDto.getUserId(),orderDto.getProductId());
-        if(order!=null){
+        if(order!=null|| orderDto.getAmount()>product.getAmount()){
             return null;
         }
         OrderEntity map = OrderEntity.builder()
@@ -47,7 +47,6 @@ public class OrderServiceImpl implements OrderService{
         map.setProduct(product);
         return orderRepository.save(map);
     }
-
     @Override
     public List<OrderEntity> getAllProducts(int size, int page) {
         Pageable pageable = PageRequest.of(page, size);

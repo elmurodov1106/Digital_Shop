@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -38,8 +39,9 @@ public class UserServiceImpl implements UserService {
     private final SellerRepository sellerRepository;
     private final GenerateVerificationCode generateVerificationCode;
 
+    @Override
     @Transactional
-    public UserEntity save(UserCreatDto userCreatDto) {
+    public UUID save(UserCreatDto userCreatDto) {
         if(!checkUserEmail(userCreatDto.getEmail())){
             return null;
         }
@@ -65,21 +67,20 @@ public class UserServiceImpl implements UserService {
             userRepository.save(userEntity);
             mailService.sendVerificationCode(userEntity.getEmail(), verificationCode.getSendingCode());
         }
-        return userEntity;
+        return userRepository.findId(userEntity.getEmail());
     }
 
     @Override
     public Boolean verify(String sendingCode,UUID userId) {
-        VerificationCode verificationCode=verificationCodeRepository.findVerificationCodeByUserId(userId)
-                .orElseThrow(()->new DataNotFoundException("Verification code for this user does not exists"));
-        if (Objects.equals(sendingCode, verificationCode.getSendingCode())
-                && LocalDateTime.now().isBefore(verificationCode.getExpiryDate())) {
-            UserEntity user = verificationCode.getUser();
+        Optional<VerificationCode> verificationCode=verificationCodeRepository.findVerificationCodeByUserId(userId);
+        if ( verificationCode.isPresent()&&Objects.equals(sendingCode, verificationCode.get().getSendingCode())
+                && LocalDateTime.now().isBefore(verificationCode.get().getExpiryDate())) {
+            UserEntity user = verificationCode.get().getUser();
             user.setState(UserState.ACTIVE);
             userRepository.save(user);
             return true;
         }
-        throw new AuthenticationFailedException("Code is incorrect or Code is ragged");
+        return null;
     }
 
     @Override

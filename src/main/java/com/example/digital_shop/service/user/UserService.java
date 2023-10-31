@@ -9,7 +9,7 @@ import java.util.UUID;
 
 
 public interface UserService {
-    UserEntity save(UserCreatDto userCreatDto);
+    UUID save(UserCreatDto userCreatDto);
     Boolean verify(String sendingCode,UUID userId);
     UserEntity getNewVerifyCode(String email);
     UserEntity signIn(LoginDto loginDto);

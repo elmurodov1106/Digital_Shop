@@ -17,6 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@ToString
 public class UserEntity extends BaseEntity implements UserDetails {
    protected String name;
    @Column(unique = true,nullable = false)

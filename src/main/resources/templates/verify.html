@@ -16,8 +16,8 @@
             <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
             <h1 class="opacity">VERIFY</h1>
 
-            <form action="/auth/verify" method="post">
-                <input type="hidden" name="userId" th:value="${user.getId()}" />
+            <form action="/auth/verify" method="get">
+                <input type="hidden" name="id" th:value="${id}" />
                 <input type="text" placeholder="verify code" name="sendingCode" />
                 <button class="opacity" type="submit">SUBMIT</button>
             </form>

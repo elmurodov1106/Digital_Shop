@@ -87,12 +87,12 @@ public class AuthController {
             model.addAttribute("message","Email did not  match");
             return "signUp";
         }
-        UserEntity save = userService.save(userCreatDto);
+        UUID save = userService.save(userCreatDto);
         if (save == null) {
             model.addAttribute("message", "Email already exists");
             return "signUp";
         }
-        model.addAttribute("user", save);
+        model.addAttribute("id", save);
         return "verify";
     }
 
@@ -101,22 +101,23 @@ public class AuthController {
         return "signUp";
     }
 
-    @GetMapping("/verify")
-    public String verifyGet() {
-        return "verify";
-    }
+//    @GetMapping("/verify")
+//    public String verifyGet() {
+//        return "verify";
+//    }
 
-    @PostMapping("/verify")
-    public String verify(@RequestParam UUID userId,
+    @GetMapping("/verify")
+    public String verify(@RequestParam UUID id,
                          @RequestParam String sendingCode,
                          Model model) {
-        Boolean isActive = userService.verify(sendingCode, userId);
-        if (isActive) {
-            model.addAttribute("isActive", true);
-            return "signIn";
+        Boolean isActive = userService.verify(sendingCode, id);
+        if (isActive==null) {
+            model.addAttribute("message", "Activation code is incorrect or ragged");
+            model.addAttribute("id",id);
+            return "verify";
         }
-        model.addAttribute("message", "Activation code is incorrect or ragged");
-        return "verify";
+        model.addAttribute("isActive", true);
+        return "signIn";
     }
 
     @GetMapping("/new-code")
