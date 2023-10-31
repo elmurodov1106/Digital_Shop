@@ -110,6 +110,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserEntity saveSeller(SellerDto sellerDto) {
         RoleEntity role = checkRole("Seller");
         if(!checkUserEmail(sellerDto.getEmail())|| !checkPassport(sellerDto.getPassportNumber())|| !checkPhoneNumber(sellerDto.getPhoneNumber())){

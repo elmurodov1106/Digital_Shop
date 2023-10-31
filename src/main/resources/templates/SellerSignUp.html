@@ -8,6 +8,8 @@
 </head>
 
 <body >
+<!--<div style="margin-top: 100px; color: #D10024; text-align: center; font-weight: bold; font-size: 20px" th:text="${message}"  class="error-message"></div>-->
+
 <section class="container">
   <div class="login-container" >
     <div class="circle circle-one"></div>
@@ -16,14 +18,14 @@
       <h1 class="opacity">REGISTER</h1>
 
       <form action="/auth/seller/sign-up" method="post">
-        <input type="text" placeholder="NAME" name="name" style="color: black;" />
-        <input type="email" placeholder="EMAIL" name="email" />
-        <input type="password" placeholder="PASSWORD" name="password" />
-        <input type="text" placeholder="LAST NAME" name="lastName" />
-        <input type="text" placeholder="FATHER NAME" name="fatherName" />
-        <input type="date" placeholder="BIRTH DATE" name="birthDate" />
-        <input type="text" placeholder="PASSPORT NUMBER" name="passportNumber" />
-        <input type="text" placeholder="PHONE NUMBER" name="phoneNumber" />
+        <input type="text" placeholder="NAME" name="name"   required/>
+        <input type="email" placeholder="EMAIL" name="email" required/>
+        <input type="password" placeholder="PASSWORD" name="password" required/>
+        <input type="text" placeholder="LAST NAME" name="lastName" required/>
+        <input type="text" placeholder="FATHER NAME" name="fatherName" required/>
+        <input type="date" placeholder="BIRTH DATE" name="birthDate" required/>
+        <input type="text" placeholder="PASSPORT NUMBER" name="passportNumber" required />
+        <input type="text" placeholder="PHONE NUMBER" name="phoneNumber" required />
         <button class="opacity">SUBMIT</button>
         <div class="error-message" th:if="${message != null and message != ''}" th:text="${message}"></div>
       </form>
