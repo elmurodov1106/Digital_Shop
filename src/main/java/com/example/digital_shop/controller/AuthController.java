@@ -128,7 +128,7 @@ public class AuthController {
     @PostMapping("/new-code")
     public String getNewVerifyCode(@RequestParam String email, Model model) {
         UserEntity user = userService.getNewVerifyCode(email);
-        model.addAttribute("user", user);
+        model.addAttribute("id", user.getId());
         return "verify";
     }
 
@@ -178,11 +178,15 @@ public class AuthController {
     @PostMapping("/seller/sign-up")
     public String sellerSignUp(@ModelAttribute SellerDto sellerDto, Model model) {
         UserEntity user = userService.saveSeller(sellerDto);
+        if (!sellerDto.getEmail().endsWith("@gmail.com")){
+            model.addAttribute("message","Email did not  match");
+            return "SellerSignUp";
+        }
         if (user == null) {
             model.addAttribute("message", "This email or passport or phone number already exists!!! Please sign in");
             return "SellerSignUp";
         }
-        model.addAttribute("user", user);
+        model.addAttribute("id", user.getId());
         return "verify";
     }
     @GetMapping("/logout")
