@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div th:text="${message}"  class="error-message"></div>
+<div style="margin-top: 100px; color: #D10024; text-align: center; font-weight: bold; font-size: 20px" th:text="${message}"  class="error-message"></div>
 <section class="container" >
     <div class="login-container">
         <div class="circle circle-one"></div>
@@ -17,8 +17,8 @@
             <h1 class="opacity">LOGIN</h1>
 
             <form action="/auth/sign-in" method="post">
-                <input type="email" placeholder="EMAIL" name="email" />
-                <input type="password" placeholder="PASSWORD" name="password" />
+                <input type="email" placeholder="EMAIL" name="email" required />
+                <input type="password" placeholder="PASSWORD" name="password"  required/>
                 <button class="opacity">SUBMIT</button>
             </form>
             <div class="register-forget opacity">
