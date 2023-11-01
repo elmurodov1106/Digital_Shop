@@ -51,7 +51,7 @@
                         </div>
                         <p>Description:</p>
                         <div style="display: flex; ">
-                            <h3 class="description" th:text="${tv.getDescription()}" id="tv-description"></h3>
+                            <h3 class="description" th:text="${tv.description}" id="tv-description"></h3>
                         </div>
                         <form method="get" action="/tv/delete">
                             <input type="hidden" name="tvId" th:value="${tv.id}">
