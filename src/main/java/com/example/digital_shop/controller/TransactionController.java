@@ -39,10 +39,6 @@ public class TransactionController {
         model.addAttribute("order",userOrder);
         return "buy";
     }
-
-
-
-
     @PostMapping("/create")
     public String p2p(@RequestParam UUID cardId,
                       @RequestParam UUID orderId,

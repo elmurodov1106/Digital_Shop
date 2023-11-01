@@ -72,12 +72,12 @@ public class AuthController {
 
     @GetMapping("/contact")
     public String contact(HttpServletRequest request, Model model) {
-//        UUID userId=checkCookie(request);
-//        UserEntity user = userService.getById(userId);
-//        if (user == null) {
-//            return "contactUs";
-//        }
-//        model.addAttribute("user",user);
+        UUID userId=checkCookie(request);
+        UserEntity user = userService.getById(userId);
+        if (user == null) {
+            return "contactUs";
+        }
+        model.addAttribute("user",user);
         return "contactUs";
     }
     @PostMapping("/sign-up")
@@ -87,12 +87,12 @@ public class AuthController {
             model.addAttribute("message","Email did not  match");
             return "signUp";
         }
-        UUID save = userService.save(userCreatDto);
-        if (save == null) {
+        UUID id = userService.save(userCreatDto);
+        if (id == null) {
             model.addAttribute("message", "Email already exists");
             return "signUp";
         }
-        model.addAttribute("id", save);
+        model.addAttribute("id", id);
         return "verify";
     }
 
@@ -100,12 +100,6 @@ public class AuthController {
     public String signUpGet() {
         return "signUp";
     }
-
-//    @GetMapping("/verify")
-//    public String verifyGet() {
-//        return "verify";
-//    }
-
     @GetMapping("/verify")
     public String verify(@RequestParam UUID id,
                          @RequestParam String sendingCode,
