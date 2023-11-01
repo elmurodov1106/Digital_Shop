@@ -51,7 +51,7 @@
                         </div>
                         <p>Description:</p>
                         <div style="display: flex; ">
-                            <h3 class="description" th:text="${phone.getDescription()}" id="phone-description"></h3>
+                            <h3 class="description" th:text="${phone.description}" id="phone-description"></h3>
                         </div>
                         <form method="get" action="/phone/update">
                             <input type="hidden" name="phoneId" th:value="${phone.id}">
