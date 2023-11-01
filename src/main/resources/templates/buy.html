@@ -20,7 +20,7 @@
             <td th:text="${card.balance}"></td>
             <td>
                 <label>
-                    <input type="radio" name="cardId" th:value="${card.id}" />
+                    <input type="radio" name="cardId" th:value="${card.id}" required/>
                     <input type="hidden" name="orderId" th:value="${order.id}">
                     Select
                 </label>
@@ -29,7 +29,8 @@
         </tbody>
     </table>
     <div>
-        <button type="submit" >Pay</button>
+        <button type="submit" th:if="${!cards.isEmpty()}">Pay</button>
+        <li class="nav-item" th:if="${cards.isEmpty()}"><a href="/payment/add" class="nav-link">Card Add</a></li>
     </div>
 </form>
 
