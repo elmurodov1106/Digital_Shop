@@ -26,5 +26,4 @@ public class PhoneEntity extends ProductEntity {
     private double battery;
     private Integer FrontCamera;
     private Integer BackCamera;
-    private String description;
 }
