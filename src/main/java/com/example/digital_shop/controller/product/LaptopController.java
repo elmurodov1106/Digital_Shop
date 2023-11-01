@@ -45,7 +45,8 @@ public class LaptopController {
         if(userId ==null){
             return "index";
         }
-        laptopService.add(laptopDto,userId,amount,image);
+        LaptopEntity add = laptopService.add(laptopDto, userId, amount, image);
+        System.out.println(add);
         model.addAttribute("message","Laptop successfully added");
         return "SellerMenu";
     }
