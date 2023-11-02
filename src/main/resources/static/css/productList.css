@@ -17,14 +17,17 @@
     width: 23%;
     border-radius: 2%;
     margin: 1%;
-    height: 500px;
-
+    /*height: 500px;*/
 }
 
-.product:hover {
-    box-shadow: 1.5px 1.5px 2.5px 3px rgba(0, 0, 0, 0.4);
-    -webkit-box-shadow: 1.5px 1.5px 2.5px 3px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow:    1.5px 1.5px 2.5px 3px rgba(0, 0, 0, 0.4);
+#laptop-name, #laptop-price,#product-name ,#product-price ,.item,.price{
+    font-size: 1rem !important;
+}
+
+.product:hover .images{
+    transform: scale(1.2);
+    overflow: hidden;
+    border-radius: 2%;
 }
 
 .image-box {
@@ -48,9 +51,7 @@
 }
 
 .images:hover {
-    transform: scale(1.2);
-    overflow: hidden;
-    border-radius: 2%;
+
 }
 
 /* IMAGES */
@@ -283,5 +284,6 @@ button:active {
 .laptops{
     width: 1300px;
 }
+
 
 

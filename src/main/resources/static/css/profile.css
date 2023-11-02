@@ -1,5 +1,52 @@
 body {
-    background: rgb(202, 219, 236)
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+    background: rgb(202, 219, 236);
+    font-family: sans-serif !important;
+}
+
+#profile-main-css{
+    max-width: 1400px !important;
+    min-height: 100vh !important;
+    margin: 0 auto !important;
+}
+
+#profile-main-css a{
+    color: inherit; !important;
+}
+.navbar {
+    display: flex !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+}
+
+.menu-button {
+    font-size: 24px;
+    position: absolute;
+    top: 10px;
+    right: 1600px;
+}
+
+/* Style for the user image */
+.user-image {
+    width: 350px; /* Increase the width to make the image larger */
+}
+
+/* Style for the text under the user image */
+.user-text {
+    font-size: 20px; /* Increase the font size to make the text larger */
+}
+
+/* Style for the Log Out button */
+.log-out-button {
+    font-size: 24px; /* Increase the font size for a bigger button */
+    position: absolute;
+    top: 10px;
+    right: 20px; /* Adjusted the right position for your design */
 }
 
 .form-control:focus {

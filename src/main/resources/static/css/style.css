@@ -36,6 +36,11 @@ img {
     padding: 0 2rem;
 }
 
+.nav-link {
+    margin: 0 10px !important;
+    padding: 0 !important;
+}
+
 /* -- BODY -- */
 body {
     font-family: "Raleway", sans-serif;
