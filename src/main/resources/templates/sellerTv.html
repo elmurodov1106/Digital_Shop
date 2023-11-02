@@ -4,33 +4,17 @@
     <meta charset="UTF-8">
     <title>Tv List</title>
     <link th:href="@{/css/productList.css}" rel="stylesheet">
-    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/3da5cff3a5.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div style="margin-top: 100px; color: #D10024; text-align: center; font-weight: bold; font-size: 20px" th:text="${message}"  class="error-message"></div>
-
-<nav class="navbar navbar-expand navbar-light bg-light">
-    <div class="container-sm">
-        <a class="navbar-brand" href="/auth/seller/menu">Seller Menu</a>
-        <div class="navcontent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center">
-                <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
-                <!--                    <a class="nav-link active fs-4" aria-current="page" href="#">Add Products</a>-->
-                <!--                </li>-->
-                <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
-                <!--                    <a class="nav-link active fs-4 " aria-current="page" href="#">Update Products</a>-->
-                <!--                </li>-->
-                <!--                <li class="nav-item border border-2 ps-3 pe-3">-->
-                <!--                    <a class="nav-link active fs-4 " href="#" tabindex="-1" aria-disabled="true">Database</a>-->
-                <!--                </li>-->
-
-            </ul>
-        </div>
-        <!--        <button class="btn btn-success ps-5 pe-5 pt-2 pb-2" onclick="quit()">Quit</button>-->
+<div style="color: #D10024; text-align: center; font-weight: bold; font-size: 20px" th:text="${message}"  class="error-message"></div>
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" style="color: black" href="/auth/seller/menu">Seller Menu</a>
     </div>
-
-
+</nav>
+<nav class="navbar navbar-expand navbar-light bg-light">
     <div class="listing-section">
         <div class="laptops">
             <div th:each="tv: ${tvs}">
@@ -46,27 +30,25 @@
                             <h2 class="item" th:text="${tv.name}" id="tv-name"></h2>
                         </div>
                         <div style="display: flex; ">
-                            <p>Price:$</p>
-                            <h3 class="price" th:text="${tv.cost}" id="tv-price"></h3>
+                            <p>Price:</p>
+                            <h3 class="price" th:text="${tv.cost} + '$'" id="tv-price"></h3>
                         </div>
-                        <p>Description:</p>
                         <div style="display: flex; ">
                             <h3 class="description" th:text="${tv.description}" id="tv-description"></h3>
                         </div>
                         <form method="get" action="/tv/delete">
                             <input type="hidden" name="tvId" th:value="${tv.id}">
-                            <button type="submit" name="item-1-button" id="item-1-button">Delete </button>
+                            <button type="submit" class="btn btn-primary" name="item-1-button" id="item-1-button">Delete </button>
                         </form>
 
                         <form action="/tv/update" method="get">
                             <input type="hidden" name="tvId" th:value="${tv.getId()}">
-                            <button type="submit" class="edit-svg"> Update </button>
+                            <button type="submit" class="edit-svg btn btn-danger"> Update </button>
                         </form>
-
-                        <!--                        <form action="/tv/update" method="get">-->
-                        <!--                            <input type="hidden" name="tv" th:value="${tv.getId()}">-->
-                        <!--                            <button type="submit" class="edit-svg"> Update </button>-->
-                        <!--                        </form>-->
+                        <!--<form action="/tv/update" method="get">-->
+                        <!--    <input type="hidden" name="tv" th:value="${tv.getId()}">-->
+                        <!--    <button type="submit" class="edit-svg"> Update </button>-->
+                        <!--</form>-->
 
                     </div>
 

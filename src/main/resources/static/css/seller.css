@@ -48,7 +48,7 @@ h2{
 #sidebarNav ul li{
     width:100%;
     margin:0px;
-    padding-left:30px;
+    /*padding-left:30px;*/
 }
 
 #sidebarNav ul li.selected{
@@ -95,9 +95,6 @@ h2{
     padding-right:10px;
     font-size:1.2em;
 }
-
-
-
 
 /*whiteLabel*/
 .whitelable{
