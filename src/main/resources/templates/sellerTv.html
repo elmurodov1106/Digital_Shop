@@ -25,16 +25,16 @@
                         </div>
                     </div>
                     <div class="text-box">
-                        <div style="display: flex; ">
+                        <div style="display: flex; align-items: center">
                             <p> Name:</p>
                             <h2 class="item" th:text="${tv.name}" id="tv-name"></h2>
                         </div>
-                        <div style="display: flex; ">
+                        <div style="display: flex; align-items: center">
                             <p>Price:</p>
                             <h3 class="price" th:text="${tv.cost} + '$'" id="tv-price"></h3>
                         </div>
                         <div style="display: flex; ">
-                            <h3 class="description" th:text="${tv.description}" id="tv-description"></h3>
+                            <h3 class="description" style="text-transform: capitalize; font-size: 1rem !important;" th:text="${tv.description}" id="tv-description"></h3>
                         </div>
                         <form method="get" action="/tv/delete">
                             <input type="hidden" name="tvId" th:value="${tv.id}">

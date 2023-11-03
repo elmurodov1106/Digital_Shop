@@ -6,133 +6,40 @@
 <!--    <link th:href="@{/css/seller.css}" rel="stylesheet">-->
     <link th:href="@{/css/seller.css}" rel="stylesheet">
     <script type="text/javascript" th:src="@{/js/seller.js}"></script>
+    <style>
+        /* Add CSS to style your container and adjust the zoom level */
+        .seller {
+            /* Your container styles go here */
+            /* Example: */
+            width: 100%;
+            text-align: center;
+        }
+
+        .sellerHead {
+            /* Your header styles go here */
+            /* Example: */
+            padding: 1em;
+        }
+
+        /* Adjust the zoom level */
+        svg {
+            transform-origin: center;
+            transition: transform 0.3s ease; /* Add a smooth transition effect */
+        }
+
+        /* On hover, apply the zoom effect */
+        .sellerHead:hover svg {
+            transform: scale(1.4); /* Adjust the scale factor for zoom level */
+        }
+        /*.username {*/
+        /*    background-color: #f8f8f8; !* Background color for highlighting *!*/
+        /*    padding: 3px 6px; !* Add some padding for better visual appearance *!*/
+        /*    border-radius: 5px; !* Rounded corners *!*/
+        /*}*/
+
+    </style>
 </head>
 <body>
-<!--<ul id="slide-out" class="side-nav fixed z-depth-2">-->
-<!--    <li class="center no-padding">-->
-<!--        <div class="indigo darken-2 white-text" style="height: 180px;">-->
-<!--            <div class="row">-->
-<!--                <img style="margin-top: 5%;" width="100" height="100" src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463990208/photo_dkkrxc.png" class="circle responsive-img" />-->
-
-<!--                <p style="margin-top: -13%;">-->
-<!--                    Tirth Patel-->
-<!--                </p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </li>-->
-
-<!--    <li id="dash_dashboard"><a class="waves-effect" href="#!"><b>Dashboard</b></a></li>-->
-
-<!--    <ul class="collapsible" data-collapsible="accordion">-->
-<!--        <li id="dash_users">-->
-<!--            <div id="dash_users_header" class="collapsible-header waves-effect"><b>Users</b></div>-->
-<!--            <div id="dash_users_body" class="collapsible-body">-->
-<!--                <ul>-->
-<!--                    <li id="users_seller">-->
-<!--                        <a class="waves-effect" style="text-decoration: none;" href="#!">Seller</a>-->
-<!--                    </li>-->
-
-<!--                    <li id="users_customer">-->
-<!--                        <a class="waves-effect" style="text-decoration: none;" href="#!">Customer</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </li>-->
-
-<!--        <li id="dash_products">-->
-<!--            <div id="dash_products_header" class="collapsible-header waves-effect"><b>Products</b></div>-->
-<!--            <div id="dash_products_body" class="collapsible-body">-->
-<!--                <ul>-->
-<!--                    <li id="products_product">-->
-<!--                        <a class="waves-effect" style="text-decoration: none;" href="/products/get-user-products">My Products</a>-->
-<!--                        <a class="waves-effect" style="text-decoration: none;" href="#!">Orders</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </li>-->
-
-<!--        <li id="dash_categories">-->
-<!--            <div id="dash_categories_header" class="collapsible-header waves-effect"><b>Categories</b></div>-->
-<!--            <div id="dash_categories_body" class="collapsible-body">-->
-<!--                <ul>-->
-<!--                    <li id="categories_category">-->
-<!--                        <a class="waves-effect" style="text-decoration: none;" href="#!">Category</a>-->
-<!--                    </li>-->
-
-<!--                    <li id="categories_sub_category">-->
-<!--                        <a class="waves-effect" style="text-decoration: none;" href="#!">Sub Category</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </li>-->
-
-<!--        <li id="dash_brands">-->
-<!--            <div id="dash_brands_header" class="collapsible-header waves-effect"><b>Brands</b></div>-->
-<!--            <div id="dash_brands_body" class="collapsible-body">-->
-<!--                <ul>-->
-<!--                    <li id="brands_brand">-->
-<!--                        <a class="waves-effect" style="text-decoration: none;" href="#!">Brand</a>-->
-<!--                    </li>-->
-
-<!--                    <li id="brands_sub_brand">-->
-<!--                        <a class="waves-effect" style="text-decoration: none;" href="#!">Sub Brand</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--</ul>-->
-
-<!--<header>-->
-<!--    <ul class="dropdown-content" id="user_dropdown">-->
-<!--        <li><a class="indigo-text" href="#!">Profile</a></li>-->
-<!--        <li><a class="indigo-text" href="#!">Logout</a></li>-->
-<!--    </ul>-->
-
-<!--    <nav class="indigo" role="navigation">-->
-<!--        <div class="nav-wrapper">-->
-<!--            <a data-activates="slide-out" class="button-collapse show-on-" href="#!"><img style="margin-top: 17px; margin-left: 5px;" src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463989873/smaller-main-logo_3_bm40iv.gif" /></a>-->
-
-<!--            <ul class="right hide-on-med-and-down">-->
-<!--                <li>-->
-<!--                    <a class='right dropdown-button' href='' data-activates='user_dropdown'><i class=' material-icons'>account_circle</i></a>-->
-<!--                </li>-->
-<!--            </ul>-->
-
-<!--            <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>-->
-<style>
-    /* Add CSS to style your container and adjust the zoom level */
-    .seller {
-        /* Your container styles go here */
-        /* Example: */
-        width: 100%;
-        text-align: center;
-    }
-
-    .sellerHead {
-        /* Your header styles go here */
-        /* Example: */
-        padding: 1em;
-    }
-
-    /* Adjust the zoom level */
-    svg {
-        transform-origin: center;
-        transition: transform 0.3s ease; /* Add a smooth transition effect */
-    }
-
-    /* On hover, apply the zoom effect */
-    .sellerHead:hover svg {
-        transform: scale(1.4); /* Adjust the scale factor for zoom level */
-    }
-    /*.username {*/
-    /*    background-color: #f8f8f8; !* Background color for highlighting *!*/
-    /*    padding: 3px 6px; !* Add some padding for better visual appearance *!*/
-    /*    border-radius: 5px; !* Rounded corners *!*/
-    /*}*/
-
-</style>
-
 <section id="sidebar">
     <div class ="whitelable">
         <div class="title">
@@ -152,14 +59,6 @@
             </a>
         </div>
     </div>
-<!--    <script>-->
-
-<!--        window.onload = function() {-->
-<!--            window.scrollBy(0, 100);-->
-<!--        }-->
-<!--    </script>-->
-
-
     <div id="sidebarNav">
         <ul class="noToplLine">
             <!--            <li class="selected"><a href=""><i class="fa fa-area-chart"></i>Dashboard</li>-->
@@ -167,15 +66,8 @@
 <!--            <li><a href="#"><i class="fa fa-list-alt"></i>Products </a></li>-->
 
             <li><a href="/product/get-seller-products"><i class="fa fa-list-alt"></i> Products </a></li>
-
-
-
             <li><a th:href="@{/laptop/get-seller}"><i class="fa fa-list-alt"></i> Laptops </a></li>
-
-
             <li><a th:href="@{/phone/get-seller}"><i class="fa fa-list-alt"></i> Phone </a></li>
-
-
             <li><a th:href="@{/tv/get-seller}"><i class="fa fa-list-alt"></i> Tv </a></li>
             <!--            <li><a href="#"><i class="fa fa-pencil-square-o"></i>Orders </a></li>-->
             <li>
@@ -205,232 +97,12 @@
                 </a>
             </li>
             <li><a href="/payment/get-all"><i class="fa fa-list-alt"></i>My Card </a></li>
-            <li><a href="/payment/get-all"><i class="fa fa-list-alt"></i>Balance </a>
-            </li>
-            <!--            <li><a href="#"><i class="fa fa-truck"></i>Analytics</a></li>-->
-<!--            <li><a href="#"><i class="fa fa-credit-card"></i>Price Managerment</a></li>-->
-<!--            <li><a href="#"><i class="fa fa-credit-card"></i>Balance</a></li>-->
 
-<!--        </ul>-->
-<!--    </div>-->
-<!--</section>-->
-
-
-<!--<section id=content>-->
-<!--        <section class="tabContainer" data-active-tab="tab-1">-->
-
-<!--            <div class="tabSection">&lt;!&ndash;Start of tab1:tabsConent&ndash;&gt;-->
-<!--                <div class="widgetBox">-->
-<!--                    <div class="widgetHeader">-->
-<!--                        <h2>GMV on Domestic</h2><span tooltip="More Settings" flow="down"><i class="fa fa-cog"></i></span>-->
-<!--                    </div>&lt;!&ndash;GMV on Domestic&ndash;&gt;-->
-<!--                    <div class="widgetContent">-->
-
-
-
-
-<!--                        &lt;!&ndash;doughunt&ndash;&gt;-->
-<!--                        <div class="pie">-->
-<!--                            <div class="slice-pink"></div>-->
-<!--                            <div class="slice-blue"></div>-->
-<!--                            <div class="slice-green"></div>-->
-<!--                            <div class="percent">-->
-<!--                                <div class="number">GMV-->
-<!--                                    <p>Domestic</p>-->
-<!--                                </div>-->
-
-<!--                            </div>-->
-
-<!--                        </div>&lt;!&ndash;doughuntpie&ndash;&gt;-->
-
-<!--                        &lt;!&ndash;chart legend&ndash;&gt;-->
-<!--                        <ul class="chartLegend">-->
-<!--                            <li>-->
-<!--                                <span class=circleBlue></span>-->
-<!--                                <em>Actived</em>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <span class=circlePink></span>-->
-<!--                                <em>Blocked</em>-->
-<!--                            </li>-->
-
-<!--                            <li>-->
-<!--                                <span class=circleGreen></span>-->
-<!--                                <em>Others</em>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                        &lt;!&ndash;end of chart legend&ndash;&gt;-->
-
-<!--                    </div>&lt;!&ndash;widgetContent&ndash;&gt;-->
-
-
-
-<!--                </div>&lt;!&ndash;widgetBox&ndash;&gt;-->
-
-<!--                <div class="widgetBox">-->
-<!--                    <div class="widgetHeader">-->
-<!--                        <h2>Item Performance</h2><span tooltip="More Settings" flow="down"><i class="fa fa-cog"></i></span>-->
-<!--                    </div>&lt;!&ndash;GMV on Domestic&ndash;&gt;-->
-<!--                    <div class="widgetContent">-->
-
-<!--                        <section id="bar">-->
-<!--                            <table id="graphBar">-->
-
-<!--                                <thead></thead>-->
-
-<!--                                <tbody>-->
-<!--                                <tr id="q1">-->
-<!--                                    <td class="uk bar q1ukbar" style="height: 150px;"><p>$18,450.00</p></td>-->
-<!--                                    <td class="usa bar q1usabar" style="height: 60px;"><p>$16,500.00</p></td>-->
-<!--                                </tr>-->
-
-<!--                                <tr id="q2">-->
-<!--                                    <td class="uk bar q2ukbar" style="height: 100px;"><p>$34,340.72</p></td>-->
-<!--                                    <td class="usa bar q2usabar" style="height: 85px;"><p>$32,340.72</p></td>-->
-<!--                                </tr>-->
-
-<!--                                </tbody>-->
-<!--                            </table>-->
-
-<!--                        </section>-->
-
-
-
-
-
-
-<!--                    </div>&lt;!&ndash;widgetContent&ndash;&gt;-->
-<!--                </div>&lt;!&ndash;widgetBox&ndash;&gt;-->
-
-<!--                &lt;!&ndash;Start of table and panelHeader:container&ndash;&gt;-->
-<!--                <div class="Container">-->
-<!--                    <div class="panel">-->
-<!--                        <h3 class="pullLeft">Item Activity</h3>-->
-
-<!--                        <div class="pullRight select-style">-->
-<!--                            <form action="">-->
-<!--                                <select name="" id="dropDownStyle">-->
-<!--                                    <option value="" data-icon="">Last 30 Days</option>-->
-<!--                                    <option value="" data-icon="">Last 60 Days</option>-->
-<!--                                </select>-->
-<!--                            </form>-->
-<!--                        </div> &lt;!&ndash;filter&ndash;&gt;-->
-
-<!--                    </div>&lt;!&ndash;panel&ndash;&gt;-->
-
-
-<!--                    <div class="scrollTable">-->
-<!--                        <table class="layout pullLeft">-->
-<!--                            <thead>-->
-<!--                            <tr>-->
-<!--                                <th>Items</th>-->
-<!--                                <th>Marketplaces</th>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
-
-<!--                            <tbody>-->
-<!--                            <tr>-->
-<!--                                <td>product itemA</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                            </tr>-->
-
-<!--                            <tr>-->
-<!--                                <td>product itemA</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                            </tr>-->
-
-<!--                            <tr>-->
-<!--                                <td>product itemA</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                            </tr>-->
-
-<!--                            <tr>-->
-<!--                                <td>product itemA</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                            </tr>-->
-
-<!--                            <tr>-->
-<!--                                <td>product itemA</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                            </tr>-->
-
-<!--                            <tr>-->
-<!--                                <td>product itemA</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                            </tr>-->
-
-<!--                            <tr>-->
-<!--                                <td>product itemA</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                            </tr>-->
-
-<!--                            <tr>-->
-<!--                                <td>product itemA</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td>-->
-<!--                                <td>UK</td> -->
-<!--                                <td>UK</td>-->
-<!--                            </tr>-->
-<!--                            </tbody>-->
-<!--                        </table>-->
-<!--                    </div>&lt;!&ndash;table&ndash;&gt;-->
-<!--                </div>&lt;!&ndash;End of table and panelHeader:container&ndash;&gt;-->
-
-<!--            </div>&lt;!&ndash;end of tab1:tabsConent&ndash;&gt;-->
-
-<!--&lt;!&ndash;            <div class="tabSection">not available in USA&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="tabSection">not available in Europe&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--        </section> &lt;!&ndash;end ofwrap for 3 tabcontent&ndash;&gt;-->
-
-
-
-
-
-
-
-
-
-<!--
-//show/hide tabsContent
-
-$("document").ready(function(){
-  $(".tabContent").hide();
-  $(".tabContent:first").show();
-});
-
-
-//tabnav
- $('#tabs li').click(function() {
-   $(".tabContent").hide();
-  var activeTab = $(this).attr('rel');
-   $("#"+activeTab).fadeIn();
-   $('.tabSliderTrigger').removeClass('active');
-   $(this).addClass('active');
-});
--->
+            </ul>
+<!--        <div style="display: flex !important;align-items: center;justify-content: space-between">-->
+<!--            <h4>Balance</h4>-->
+<!--            <h2 th:text="${}" style="font-size: 2rem">56886$</h2>-->
+<!--        </div>-->
 </body>
 
 

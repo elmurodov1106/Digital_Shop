@@ -11,16 +11,29 @@
     padding: 1%;
     border-bottom: 0.01em solid #dddbdb;
 }
+.laptops {
+    width: 100% !important;
+}
+.laptops,.listing-section .phones{
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.laptops .product {
+  min-width: 100% !important;
+}
 
 .product {
     float: left;
-    width: 23%;
+    width: 300px !important;
     border-radius: 2%;
     margin: 1%;
-    /*height: 500px;*/
+    min-height: 500px !important;
 }
 
-#laptop-name, #laptop-price,#product-name ,#product-price ,.item,.price{
+#laptop-name, #laptop-price,#product-name ,#product-price ,.item,.price,.description{
     font-size: 1rem !important;
 }
 
@@ -276,10 +289,11 @@ button:active {
 }
 
 .boxes{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     margin-top: 90px;
     width: 100%;
+    display: flex !important;
+    align-content: center;
+    justify-content: center;
 }
 .laptops{
     width: 1300px;

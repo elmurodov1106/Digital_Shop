@@ -4,19 +4,17 @@
   <meta charset="UTF-8">
   <title>Seller sign-up</title>
   <link th:href="@{/css/sign-in.css}" rel="stylesheet">
+<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"/>-->
   <script type="text/javascript" th:src="@{/js/sign-in.js}"></script>
 </head>
 
 <body >
-<!--<div style="margin-top: 100px; color: #D10024; text-align: center; font-weight: bold; font-size: 20px" th:text="${message}"  class="error-message"></div>-->
-
 <section class="container">
   <div class="login-container" >
     <div class="circle circle-one"></div>
     <div class="form-container">
       <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
       <h1 class="opacity">REGISTER</h1>
-
       <form action="/auth/seller/sign-up" method="post">
         <input type="text" placeholder="NAME" name="name"   required/>
         <input type="email" placeholder="EMAIL" name="email" required/>
@@ -27,9 +25,8 @@
         <input type="text" placeholder="PASSPORT NUMBER" name="passportNumber" required />
         <input type="text" placeholder="PHONE NUMBER" name="phoneNumber" required />
         <button class="opacity">SUBMIT</button>
-        <div class="error-message" th:if="${message != null and message != ''}" th:text="${message}"></div>
+        <div class="error-message" role="alert" th:if="${message != null and message != ''}" th:text="${message}"></div>
       </form>
-
       <div class="register-forget opacity">
         <a href="/auth/sign-in" methods="get">SIGN IN</a>
       </div>

@@ -34,7 +34,7 @@ h2{
 /*seciton: sidebar----------------------------------------*/
 #sidebar{
     width:350px;
-    height:850px;
+    min-height:100vh !important;
     float:left;
     background:#4b6c8b;
 }
