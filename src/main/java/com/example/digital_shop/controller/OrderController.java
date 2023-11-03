@@ -5,7 +5,6 @@ import com.example.digital_shop.domain.dto.OrderDto;
 import com.example.digital_shop.entity.order.OrderEntity;
 import com.example.digital_shop.entity.user.UserEntity;
 import com.example.digital_shop.service.order.OrderService;
-import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -55,8 +54,6 @@ public class OrderController {
             return "basket";
         }
         model.addAttribute("orders",userOrders);
-//        model.addAttribute("orders",getOrder(userOrders));
-//        model.addAttribute("products",getAll(userOrders));
         return "basket";
     }
     @PostMapping("/update")
@@ -82,8 +79,10 @@ public class OrderController {
             Model model
     ){
         UUID userId = checkCookie(request);
+        UserEntity user = userService.getById(userId);
         Boolean aBoolean = orderService.deleteById(orderId, userId);
         List<OrderEntity> userOrders = orderService.getUserOrders(userId);
+        model.addAttribute("user",user);
         if(aBoolean){
             model.addAttribute("message","Order Succefully deleted");
             return "basket";
@@ -98,12 +97,5 @@ public class OrderController {
         }
         return null;
     }
-
-//    private OrderEntity getOrder(List<OrderEntity> orders){
-//        for(OrderEntity order : orders) {
-//        return order;
-//        }
-//        return null;
-//    }
 
 }

@@ -38,7 +38,15 @@ public class CardServiceImpl implements CardService{
     @Override
     public List<CardEntity> getAllUserCards(int size, int page, UUID userId) {
         Pageable pageable = PageRequest.of(page, size);
-        return cardRepository.findCardEntitiesByOwnerId(pageable, userId);
+        List<CardEntity> cardEntitiesByOwnerId = cardRepository.findCardEntitiesByOwnerId(pageable, userId);
+        for (CardEntity cardEntity : cardEntitiesByOwnerId) {
+            String number = cardEntity.getNumber();
+            StringBuilder stringBuilder = new StringBuilder(number);
+            stringBuilder.replace(4,12,"********");
+            number = stringBuilder.toString();
+            cardEntity.setNumber(number);
+        }
+        return cardEntitiesByOwnerId;
     }
 
 

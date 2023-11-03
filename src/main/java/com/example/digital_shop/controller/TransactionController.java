@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -31,7 +33,6 @@ public class TransactionController {
         OrderEntity userOrder = orderService.getUserOrder(userId, orderId);
         if(userOrder == null){
             model.addAttribute("message","Order not found");
-            System.out.println("Order not found");
             return "basket";
         }
         model.addAttribute("user",userService.getById(userId));
@@ -47,12 +48,11 @@ public class TransactionController {
         if(userId==null){
             return "signIn";
         }
-        OrderEntity userOrder = orderService.getUserOrder(userId, orderId);
+        List<OrderEntity> userOrder = orderService.getUserOrders(userId);
         String message = transactionService.transferMoney(cardId, orderId);
         model.addAttribute("orders",userOrder);
-
         model.addAttribute("message",message);
-        return "redirect:/order/get-user-orders";
+        return "index";
     }
     private UUID checkCookie(HttpServletRequest request){
         String userId = CookieValue.getValue("userId",request);
