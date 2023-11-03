@@ -3,7 +3,6 @@ package com.example.digital_shop.config;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
-
 public class CookieValue {
     public static String getValue(String name, HttpServletRequest request) {
             Cookie[] cookies = request.getCookies();
