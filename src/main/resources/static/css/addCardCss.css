@@ -5,8 +5,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #C1BFFA;
     font-family: inter, sans-serif;
+    background-image: url("https://time.com/personal-finance/static/84016af8afe9681354d097200e07945e/4febf/credit-card-types.webp") !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh !important;
 }
 
 .container {

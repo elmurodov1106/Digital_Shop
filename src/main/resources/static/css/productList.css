@@ -36,6 +36,12 @@
 #laptop-name, #laptop-price,#product-name ,#product-price ,.item,.price,.description{
     font-size: 1rem !important;
 }
+.product .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
 .product:hover .images{
     transform: scale(1.2);

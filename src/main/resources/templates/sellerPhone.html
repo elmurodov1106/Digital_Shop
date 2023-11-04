@@ -31,10 +31,10 @@
                         </div>
                         <div style="display: flex; ">
                             <p>Price:</p>
-                            <h3 class="price" th:text="${phone.cost}" id="phone-price"></h3>
+                            <h3 class="price" th:text="${phone.cost} + '$'" id="phone-price"></h3>
                         </div>
                         <div style="display: flex; ">
-                            <p class="description" th:text="${phone.description} + '$'" id="phone-description"></p>
+                            <p class="description" th:text="${phone.description}" id="phone-description"></p>
                         </div>
                         <form method="get" action="/phone/update">
                             <input type="hidden" name="phoneId" th:value="${phone.id}">

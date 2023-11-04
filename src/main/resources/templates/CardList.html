@@ -6,110 +6,189 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Add Card</title>
-  <link th:href="@{/css/addCardCss.css}" rel="stylesheet">
+<!--  <link th:href="@{/css/addCardCss.css}" rel="stylesheet">-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     body {
-      background-color: #C1BFFA;
+      /*background-color: #C1BFFA;*/
+      background-image: url("https://time.com/personal-finance/static/84016af8afe9681354d097200e07945e/4febf/credit-card-types.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      font-weight: 300;
+      font-size: 24px;
+      font-family: sans-serif;
     }
-
-    .main {
-      padding: 10px;
-      text-align: center;
+    .card-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      flex-direction: column;
+      margin: 0;
+      font-family: "Lato";
+      font-weight: 300;
+      font-size: 24px;
     }
-
-    .back-button {
-      font-size: 16px;
+    .credit-card {
+      font-family: 'Share Tech Mono', monospace !important;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem;
+      backdrop-filter: blur(4px);
+      background-color: #515151;
+      box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.2);
+      padding: 1rem;
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+      grid-row-gap: 0.5rem;
+      grid-template-columns: repeat(3, 1fr);
+      grid-column-gap: 0.35rem;
+      grid-template-areas:
+              "provider . . ."
+              "number number number number"
+              "good-through-label good-through-value . validity"
+              "holder holder holder select";
+              "balance . . ."
+    }
+    .credit-card > .provider {
+      grid-area: provider;
+      display: block;
+      width: 100% !important;
+    }
+    .credit-card > .balance {
+      display: block;
+      width: 100% !important;
+      grid-area: balance;
+    }
+    .credit-card > .number {
+      grid-area: number;
+    }
+    .credit-card > .good-through-label {
+      grid-area: good-through-label;
+      font-family: 'Lato', sans-serif;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+    }
+    .credit-card > .good-through-value {
+      grid-area: good-through-value;
+    }
+    .credit-card > .holder {
+      grid-area: holder;
+    }
+    .credit-card > .validity {
+      grid-area: validity;
+      border: 1px solid #44a333;
+      font-size: 1rem;
+      background: #57c443 linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.25) 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 2px 3px 6px 0px rgba(0, 0, 0, 0.5);
+    }
+    .credit-card > .select {
+      grid-area: select;
+      background: #2ca7d8 linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.25) 100%);
+      border: 1px solid #1482ce;
+      color: white;
+      font-family: 'Lato', sans-serfi;
+      font-size: 1rem;
       text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 2px 3px 6px 0px rgba(0, 0, 0, 0.5);
+      transition: box-shadow 250ms, transform 250ms;
     }
-
-    .add-card-button {
-      font-size: 16px;
-      margin-left: 20px;
-      text-decoration: none;
+    .credit-card > .select:active {
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
+      transform: translate(-1px, -1px);
     }
-
-    .alert {
-      margin: 20px 0;
-      text-align: center;
-    }
-
-    .container {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 20px;
-      margin-top: 90px;
-
-    }
-
-    /*.container1 {*/
-    /*  display: grid;*/
-    /*  grid-template-columns: 1fr;*/
-    /*}*/
-
-    /* Add your custom CSS here for card styling */
   </style>
 </head>
 <body>
-<div style="margin-top: 100px; color: #D10024; text-align: center; font-weight: bold; font-size: 20px" th:text="${message}"  class="error-message"></div>
+<nav style="width: 100%!important;" class="navbar navbar-light justify-content-between">
+  <button class="btn btn-primary">
+    <a href="/auth/menu" style="color: inherit !important;text-decoration: none !important;"><-Back</a>
+  </button>
+  <button class="btn btn-primary">
+    <a href="/payment/add" style="color: inherit !important;text-decoration: none !important;">Add Card</a>
+  </button>
+</nav>
 
+<div style="margin-top: 100px; color: #D10024; text-align: center; font-weight: bold; font-size: 20px" th:text="${message}"
+     class="error-message"></div>
 
-<div class="main">
-  <!-- Back Button -->
-  <a href="/auth/menu" class="back-button"> <-Back</a>
+<div style="display: flex!important; align-items: center;justify-content: center">
+  <div class="card p-2" style="width: 800px !important;background: none !important;border: none !important; display: flex !important;align-items: center;justify-content: center">
+    <div class="container1">
+      <div class="heading">
+        <h1>Card Information</h1>
+      </div>
+      <div th:each="cardlist: ${cardList}" style="margin-bottom: 10px">
+        <div class="">
+          <div class="card-wrapper">
+            <div class="credit-card">
 
-  <!-- Add Card Button -->
-  <a href="/payment/add" class="add-card-button">Add Card</a>
+               <div style="display: flex !important;align-items: center;justify-content: space-between;gap: 10px !important;margin-bottom: 5px">
+                 <!-- Add an "Edit" button that links to "/payment/update" -->
+                 <form action="/payment/update" method="get">
+                   <input type="hidden" name="cardId" th:value="${cardlist.getId()}">
+                   <button class="btn btn-primary" type="submit">
+                     <i class="fa-solid fa-pen-to-square"></i>
+                   </button>
+                 </form>
+                 <form action="/payment/delete" method="get">
+                   <input type="hidden" name="cardId" th:value="${cardlist.getId()}">
+                   <button class="btn btn-danger" type="submit">
+                     <i class="fa-solid fa-x"></i>
+                   </button>
+                 </form>
+               </div>
+              <div class="number" th:text="${'Card Name: ' + cardlist.getName()}"></div>
+              <div class="holder" th:text="${cardlist.number}"></div>
+              <div class="good-through-label">good<br />through</div>
+              <div class="good-through-value" th:text="${'E/D: ' + cardlist.getExpireDate()}"></div>
+              <div class="balance" th:text="${'Balance: ' + cardlist.getBalance()}"></div>
+            </div>
+          </div>
+
+<!--          <table>-->
+<!--            <tbody>-->
+<!--            <tr>-->
+<!--              <td ></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <td ></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <td ></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <td ></td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--          </table>-->
+        </div>
+      </div>
+      <br>
+    </div>
   </div>
+</div>
 
 <!--<div th:if="${cardList?.isEmpty()}" class="alert alert-danger">-->
 <!--  Card not found-->
 <!--</div>-->
 
-  <div class="container1">
-    <div th:each="cardlist: ${cardList}">
-      <div class="container">
-        <form action="/payment/delete" method="get">
-          <input type="hidden" name="cardId" th:value="${cardlist.getId()}">
-          <button type="submit" class="x-svg">
-            <svg id="exit" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3.35288 8.95043C4.00437 6.17301 6.17301 4.00437 8.95043 3.35288C10.9563 2.88237 13.0437 2.88237 15.0496 3.35288C17.827 4.00437 19.9956 6.17301 20.6471 8.95044C21.1176 10.9563 21.1176 13.0437 20.6471 15.0496C19.9956 17.827 17.827 19.9956 15.0496 20.6471C13.0437 21.1176 10.9563 21.1176 8.95044 20.6471C6.17301 19.9956 4.00437 17.827 3.35288 15.0496C2.88237 13.0437 2.88237 10.9563 3.35288 8.95043Z" stroke="#1B1B1B" stroke-width="1.5"/>
-              <path d="M13.7678 10.2322L10.2322 13.7678M13.7678 13.7678L10.2322 10.2322" stroke="#1B1B1B" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </button>
-        </form>
-
-        <!-- Add an "Edit" button that links to "/payment/update" -->
-        <form action="/payment/update" method="get">
-          <input type="hidden" name="cardId" th:value="${cardlist.getId()}">
-          <button type="submit" class="edit-svg">
-            Edit
-          </button>
-        </form>
-
-        <div class="heading">
-          <h1>Card</h1>
-        </div>
-        <table>
-          <tbody>
-          <tr>
-            <td th:text="${'Card Name: ' + cardlist.getName()}"></td>
-          </tr>
-          <tr>
-            <td th:text="${'Card Number: ' + cardlist.getNumber()}"></td>
-          </tr>
-          <tr>
-            <td th:text="${'Expire Date: ' + cardlist.getExpireDate()}"></td>
-          </tr>
-          <tr>
-            <td th:text="${'Balance: ' + cardlist.getBalance()}"></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <br>
-  </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </body>
