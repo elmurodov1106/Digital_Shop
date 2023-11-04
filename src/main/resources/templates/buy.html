@@ -82,6 +82,7 @@
         <thead>
         <tr>
             <th>Name</th>
+            <th>Number</th>
             <th>Balance</th>
             <th>Action</th>
         </tr>
@@ -89,6 +90,7 @@
         <tbody>
         <tr th:each="card : ${cards}">
             <td th:text="${card.name}"></td>
+            <td th:text="${card.number}"></td>
             <td th:text="${card.balance}"></td>
             <td>
                 <label>
