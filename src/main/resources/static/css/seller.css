@@ -1,7 +1,7 @@
 /* #Universal Styles–––––––––––––––– */
 body, html {
     font: lighter normal 1em/1.2em "robotobold", sans-serif;
-    height:700px;
+    height:100vh!important;
     background:#cadbec;
 }
 
