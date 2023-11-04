@@ -167,7 +167,7 @@ public class ProductController {
     }
     @GetMapping("/get-seller-products")
     public String getSellerProducts(
-            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "100") int size,
             @RequestParam(defaultValue = "0") int page,
             HttpServletRequest request,
             Model model){
