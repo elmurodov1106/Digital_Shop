@@ -73,7 +73,7 @@ public class AuthController {
     @GetMapping("/contact")
     public String contact(HttpServletRequest request, Model model) {
         UUID userId=checkCookie(request);
-        if (userId == null) {
+        if(userId==null){
             return "contactUs";
         }
         UserEntity user = userService.getById(userId);
