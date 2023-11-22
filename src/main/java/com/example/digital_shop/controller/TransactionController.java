@@ -4,6 +4,7 @@ import com.example.digital_shop.config.CookieValue;
 import com.example.digital_shop.entity.order.OrderEntity;
 import com.example.digital_shop.service.card.CardService;
 import com.example.digital_shop.service.order.OrderService;
+import com.example.digital_shop.service.product.ProductService;
 import com.example.digital_shop.service.transaction.TransactionService;
 import com.example.digital_shop.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class TransactionController {
     private final OrderService orderService;
     private final UserService userService;
     private final CardService cardService;
-
+    private final ProductService productService;
     @GetMapping("/create")
     public String TransactionPage(@RequestParam UUID orderId, Model model, HttpServletRequest request) {
         UUID userId = checkCookie(request);
@@ -51,6 +52,8 @@ public class TransactionController {
         List<OrderEntity> userOrder = orderService.getUserOrders(userId);
         String message = transactionService.transferMoney(cardId, orderId);
         model.addAttribute("orders",userOrder);
+        model.addAttribute("user",userService.getById(userId));
+        model.addAttribute("products",productService.getAllProducts(100,0));
         model.addAttribute("message",message);
         return "index";
     }

@@ -18,7 +18,7 @@
       <form action="/auth/seller/sign-up" method="post">
         <input type="text" placeholder="NAME" name="name"   required/>
         <input type="email" placeholder="EMAIL" name="email" required/>
-        <input type="password" placeholder="PASSWORD" name="password" required/>
+        <input type="password" placeholder="PASSWORD" name="password" min="6" max="20" required/>
         <input type="text" placeholder="LAST NAME" name="lastName" required/>
         <input type="text" placeholder="FATHER NAME" name="fatherName" required/>
         <input type="date" placeholder="BIRTH DATE" name="birthDate" required/>

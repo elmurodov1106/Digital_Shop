@@ -19,7 +19,7 @@
       <form action="/auth/sign-up" method="post">
         <input type="text" placeholder="NAME" name="name"  required/>
         <input type="email" placeholder="EMAIL" name="email"  required/>
-        <input type="password" placeholder="PASSWORD" name="password"  required/>
+        <input type="password" placeholder="PASSWORD" name="password" min="6" max="20" required/>
         <button class="opacity">SUBMIT</button>
       </form>
 
